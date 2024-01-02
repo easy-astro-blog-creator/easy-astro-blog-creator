@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [   
+        {
+            "label": "serve",
+            "dependsOn": ["start_tailwindcss", "start_dioxus"],
+
+        },
+        {
+            "label": "start_tailwindcss",
+            "type": "shell",
+            "command": "./tailwindcss -i src/input.css -o dist/tailwinds.css --watch",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "panel": "new"
+            }
+            
+        },
+        {
+            "label": "start_dioxus",
+            "type": "shell",
+            "command": "dx serve --hot-reload",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "panel": "new"
+            }
+            
+        }
+    ]
+}
