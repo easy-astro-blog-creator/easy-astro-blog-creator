@@ -2,11 +2,9 @@
 // import the prelude to get access to the `rsx!` macro and the `Scope` and `Element` types
 use dioxus::prelude::*;
 
-
 fn main() {
     // launch the web app
     dioxus_web::launch(App);
-
 }
 
 fn App(cx: Scope) -> Element {

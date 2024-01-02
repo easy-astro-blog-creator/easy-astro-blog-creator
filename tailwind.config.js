@@ -6,7 +6,7 @@ module.exports = {
       // include all rust, html and css files in the src directory
       "./src/**/*.{rs,html,css}",
       // include all html files in the output (dist) directory
-      "./dist/**/*.html",
+      "./docs/**/*.html",
   ],
   theme: {
       extend: {},

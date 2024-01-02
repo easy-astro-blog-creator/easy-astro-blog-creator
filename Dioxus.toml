@@ -11,7 +11,7 @@ default_platform = "web"
 out_dir = "docs"
 
 # resource (public) file folder
-asset_dir = "public"
+asset_dir = "docs/public"
 
 [web.app]
 
@@ -27,13 +27,13 @@ base_path = "blog"
 reload_html = true
 
 # which files or dirs will be watcher monitoring
-watch_path = ["src", "public"]
+watch_path = ["src"]
 
 # include `assets` in web platform
 [web.resource]
 
 # CSS style file
-style = ["tailwinds.css"]
+style = ["public/tailwind.css"]
 
 # Javascript code file
 script = []

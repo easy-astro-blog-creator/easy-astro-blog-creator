@@ -9,7 +9,7 @@
         {
             "label": "start_tailwindcss",
             "type": "shell",
-            "command": "./tailwindcss -i src/input.css -o dist/tailwinds.css --watch",
+            "command": "./tailwindcss -i input.css -o ./docs/public/tailwind.css --watch",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
