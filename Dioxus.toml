@@ -8,7 +8,7 @@ name = "personal_blog"
 default_platform = "web"
 
 # `build` & `serve` dist path
-out_dir = "dist"
+out_dir = "."
 
 # resource (public) file folder
 asset_dir = "public"

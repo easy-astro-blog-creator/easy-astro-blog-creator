@@ -24,12 +24,12 @@ fn App(cx: Scope) -> Element {
             div {
                 class: "flex basis-full place-items-center justify-center flex-col",
                 textarea {
-                    class: "h-1/2 w-1/2",
+                    class: "h-1/3 w-1/3",
                     placeholder: "Type name here",
                     oninput: move |e| text_input.set(e.value.clone()),
                 }
                 button {
-                    class: "btn btn-outline btn-accent w-1/2",
+                    class: "btn btn-outline btn-accent w-1/3",
                     // onclick: move |_| is_modal_open.set(true),
                     "Send"
                 }
