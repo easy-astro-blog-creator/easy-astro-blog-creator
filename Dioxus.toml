@@ -1,17 +1,17 @@
 [application]
 
 # App (Project) Name
-name = "Dioxus + Tailwind CSS"
+name = "personal_blog"
 
 # Dioxus App Default Platform
 # desktop, web, mobile, ssr
 default_platform = "web"
 
 # `build` & `serve` dist path
-out_dir = "docs"
+out_dir = "dist"
 
 # resource (public) file folder
-asset_dir = "docs/public"
+asset_dir = "public"
 
 [web.app]
 
@@ -27,13 +27,13 @@ base_path = "blog"
 reload_html = true
 
 # which files or dirs will be watcher monitoring
-watch_path = ["src"]
+watch_path = ["src", "public"]
 
 # include `assets` in web platform
 [web.resource]
 
 # CSS style file
-style = ["public/tailwind.css"]
+style = ["tailwind.css"]
 
 # Javascript code file
 script = []

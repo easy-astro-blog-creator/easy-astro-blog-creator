@@ -15,7 +15,7 @@ fn App(cx: Scope) -> Element {
         div {
             class: "flex flex-row",
             ul {
-                class: "flex menu bg-base-200 w-56 p-0 [&_li>*]:rounded-none h-screen flex-col justify-around",
+                class: "flex menu bg-base-200 w-25 p-0 [&_li>*]:rounded-none h-screen flex-col justify-around",
                 li { a { "Item 3" } }
                 li { a { "Item 2" } }
                 li { a { "Item 1" } }

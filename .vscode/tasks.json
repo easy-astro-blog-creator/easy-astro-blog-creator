@@ -9,14 +9,13 @@
         {
             "label": "start_tailwindcss",
             "type": "shell",
-            "command": "./tailwindcss -i input.css -o ./docs/public/tailwind.css --watch",
+            "command": "./tailwindcss/tailwindcss -i ./tailwindcss/input.css -o ./public/tailwind.css --watch --config ./tailwindcss/tailwind.config.js",
             "options": {
                 "cwd": "${workspaceFolder}"
             },
             "presentation": {
                 "panel": "new"
             }
-            
         },
         {
             "label": "start_dioxus",

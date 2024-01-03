@@ -1,14 +1,16 @@
 {
-	"name": "Rust WebDev",
+	"name": "Rust Dioxus + TailwindCSS",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {"version": "latest"},
 		"ghcr.io/devcontainers/features/node:1": {"version": "latest"}
+		// Opt for installing via dockerfile instead
+		// But we could use https://github.com/r3dpoint/devcontainer-features
+		// "ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {"version": "latest"}
 	},
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-	"onCreateCommand": "chmod +x .devcontainer/postCreateCommand.sh",
-	"postCreateCommand": "/workspaces/blog/.devcontainer/postCreateCommand.sh",
+	"postCreateCommand": "cargo build && npm install -D daisyui@latest",
     "remoteUser": "root",
     "customizations": {
 		"vscode": {
