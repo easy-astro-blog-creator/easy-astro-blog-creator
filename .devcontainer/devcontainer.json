@@ -1,37 +1,20 @@
 {
-	"name": "Rust Dioxus + TailwindCSS",
+	"name": "personal blog",
+	"image": "mcr.microsoft.com/devcontainers/mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {"version": "latest"},
 		"ghcr.io/devcontainers/features/node:1": {"version": "latest"}
-		// Opt for installing via dockerfile instead
-		// But we could use https://github.com/r3dpoint/devcontainer-features
-		// "ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {"version": "latest"}
 	},
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
-	"postCreateCommand": "cargo build && npm install -D daisyui@latest",
     "remoteUser": "root",
     "customizations": {
 		"vscode": {
-			"settings": {
-				"lldb.executable": "/usr/bin/lldb",
-				"files.watcherExclude": {
-					"**/target/**": true
-				},
-				"rust-analyzer.checkOnSave.command": "clippy"
-			},
 			"extensions": [
-				"vadimcn.vscode-lldb",
-				"rust-lang.rust-analyzer",
-				"tamasfe.even-better-toml",
-				"serayuzgur.crates",
 				"github.vscode-pull-request-github",
 				"github.vscode-github-actions",
 				"github.copilot",
 				"github.copilot-chat",
 				"d-koppenhagen.file-tree-to-text-generator",
-				"bradlc.vscode-tailwindcss",
+				"astro-build.astro-vscode"
 			]
 		}
 	}
