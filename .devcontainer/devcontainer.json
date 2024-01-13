@@ -1,9 +1,10 @@
 {
 	"name": "personal blog",
-	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {"version": "latest"},
-		"ghcr.io/devcontainers/features/node:1": {"version": "latest"}
+	},
+	"build": {
+		"dockerfile": "Dockerfile"
 	},
     "remoteUser": "root",
     "customizations": {
