@@ -5,7 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://shelbyjenkins.github.io',
-	base: '/blog',
+	site: 'https://shelbyjenkins.github.io/blog',
 	integrations: [mdx(), sitemap()],
 });
