@@ -185,13 +185,6 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"first-post.md": {
-	id: "first-post.md";
-  slug: "first-post";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
 "markdown-style-guide.md": {
 	id: "markdown-style-guide.md";
   slug: "markdown-style-guide";
@@ -199,94 +192,6 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
-"pale-blue-dot.md": {
-	id: "pale-blue-dot.md";
-  slug: "pale-blue-dot";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
-"preview-markdown.md": {
-	id: "preview-markdown.md";
-  slug: "preview-markdown";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
-"third-post.md": {
-	id: "third-post.md";
-  slug: "third-post";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
-"using-mdx.mdx": {
-	id: "using-mdx.mdx";
-  slug: "using-mdx";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-};
-"docs": {
-"documentation/code-blocks.mdx": {
-	id: "documentation/code-blocks.mdx";
-  slug: "documentation/code-blocks";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"documentation/components.mdx": {
-	id: "documentation/components.mdx";
-  slug: "documentation/components";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"documentation/index.mdx": {
-	id: "documentation/index.mdx";
-  slug: "documentation";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"documentation/style-guide.mdx": {
-	id: "documentation/style-guide.mdx";
-  slug: "documentation/style-guide";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"getting-started.mdx": {
-	id: "getting-started.mdx";
-  slug: "getting-started";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"in-progress.mdx": {
-	id: "in-progress.mdx";
-  slug: "in-progress";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-};
-"guides": {
-"build-blog-using-astro-mdx.mdx": {
-	id: "build-blog-using-astro-mdx.mdx";
-  slug: "build-blog-using-astro-mdx";
-  body: string;
-  collection: "guides";
-  data: InferEntrySchema<"guides">
-} & { render(): Render[".mdx"] };
-"using-next-auth-next-13.mdx": {
-	id: "using-next-auth-next-13.mdx";
-  slug: "using-next-auth-next-13";
-  body: string;
-  collection: "guides";
-  data: InferEntrySchema<"guides">
-} & { render(): Render[".mdx"] };
 };
 
 	};
