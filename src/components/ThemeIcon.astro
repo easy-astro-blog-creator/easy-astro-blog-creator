@@ -52,13 +52,13 @@
         if (theme === 'light') {
             rootStyle.setProperty('--font-color', fontColorDark);
             rootStyle.setProperty('--background-color', backgroundColorDark);
-            if (sunElement) sunElement.style.setProperty('fill', 'var(--font-color-light)');
-            if (moonElement) moonElement.style.fill = 'transparent';
+            if (sunElement) sunElement.style.fill = 'transparent';
+            if (moonElement) moonElement.style.setProperty('fill', 'var(--font-color-light)');
         } else {
             rootStyle.setProperty('--font-color', fontColorLight);
             rootStyle.setProperty('--background-color', backgroundColorLight);
-            if (sunElement) sunElement.style.fill = 'transparent';
-            if (moonElement) moonElement.style.setProperty('fill', 'var(--font-color-light)');
+            if (sunElement) sunElement.style.setProperty('fill', 'var(--font-color-light)');
+            if (moonElement) moonElement.style.fill = 'transparent';
         }
         
     };

@@ -4,10 +4,15 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+    return posts.map((post) => {
+        // Split the slug by '/' and get the last part
+        // This works for both 'foldername/filename' and 'filename'
+        const filename = post.slug.split('/').pop();
+        return {
+            params: { slug: filename },
+            props: post,
+        };
+    });
 }
 type Props = CollectionEntry<'blog'>;
 
