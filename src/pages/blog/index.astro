@@ -17,71 +17,88 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: 66vw;
 			}
 			ul {
 				display: flex;
 				flex-direction: column;
-				flex-wrap: wrap;
-				gap: 2rem;
+				/* gap: 0.5rem; */
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
 			}
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
+		
 			ul li a {
-				display: block;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 22vh;
+				padding: 0.22em;
+			}
+			.post-details {
+				display: flex;
+				flex-direction: column;
+				align-content: flex-start;
+				flex-shrink: 0;
+				width: 63%;
+				height: 100%;
+				color: rgb(var(--font-color));
+				margin-right: 1em;
+				
 			}
 			.title {
-				margin: 0;
 				color: rgb(var(--font-color));
 				line-height: 1;
+				margin-bottom: 0.25em;
+				
+			}
+			.description {
+				overflow: hidden;
+				line-height: 1.2; 
+				display: -webkit-box;
+				-webkit-line-clamp: 4; /* Number of lines you want */
+				-webkit-box-orient: vertical;
+				margin: 0;
 			}
 			.date {
-				margin: 0;
-				color: rgb(var(--font-color));
+				margin-bottom: 0;
+				line-height: 1.3;
+				font-size: 0.8em;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			.hero-image {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				width: 30%;
+				
 			}
-			ul a:hover img {
+			.hero-image img {
+				max-height: 90%;
+			}
+
+			a:hover h4 {
+				color: var(--accent);
+			}
+			a:hover img {
 				box-shadow: var(--box-shadow);
 			}
 			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+				main {
+				width: 95vw;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
+				h4 {
+					font-size: 1.3em;
 				}
-				ul li:first-child {
-					margin-bottom: 0;
+				.date {
+					font-size: 0.8em;
 				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+				.description {
+					-webkit-line-clamp: 3; /* Number of lines you want */
 				}
 			}
 		</style>
@@ -97,18 +114,22 @@ const posts = (await getCollection('blog')).sort(
 							return (
 								<li>
 									<a href={`/blog/${filename}/`}>
+										<div class="post-details">
+											<p class="date">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+											<h4 class="title">{post.data.title}</h4>
+											<p class="description">{post.data.description}</p>
+										</div>
 										<div class="hero-image">
 											{
 												post.data.heroImage &&
-												<img style={{ width: '22vw', height: 'auto' }} src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+												<img src={post.data.heroImage} alt={post.data.heroAlt || ''} />
 											}
 										</div>
-										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
 									</a>
 								</li>
+								<hr />
 							);
 						})
 					}

@@ -15,15 +15,22 @@
 	--background-color-dark: var(--gray-dark);
 	--font-color-light: var(--gray-dark);
 	--font-color-dark: var(--gray-light);
-	
+	--social-links-color-light: var(--gray);
+	--social-links-color-hover-light: var(--gray-dark);
+	--social-links-color-dark: var(--gray);
+	--social-links-color-hover-dark: var(--gray-light);
+
 	--background-color: rgb(var(--font-color-light));
 	--font-color: rgb(var(--background-color-light));
+	--social-links-color: rgb(var(--social-links-color-light));
+	--social-links-color-hover: rgb(var(--social-links-color-hover-light));
 
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
+	--gray-super-light: rgb(179, 179, 179);
 	--gray-dark: 34, 41, 57;
 	--red: red;
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
@@ -53,7 +60,7 @@ body {
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	font-size: 20px;
+	font-size: 1em;
 	line-height: 1.7;
 	height: 100vh;
 	background: rgb(var(--background-color));
@@ -140,14 +147,19 @@ blockquote {
 	margin: 0px;
 	font-size: 1.333em;
 }
+
 hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+    border: none;           /* Removes the default border */
+    height: 1px;            /* Sets the height of the line */
+    background-color: var(--gray-super-light);
+    width: 6%;             /* Width of the dash */
+    margin: 10px auto;      /* Centers the dash and adds space around it */
 }
+
 @media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
+	/* body {
+		font-size: 16px;
+	} */
 	main {
 		padding: 1em;
 	}

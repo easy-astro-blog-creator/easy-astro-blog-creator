@@ -1,60 +1,60 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import SocialLinks from "./SocialLinks.astro"
 import ThemeIcon from './ThemeIcon.astro';
-import { SITE_TITLE } from '../consts';
+import { FIRST_NAME, FULL_NAME } from '../consts';
 ---
 
 <header>
 	<nav>
-		
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
+		<div id="internal-links">
+			<HeaderLink id="first-name" href="/">{FIRST_NAME}</HeaderLink>
+			<HeaderLink id="full-name" href="/">{FULL_NAME}</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/blog-template-guide">Resources</HeaderLink>
+			<HeaderLink href="/blog-template-guide">Template</HeaderLink>
 		</div>
-		<a href="/">
-			{SITE_TITLE}
-		</a>
-		<ThemeIcon />
-		<SocialLinks class="header-social-links"/>
-		
+		<div id="theme-icon">
+			<ThemeIcon />
+		</div> 
 	</nav>
 </header>
+
 <style>
 	header {
 		margin: 0;
-		padding: 0 1em;
+		padding: 0.3em 0.5em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-		color: rgb(var(--font-color-light));
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+		font-size: 1.2em;
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
-	nav a {
-		padding: 1em 0.5em;
+
+	#internal-links a {
+		padding: 0.1em 0.3em;
 		color: rgb(var(--font-color-light));
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
 	}
-	nav a.active {
+	#internal-links a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
+	#internal-links a:hover {
+		
+		color: var(--accent);
+	}
+	#first-name {
+		display: none;
+	}
+	@media (max-width: 720px) {
+		#first-name {
+			display: inline-block;
+		}
+		#full-name {
+			display: none;
+		}
+    }
 </style>

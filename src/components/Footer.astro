@@ -1,20 +1,22 @@
 ---
 import SocialLinks from "./SocialLinks.astro"
-import { NAME } from '../consts';
+import { FULL_NAME } from '../consts';
 const today = new Date();
 ---
 
 
 <footer>
 	<SocialLinks class="footer-social-links"/>
-	&copy; {today.getFullYear()} {NAME}. All rights reserved.
+	<hr />
+	&copy; {today.getFullYear()} {FULL_NAME}. All rights reserved.
 </footer>
 
 <style>
 	footer {
 		padding: 2em 1em 2em 1em;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		color: rgb(var(--social-links-color));
+		font-size: 0.7em;
 		text-align: center;
 	}
 </style>

@@ -1,0 +1,19 @@
+
+.small {
+    width: 22vw;
+    display: flex; 
+    margin-right: auto; 
+    margin-left: auto;
+}
+.medium {
+    width: 44vw;
+    display: flex; 
+    margin-right: auto; 
+    margin-left: auto;
+}
+.large {
+    width: 55vw;
+    display: flex; 
+    margin-right: auto; 
+    margin-left: auto;
+}

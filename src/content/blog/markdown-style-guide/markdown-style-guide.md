@@ -2,7 +2,7 @@
 title: 'Markdown Style Guide'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Jul 01 2022'
-heroImage: '/src/content/blog/markdown-style-guide/blog-placeholder-1.png'
+heroImage: '/src/content/blog/markdown-style-guide/hero.jpg'
 heroAlt: "A pizza."
 ---
 
@@ -38,12 +38,12 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 This section was edited for storing images in src folder. This works whether the image is nested in the collections root folder or within a nested folder where the markdown file is.
 ```markdown
-![Alt text](./blog-placeholder-1.png)
+![Alt text](./hero.jpg)
 ```
 
 #### Output
 
-![blog placeholder](./blog-placeholder-1.png)
+![blog placeholder](./hero.jpg)
 
 
 ## Blockquotes
