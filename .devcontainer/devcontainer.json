@@ -15,7 +15,8 @@
 				"github.copilot",
 				"github.copilot-chat",
 				"d-koppenhagen.file-tree-to-text-generator",
-				"astro-build.astro-vscode"
+				"astro-build.astro-vscode",
+				"unifiedjs.vscode-mdx"
 			]
 		}
 	}

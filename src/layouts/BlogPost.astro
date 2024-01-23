@@ -4,7 +4,6 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { Image } from "astro:assets";
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -20,8 +19,13 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt } = Astro.p
 				max-width: 100%;
 				margin: 0;
 			}
+			article {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
 			.hero-image {
-				width: 100%;
+				width: 33vw;
 			}
 			.hero-image img {
 				display: block;
@@ -62,7 +66,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt } = Astro.p
 				<div class="hero-image">
 					{
 						heroImage  &&
-						<img style={{ width: '33vw', height: 'auto' }} src={heroImage} alt={heroAlt || ''} />
+						<img src={heroImage} alt={heroAlt || ''} />
 					  }
 				</div>
 				<div class="prose">

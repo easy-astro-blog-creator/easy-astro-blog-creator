@@ -8,6 +8,6 @@ FROM  mcr.microsoft.com/devcontainers/typescript-node
 # # CLI steps 
 # npm init --yes
 # npm create astro@latest -- --template blog
-
+# https://github.com/OliverSpeir/remark-imgattr
 
 

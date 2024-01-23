@@ -6,4 +6,6 @@ heroImage: '/src/content/blog/template/default-hero-image.png'
 heroAlt: "A pizza."
 ---
 Template guide in progress.
-![blog placeholder](./default-hero-image.png)
+
+![blog placeholder](./default-hero-image.png)(style: 'width:33vw;')
+

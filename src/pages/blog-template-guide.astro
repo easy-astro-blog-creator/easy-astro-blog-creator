@@ -1,0 +1,22 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import {Content as ReadMe} from '/README.md';
+const TITLE = "Blog Template Guide"
+const DESCRIPTION = "A guide to using the Blog Template."
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={TITLE} description={DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={TITLE} />
+		<main>
+            <ReadMe />
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -7,20 +7,17 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2>
-			<ThemeIcon />
-			<a href="/">
-				
-				{SITE_TITLE}
-			</a>
-		</h2>
 		
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/blog-template-guide">Resources</HeaderLink>
 		</div>
-		
+		<a href="/">
+			{SITE_TITLE}
+		</a>
+		<ThemeIcon />
 		<SocialLinks class="header-social-links"/>
 		
 	</nav>
