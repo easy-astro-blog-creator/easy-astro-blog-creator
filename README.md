@@ -62,13 +62,16 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 
 - <h4>Install</h4> 
 
+    - Fork the [existing repository](https://github.com/ShelbyJenkins/easy-astro-blog-creator) by going to github and pressing the fork button.
+        - Important! Name the repository with this format: `GITHUB_USERNAME.github.io`.
+        - For example mine is `shelbyjenkins.github.io`.
     - Download the repository with:
         ```sh
-        git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
+        git clone https://github.com/GITHUB_USERNAME/GITHUB_USERNAME.github.io
         ```
     - Move into the directory:
         ```sh
-        cd easy-astro-blog-creator
+        cd GITHUB_USERNAME.github.io
         ```
     - Install all the related dependencies with:
         ```sh
@@ -114,18 +117,14 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
         - Rename `src/content/blog/template` to `src/content/blog/_template`. Pre-fixing `_` tells Astro to ignore this item, but it will be there for you to copy from in the future!
 - <h4>Deploy</h4>
     
-    - Go to your Github account and create a new repository named `GITHUB_USERNAME.github.io`.
-        - For example mine is `shelbyjenkins.github.io`.
-        - All other settings can be unchanged.
+    - In your Github repository go to the settings and find the pages panel.
+        - Set the Source dropdown to Github Actions.
     - In your VSCode terminal in the project root folder (The folder with the README.md) run these commands:
         ```sh
-        git init
         git commit -m "first commit"
         git branch -M main
-        git remote add origin https://github.com/GITHUB_USERNAME/GITHUB_USERNAME.github.io.git
         git push -u origin main
         ```
-    - In your Github repository go to the settings and find the pages panel.
 </details>
 
 ## 👀 Want to learn more?
