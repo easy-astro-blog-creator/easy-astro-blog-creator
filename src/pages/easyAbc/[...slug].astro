@@ -1,0 +1,27 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import '../../styles/blog.css'
+
+export async function getStaticPaths() {
+	const posts = await getCollection('easyAbc');
+    return posts.map((post) => {
+        // This removes nested folders
+        // Split the slug by '/' and get the last part
+        // This works for both 'foldername/filename' and 'filename'
+        const filename = post.slug.split('/').pop();
+        return {
+            params: { slug: filename },
+            props: post,
+        };
+    });
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>

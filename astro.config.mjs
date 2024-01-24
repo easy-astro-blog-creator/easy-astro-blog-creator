@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 import imgAttr from 'remark-imgattr';
 import sitemap from '@astrojs/sitemap';
+import { GITHUB_PAGES_URL } from '/src/consts';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://shelbyjenkins.github.io',
+	site: GITHUB_PAGES_URL,
 	integrations: [sitemap()],
 	markdown: {
 		remarkPlugins:[imgAttr]

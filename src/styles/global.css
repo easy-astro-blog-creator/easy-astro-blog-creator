@@ -3,6 +3,7 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+
 @import url('https://fonts.googleapis.com/css2?family=REM&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
 
@@ -25,7 +26,7 @@
 	--social-links-color: rgb(var(--social-links-color-light));
 	--social-links-color-hover: rgb(var(--social-links-color-hover-light));
 
-	--accent: #2337ff;
+	--accent: #4353ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
@@ -131,7 +132,8 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--background-color));
+	background-color: rgb(var(--black));
+	color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
 pre {
