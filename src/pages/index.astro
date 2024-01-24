@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { Image } from 'astro:assets';
+import headshot from '../images/headshot.png';
 ---
 
 <!doctype html>
@@ -13,9 +15,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header title={SITE_TITLE} />
 		<main>
-			<h1>🧑‍🚀 Hello there</h1>
+			<h1>Hello There</h1>
+			<Image src={headshot} alt="A headshot." width="200" style="display: flex; margin-right: auto; margin-left: auto;"/>
 			<p>
-				Welcome to my place.
+				Welcome to my about me page.
 			</p>
 		</main>
 		<Footer />

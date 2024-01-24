@@ -1,14 +1,15 @@
 ---
-title: 'test'
+title: 'Markdown Style Guide'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Jul 01 2022'
-heroImage: '/src/content/blog/markdown-style-guide/hero.jpg'
-heroAlt: "A pizza."
+heroImage: '/src/content/easyAbc/markdown-style-guide/hero.jpg'
+heroAlt: "A hero!"
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
-[This guide is from the astro blog repo.](https://github.com/withastro/astro/tree/main/examples/blog)
+- This guide is from the [astro blog repo.](https://github.com/withastro/astro/tree/main/examples/blog)
+- Also checkout [Github's guide to markdown.](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 ## Headings
 
@@ -44,7 +45,7 @@ This section was edited for storing images in src folder. This works whether the
 #### Output
 
 ![blog placeholder](./hero.jpg)
-
+Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
 ## Blockquotes
 
