@@ -3,21 +3,63 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import '../../styles/blog.css'
 
+
+export const nestedImages = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/content/blog/**/*.{png,jpg,jpeg,webp}",
+)
+export const rootImages = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/content/blog/*.{png,jpg,jpeg,webp}",
+)
+
+
+export async function resolveHeroImage(post: {
+	data: { title: string; heroImage?: string | undefined }
+    slug: string
+}) {
+    if (!post.data.heroImage) {
+        return undefined
+	};
+    const folderName =  post.slug.split('/').pop()?.toLowerCase();
+    const imageName = post.data.heroImage.toLowerCase();
+
+    for (const path of Object.keys(nestedImages)) {
+        const lowerPath = path.toLowerCase();
+        if (lowerPath.endsWith(`${folderName}/${imageName}`)) {
+            return path;
+        }
+    };
+    for (const path of Object.keys(rootImages)) {
+        const lowerPath = path.toLowerCase();
+        if (lowerPath.endsWith(`${imageName}`)) {
+            return path;
+        }
+    };
+
+    throw new Error(
+        `[blog] hero image for "${folderName}" not found! Provided: "${post.data.heroImage}", is there a typo?`,
+    );
+}
+
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-    return posts.map((post) => {
-        // This removes nested folders
-        // Split the slug by '/' and get the last part
-        // This works for both 'foldername/filename' and 'filename'
+    const posts = await getCollection('blog');
+
+    // Map each post to a promise
+    const pathsPromises = posts.map(async (post) => {
         const filename = post.slug.split('/').pop();
+        post.data.heroImage = await resolveHeroImage(post);
         return {
             params: { slug: filename },
-            props: post,
+            props: post, 
         };
     });
-}
-type Props = CollectionEntry<'blog'>;
 
+    // Wait for all promises to resolve
+    const paths = await Promise.all(pathsPromises);
+
+    return paths;
+}
+
+type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 ---

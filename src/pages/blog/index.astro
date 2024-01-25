@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { resolveHeroImage } from './[...slug].astro';
 
 const posts = (await getCollection('blog')).sort(
 	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -109,8 +110,9 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map((post) => {
+						posts.map(async (post) => {
 							const filename = post.slug.split('/').pop();
+							const heroImage = await resolveHeroImage(post);
 							return (
 								<li>
 									<a href={`/blog/${filename}/`}>
@@ -123,8 +125,8 @@ const posts = (await getCollection('blog')).sort(
 										</div>
 										<div class="hero-image">
 											{
-												post.data.heroImage &&
-												<img src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+												heroImage &&
+												<img src={heroImage} alt={post.data.heroAlt || ''} />
 											}
 										</div>
 									</a>
