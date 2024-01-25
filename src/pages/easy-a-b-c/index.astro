@@ -3,17 +3,18 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import {Content as ReadMe} from '/README.md';
-const TITLE = "Blog Template Guide"
-const DESCRIPTION = "A guide to using the Blog Template."
+
+const SITE_TITLE = "Easy Astro Blog Creator";
+const SITE_DESCRIPTION = "Create and host a blog for free using github pages."
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={TITLE} description={DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header title={TITLE} />
+		<Header title={SITE_TITLE} />
 		<main>
             <ReadMe />
 		</main>

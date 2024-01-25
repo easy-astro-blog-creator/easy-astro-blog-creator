@@ -5,18 +5,19 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { Image } from 'astro:assets';
 import headshot from '../images/headshot.png';
+const heroAlt = 'A headshot.';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={headshot} heroAlt={heroAlt}/>
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
 		<main>
 			<h1>Hello There</h1>
-			<Image src={headshot} alt="A headshot." width="200" style="display: flex; margin-right: auto; margin-left: auto;"/>
+			<Image src={headshot} alt={heroAlt} width="200" style="display: flex; margin-right: auto; margin-left: auto;"/>
 			<p>
 				Welcome to my about me page.
 			</p>

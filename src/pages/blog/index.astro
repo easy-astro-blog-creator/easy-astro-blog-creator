@@ -11,16 +11,17 @@ const posts = (await getCollection('blog')).sort((a, b) => {
     // Use updatedDate if available, otherwise fall back to pubDate
     const dateA = a.data.updatedDate ? new Date(a.data.updatedDate) : new Date(a.data.pubDate);
     const dateB = b.data.updatedDate ? new Date(b.data.updatedDate) : new Date(b.data.pubDate);
-
     // Sort in descending order (newest first)
     return dateB.valueOf() - dateA.valueOf();
 });
+const heroImage = posts.length > 0 ? posts[0].data.heroImage : undefined;
+const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}/>
 		<style>
 			main {
 				width: 66vw;
