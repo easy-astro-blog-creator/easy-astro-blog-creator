@@ -1,6 +1,6 @@
 <h1> EasyABC </h1>
 
-*Easy Astro Blog Creator* -> [live demo](https://github.com/ShelbyJenkins/easy-astro-blog-creator)
+*Easy Astro Blog Creator* -> [live demo](https://shelbyjenkins.github.io/)
 
 - Create and host a blog for free using github pages
 - *Almost* WYSIWYG with plain text + markdown
