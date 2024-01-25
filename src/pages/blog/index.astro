@@ -5,11 +5,16 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
-import { resolveHeroImage } from './[...slug].astro';
 
-const posts = (await getCollection('blog')).sort(
-	(b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+
+const posts = (await getCollection('blog')).sort((a, b) => {
+    // Use updatedDate if available, otherwise fall back to pubDate
+    const dateA = a.data.updatedDate ? new Date(a.data.updatedDate) : new Date(a.data.pubDate);
+    const dateB = b.data.updatedDate ? new Date(b.data.updatedDate) : new Date(b.data.pubDate);
+
+    // Sort in descending order (newest first)
+    return dateB.valueOf() - dateA.valueOf();
+});
 ---
 
 <!doctype html>
@@ -110,9 +115,8 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map(async (post) => {
+						posts.map((post) => {
 							const filename = post.slug.split('/').pop();
-							const heroImage = await resolveHeroImage(post);
 							return (
 								<li>
 									<a href={`/blog/${filename}/`}>
@@ -125,8 +129,8 @@ const posts = (await getCollection('blog')).sort(
 										</div>
 										<div class="hero-image">
 											{
-												heroImage &&
-												<img src={heroImage} alt={post.data.heroAlt || ''} />
+												post.data.heroImage &&
+												<img src={post.data.heroImage} alt={post.data.heroAlt || ''} />
 											}
 										</div>
 									</a>
