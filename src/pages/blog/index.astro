@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
-
+import { Image } from 'astro:assets';
 
 const posts = (await getCollection('blog')).sort((a, b) => {
     // Use updatedDate if available, otherwise fall back to pubDate
@@ -80,11 +80,12 @@ const posts = (await getCollection('blog')).sort((a, b) => {
 				justify-content: center;
 				align-items: center;
 				height: 100%;
-				width: 30%;
+				width:auto;
 				
 			}
 			.hero-image img {
 				max-height: 90%;
+				width: auto;
 			}
 
 			a:hover h4 {
@@ -130,7 +131,7 @@ const posts = (await getCollection('blog')).sort((a, b) => {
 										<div class="hero-image">
 											{
 												post.data.heroImage &&
-												<img src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+												<Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
 											}
 										</div>
 									</a>

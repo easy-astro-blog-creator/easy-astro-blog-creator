@@ -3,7 +3,8 @@ title: 'Markdown Style Guide'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 'Jul 01 2022'
 updatedDate: 'Jan 02 2024'
-heroImage: 'markdown-style-guide/hero.jpg'
+heroImagePath: './markdown-style-guide/hero.jpg'
+heroImage: './hero.jpg'
 heroAlt: "A hero!"
 ---
 

@@ -3,7 +3,8 @@ title: 'Template'
 description: 'A description of the post. The preview renders from the first 3-4 lines of the body, and not the description!'
 pubDate: 'Jan 01 2024'
 updatedDate: 'Jan 02 2024'
-heroImage: 'template/hero.png'
+heroImagePath: './template/hero.png'
+heroImage: './hero.png'
 heroAlt: "Describe the image for screen readers."
 ---
 
