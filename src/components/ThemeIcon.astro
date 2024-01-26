@@ -7,14 +7,14 @@
     </svg>
   </button>
   
-  <style>
+  <style lang="scss">
     #themeToggle {
       border: 0;
       background: none;
     }
 
     #sun { 
-        fill: var(--font-color-light); /* Only has an effect when JS is disabled */
+        fill: var(--gray-dark); /* Only has an effect when JS is disabled */
     }
     #moon { 
         fill: transparent;
@@ -27,22 +27,6 @@
 
   
 <script is:inline>
-    const rootStyle = document.documentElement.style;
-    const sunElement = document.querySelector('#sun');
-    const moonElement = document.querySelector('#moon');
-    const getCSSVariable = (variable) => {
-        return getComputedStyle(document.documentElement).getPropertyValue(variable);
-    };
-    const fontColorLight = getCSSVariable('--font-color-light').trim();
-    const backgroundColorLight = getCSSVariable('--background-color-light').trim();
-    const socialLinksColorLight = getCSSVariable('--social-links-color-light').trim();
-    const socialLinksColorHoverLight = getCSSVariable('--social-links-color-hover-light').trim();
-    
-    const fontColorDark = getCSSVariable('--font-color-dark').trim();
-    const backgroundColorDark = getCSSVariable('--background-color-dark').trim();
-    const socialLinksColorDark = getCSSVariable('--social-links-color-dark').trim();
-    const socialLinksColorHoverDark = getCSSVariable('--social-links-color-hover-dark').trim();
-
 
 
     const getTheme = () => {
@@ -59,24 +43,27 @@
     };
 
     const applyTheme = (toggle = false) => {
+        const rootElement = document.documentElement;
+        const sunElement = document.querySelector('#sun');
+        const moonElement = document.querySelector('#moon');
         let theme = getTheme();
         if (toggle) {
             theme = theme === 'dark' ? 'light' : 'dark';
             localStorage.setItem('theme', theme);
         }
         if (theme === 'light') {
-            rootStyle.setProperty('--font-color', fontColorDark);
-            rootStyle.setProperty('--background-color', backgroundColorDark);
-            rootStyle.setProperty('--social-links-color', socialLinksColorDark);
-            rootStyle.setProperty('--social-links-color-hover', socialLinksColorHoverDark);
+            if (rootElement.classList.contains('dark')) {
+                rootElement.classList.remove('dark');
+            };
+            rootElement.classList.add('light');
             if (sunElement) sunElement.style.fill = 'transparent';
-            if (moonElement) moonElement.style.setProperty('fill', 'var(--font-color-light)');
+            if (moonElement) moonElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
         } else {
-            rootStyle.setProperty('--font-color', fontColorLight);
-            rootStyle.setProperty('--background-color', backgroundColorLight);
-            rootStyle.setProperty('--social-links-color', socialLinksColorLight);
-            rootStyle.setProperty('--social-links-color-hover', socialLinksColorHoverLight);
-            if (sunElement) sunElement.style.setProperty('fill', 'var(--font-color-light)');
+            if (rootElement.classList.contains('light')) {
+                rootElement.classList.remove('light');
+            };
+            rootElement.classList.add('dark');
+            if (sunElement) sunElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
             if (moonElement) moonElement.style.fill = 'transparent';
         }
         

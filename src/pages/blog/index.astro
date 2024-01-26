@@ -22,7 +22,7 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}/>
-		<style>
+		<style lang="scss">	
 			main {
 				width: 66vw;
 			}
@@ -53,12 +53,11 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 				flex-shrink: 0;
 				width: 63%;
 				height: 100%;
-				color: rgb(var(--font-color));
+				color: var(--font-color);
 				margin-right: 1em;
-				
 			}
 			.title {
-				color: rgb(var(--font-color));
+				color: var(--font-color);
 				line-height: 1;
 				margin-bottom: 0.25em;
 				

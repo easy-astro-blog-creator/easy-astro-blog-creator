@@ -1,6 +1,9 @@
-<h1> EasyABC </h1>
 
-*Easy Astro Blog Creator* -> [live demo](https://shelbyjenkins.github.io/)
+<img src="./src/images/easy-hero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em;">
+    
+<h1> Easy Astro Blog Creator </h1>
+
+[EasyABC Live Demo](https://shelbyjenkins.github.io/)
 
 - Create and host a blog for free using github pages
 - *Almost* WYSIWYG with plain text + markdown
@@ -14,18 +17,16 @@
 git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 ```
 
-
 <!-- [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json) -->
 
-
-<!-- ![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d) -->
 
 <h6>Quicklinks:</h6>
 
 - [General markdown guide](/easy-a-b-c/markdown-style-guide)
 - [EasyABC markdown specifics](/easy-a-b-c/easy-a-b-c-markdown-specifics)
 *** 
-
+<!-- Here we should have some images of example usages -->
+<!-- This should start closed -->
 <details open>
   <summary><h1> Why </h1></summary>
 

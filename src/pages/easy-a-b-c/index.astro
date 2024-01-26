@@ -2,16 +2,19 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import {Content as ReadMe} from '/README.md';
 
+import {Content as ReadMe} from '/README.md';
 const SITE_TITLE = "Easy Astro Blog Creator";
 const SITE_DESCRIPTION = "Create and host a blog for free using github pages."
+import heroImage from '/src/images/easy-hero.png';
+const heroAlt = 'Easy logo.';
 ---
 
 <!doctype html>
+<style lang="scss"></style>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt} />
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />

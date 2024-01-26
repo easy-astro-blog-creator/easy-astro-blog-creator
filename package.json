@@ -18,5 +18,8 @@
     "remark-imgattr": "^1.0.3",
     "remark-unwrap-images": "^4.0.0",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
   }
 }
