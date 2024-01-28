@@ -4,13 +4,13 @@
 import '../styles/global.scss';
 // import SEO from "./SEO.astro"
 import { SEO } from "astro-seo";
-import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE, FULL_NAME} from '../consts';
+import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE, FULL_NAME, GITHUB_PAGES_URL} from '../consts';
 import { getImage } from 'astro:assets';
 import defaultSocialImage from '../images/default-social-image.png';
 /**
  * Enforce some standard canonical URL formatting across the site.
  */
-const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, Astro.site));
+const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, GITHUB_PAGES_URL));
 function formatCanonicalURL(url: string | URL) {
     let path = url.toString();
     const hasQueryParams = path.includes("?");
@@ -52,10 +52,9 @@ const socialImage = await (async () => {
 					title: page_title || SITE_TITLE,
 					type: "website",
 					image: socialImage.src,
+					url: canonicalURL,
 				},
-				image: {
-					alt: socialImage.alt,
-				},
+
 				article: {
 					publishedTime: pubDate,
 					modifiedTime: updatedDate,
