@@ -28,13 +28,17 @@ function formatCanonicalURL(url: string | URL) {
 const {page_title, description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
 
 const socialImage = await (async () => {
+    let image; // Declare image variable in the outer scope
+
     if (heroImage) {
-        const image = await getImage({ src: heroImage, format: 'webp' });
-        return { src: image.src, alt: heroAlt };
+        image = await getImage({ src: heroImage, format: 'webp' });
+    } else {
+        image = await getImage({ src: defaultSocialImage, format: 'webp' });
     }
-    const image = await getImage({ src: defaultSocialImage, format: 'webp' });
-	return { src: image.src, alt: heroAlt };
+	const fullImage = new URL(image.src, GITHUB_PAGES_URL).toString();
+	return { src: fullImage, alt: heroAlt };
 })();
+
 // See https://github.com/jonasmerlin/astro-seo
 ---
 
