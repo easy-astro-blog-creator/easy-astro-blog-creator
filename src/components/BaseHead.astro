@@ -58,7 +58,13 @@ const socialImage = await (async () => {
 					image: socialImage.src,
 					url: canonicalURL,
 				},
-
+				optional: {
+					description: description,
+					siteName: SITE_TITLE,
+				},
+				image: {
+					alt: socialImage.alt,
+				},
 				article: {
 					publishedTime: pubDate,
 					modifiedTime: updatedDate,
