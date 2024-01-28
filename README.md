@@ -122,7 +122,7 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
         - Set the Source dropdown to Github Actions.
     - In your VSCode terminal in the project root folder (The folder with the README.md) run these commands:
         ```sh
-        git commit -m "first commit"
+        git commit -m "my first commit"
         git branch -M main
         git push -u origin main
         ```

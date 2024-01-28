@@ -56,15 +56,15 @@
                 rootElement.classList.remove('dark');
             };
             rootElement.classList.add('light');
-            if (sunElement) sunElement.style.fill = 'transparent';
-            if (moonElement) moonElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
+            if (sunElement) moonElement.style.fill = 'transparent';
+            if (moonElement) sunElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
         } else {
             if (rootElement.classList.contains('light')) {
                 rootElement.classList.remove('light');
             };
             rootElement.classList.add('dark');
-            if (sunElement) sunElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
-            if (moonElement) moonElement.style.fill = 'transparent';
+            if (sunElement) moonElement.style.setProperty('fill', 'rgb(var(--gray-dark))');
+            if (moonElement) sunElement.style.fill = 'transparent';
         }
         
     };

@@ -2,56 +2,70 @@
 // Import the global.scss file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.scss';
-import SEO from "./SEO.astro"
-import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE} from '../consts';
-
+// import SEO from "./SEO.astro"
+import { SEO } from "astro-seo";
+import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE, FULL_NAME} from '../consts';
 import { getImage } from 'astro:assets';
-// const { title, description, pubDate, updatedDate, heroImage, heroAlt } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+import defaultSocialImage from '../images/default-social-image.png';
+/**
+ * Enforce some standard canonical URL formatting across the site.
+ */
+const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, Astro.site));
+function formatCanonicalURL(url: string | URL) {
+    let path = url.toString();
+    const hasQueryParams = path.includes("?");
 
-const { title, description, heroImage, heroAlt} = Astro.props;
+    // If there are query params, make sure the URL has no trailing slash
+    if (hasQueryParams) {
+        path = path.replace(/\/?$/, "");
+    } else {
+        // Otherwise, canonical URL always has a trailing slash
+        path = path.replace(/\/?$/, "/");
+    }
+    return path;
+}
+
+const {page_title, description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
+
 const socialImage = await (async () => {
     if (heroImage) {
         const image = await getImage({ src: heroImage, format: 'webp' });
         return { src: image.src, alt: heroAlt };
     }
-    return null;
+    const image = await getImage({ src: defaultSocialImage, format: 'webp' });
+	return { src: image.src, alt: heroAlt };
 })();
-
-
+// See https://github.com/jonasmerlin/astro-seo
 ---
 
-<!-- High Priority Global Metadata -->
-<meta charset="utf-8" />
-<!-- <meta name="viewport" content="width=device-width" /> -->
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#8D46E7" />
-<!-- Used to specify a color that browsers can use to theme their interface to match the website's color scheme. This is particularly noticeable on mobile devices and in some desktop browsers. -->
-
-<!-- Low Priority Global Metadata -->
-<link rel="icon" type={FAVICON_TYPE} href={FAVICON_URL} />
-<link rel="mask-icon" href={FAVICON_URL} color="#8D46E7" />
-<link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
-
-<!-- Font preloads -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
-
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
-
-<!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-
-<SEO
-	name={SITE_TITLE}
-	title={title}
-	description={description}
-	image= {socialImage}
-	og={{ type: "website" }}
-	canonicalURL={canonicalURL}
-/>
+<html lang="en">
+	<head>
+    	<SEO
+			title={page_title && `${page_title}`}
+			titleTemplate={`%s — ${SITE_TITLE}`}
+			titleDefault={SITE_TITLE}
+			description={description}
+			canonical={canonicalURL}
+			charset="utf-8"
+			openGraph={{
+				basic: {
+					title: page_title || SITE_TITLE,
+					type: "website",
+					image: socialImage.src,
+				},
+				image: {
+					alt: socialImage.alt,
+				},
+				article: {
+					publishedTime: pubDate,
+					modifiedTime: updatedDate,
+					authors: [FULL_NAME]
+				}
+			}}
+			extend={{
+				// extending the default link tags
+				link: [{ rel: "icon", type: FAVICON_TYPE, href: FAVICON_URL }],
+			}}
+		/>
+  	</head>
+</html>
