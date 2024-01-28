@@ -1,6 +1,6 @@
 ---
 title: 'Template'
-description: 'A description of the post. The preview renders from the first 3-4 lines of the body, and not the description!'
+description: 'A description of the post. Used to render social share previews and archive page previews.'
 pubDate: 'Jan 01 2024'
 updatedDate: 'Jan 02 2024'
 heroImage: './hero.png'

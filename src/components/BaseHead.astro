@@ -2,7 +2,6 @@
 // Import the global.scss file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.scss';
-// import SEO from "./SEO.astro"
 import { SEO } from "astro-seo";
 import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE, FULL_NAME, GITHUB_PAGES_URL} from '../consts';
 import { getImage } from 'astro:assets';
@@ -25,7 +24,7 @@ function formatCanonicalURL(url: string | URL) {
     return path;
 }
 
-const {page_title, description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
+const {page_title, page_description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
 
 const socialImage = await (async () => {
     let image; // Declare image variable in the outer scope
@@ -48,7 +47,7 @@ const socialImage = await (async () => {
 			title={page_title && `${page_title}`}
 			titleTemplate={`%s — ${SITE_TITLE}`}
 			titleDefault={SITE_TITLE}
-			description={description}
+			description={page_description}
 			canonical={canonicalURL}
 			charset="utf-8"
 			openGraph={{
@@ -59,7 +58,7 @@ const socialImage = await (async () => {
 					url: canonicalURL,
 				},
 				optional: {
-					description: description,
+					description: page_description,
 					siteName: SITE_TITLE,
 				},
 				image: {

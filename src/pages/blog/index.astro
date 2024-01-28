@@ -21,7 +21,7 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}/>
+		<BaseHead title={SITE_TITLE} page_description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}/>
 		<style lang="scss">	
 			main {
 				width: 66vw;
@@ -126,7 +126,7 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 												<FormattedDate date={post.data.pubDate} />
 											</p>
 											<h4 class="title">{post.data.title}</h4>
-											<p class="description">{post.body}</p>
+											<p class="description">{post.data.description}</p>
 										</div>
 										<div class="hero-image">
 											{
