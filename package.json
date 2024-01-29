@@ -17,8 +17,12 @@
     "astro": "^4.1.2",
     "astro-icon": "^1.0.3",
     "astro-seo": "^0.8.0",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
+    "remark": "^15.0.1",
     "remark-imgattr": "^1.0.3",
     "remark-unwrap-images": "^4.0.0",
+    "strip-markdown": "^6.0.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {

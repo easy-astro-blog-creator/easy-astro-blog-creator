@@ -6,6 +6,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
+import { getReadingTime } from '../../utils/readingTime';
+import { formatDescription } from '../../utils/abbreviateDescription';
 
 const posts = (await getCollection('blog')).sort((a, b) => {
     // Use updatedDate if available, otherwise fall back to pubDate
@@ -43,7 +45,7 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				height: 22vh;
+				height: 25vh;
 				padding: 0.22em;
 			}
 			.post-details {
@@ -71,9 +73,13 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 				margin: 0;
 			}
 			.date {
-				margin-bottom: 0;
+				margin-bottom: 0.2em;
 				line-height: 1.3;
 				font-size: 0.8em;
+			}
+			.reading-time {
+				font-size: 0.8em;
+				font-style: italic;
 			}
 			.hero-image {
 				display: flex;
@@ -123,10 +129,11 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 									<a href={`/blog/${filename}/`}>
 										<div class="post-details">
 											<p class="date">
-												<FormattedDate date={post.data.pubDate} />
+												<FormattedDate date={post.data.updatedDate ? new Date(post.data.updatedDate) : new Date(post.data.pubDate)} />
 											</p>
 											<h4 class="title">{post.data.title}</h4>
-											<p class="description">{post.data.description}</p>
+											<p class="description">{formatDescription(post.data.description, post.body)}</p>
+											<p class="reading-time">{getReadingTime(post.body)}</p>
 										</div>
 										<div class="hero-image">
 											{
