@@ -3,7 +3,7 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
+@import 'themes.css';
 @import url('https://fonts.googleapis.com/css2?family=REM&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
 
@@ -11,67 +11,8 @@
 	min-width: 0;
 }
 
-:root {
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-super-light: 179, 179, 179;
-	--gray-dark: 34, 41, 57;
-	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
-		
-}
 
-@mixin light-theme {
-	--font-color: rgb(var(--gray-dark));
-	--background-color: rgb(var(--gray-light));
-	--accent: #4353ff;
-
-	--social-links-color: rgb(var(--gray));
-	--social-links-color-hover: rgb(var(--gray-dark));
-
-	--code-background-color: #24292e;
-	--code-font-color: #9cc8fb;
-
-	--hr-background-color: rgb(var(--gray-super-light));
-}
-
-@mixin dark-theme {
-	  --background-color: rgb(var(--gray-dark));
-	  --font-color: rgb(var(--gray-light));
-	  --accent: #4a57cb;
-
-	  --social-links-color: rgb(var(--gray));
-	  --social-links-color-hover: rgb(var(--gray-light));
-
-	  --code-background-color: #24292e;
-	  --code-font-color: #9cc8fb;
-
-	  --hr-background-color: rgb(var(--gray-super-light));
-  }
-
-.light {
-	@include light-theme;
-  }
-  
-.dark {
-	@include dark-theme;
-  }
-
-// On initial load we check if existing theme is set,
-// if not we default to system preference.
-// Finally we toggle the theme in ThemeIcon.astro if it's set locally.
-:root:not(.light):not(.dark) {
-  @media (prefers-color-scheme: light) {
-    @include light-theme;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    @include dark-theme;
-  }
-}
-
-@font-face {
+/* @font-face {
 	font-family: 'Atkinson';
 	src: url('/fonts/atkinson-regular.woff') format('woff');
 	font-weight: 400;
@@ -84,7 +25,7 @@
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
-}
+} */
 
 body {
 	font-family: 'REM', sans-serif;

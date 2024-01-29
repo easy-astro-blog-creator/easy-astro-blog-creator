@@ -13,7 +13,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = As
 <html lang="en">
 	<head>
 		<BaseHead title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}/>
-		<style lang="scss">
+		<style>
 			main {
 				width: calc(100% - 2em);
 				max-width: 100%;
