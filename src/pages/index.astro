@@ -6,6 +6,7 @@ import { SITE_DESCRIPTION } from '../consts';
 import { Image } from 'astro:assets';
 import headshot from '../images/headshot.png';
 const heroAlt = 'A headshot.';
+
 ---
 <!doctype html>
 <html lang="en">
@@ -17,6 +18,7 @@ const heroAlt = 'A headshot.';
 		<main>
 			<h1>Hello There</h1>
 			<Image src={headshot} alt={heroAlt} width="200" style="display: flex; margin-right: auto; margin-left: auto;"/>
+
 			<p>
 				Welcome to my about me page.
 			</p>
