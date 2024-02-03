@@ -1,5 +1,5 @@
 ---
-title: 'Template'
+title: 'Template for creating new posts'
 # description: 'Optional. If provided this will be used for previews. If not provided, the first 3-4 lines from the post will be used as a description.'
 pubDate: 'Jan 01 2024'
 updatedDate: 'Jan 02 2024'

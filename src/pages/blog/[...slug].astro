@@ -24,10 +24,10 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
-const { Content, remarkPluginFrontmatter} = await post.render();
+const { Content } = await post.render();
 
 ---
 
-<BlogPost {...post.data} body={post.body} readingTime={remarkPluginFrontmatter.readingTime}>
+<BlogPost {...post.data} body={post.body}>
 	<Content />
 </BlogPost>

@@ -1,11 +1,11 @@
-/*
-The CSS in this style tag is based off of Bear Blog's default CSS.
-https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
-*/
-@import url('https://fonts.googleapis.com/css2?family=REM&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Belanosima&display=swap');
-@import 'themes.css';
+
+/* In this file the theme is applied. 
+If applying your own theme, comment out the default,
+and import your own*/
+@import 'default-theme.css';
+/* @import 'your-theme.css'; */
+
+@import 'light-dark-modes.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,138 +14,111 @@ License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
      min-width: 0;
  }
  
+
+@layer base {
+    :root {
+        --box-shadow: 0 2px 6px rgb(var(--accent-rgb) / 0.1), 0 8px 24px rgb(var(--accent-rgb) / 0.1),
+        0 16px 32px rgb(var(--accent-rgb) / 0.1);
+    }
+    body {
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--main-font);
+        color: var(--text-color);
+        text-align: left;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        background: var(--background-color);
+        background-image: var(--background-gradient);
+    }
+    main {
+       @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
+    }
+    article {
+       @apply flex flex-col grow justify-normal;
+    }
+    p {
+        @apply text-4xl lg:text-base pb-4;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--heading-color);
+        @apply pb-4;
+    }
+    h1 {
+        font-size: 3.052em;
+    }
+    h2 {
+        font-size: 2.441em;
+    }
+    h3 {
+        font-size: 1.953em;
+    }
+    h4 {
+        font-size: 1.563em;
+    }
+    h5 {
+        font-size: 1.25em;
+    }
+    h6 {
+        font-size: .75em;
+    }
+
+    a {
+        color: var(--accent);
+    }
+    a:hover {
+        color: var(--accent);
+    }
+    ul {
+        @apply list-disc;
+        @apply pl-0; 
+    }
+    ul > li > ul {
+        @apply pl-8;
+    }
+    li::marker {
+        color: var(--accent);   
+    }
+    code {
+        padding: 2px 5px;
+        background-color: var(--code-background-color);
+        color: var(--code-font-color);
+        border-radius: 2px;
+    }
+    pre {
+        padding: 1.5em;
+        @apply my-4;
+        border-radius: 8px;
+    }
+    pre > code {
+        all: unset;
+    } 
+    blockquote {
+        border-left: 4px solid var(--accent);
+        padding: 0 0 0 20px;
+        margin: 0px;
+        font-size: 1.333em;
+    }  
+    img {
+        @apply rounded-xl;
+    }
+    /* hr {
+        border: none;           
+        height: 1px;           
+        background-color: var(--hr-background-color);
+        width: 6%;             
+        margin: 10px auto;     
+    } */
+}
+
+
  
- /* @font-face {
-     font-family: 'Atkinson';
-     src: url('/fonts/atkinson-regular.woff') format('woff');
-     font-weight: 400;
-     font-style: normal;
-     font-display: swap;
- }
- @font-face {
-     font-family: 'Atkinson';
-     src: url('/fonts/atkinson-bold.woff') format('woff');
-     font-weight: 700;
-     font-style: normal;
-     font-display: swap;
- } */
  
- body {
-     font-family: 'REM', sans-serif;
-     display: flex;
-     flex-direction: column;
-     margin: 0;
-     padding: 0;
-     text-align: left;
-     word-wrap: break-word;
-     overflow-wrap: break-word;
-     font-size: 1em;
-     line-height: 1.7;
-     height: 100vh;
-     background: var(--background-color);
-     color: var(--font-color);
- }
- 
- main {
-     width: 720px;
-     max-width: calc(100% - 2em);
-     margin: auto;
-     padding: 3em 1em;
- }
- h1,
- h2,
- h3,
- h4,
- h5,
- h6 {
-     margin: 0 0 0.5rem 0;
-     color: var(--font-color);
-     line-height: 1.2;
- }
- h1 {
-     font-size: 3.052em;
- }
- h2 {
-     font-size: 2.441em;
- }
- h3 {
-     font-size: 1.953em;
- }
- h4 {
-     font-size: 1.563em;
- }
- h5 {
-     font-size: 1.25em;
- }
- strong,
- b {
-     font-weight: 700;
- }
- a {
-     color: var(--accent);
- }
- a:hover {
-     color: var(--accent);
- }
- p {
-     margin-bottom: 1em;
- }
- .prose p {
-     margin-bottom: 2em;
- }
- textarea {
-     width: 100%;
-     font-size: 16px;
- }
- input {
-     font-size: 16px;
- }
- table {
-     width: 100%;
- }
- img {
-     max-width: 100%;
-     height: auto;
-     border-radius: 8px;
- }
- code {
-     padding: 2px 5px;
-     background-color: var(--code-background-color);
-     color: var(--code-font-color);
-     border-radius: 2px;
- }
- pre {
-     padding: 1.5em;
-     border-radius: 8px;
- }
- pre > code {
-     all: unset;
- }
- blockquote {
-     border-left: 4px solid var(--accent);
-     padding: 0 0 0 20px;
-     margin: 0px;
-     font-size: 1.333em;
- }
- 
- hr {
-     border: none;           /* Removes the default border */
-     height: 1px;            /* Sets the height of the line */
-     background-color: var(--hr-background-color);
-     width: 6%;             /* Width of the dash */
-     margin: 10px auto;      /* Centers the dash and adds space around it */
- }
- 
- @media (max-width: 720px) {
-     /* body {
-         font-size: 16px;
-     } */
-     main {
-         padding: 1em;
-     }
- }
- 
- .sr-only {
+.sr-only {
      border: 0;
      padding: 0;
      margin: 0;

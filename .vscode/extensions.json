@@ -7,7 +7,9 @@
     "d-koppenhagen.file-tree-to-text-generator",
     "astro-build.astro-vscode",
     "unifiedjs.vscode-mdx",
-    "csstools.postcss"
+    "csstools.postcss",
+    "moalamri.inline-fold",
+    "bradlc.vscode-tailwindcss"
   ],
   "unwantedRecommendations": []
 }

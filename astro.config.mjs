@@ -4,7 +4,6 @@ import remarkUnwrapImages from 'remark-unwrap-images';
 import sitemap from '@astrojs/sitemap';
 import { GITHUB_PAGES_URL } from '/src/consts';
 import icon from "astro-icon";
-import react from "@astrojs/react";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -12,7 +11,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   output: 'static',
   site: GITHUB_PAGES_URL,
-  integrations: [sitemap(), icon(), react(), tailwind({applyBaseStyles: false})],
+  integrations: [sitemap(), icon(), tailwind()],
   markdown: {
     remarkPlugins: [imgAttr, remarkUnwrapImages]
   }

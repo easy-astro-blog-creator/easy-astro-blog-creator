@@ -4,57 +4,21 @@ import ThemeIcon from './ThemeIcon.astro';
 import { FIRST_NAME, FULL_NAME } from '../consts';
 ---
 
-<header>
-	<nav>
-		<div id="internal-links">
-			<HeaderLink id="first-name" href="/">{FIRST_NAME}</HeaderLink>
-			<HeaderLink id="full-name" href="/">{FULL_NAME}</HeaderLink>
+<header class="w-full text-5xl lg:text-3xl">
+	<nav class="flex items-center justify-between py-4">
+		<div>
+			<HeaderLink class="inline-block lg:hidden" href="/">{FIRST_NAME}</HeaderLink>
+			<HeaderLink class="hidden lg:inline-block" href="/">{FULL_NAME}</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/easy-a-b-c">EasyABC</HeaderLink>
 		</div>
-		<div id="theme-icon">
-			<ThemeIcon />
-		</div> 
+		<ThemeIcon />
 	</nav>
 </header>
-
+<div class="pb-6"></div>
 <style>
 	header {
-		margin: 0;
-		padding: 0.3em 0.5em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-		font-size: 1.2em;
+		background: var(--background-color);
 	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	#internal-links a {
-		padding: 0.1em 0.3em;
-		color: rgb(var(--gray-dark));
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	#internal-links a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	#internal-links a:hover {
-		
-		color: var(--accent);
-	}
-	#first-name {
-		display: none;
-	}
-	@media (max-width: 720px) {
-		#first-name {
-			display: inline-block;
-		}
-		#full-name {
-			display: none;
-		}
-    }
 </style>
+

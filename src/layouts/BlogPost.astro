@@ -6,6 +6,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import SocialLinks from "../components/SocialLinks.astro";
 import { Image }  from "astro:assets";
 import { formatDescription } from '../utils/abbreviateDescription';
+import { getReadingTime } from '../utils/readingTime';
 
 const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = Astro.props;
 ---
@@ -13,84 +14,47 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = As
 <html lang="en">
 	<head>
 		<BaseHead page_title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}/>
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			article {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			.hero-image {
-				width: 33vw;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--font-color));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.1em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--font-color));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
-
 	<body>
 		<Header />
 		<main>
-			<article>
-				<div class="hero-image">
-					{
-						heroImage  &&
-						<Image src={heroImage} alt={heroAlt || ''} />
-					}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							Published on
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
+			<article class="w-full flex flex-col items-center">
+				<div class="flex flex-col items-center pb-4 ">
+					<div class="w-6/12 lg:w-5/12 p-1">
+						{
+							heroImage  &&
+							<Image style="box-shadow: var(--box-shadow);" src={heroImage} alt={heroAlt || ''} />
+						}
+					</div>
+					<div class="flex flex-col pt-8 max-w-prose" style="color: var(--heading-color);">
+						<h1 class="text-6xl lg:text-4xl">{title}</h1>
+						<div class="flex items-center pt-4 pl-2 pb-5 text-l space-x-4 text-3xl lg:text-sm">					
+							<div>{getReadingTime(body)}</div>
+							<div>·</div>
+							<div>
+								Published on
+								<FormattedDate date={pubDate} />
+							</div>
+							<div class="italic">
+								{updatedDate && (
+									<>
 										Updated on
 										<FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+									</>
+								)}
+							</div>
+							<!-- <SocialLinks class="blog-social-links"/> -->
 						</div>
-						<h1>{title}</h1>
-						<SocialLinks class="blog-social-links"/>
-						<hr />
+						<!-- <hr class="ml-2 w-11/12 lg:w-full"/> -->
 					</div>
-					<slot />
 				</div>
+				<article class="max-w-prose">
+					<slot />
+				</article>
 			</article>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+  

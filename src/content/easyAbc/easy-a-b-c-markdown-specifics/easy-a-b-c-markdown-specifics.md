@@ -96,16 +96,9 @@ I've defined a caption class you can use for your `<p>` tags.
 ```
 
 ![Alt text](./example.png)(class:'small')
-<p class="caption">The Caption</p3>
+<p class="caption">The Caption</p>
 
-You can use other text tags as well.
 
-```sh
-![Alt text](./example.png)(class:'small')
-<h6 class="caption">The Caption</h6>
-```
-![Alt text](./example.png)(class:'small')
-<h6 class="caption">The Caption</h6>
 
 <h3> Define your own classes </h3>
 

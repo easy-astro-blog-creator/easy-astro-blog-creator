@@ -3,25 +3,31 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import '../../styles/blog.css'
 
+
 export async function getStaticPaths() {
-	const posts = await getCollection('easyAbc');
-    return posts.map((post) => {
-        // This removes nested folders
-        // Split the slug by '/' and get the last part
-        // This works for both 'foldername/filename' and 'filename'
+    const posts = await getCollection('easyAbc');
+
+    // Map each post to a promise
+    const pathsPromises = posts.map((post) => {
         const filename = post.slug.split('/').pop();
         return {
             params: { slug: filename },
             props: post,
         };
     });
-}
-type Props = CollectionEntry<'blog'>;
 
+    // Wait for all promises to resolve
+    const paths = await Promise.all(pathsPromises);
+
+    return paths;
+}
+
+type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
+
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} body={post.body}>
 	<Content />
 </BlogPost>

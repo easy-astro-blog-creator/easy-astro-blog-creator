@@ -25,130 +25,46 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 	<head>
 		<BaseHead title={SITE_TITLE} page_description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}/>
 		<style>	
-			main {
-				width: 66vw;
-			}
-			ul {
-				display: flex;
-				flex-direction: column;
-				/* gap: 0.5rem; */
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-		
-			ul li a {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				height: 25vh;
-				padding: 0.22em;
-			}
-			.post-details {
-				display: flex;
-				flex-direction: column;
-				align-content: flex-start;
-				flex-shrink: 0;
-				width: 63%;
-				height: 100%;
-				color: var(--font-color);
-				margin-right: 1em;
-			}
-			.title {
-				color: var(--font-color);
-				line-height: 1;
-				margin-bottom: 0.25em;
-				
-			}
-			.description {
-				overflow: clip;
-				line-height: 1.2; 
-				display: -webkit-box;
-				-webkit-line-clamp: 4; /* Number of lines you want */
-				-webkit-box-orient: vertical;
-				margin: 0;
-			}
-			.date {
-				margin-bottom: 0.2em;
-				line-height: 1.3;
-				font-size: 0.8em;
-			}
-			.reading-time {
-				font-size: 0.8em;
-				font-style: italic;
-			}
-			.hero-image {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 100%;
-				width:auto;
-				
-			}
-			.hero-image img {
-				max-height: 90%;
-				width: auto;
-			}
-
-			a:hover h4 {
+			a:hover h1 {
 				color: var(--accent);
 			}
 			a:hover img {
 				box-shadow: var(--box-shadow);
 			}
-			@media (max-width: 720px) {
-				main {
-				width: 95vw;
-				}
-				h4 {
-					font-size: 1.3em;
-				}
-				.date {
-					font-size: 0.8em;
-				}
-				.description {
-					-webkit-line-clamp: 3; /* Number of lines you want */
-				}
-			}
+
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => {
-							const filename = post.slug.split('/').pop();
-							return (
-								<li>
-									<a href={`/blog/${filename}/`}>
-										<div class="post-details">
-											<p class="date">
-												<FormattedDate date={post.data.updatedDate ? new Date(post.data.updatedDate) : new Date(post.data.pubDate)} />
-											</p>
-											<h4 class="title">{post.data.title}</h4>
-											<p class="description">{formatDescription(post.data.description, post.body)}</p>
-											<p class="reading-time">{getReadingTime(post.body)}</p>
+		<main class="justify-start">
+			<ul class="flex flex-col items-center gap-4 list-none">
+				{
+					posts.map((post) => {
+						const filename = post.slug.split('/').pop();
+						return (
+							<li >
+								<a class="h-80 flex justify-between items-center no-underline" href={`/blog/${filename}/`}style="color: var(--heading-color);">
+									<div class="flex flex-col shrink-0 w-8/12 max-h-full pr-4">
+										<div class="pb-1 text-2xl lg:text-xl">
+											<FormattedDate date={post.data.updatedDate ? new Date(post.data.updatedDate) : new Date(post.data.pubDate)} />
 										</div>
-										<div class="hero-image">
-											{
-												post.data.heroImage &&
-												<Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
-											}
-										</div>
-									</a>
-								</li>
-								<hr />
-							);
-						})
-					}
-				</ul>
-			</section>
+										<h1 class="pb-1 text-4xl">{post.data.title}</h1>
+										<div class="pb-0 text-3xl lg:text-2xl line-clamp-3 lg:line-clamp-4">{formatDescription(post.data.description, post.body)}</div>
+										<div class="pt-1 text-2xl lg:text-xl italic">{getReadingTime(post.body)}</div>
+									</div>
+									<div class="flex justify-center items-center w-4/12 h-full">
+										{
+											post.data.heroImage &&
+											<Image class="h-auto w-auto" style="max-width: 90%; max-height: 90%;" src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+										}
+									</div>
+								</a>
+							</li>
+							<hr />
+						);
+					})
+				}
+			</ul>
 		</main>
 		<Footer />
 	</body>	
