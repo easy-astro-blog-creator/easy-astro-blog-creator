@@ -1,59 +1,39 @@
 ---
-const { class: className, ...rest } = Astro.props;
 import { Icon } from 'astro-icon/components'
-import { FIRST_NAME, LINKEDIN_URL, TWITTER_URL, GITHUB_URL} from '../consts';
+import { FIRST_NAME, LINKEDIN_URL, TWITTER_URL, GITHUB_URL} from '../siteConfig';
 // See https://github.com/natemoo-re/astro-icon
 // and https://icon-sets.iconify.design/ for more icons
 ---
 
-<div class:list={[className, 'social-links']} {...rest}>
-    <p>Follow {FIRST_NAME}</p>
-        <div id="social-link-icons">
-            <a href={LINKEDIN_URL} target="_blank">
-                <Icon name="mdi:linkedin"/>
-            </a>    
-            <a href={TWITTER_URL} target="_blank">
-                <Icon name="mdi:twitter"/>
-            </a>    
-            <a href={GITHUB_URL} target="_blank">
-                <Icon name="mdi:github"/>
-            </a>
-        </div>
-</div>
+<nav >
+    <div class="grid grid-flow-col gap-4">
+        <a href={LINKEDIN_URL} target="_blank">
+            <Icon name="mdi:linkedin"/>
+        </a>    
+        <a href={TWITTER_URL} target="_blank">
+            <Icon name="mdi:twitter"/>
+        </a>    
+        <a href={GITHUB_URL} target="_blank">
+            <Icon name="mdi:github"/>
+        </a>
+    </div>
+    <div class="divider divider-neutral w-full ">Follow {FIRST_NAME}</div>
+</nav>
+
 <style>
 	.social-links {
 		text-decoration: none;
         display: flex;
         flex-direction: column;
+       
 	}
-
-    .social-links p {
-        margin: 0.3em;
-        text-align: center;
-        color: var(--social-links-color);
-    }
-
-    #social-link-icons {
-        display: flex;
-        justify-content: center;
-    }
-
     [data-icon] {
         text-decoration: none;
-        width: 4em;
+        @apply w-20 lg:w-12;
+        @apply text-accent-color-100;
         height: auto;
-        color: var(--social-links-color);
     }
     [data-icon]:hover {
-        color: var(--social-links-color-hover);
-    }
-
-    // Specific to blog entries
-    .blog-social-links [data-icon] {
-        width: 2em;
-    }
-
-    .blog-social-links p {
-        font-size: 0.7em;
+        @apply text-accent-color-900;
     }
 </style>

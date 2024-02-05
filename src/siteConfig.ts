@@ -20,3 +20,15 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/jshelbyj/';
 export const TWITTER_URL = 'https://twitter.com/j_shelby_j';
 export const GITHUB_URL = 'https://github.com/shelbyjenkins';
 
+export const THEME = {
+    primaryTextColor: "#D07D12",
+    secondaryColor: "#40a1e6",
+    accentColor: "#003E1F",
+    neutralColor: "#E8F5F2",
+    baseColor: "#d4e9f8",
+}
+// Meteor #D07D12 208, 125, 18
+// Aqua Squeeze #E8F5F2 232, 245, 242
+// Pattens Blue #d4e9f8 212, 233, 248
+// Curious Blue #40a1e6 64, 161, 230
+// Britich Racing Green #003E1F 0, 62, 31

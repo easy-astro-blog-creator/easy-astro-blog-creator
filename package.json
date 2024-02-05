@@ -7,7 +7,12 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
@@ -16,19 +21,29 @@
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/mdi": "^1.1.64",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/jest": "^29.5.12",
     "astro": "^4.1.2",
     "astro-icon": "^1.0.3",
     "astro-seo": "^0.8.0",
+    "chroma-js": "^2.4.2",
+    "daisyui": "^4.6.1",
+    "jest": "^29.7.0",
     "mdast-util-to-string": "^4.0.0",
     "postcss": "^8.4.33",
     "postcss-mixins": "^9.0.4",
     "reading-time": "^1.5.0",
     "remark": "^15.0.1",
+    "remark-code-title": "^0.2.5",
     "remark-imgattr": "^1.0.3",
     "remark-unwrap-images": "^4.0.0",
     "strip-markdown": "^6.0.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^2.4.3"
   }
 }

@@ -1,39 +1,62 @@
 
 /* In this file the theme is applied. 
-If applying your own theme, comment out the default,
-and import your own*/
-@import 'default-theme.css';
-/* @import 'your-theme.css'; */
+/* Get fonts from https://fonts.google.com/ */
+@import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-@import 'light-dark-modes.css';
+
+/* @import 'light-dark-modes.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
- * { 
-     min-width: 0;
- }
+* { 
+    min-width: 0;
+}
  
+
+/* @layer base {
+    div[data-remark-code-title] {
+        background-color: #60a5fa;
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem;
+        color: #000;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        font-family: monospace;
+      }
+      
+    div[data-remark-code-title] + pre {
+    margin-top: 0;
+    border-bottom-right-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+    }
+} */
 
 @layer base {
     :root {
         --box-shadow: 0 2px 6px rgb(var(--accent-rgb) / 0.1), 0 8px 24px rgb(var(--accent-rgb) / 0.1),
         0 16px 32px rgb(var(--accent-rgb) / 0.1);
     }
+    html {
+
+    }
     body {
         min-height: 100vh;
-        width: 100vw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        font-family: var(--main-font);
-        color: var(--text-color);
+        @apply font-sans;
+        @apply text-primary-text-color-950 dark:text-primary-text-color-50;
         text-align: left;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        background: var(--background-color);
-        background-image: var(--background-gradient);
+        background-color: white;
+        @apply bg-base-color-50  dark:bg-base-color-950;
+        @apply bg-gradient-light dark:bg-gradient-dark;
+        --scrollbar-width: calc(100vw - 100%);
     }
     main {
        @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
@@ -42,11 +65,10 @@ and import your own*/
        @apply flex flex-col grow justify-normal;
     }
     p {
-        @apply text-4xl lg:text-base pb-4;
+    
     }
     h1, h2, h3, h4, h5, h6 {
-        color: var(--heading-color);
-        @apply pb-4;
+        @apply  text-secondary-color-950 dark:text-secondary-color-50;
     }
     h1 {
         font-size: 3.052em;
@@ -68,10 +90,10 @@ and import your own*/
     }
 
     a {
-        color: var(--accent);
+        @apply text-neutral-color-700 dark:text-accent-color-500;
     }
     a:hover {
-        color: var(--accent);
+        @apply text-accent-color-950 dark:text-accent-color-50;
     }
     ul {
         @apply list-disc;
@@ -83,7 +105,7 @@ and import your own*/
     li::marker {
         color: var(--accent);   
     }
-    code {
+    /* code {
         padding: 2px 5px;
         background-color: var(--code-background-color);
         color: var(--code-font-color);
@@ -97,22 +119,38 @@ and import your own*/
     pre > code {
         all: unset;
     } 
+    div[data-remark-code-title] {
+        background-color: #60a5fa;
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem;
+        color: #000;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        font-family: monospace;
+      }
+      
+    div[data-remark-code-title] + pre {
+    margin-top: 0;
+    border-bottom-right-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+    }
     blockquote {
         border-left: 4px solid var(--accent);
         padding: 0 0 0 20px;
         margin: 0px;
         font-size: 1.333em;
-    }  
+    }   */
     img {
         @apply rounded-xl;
     }
-    /* hr {
+    hr {
         border: none;           
         height: 1px;           
         background-color: var(--hr-background-color);
         width: 6%;             
         margin: 10px auto;     
-    } */
+    }
 }
 
 

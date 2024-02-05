@@ -1,11 +1,11 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import ThemeIcon from './ThemeIcon.astro';
-import { FIRST_NAME, FULL_NAME } from '../consts';
+import { FIRST_NAME, FULL_NAME } from '../siteConfig';
 ---
 
-<header class="w-full text-5xl lg:text-3xl">
-	<nav class="flex items-center justify-between py-4">
+<header class="w-full">
+	<nav class="rounded-b-lg flex items-center justify-between mx-2 text-5xl lg:text-2xl bg-secondary-color-50 text-neutral-color-950">
 		<div>
 			<HeaderLink class="inline-block lg:hidden" href="/">{FIRST_NAME}</HeaderLink>
 			<HeaderLink class="hidden lg:inline-block" href="/">{FULL_NAME}</HeaderLink>
@@ -16,9 +16,4 @@ import { FIRST_NAME, FULL_NAME } from '../consts';
 	</nav>
 </header>
 <div class="pb-6"></div>
-<style>
-	header {
-		background: var(--background-color);
-	}
-</style>
 

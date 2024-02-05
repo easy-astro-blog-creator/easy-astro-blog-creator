@@ -1,18 +1,28 @@
 import { defineConfig } from 'astro/config';
+// Remark plugins
 import imgAttr from 'remark-imgattr';
 import remarkUnwrapImages from 'remark-unwrap-images';
+import codeTitle from "remark-code-title";
+// Astro integrations
 import sitemap from '@astrojs/sitemap';
-import { GITHUB_PAGES_URL } from '/src/consts';
 import icon from "astro-icon";
-
 import tailwind from "@astrojs/tailwind";
+// Site Config
+import { GITHUB_PAGES_URL } from '/src/siteConfig';
 
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
   site: GITHUB_PAGES_URL,
-  integrations: [sitemap(), icon(), tailwind()],
+  integrations: [
+    sitemap(), 
+    icon(), 
+    tailwind({
+      applyBaseStyles: false,
+    }),
+  ],
   markdown: {
-    remarkPlugins: [imgAttr, remarkUnwrapImages]
+    // remarkPlugins: [imgAttr, codeTitle, remarkUnwrapImages]
+    remarkPlugins: [imgAttr, codeTitle]
   }
 });

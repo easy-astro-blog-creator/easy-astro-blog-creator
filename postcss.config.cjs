@@ -1,5 +1,7 @@
 module.exports = {
-    plugins: [
-      require('postcss-mixins'),
-    ],
-  };
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+    'postcss-mixins': {},
+  }
+}

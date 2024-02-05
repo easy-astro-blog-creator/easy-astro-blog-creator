@@ -18,7 +18,7 @@ This is a guide for specific markdown syntax used in EasyABC.
 
 To resize and center images use the premade classes like:
 
-```sh
+```md title="blog-post.md"
 ![Alt text](./example.png)(class:'small')
 ![Alt text](./example.png)(class:'medium')
 ![Alt text](./example.png)(class:'large')

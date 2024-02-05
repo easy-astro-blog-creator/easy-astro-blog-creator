@@ -1,27 +1,16 @@
 ---
 import SocialLinks from "./SocialLinks.astro"
-import { FULL_NAME } from '../consts';
+import { FULL_NAME } from '../siteConfig';
 const today = new Date();
 ---
 
 
-<footer>
-	<SocialLinks class="footer-social-links"/>
-	<hr />
-	<p>
-		Use <a href="https://github.com/ShelbyJenkins/easy-astro-blog-creator" target="_blank">easy-astro-blog-creator</a> to create your own GitHub Pages blog!
-	  </p>	  
-	<hr />
-	&copy; {today.getFullYear()} {FULL_NAME}. All rights reserved.
-
+<footer class="footer gap-y-0 font-light text-3xl lg:text-sm footer-center p-10 rounded">
+	<SocialLinks />
+	<aside>
+		<p>
+			Use <a href="https://github.com/ShelbyJenkins/easy-astro-blog-creator" target="_blank">easy-astro-blog-creator</a> to create your own GitHub Pages blog!
+		</p>	  
+		<p>&copy; {today.getFullYear()} {FULL_NAME}. All rights reserved.</p>
+	</aside>
 </footer>
-
-<style>
-	footer {
-		padding: 2em 1em 2em 1em;
-		/* background: var(--background-color); */
-		color: rgb(var(--social-links-color));
-		font-size: 0.7em;
-		text-align: center;
-	}
-</style>

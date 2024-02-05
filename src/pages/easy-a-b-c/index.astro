@@ -1,6 +1,6 @@
 ---
 import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
+import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 // import { Image } from 'astro:assets';
 
@@ -17,7 +17,7 @@ const heroAlt = 'Easy logo.';
 		<BaseHead title={SITE_TITLE} page_description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt} />
 	</head>
 	<body>
-		<Header/>
+		<Navbar/>
 		<main>
 			<article>
 				<!-- <Image src={heroImage} alt={heroAlt} format="png" quality="100" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto;"/> -->

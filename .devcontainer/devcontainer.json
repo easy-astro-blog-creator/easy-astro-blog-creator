@@ -19,7 +19,8 @@
 				"unifiedjs.vscode-mdx",
 				"csstools.postcss",
 				"moalamri.inline-fold",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"ms-vscode.vscode-typescript-next"
 			]
 		}
 	}

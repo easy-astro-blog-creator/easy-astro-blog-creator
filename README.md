@@ -118,7 +118,7 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 - Open `src/consts.ts` and set the information within. This sets things like adding your name and social links.
 - Replace `public/favicon.png` with your choice of image.
 - Finally, lets remove the EasyABC content from your blog!
-- Go to `src/components/Header.astro` and comment out or remove this line: `<HeaderLink href="/easy-a-b-c">EasyABC</HeaderLink>`. This removes the link in the header.
+- Go to `src/components/Navbar.astro` and comment out or remove this line: `<HeaderLink href="/easy-a-b-c">EasyABC</HeaderLink>`. This removes the link in the header.
 - Rename `src/content/blog/template` to `src/content/blog/_template`. Pre-fixing `_` tells Astro to ignore this item, but it will be there for you to copy from in the future!
 <h4>Deploy</h4>
     
