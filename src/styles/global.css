@@ -36,12 +36,10 @@
 
 @layer base {
     :root {
-        --box-shadow: 0 2px 6px rgb(var(--accent-rgb) / 0.1), 0 8px 24px rgb(var(--accent-rgb) / 0.1),
-        0 16px 32px rgb(var(--accent-rgb) / 0.1);
+        --box-shadow: 0 2px 6px rgb(var(--accent) / 0.1), 0 8px 24px rgb(var(--accent) / 0.1),
+        0 16px 32px rgb(var(--accent) / 0.1);
     }
-    html {
 
-    }
     body {
         min-height: 100vh;
         display: flex;
@@ -49,7 +47,7 @@
         justify-content: space-between;
         align-items: center;
         @apply font-sans;
-        @apply text-primary-text-color-950 dark:text-primary-text-color-50;
+        @apply text-neutral-color-900 dark:text-neutral-color-100;
         text-align: left;
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -68,7 +66,7 @@
     
     }
     h1, h2, h3, h4, h5, h6 {
-        @apply  text-secondary-color-950 dark:text-secondary-color-50;
+        @apply  text-neutral-color-950 dark:text-neutral-color-50;
     }
     h1 {
         font-size: 3.052em;
@@ -90,10 +88,7 @@
     }
 
     a {
-        @apply text-neutral-color-700 dark:text-accent-color-500;
-    }
-    a:hover {
-        @apply text-accent-color-950 dark:text-accent-color-50;
+        @apply font-medium text-accent-color-900 hover:text-accent-color-500 dark:text-accent-color-500 dark:hover:text-accent-color-300;
     }
     ul {
         @apply list-disc;

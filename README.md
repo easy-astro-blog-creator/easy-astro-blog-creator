@@ -22,8 +22,8 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 
 <h6>Quicklinks:</h6>
 
-- [General markdown guide](/easy-a-b-c/markdown-style-guide)
-- [EasyABC markdown specifics](/easy-a-b-c/easy-a-b-c-markdown-specifics)
+- [General markdown guide](/easy/markdown-style-guide)
+- [EasyABC markdown specifics](/easy/easy-markdown-specifics)
 *** 
 <!-- Here we should have some images of example usages -->
 <!-- This should start closed -->
@@ -101,8 +101,8 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 <h4>Working with markdown</h4>
 
 - Markdown is straight forward and you defintely use it in some form already. For example: Slack and Discord both use flavors of markdown.
-    - Check out the [general markdown guide](/easy-a-b-c/markdown-style-guide) for some notes.
-    - And also the [EasyABC markdown specifics guide](/easy-a-b-c/easy-a-b-c-markdown-specifics).
+    - Check out the [general markdown guide](/easy/markdown-style-guide) for some notes.
+    - And also the [EasyABC markdown specifics guide](/easy/easy-markdown-specifics).
 <h4>Your homepage</h4>
 
 - The landing page for your website is `src/pages/index.astro`.
@@ -118,7 +118,7 @@ git clone https://github.com/ShelbyJenkins/easy-astro-blog-creator
 - Open `src/consts.ts` and set the information within. This sets things like adding your name and social links.
 - Replace `public/favicon.png` with your choice of image.
 - Finally, lets remove the EasyABC content from your blog!
-- Go to `src/components/Navbar.astro` and comment out or remove this line: `<HeaderLink href="/easy-a-b-c">EasyABC</HeaderLink>`. This removes the link in the header.
+- Go to `src/components/Navbar.astro` and comment out or remove this line: `<HeaderLink href="/easy">EasyABC</HeaderLink>`. This removes the link in the header.
 - Rename `src/content/blog/template` to `src/content/blog/_template`. Pre-fixing `_` tells Astro to ignore this item, but it will be there for you to copy from in the future!
 <h4>Deploy</h4>
     

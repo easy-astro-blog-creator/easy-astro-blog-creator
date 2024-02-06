@@ -1,0 +1,36 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../siteConfig';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaletteSwatch from '../../components/PaletteSwatch.astro';
+import { tailwindsTheme } from "./src/styles/easy-theme.mjs";
+
+const PAGE_TITLE = 'EasyABC Theme';
+const PAGE_DESCRIPTION = 'Viewing and applying Themes for EasyABC';
+
+const THEME_COLORS = tailwindsTheme.theme.colors;
+
+const colorShades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
+const semanticColors = 'base'; // Example: blue, red, etc.
+
+---
+<BaseLayout page_title={PAGE_TITLE} page_description={PAGE_DESCRIPTION}>
+    <main class="bg-[white] dark:bg-[black] px-4 py-6 rounded-lg">
+        <div class="flex flex-col gap-1">
+            {
+                Object.entries(THEME_COLORS).map(([colorName, colorFamily]) => (
+                    <div class="flex flex-col">
+                        <h5 class='text-[black] dark:text-[white]'>{colorName}</h5>
+                        <div class="flex flex-row md:flex-row relative md:space-x-1 space-y-1 md:space-y-0 rounded-lg">
+                            {
+                                Object.entries(colorFamily).map(([shadeValue, colorCode]) => {                              
+                                    return <PaletteSwatch shadeValue={shadeValue} colorCode={colorCode}/>;
+                                })
+                            }
+                            </div>
+                    </div>
+                ))
+            }
+        </div>
+    </main>
+</BaseLayout>

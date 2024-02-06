@@ -1,28 +1,18 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_DESCRIPTION } from '../siteConfig';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../siteConfig';
 import { Image } from 'astro:assets';
-import headshot from '../images/headshot.png';
+import heroImage from '../images/headshot.png';
 const heroAlt = 'A headshot.';
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead page_description={SITE_DESCRIPTION} heroImage={headshot} heroAlt={heroAlt}/>
-	</head>
-	<body>
-		<Navbar/>
-		<main>
-			<h1 class="pb-3">Hello There</h1>
-			<Image src={headshot} alt={heroAlt} class="w-1/4 p-4 rounded-3xl"/>
+<BaseLayout page_title={SITE_TITLE} page_description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
+	<main>
+		<h1 class="pb-3">Hello There</h1>
+		<Image src={heroImage} alt={heroAlt} class="w-1/4 p-4 rounded-3xl"/>
+		
+		<p>
+			Welcome to my about me page.
+		</p>
+	</main>
 
-			<p>
-				Welcome to my about me page.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+</BaseLayout>

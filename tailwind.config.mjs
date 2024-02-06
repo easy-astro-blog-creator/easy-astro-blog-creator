@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-import customTheme from "./src/styles/easy-theme.mjs";
+import { tailwindsTheme, daisyuiTheme } from "./src/styles/easy-theme.mjs";
+
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: [
-       {'customTheme': customTheme.daisyui},
+       {'customTheme': daisyuiTheme},
     ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
@@ -26,6 +27,6 @@ export default {
       },
     },
   },
-  presets: [customTheme],
+  presets: [tailwindsTheme],
   darkMode: "class",
 }

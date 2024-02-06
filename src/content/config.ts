@@ -13,4 +13,4 @@ const blogCollection = defineCollection({
 	})
 });
 	
-export const collections = { blog: blogCollection, easyAbc: blogCollection};
+export const collections = { blog: blogCollection, easy: blogCollection};

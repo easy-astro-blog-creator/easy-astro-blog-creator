@@ -3,14 +3,14 @@ title: 'EasyABC Markdown Specifics'
 description: 'This is a guide for specific markdown syntax used in EasyABC.'
 pubDate: 'Jan 24 2024'
 updatedDate: 'Jan 02 2024'
-heroImagePath: './easy-a-b-c-markdown-specifics/hero.jpg'
+heroImagePath: './easy-markdown-specifics/hero.jpg'
 heroImage: './hero.jpg'
 heroAlt: "A hero!"
 ---
 
 This is a guide for specific markdown syntax used in EasyABC.
 
-- This is in addition to the [general markdown guide.](/easy-a-b-c/markdown-style-guide)
+- This is in addition to the [general markdown guide.](/easy/markdown-style-guide)
 
 <hr>
 

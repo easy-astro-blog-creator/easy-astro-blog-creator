@@ -5,7 +5,7 @@ import '../../styles/blog.css'
 
 
 export async function getStaticPaths() {
-    const posts = await getCollection('easyAbc');
+    const posts = await getCollection('easy');
 
     // Map each post to a promise
     const pathsPromises = posts.map((post) => {

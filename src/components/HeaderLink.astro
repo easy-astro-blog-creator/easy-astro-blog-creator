@@ -10,7 +10,7 @@ const isActive = pathname === href || pathname.startsWith(`${href}/`);
 
 
 const underline = isActive ? 'underline' : 'no-underline';
-const bold = isActive ? 'font-bold' : 'font-normal';
+const bold = isActive ? 'font-bold' : 'font-medium';
 ---
 
 <a href={href} class:list={[
@@ -24,12 +24,3 @@ const bold = isActive ? 'font-bold' : 'font-normal';
 	{...props}>
 	<slot />
 </a>
-<style>
-	a {
-		color: var(--heading-color);
-		text-decoration-color: var(--accent);
-	}
-	a:hover {
-		color: var(--accent);
-	}
-</style>

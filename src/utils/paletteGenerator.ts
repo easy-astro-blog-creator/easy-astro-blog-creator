@@ -1,5 +1,6 @@
-import chroma = require("chroma-js");
-import { Color } from 'chroma-js';
+// import chroma = require("chroma-js");
+// import chroma from 'chroma-js';
+import chroma, { Color } from 'chroma-js';
 
 interface TailwindPalette {
   '50': string;
@@ -17,89 +18,31 @@ interface TailwindPalette {
 
 
 const steps = 11;
-const lightMax = 0.99;
-const darkMax = 0.01;
+const darkMax = 0.95;
+const lightMax = 0.01;
 
 export default function generateTailwindPalette(colorInput: string) {
   if (!chroma.valid(colorInput)) {
     throw new Error(`Invalid color: ${colorInput}. See https://gka.github.io/chroma.js/#chroma-valid for valid color formats.`);
   }
 
-  let inputLuminance = chroma(colorInput).get('oklab.l');
+  const oklabPalette = generatePalette(colorInput, 'oklab');
+  const oklchPalette = generatePalette(colorInput, 'oklch');
+  const hslPalette = generatePalette(colorInput, 'hsl');
 
-  let initialStepSize = (lightMax + darkMax) / steps;
-  let lightStepSize = 0;
-  let rangeLight = lightMax - inputLuminance;
-  let lightSteps = Math.floor(rangeLight / initialStepSize);
-
-  let darkStepSize = 0;
-  let rangeDark = inputLuminance - darkMax;
-  let darkSteps = Math.floor(rangeDark / initialStepSize);
-
-  if (lightSteps === 0) {
-    if ((rangeLight >= initialStepSize / 2)) {
-      lightSteps = 1;
-      lightStepSize = rangeLight / 2;
-      darkSteps = steps - 2;
-    } else {
-      lightSteps = 0;
-    }
-    darkStepSize = (rangeDark / darkSteps);
-  } else if (darkSteps === 0) {
-    if ((rangeDark >= initialStepSize / 2)) {
-      darkSteps = 1;
-      darkStepSize = rangeDark / 2;
-      lightSteps = steps - 2;
-    } else {
-      darkSteps = 0;
-    }
-    lightStepSize = (rangeLight / lightSteps);
-  } else {
-    lightStepSize = initialStepSize;
-    darkStepSize = initialStepSize;
-  }
-
-
-  let luminanceScale: number[] = [];
-  for (let i = 1; i <= lightSteps; i++) {
-      luminanceScale.push(inputLuminance + (lightStepSize * i));
-  };
- 
-  for (let i = 1; i <= darkSteps; i++) {
-    let darkness = inputLuminance - (darkStepSize * i);
-    let adjustedDarkness = darkness * (1 - (i / 33));
-    luminanceScale.push(adjustedDarkness);
+  const blendedColors: Color[] = [];
+  for (let i = 1; i <= steps; i++) {
+    const oklabColor = oklabPalette[i - 1];
+    const oklchColor = oklchPalette[i - 1];
+    const hslColor = hslPalette[i - 1];
+    const blendedColor = chroma.average([oklabColor, oklchColor, hslColor], 'oklch', [1,1,1.5]);
+    blendedColors.push(blendedColor);
   };
 
-
-  luminanceScale.push(inputLuminance);
-
-  luminanceScale = luminanceScale.sort((a, b) => b - a);
-  const colorScale: Color[] = [];
-  luminanceScale.forEach((luminanceStep) => {
-    let colorStep = chroma(colorInput).luminance((luminanceStep), 'oklab')
-    colorScale.push(colorStep);
+  const stringFormattedColorScale = blendedColors.map((color) => {
+    return color.css('hsl');
   });
-
-  if (colorScale.length != 11) {
-    throw new Error(
-      `
-      Error for: ${colorInput}
-      Color scale is not long enough. Expected 11, got ${colorScale.length}.
-      lightSteps: ${lightSteps} 
-      lightStepSize: ${lightStepSize} 
-      rangeLight: ${rangeLight}
-      darkSteps: ${darkSteps}
-      darkStepSize: ${darkStepSize}
-      rangeDark: ${rangeDark}
-      `);
-  };
   
-  const stringFormattedColorScale = colorScale.map((color) => {
-    const hsl = color.hsl();
-    const hslString = `hsl(${hsl[0]}, ${hsl[1]*100}%, ${hsl[2]*100}%)`;
-    return hslString;
-  });
   const tailwindPalette: TailwindPalette = {
     '50': stringFormattedColorScale[0],
     '100': stringFormattedColorScale[1],
@@ -117,5 +60,25 @@ export default function generateTailwindPalette(colorInput: string) {
 }
 
 
+function generatePalette(colorInput: string, mode: 'hsl' | 'lab' | 'lch' | 'rgb' | 'hsv' | 'oklab' | 'oklch') {
+  let brightest = chroma(colorInput).luminance(lightMax, mode);
+  let darkest = chroma(colorInput).luminance(darkMax, mode);
+  let colorScale = chroma.scale([darkest, colorInput, brightest]).mode(mode);
+ 
+  
+  let luminanceSteps: number[] = [];
+  for (let i = 1; i <= steps; i++) {
+    let fraction = (i - 1) / (steps - 1);
+    let position = lightMax + fraction * (darkMax - lightMax);
+    luminanceSteps.push(position);
+  };
+  // luminanceSteps = luminanceSteps.sort((a, b) => b - a);
 
+  const colors: Color[] = [];
+  luminanceSteps.forEach((luminanceStep) => {
+    let colorStep = colorScale(luminanceStep);
+    colors.push(colorStep);
+  });
+  return colors;
+}
   
