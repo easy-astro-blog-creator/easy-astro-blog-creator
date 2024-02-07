@@ -27,6 +27,8 @@ export default {
       },
     },
   },
-  presets: [tailwindsTheme],
+  theme: {
+    extend: tailwindsTheme
+  },
   darkMode: "class",
 }

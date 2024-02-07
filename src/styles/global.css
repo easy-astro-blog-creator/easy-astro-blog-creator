@@ -39,7 +39,10 @@
         --box-shadow: 0 2px 6px rgb(var(--accent) / 0.1), 0 8px 24px rgb(var(--accent) / 0.1),
         0 16px 32px rgb(var(--accent) / 0.1);
     }
-
+    html {
+        font-size: 16px;
+        font-weight: 300;
+    }
     body {
         min-height: 100vh;
         display: flex;
@@ -47,14 +50,9 @@
         justify-content: space-between;
         align-items: center;
         @apply font-sans;
-        @apply text-neutral-color-900 dark:text-neutral-color-100;
-        text-align: left;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        background-color: white;
-        @apply bg-base-color-50  dark:bg-base-color-950;
-        @apply bg-gradient-light dark:bg-gradient-dark;
-        --scrollbar-width: calc(100vw - 100%);
+        color: black;
+        background-color: theme(colors.background-color.50);
+
     }
     main {
        @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
@@ -62,35 +60,29 @@
     article {
        @apply flex flex-col grow justify-normal;
     }
-    p {
-    
-    }
-    h1, h2, h3, h4, h5, h6 {
-        @apply  text-neutral-color-950 dark:text-neutral-color-50;
-    }
-    h1 {
-        font-size: 3.052em;
-    }
-    h2 {
-        font-size: 2.441em;
-    }
-    h3 {
-        font-size: 1.953em;
-    }
-    h4 {
-        font-size: 1.563em;
-    }
-    h5 {
-        font-size: 1.25em;
-    }
-    h6 {
-        font-size: .75em;
-    }
 
-    a {
-        @apply font-medium text-accent-color-900 hover:text-accent-color-500 dark:text-accent-color-500 dark:hover:text-accent-color-300;
+    /* Hyperlinks */
+    .easy-link {
+        letter-spacing: 0.025rem;
+        font-weight: 400;
     }
-    ul {
+    /* For unvisited links. TIL! */
+    .easy-link:link {
+        color: theme(colors.links.initial);
+    }
+    .easy-link:visited {
+        color: theme(colors.links.visited);
+    }
+    
+    .easy-link:active {
+        color: theme(colors.links.active);
+    }
+    .easy-link:hover, .easy-link:focus, .easy-link:active {
+        text-decoration: underline;
+    }
+}
+
+    /* ul {
         @apply list-disc;
         @apply pl-0; 
     }
@@ -99,7 +91,7 @@
     }
     li::marker {
         color: var(--accent);   
-    }
+    } */
     /* code {
         padding: 2px 5px;
         background-color: var(--code-background-color);
@@ -136,7 +128,7 @@
         margin: 0px;
         font-size: 1.333em;
     }   */
-    img {
+    /* img {
         @apply rounded-xl;
     }
     hr {
@@ -145,8 +137,8 @@
         background-color: var(--hr-background-color);
         width: 6%;             
         margin: 10px auto;     
-    }
-}
+    } */
+
 
 
  

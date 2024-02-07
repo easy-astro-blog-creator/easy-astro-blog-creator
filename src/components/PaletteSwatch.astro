@@ -2,37 +2,9 @@
 import chroma from 'chroma-js';
 const {colorCode, shadeValue} = Astro.props;
 const colorHex = chroma(colorCode).hex();
+import { findContrastLevel } from '../utils/checkContrast';
 
-
-function findContrastingTextColor(backgroundColor, targetContrast = 8) {
-  let darkerColor = chroma(backgroundColor);
-  let lighterColor = chroma(backgroundColor);
-  let maxIterations = 100; // Prevent infinite loops
-
-  for (let i = 0; i < maxIterations; i++) {
-    // Alternate between darkening and brightening to find a contrast
-    const isEven = i % 2 === 0;
-    const testColor = isEven ? darkerColor.darken(0.1) : lighterColor.brighten(0.1);
-    
-    // Update darker or lighter color based on iteration
-    if (isEven) {
-      darkerColor = testColor;
-    } else {
-      lighterColor = testColor;
-    }
-    
-    const currentContrast = chroma.contrast(backgroundColor, testColor);
-    if (currentContrast >= targetContrast) {
-      return testColor.css();
-    }
-  }
-
-  // If no suitable contrast was found, return a default high-contrast color
-  return chroma(backgroundColor).luminance() > 0.5 ? 'black' : 'white';
-}
-
-const textColor = findContrastingTextColor(colorCode);
-
+const textColor = chroma(findContrastLevel(colorCode, colorCode, 'highest')).css('hsl');
 ---
 
 <div class='h-16 w-16 lg:h-24 lg:w-24 rounded-lg p-2 flex justify-center flex-col relative' style=`background-color: ${colorCode}; color: ${textColor}`>
