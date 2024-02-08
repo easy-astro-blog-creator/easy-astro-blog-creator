@@ -1,4 +1,4 @@
-import generateTailwindPalette from '../src/utils/paletteGenerator';
+import generateTailwindPalette from '../src/utils/color/paletteGenerator';
 
 test('Tests generateTailwindPalette', () => {
     const tailwindPaletteTest: number[] = [

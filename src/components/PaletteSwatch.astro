@@ -2,16 +2,16 @@
 import chroma from 'chroma-js';
 const {colorCode, shadeValue} = Astro.props;
 const colorHex = chroma(colorCode).hex();
-import { findContrastLevel } from '../utils/checkContrast';
+import { findContrastLevel } from '../utils/color/checkContrast';
 
 const textColor = chroma(findContrastLevel(colorCode, colorCode, 'highest')).css('hsl');
 ---
 
-<div class='h-16 w-16 lg:h-24 lg:w-24 rounded-lg p-2 flex justify-center flex-col relative' style=`background-color: ${colorCode}; color: ${textColor}`>
-    <div class="px-2 lg:mt-auto cursor-pointer flex items-center justify-center ">
-        <div class="w-full">
-            <div class="text-center text-xs font-medium">{shadeValue}</div>
-            <div class="text-center text-xs uppercase opacity-90 ">{colorHex}</div>
+<div class='h-16 w-16 lg:h-24 lg:w-24 rounded-lg p-2 flex justify-center flex-col items-center relative' style=`background-color: ${colorCode}; color: ${textColor}`>
+    <div class="px-2 lg:mt-auto cursor-pointer flex items-center justify-center">
+        <div class="w-full text-ellipsis">
+            <div class="break-all text-center text-xs font-medium">{shadeValue}</div>
+            <div class="text-center text-xs uppercase opacity-90">{colorHex}</div>
         </div>
     </div>
 </div>

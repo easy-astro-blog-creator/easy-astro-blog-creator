@@ -1,12 +1,12 @@
 import chroma, { Color } from 'chroma-js';
 
-const targetContrast = 6;
-const acceptableContrast = 4;
 
 export function findContrastLevel(
-    backgroundColor: string | Color = 'white',
     inputColor: string | Color,
-    returnMode: 'first' | 'highest' = 'first' 
+    backgroundColor: string | Color,
+    returnMode: 'first' | 'highest' | 'lowest' | 'middle' = 'highest',
+    targetContrast: number = 9,
+    acceptableContrast: number = 4
   ): Color {
     let darkerColor = chroma(inputColor);
     let lighterColor = chroma(inputColor);
@@ -20,6 +20,7 @@ export function findContrastLevel(
             let darkerContrast = chroma.contrast(backgroundColor, darkerColor);
             if (darkerContrast >= acceptableContrast) {
                 if (darkerContrast >= targetContrast && returnMode === 'first') return darkerColor;
+                if (darkerContrast >= acceptableContrast && returnMode === 'first') return darkerColor;
                 scoredColors[darkerContrast] = darkerColor;
             }
         }
@@ -28,13 +29,15 @@ export function findContrastLevel(
             let lighterContrast = chroma.contrast(backgroundColor, lighterColor);
             if (lighterContrast >= acceptableContrast) {
                 if (lighterContrast >= targetContrast && returnMode === 'first') return lighterColor;
+                if (lighterContrast >= acceptableContrast && returnMode === 'first') return lighterColor;
                 scoredColors[lighterContrast] = lighterColor;
             }
         }
         if (currentLuminanceDarker <= 0 && currentLuminanceLighter >= 1) break;
     }
-    let sortedScoredColors = Object.keys(scoredColors).map(Number).sort((a, b) => b - a);
-    if (sortedScoredColors[0] < acceptableContrast || sortedScoredColors.length === 0){
+    let sortedScoredColors = [];
+    sortedScoredColors = Object.keys(scoredColors).map(Number).sort((a, b) => a - b);
+    if (sortedScoredColors.length === 0 || sortedScoredColors[0] < acceptableContrast){
         throw new Error(`No suitable contrast found for 
             inputColor: ${chroma(inputColor).css('hsl')} 
             on backgroundColor: ${backgroundColor} 
@@ -44,15 +47,23 @@ export function findContrastLevel(
             highest contrast color: ${scoredColors[sortedScoredColors[0]]}`
         );
     }
-    return scoredColors[sortedScoredColors[0]];
+    if (returnMode === 'highest') {
+        return scoredColors[sortedScoredColors[sortedScoredColors.length - 1]];
+    } else if (returnMode === 'lowest') {
+        return scoredColors[sortedScoredColors[0]];
+    } else if (returnMode === 'middle') {
+        return scoredColors[sortedScoredColors[Math.floor(sortedScoredColors.length / 2)]];
+    }
+
+    
 }
 
-function adjustContrastViaLuminance(color: Color, value: number, mode: string): Color {
+export function adjustContrastViaLuminance(color: Color, value: number, mode: 'darken' | 'lighten'): Color {
     if (mode === 'darken') {
         const colorL = chroma(color).luminance() - value;
-        return chroma(color).luminance(colorL, 'hsl');
+        return chroma(color).luminance(colorL, 'oklch');
     } else if (mode === 'lighten') {
         const colorL = chroma(color).luminance() + value;
-        return chroma(color).luminance(colorL, 'hsl');
+        return chroma(color).luminance(colorL, 'oklch');
     }
 }

@@ -51,8 +51,8 @@
         align-items: center;
         @apply font-sans;
         color: black;
-        background-color: theme(colors.background-color.50);
-
+        @apply bg-light-background-default dark:bg-dark-background-default;
+        @apply text-light-text-default dark:text-dark-text-default;
     }
     main {
        @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
@@ -63,19 +63,19 @@
 
     /* Hyperlinks */
     .easy-link {
-        letter-spacing: 0.025rem;
-        font-weight: 400;
+        letter-spacing: 0.033rem;
+        font-weight: 433;
     }
     /* For unvisited links. TIL! */
     .easy-link:link {
-        color: theme(colors.links.initial);
+        @apply text-light-links-initial dark:text-dark-links-initial;
     }
     .easy-link:visited {
-        color: theme(colors.links.visited);
+        @apply text-light-links-visited dark:text-dark-links-visited;
     }
     
     .easy-link:active {
-        color: theme(colors.links.active);
+        @apply text-light-links-active dark:text-dark-links-active;
     }
     .easy-link:hover, .easy-link:focus, .easy-link:active {
         text-decoration: underline;

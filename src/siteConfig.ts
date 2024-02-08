@@ -22,15 +22,15 @@ export const GITHUB_URL = 'https://github.com/shelbyjenkins';
 
 export const THEME = {
     // Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
-    primaryColor: "19405c", 
+    primaryColor: "#003E1F", 
     // Secondary colors highlight or complement the primary color. These are to be used sparingly to make the UI elements stand out.
-    secondaryColor: "#003E1F", 
-    // Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
-    accentColor: "#40a1e6",
-    // Use for both dark and light mode
-    neutralColor: "#E8F5F2",
-    // Background color is the color of the main content area. It is used to set the mood of the UI.
-    backgroundColor: "#d4e9f8", 
+    // secondaryColor: "#003E1F", 
+    // // Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
+    // accentColor: "#40a1e6",
+    // // Use for both dark and light mode
+    // neutralColor: "#E8F5F2",
+    // // Background color is the color of the main content area. It is used to set the mood of the UI.
+    // backgroundColor: "#d4e9f8", 
 }
 // Meteor #D07D12 208, 125, 18
 // Aqua Squeeze #E8F5F2 232, 245, 242
