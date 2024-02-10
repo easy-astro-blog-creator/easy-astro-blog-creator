@@ -9,16 +9,19 @@
   
   <style>    
     #sun { 
-        display: block;
+        @apply dark:hidden;
     }
     #moon { 
-        display: none;
+        @apply hidden dark:block;
     }
     #themeToggle {
-        @apply fill-black;
+        @apply fill-on-background-light dark:fill-on-background-dark;
     }
     #themeToggle:hover {
-        @apply fill-black;
+        @apply fill-primary-light dark:fill-primary-dark;
+    }
+    #themeToggle:active {
+        @apply fill-tertiary-light dark:fill-tertiary-dark;
     }
 
 
@@ -26,7 +29,6 @@
 
   
 <script is:inline>
-
 
     const getTheme = () => {
         if (typeof localStorage !== 'undefined') {
@@ -42,32 +44,25 @@
     };
 
     const applyTheme = (toggle = false) => {
-        const rootElement = document.documentElement;
-        const sunElement = document.querySelector('#sun');
-        const moonElement = document.querySelector('#moon');
+        
         let theme = getTheme();
         if (toggle) {
             theme = theme === 'dark' ? 'light' : 'dark';
-            localStorage.setItem('theme', theme);
         }
+        localStorage.setItem('theme', theme);
         if (theme === 'light') {
-            if (rootElement.classList.contains('dark')) {
-                rootElement.classList.remove('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
             };
-            rootElement.classList.add('light');
-            if (sunElement) moonElement.style.display = 'none';
-            if (moonElement) sunElement.style.display = 'block';
+            document.documentElement.classList.add('light');
             // if (moonElement) sunElement.style.setProperty('fill', 'var(--heading-color)');
         } else {
-            if (rootElement.classList.contains('light')) {
-                rootElement.classList.remove('light');
+            if (document.documentElement.classList.contains('light')) {
+                document.documentElement.classList.remove('light');
             };
-            rootElement.classList.add('dark');
-            if (moonElement) sunElement.style.display = 'none';
-            if (sunElement) moonElement.style.display = 'block';
+            document.documentElement.classList.add('dark')
             // if (moonElement) sunElement.style.fill = 'transparent';
         }
-        
     };
 
     applyTheme(); // Apply the initial theme

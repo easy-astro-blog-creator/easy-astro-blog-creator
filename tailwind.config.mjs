@@ -1,13 +1,17 @@
-/** @type {import('tailwindcss').Config} */
-import { tailwindsTheme, daisyuiTheme } from "./src/styles/easy-theme.mjs";
 
+import { tailwindsTheme, daisyuiTheme } from "./src/styles/easy-theme.mjs";
+// import { test } from './src/utils/material/test.ts';
+import { THEME } from '../../siteConfig';
+
+
+/** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: [
-       {'customTheme': daisyuiTheme},
-    ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    // themes: [
+    //    {'customTheme': daisyuiTheme},
+    // ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
     utils: true, // adds responsive and modifier utility classes
@@ -27,8 +31,10 @@ export default {
       },
     },
   },
-  theme: {
-    extend: tailwindsTheme
-  },
+  theme: tailwindsTheme,
   darkMode: "class",
-}
+  fontFamily: {
+    sans: ['REM', 'sans-serif'],
+  },
+};
+

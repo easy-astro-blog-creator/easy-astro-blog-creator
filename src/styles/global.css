@@ -4,8 +4,6 @@
 @import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
-/* @import 'light-dark-modes.css'; */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,10 +47,11 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        @apply font-sans;
-        color: black;
-        @apply bg-light-background-default dark:bg-dark-background-default;
-        @apply text-light-text-default dark:text-dark-text-default;
+        /* @apply bg-light-background-default dark:bg-dark-background-default;
+        @apply text-light-text-default dark:text-dark-text-default; */
+        @apply bg-background-light dark:bg-background-dark;
+        @apply text-on-background-light dark:text-on-background-dark;
+        
     }
     main {
        @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
@@ -68,14 +67,14 @@
     }
     /* For unvisited links. TIL! */
     .easy-link:link {
-        @apply text-light-links-initial dark:text-dark-links-initial;
+        /* @apply text-light-links-initial dark:text-dark-links-initial; */
     }
     .easy-link:visited {
-        @apply text-light-links-visited dark:text-dark-links-visited;
+        /* @apply text-light-links-visited dark:text-dark-links-visited; */
     }
     
     .easy-link:active {
-        @apply text-light-links-active dark:text-dark-links-active;
+        /* @apply text-light-links-active dark:text-dark-links-active; */
     }
     .easy-link:hover, .easy-link:focus, .easy-link:active {
         text-decoration: underline;

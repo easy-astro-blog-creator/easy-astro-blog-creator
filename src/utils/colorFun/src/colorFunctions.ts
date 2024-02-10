@@ -1,6 +1,7 @@
-import chroma, { Color } from 'chroma-js';
+import chroma from 'chroma-js';
+import { validateColor } from './utils';
 
-function complemetaryColor(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color {
+function complemetaryColor(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color {
     validateColor(inputColor);
     if (mode === 'hsl') {
         return chroma(inputColor).set('hsl.h', ((chroma(inputColor).get('hsl.h') + 180) % 360));
@@ -9,7 +10,7 @@ function complemetaryColor(inputColor: string | Color, mode: 'hsl' | 'oklch' = '
     }
 }
 
-function complemetarySplitColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color[] {
+function complemetarySplitColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
     validateColor(inputColor);
     if (mode === 'hsl') {
         const splitComplement1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 150) % 360);
@@ -22,7 +23,7 @@ function complemetarySplitColors(inputColor: string | Color, mode: 'hsl' | 'oklc
     }
 }
 
-function analogousColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color[] {
+function analogousColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
     validateColor(inputColor);
     if (mode === 'hsl') {
         const analogous1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 24) % 360);
@@ -39,7 +40,7 @@ function analogousColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'ok
     }
 }
 
-function triadicColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color[] {
+function triadicColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
     validateColor(inputColor);
     if (mode === 'hsl') {
         const triadic1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 120) % 360);
@@ -52,7 +53,7 @@ function triadicColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklc
     }
 }
 
-function tetradicColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color[] {
+function tetradicColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
     validateColor(inputColor);
     if (mode === 'hsl') {
         const tetradic1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 60) % 360);
@@ -67,7 +68,7 @@ function tetradicColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'okl
         return [chroma(inputColor), tetradic1, tetradic2, tetradic3];
     }
 }
-function squareColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch'): Color[] {
+function squareColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
     validateColor(inputColor);
     if (mode === 'hsl') {
         const square1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 90) % 360);
@@ -83,61 +84,6 @@ function squareColors(inputColor: string | Color, mode: 'hsl' | 'oklch' = 'oklch
     }
 }
 
-function sortColorsByP(testColors: Color[], param: 'l' | 'c' | 'h') {
-    for (let i = 0; i < testColors.length - 1; i++) {
-        for (let j = 0; j < testColors.length - i - 1; j++) {
-            const color1 = testColors[j];
-            const color2 = testColors[j + 1];
-            const value1 = chroma(color1).get(`oklch.${param}`);
-            const value2 = chroma(color2).get(`oklch.${param}`);
-            if (value1 > value2) {
-                [testColors[j], testColors[j + 1]] = [testColors[j + 1], testColors[j]];
-            }
-        }
-    }
-    return testColors;
-}
 
-function findClosestSchemeHue(matchColor: Color | string, testColors: {[key: string]: [Color] }): string {
-    validateColor(matchColor);
-    let closestScheme = '';
-    let closestMatch = Infinity; 
-    Object.entries(testColors).forEach(([schemeName, schemeColors]) => {
-      const normalizedSchemeColors = Array.isArray(schemeColors) ? schemeColors : [schemeColors];
-      normalizedSchemeColors.forEach(schemeColor => {
-        const difference = getDifferenceHue(matchColor, schemeColor);
-        if (closestMatch === 0 || difference < closestMatch) {
-          closestMatch = difference;
-          closestScheme = schemeName;
-        }
-      });
-    })
-    return closestScheme;
-  }
-
-
-
-function sortColorsByDifferenceHue(matchColor: Color | string, testColors: Color[]) {
-    const huesWithDifferences = testColors.map(hue => {
-      let difference = getDifferenceHue(matchColor, hue);
-      return { hue, difference };
-    });
-    huesWithDifferences.sort((a, b) => a.difference - b.difference);
-    return huesWithDifferences.map(item => item.hue);
-  }
-  
-
-  function getDifferenceHue(color1: Color | string, color2: Color | string) {
-    let difference = Math.abs(chroma(color1).get('oklch.h') - chroma(color2).get('oklch.h'));
-    difference = difference > 180 ? 360 - difference : difference;
-    return difference;
-  }
-  
-    
-function validateColor(color: string | Color) {
-    if (!chroma.valid(color)) {
-        throw new Error(`Invalid color: ${color}. See https://gka.github.io/chroma.js/#chroma-valid for valid color formats.`);
-    }
-}
 
 export default { complemetaryColor, complemetarySplitColors, analogousColors, triadicColors, tetradicColors, squareColors, sortColorsByP, findClosestSchemeHue, sortColorsByDifferenceHue, getDifferenceHue, validateColor }

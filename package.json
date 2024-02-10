@@ -21,6 +21,7 @@
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/mdi": "^1.1.64",
+    "@material/material-color-utilities": "^0.2.7",
     "@tailwindcss/typography": "^0.5.10",
     "@types/jest": "^29.5.12",
     "astro": "^4.1.2",
@@ -44,6 +45,10 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/chroma-js": "^2.4.3"
+    "@types/chroma-js": "^2.4.3",
+    "@types/node": "^20.11.16",
+    "tailwind-material-colors": "^1.2.0",
+    "tailwind-material-surfaces": "^2.0.0",
+    "tailwind-mode-aware-colors": "^1.5.0"
   }
 }

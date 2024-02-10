@@ -1,13 +1,12 @@
-import chroma, { Color } from 'chroma-js';
-
+import chroma from 'chroma-js';
 
 export function findContrastLevel(
-    inputColor: string | Color,
-    backgroundColor: string | Color,
+    inputColor: string | chroma.Color,
+    backgroundColor: string | chroma.Color,
     returnMode: 'first' | 'highest' | 'lowest' | 'middle' = 'highest',
     targetContrast: number = 9,
     acceptableContrast: number = 4
-  ): Color {
+  ): chroma.Color {
     let darkerColor = chroma(inputColor);
     let lighterColor = chroma(inputColor);
     let maxIterations = 100;
@@ -58,7 +57,7 @@ export function findContrastLevel(
     
 }
 
-export function adjustContrastViaLuminance(color: Color, value: number, mode: 'darken' | 'lighten'): Color {
+export function adjustContrastViaLuminance(color: chroma.Color, value: number, mode: 'darken' | 'lighten'): chroma.Color {
     if (mode === 'darken') {
         const colorL = chroma(color).luminance() - value;
         return chroma(color).luminance(colorL, 'oklch');

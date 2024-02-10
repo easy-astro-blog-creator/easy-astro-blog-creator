@@ -20,9 +20,17 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/jshelbyj/';
 export const TWITTER_URL = 'https://twitter.com/j_shelby_j';
 export const GITHUB_URL = 'https://github.com/shelbyjenkins';
 
+
+/* Color Palette */
+/* Find a palette with https://mycolor.space/?hex=%23D4E9F8&sub=1 */
+/* Another fun tool is https://huemint.com/illustration-1/ */
+ /* https://themes.ionevolve.com/ */
+    /* Generate color codes with https://uicolors.app/create */
+  
+  /* Generate gradients with https://mycolor.space/gradient?ori=to+bottom&hex=%23102C41&hex2=%230F2424&sub=1 */
 export const THEME = {
     // Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
-    primaryColor: "#003E1F", 
+    primary: "#D07D12", 
     // Secondary colors highlight or complement the primary color. These are to be used sparingly to make the UI elements stand out.
     // secondaryColor: "#003E1F", 
     // // Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
