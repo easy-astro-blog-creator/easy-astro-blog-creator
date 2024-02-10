@@ -1,63 +1,13 @@
 ---
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../siteConfig';
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PaletteSwatch from '../../components/PaletteSwatch.astro';
-
-import { tailwindsTheme } from '../../styles/easy-theme.mjs';
-
-
+import Palette from '../../components/Palette.astro';
 
 const PAGE_TITLE = 'EasyABC Theme';
 const PAGE_DESCRIPTION = 'Viewing and applying Themes for EasyABC';
 
-const sortedColors = Object.fromEntries(Object.entries(tailwindsTheme.colors).sort());
-
 ---
 <BaseLayout page_title={PAGE_TITLE} page_description={PAGE_DESCRIPTION}>
     <main class="px-4 py-6 rounded-lg w-full">
-        <div class="grid grid-cols-12 gap-1 dark:hidden w-full">
-            {
-                Object.entries(sortedColors).map(([colorName, colorFamily]) => (
-                    !colorName.includes('dark') && (
-                        <div class="flex flex-col">
-                            <div class="flex flex-row md:flex-row relative md:space-x-1 space-y-1 md:space-y-0 rounded-lg">
-                                <PaletteSwatch shadeValue={colorName} colorCode={colorFamily}/>
-                            </div>
-                        </div>
-                    )
-                ))
-            }
-        </div>
-        <div class="hidden dark:grid grid-cols-12 gap-1 w-full">
-            {
-                Object.entries(sortedColors).map(([colorName, colorFamily]) => (
-                    !colorName.includes('light') && (
-                        <div class="flex flex-col">
-                            <div class="flex flex-row md:flex-row relative md:space-x-1 space-y-1 md:space-y-0 rounded-lg">
-                                <PaletteSwatch shadeValue={colorName} colorCode={colorFamily}/>
-                            </div>
-                        </div>
-                    )
-                ))
-            }
-        </div>
+        <Palette />
     </main>
 </BaseLayout>
-<!-- <div class="dark:flex flex-col gap-2 hidden">
-    {
-        Object.entries(dark_theme).map(([colorName, colorFamily]) => (
-            <div class="flex flex-col">
-                <h5 class="pl-1 pb-1">{colorName}</h5>
-                <div class="flex flex-row md:flex-row relative md:space-x-1 space-y-1 md:space-y-0 rounded-lg">
-                    {
-                        Object.entries(colorFamily).map(([shadeValue, colorCode]) => {                              
-                            return <PaletteSwatch shadeValue={shadeValue} colorCode={colorCode} />;
-                        })
-                        
-                    }
-                    </div>
-            </div>
-        ))
-    }
-</div> -->

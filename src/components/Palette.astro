@@ -1,0 +1,48 @@
+---
+import chroma from 'chroma-js';
+// const colorHex = chroma(colorCode).hex();
+import { findContrastLevel } from 'src/utils/colorFun/src/index';
+
+// const textColor = chroma(findContrastLevel(colorCode, colorCode, 'highest')).css('hsl');
+import { genenerateTailwindTheme, paletteTailwind} from 'src/utils/colorFun/src/index';
+import { CUSTOM_THEME } from 'src/siteConfig';
+
+const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
+const colors = tailwindsTheme.colors;
+
+const palettes = {
+    'primary': colors['primary-palette'],
+    'secondary': colors['secondary-palette'],
+    'tertiary': colors['tertiary-palette'],
+    'neutral': colors['neutral-palette'],
+    'neutral-variant': colors['neutral-variant-palette'],
+};
+const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+
+---
+
+<div class="w-11/12 grid grid-rows-6 gap-1">
+    <div class="grid grid-cols-[repeat(15,_minmax(0,_1fr))] place-content-center">
+        {
+            paletteSteps.map((step, index) => (
+                <div class="col-span-1 text-center text-sm" style={{ gridColumnStart: index + 3 }}>{step}</div>
+            ))
+        }
+    </div>
+    {
+        Object.entries(palettes).map(([colorName, colorFamily]) => (
+            <div class="grid grid-cols-[repeat(15,_minmax(0,_1fr))] gap-1">
+                <div class="col-start-1 col-span-2 text-right place-self-center">{colorName}</div>
+                {
+                    Object.entries(colorFamily).map(([shadeValue, colorCode]) => (
+                        <div class="rounded py-10 px-5" style={{ backgroundColor: colorCode, color: colorCode }}>
+                            </div>
+                            ))
+                        }
+                <div class="col-start-15 col-span-2  place-self-center">{colorName}</div>
+            </div>
+        ))
+    }
+</div>
+
+

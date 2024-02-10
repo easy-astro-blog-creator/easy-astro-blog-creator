@@ -20,7 +20,8 @@
 				"csstools.postcss",
 				"moalamri.inline-fold",
 				"bradlc.vscode-tailwindcss",
-				"ms-vscode.vscode-typescript-next"
+				"ms-vscode.vscode-typescript-next",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}

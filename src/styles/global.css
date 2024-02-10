@@ -49,8 +49,8 @@
         align-items: center;
         /* @apply bg-light-background-default dark:bg-dark-background-default;
         @apply text-light-text-default dark:text-dark-text-default; */
-        @apply bg-background-light dark:bg-background-dark;
-        @apply text-on-background-light dark:text-on-background-dark;
+        @apply bg-semantic-background-light dark:bg-semantic-background-dark;
+        @apply text-semantic-on-background-light dark:text-semantic-on-background-dark;
         
     }
     main {
@@ -67,14 +67,14 @@
     }
     /* For unvisited links. TIL! */
     .easy-link:link {
-        /* @apply text-light-links-initial dark:text-dark-links-initial; */
+        @apply text-semantic-secondary-light dark:text-semantic-secondary-dark;
     }
     .easy-link:visited {
-        /* @apply text-light-links-visited dark:text-dark-links-visited; */
+        @apply text-semantic-tertiary-light dark:text-semantic-tertiary-dark;
     }
     
     .easy-link:active {
-        /* @apply text-light-links-active dark:text-dark-links-active; */
+        @apply text-semantic-primary-light dark:text-semantic-primary-dark;
     }
     .easy-link:hover, .easy-link:focus, .easy-link:active {
         text-decoration: underline;

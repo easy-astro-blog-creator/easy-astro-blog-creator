@@ -2,133 +2,135 @@
 // import chroma from 'chroma-js';
 import chroma from 'chroma-js';
 import { findContrastLevel, adjustContrastViaLuminance } from './checkContrast';
-import colorFunctions from './colorFunctions';
+import { generateScheme, SchemeVariant, MaterialColorUtilitiesScheme } from './scheme';
+import { validateColor } from './utils';
+import { generateTonalPalette, paletteTailwind } from './palette';
 
-export const tailwindsTheme = {  
-  colors: materialPalette,
-  // backgroundImage: {
-  //   // 'gradient-light': 'linear-gradient(to bottom, #f2f9fd, #ebf7fa, #e4f4f6, #ddf2f1, #d8efea)',
-  //   'gradient-light': `linear-gradient(to bottom, ${backgroundColor['50']}, ${backgroundColor['200']})`,
-  //   'gradient-light-short': `linear-gradient(to bottom, ${secondary['200']}, ${secondary['100']})`,
-  //   'gradient-dark': `linear-gradient(to bottom, ${backgroundColor['800']}, ${backgroundColor['900']}, ${backgroundColor['950']})`,
-  // },
-}
-
-
-// export const daisyuiTheme = {
-//   "primary": tailwindsPalette.light.primary['500'],
-//   "secondary": tailwindsPalette.light.primary['500'],
-//   "accent": tailwindsPalette.light.primary['500'],
-//   "neutral": tailwindsPalette.light.primary['500'],
-//   "base-100": tailwindsPalette.light.primary['500'],
-// }
-
-type TailwindPalette = {
-  light: {
-    background: {
-        default: string;
-    },
-    text: textPalette;
-    links: linkPalette;
-    primary: paletteCSS;
-    complementary: paletteCSS;
-    accents: accentPalette;
-  },
-  dark: {
-    background: {
-      default: string;
-    },
-    text: textPalette;
-    links: linkPalette;
-    primary: paletteCSS;
-    complementary: paletteCSS;
-    accents: accentPalette;
-  },
+export type CustomThemeConfig = {
+	/**
+	 * The primary color for the theme. This color is used most frequently across the UI and imparts a distinct identity to the product.
+	 * This color is required.
+	 * Can be any valid CSS color format, including hex, rgb, rgba, hsl, hsla, and named colors.
+	 * @see validateColor
+	 */
+	primary: string | chroma.Color;
+	/**
+	 * A type for the color scheme, expected to be one of the values in the `SchemeVariant` enum.
+	 * If not provided, the default value is `SchemeVariant.TONAL_SPOT`
+	 * @default SchemeVariant.TONAL_SPOT
+	 * @see SchemeVariant
+	 */
+	schemeTypeMCU: SchemeVariant | undefined;
+	/**
+	 * Optional Colors.
+	 * If all supplied @see SchemeTypeMCU is not used.
+	 * Otherwise, if any supplied the supplied will be used to generate that color of the scheme.
+	 */
+	secondary: string | chroma.Color | undefined;
+	tertiary: string | chroma.Color | undefined;
+	neutral: string | chroma.Color | undefined;
+	neutralVarient: string | chroma.Color | undefined;
 };
 
-type accentPalette = {
-primary: string;
-complementary: string;
-complementarySplit1: string;
-complementarySplit2: string;
-}
-type linkPalette = {
-initial: string;
-visited: string;
-active: string;
+export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): TailwindTheme {
+	if (!themeConfig.primary) {
+		throw new Error('Primary color is required');
+	}
+	validateColor(themeConfig.primary);
+	if (themeConfig.secondary) {
+		validateColor(themeConfig.secondary);
+	}
+	if (themeConfig.tertiary) {
+		validateColor(themeConfig.tertiary);
+	}
+	if (themeConfig.neutral) {
+		validateColor(themeConfig.neutral);
+	}
+	if (themeConfig.neutralVarient) {
+		validateColor(themeConfig.neutralVarient);
+	}
+	const semanticScheme = generateScheme(themeConfig);
+	return {
+		colors: {
+			semantic: semanticScheme,
+			'primary-palette': generateTonalPalette(semanticScheme['primary-palette-key-color']),
+			'secondary-palette': generateTonalPalette(semanticScheme['secondary-palette-key-color']),
+			'tertiary-palette': generateTonalPalette(semanticScheme['tertiary-palette-key-color']),
+			'neutral-palette': generateTonalPalette(semanticScheme['neutral-palette-key-color']),
+			'neutral-variant-palette': generateTonalPalette(semanticScheme['neutral-variant-palette-key-color']),
+			transparent: 'transparent',
+			current: 'currentColor',
+			black: '#000000',
+			white: '#ffffff',
+		},
+		fontFamily: {
+			sans: ['REM', 'sans-serif'],
+		},
+	};
 }
 
-type textPalette = {
-lighter: string;
-default: string;
-darker: string;
-}
+type TailwindTheme = {
+	colors: {
+		semantic: MaterialColorUtilitiesScheme;
+		'primary-palette': paletteTailwind;
+		'secondary-palette': paletteTailwind;
+		'tertiary-palette': paletteTailwind;
+		'neutral-palette': paletteTailwind;
+		'neutral-variant-palette': paletteTailwind;
+		transparent: 'transparent';
+		current: 'currentColor';
+		black: '#000000';
+		white: '#ffffff';
+	};
+	fontFamily: {
+		[key: string]: string[];
+	};
+};
 
+type DaisyuiTheme = {
+	primary: string;
+	'primary-content': string;
+	secondary: string;
+	'secondary-content': string;
+	accent: string;
+	'accent-content': string;
+	neutral: string;
+	'neutral-content': string;
+	'base-100': string;
+	'base-200': string;
+	'base-300': string;
+	'base-content': string;
+	info: string;
+	success: string;
+	warning: string;
+	'warning-content': string;
+	error: string;
+	'error-content': string;
+};
+
+// type linkPalette = {
+// initial: string;
+// visited: string;
+// active: string;
+// }
+
+// type textPalette = {
+// lighter: string;
+// default: string;
+// darker: string;
+// }
 
 // Primary color palette
 // text - light and dark
 // background - light and dark
 // links - initial, visited, active - light and dark
 
-const tailwindsPalette = generateTailwindPalette(THEME.primary);
-const materialPalette = tailwindThemeFromColor(THEME.primary, tailwindsPalette.light.primary['500'], tailwindsPalette.light.complementary['500'], 'vibrant');
-
-
-
-
-export function generateTailwindPalette(colorInput: string): TailwindPalette {
-colorFunctions.validateColor(colorInput);
-
-const primary = generatePalette(colorInput);
-const complementary = generatePalette(colorFunctions.complemetaryColor(colorInput));
-
-const bgLight = primary['50'];
-const bgDark = primary['950'];
-
-const accentsLight = generateAccents(colorInput, bgLight);
-const accentsDark = generateAccents(colorInput, bgDark);
-
-const textLight = generateTextColor(primary['900'], bgLight, 'light');
-const textDark = generateTextColor(primary['100'], bgDark, 'dark');
-
-const linksLight = generateLinkPalette(textLight.default, primary['900'], bgLight);
-const linksDark = generateLinkPalette(textDark.default, primary['100'], bgDark);
-
-const tailwindPalette: TailwindPalette = {
-  light: {
-    background: {
-      default: bgLight.css('hsl'),
-    },
-    text: textLight,
-    links: linksLight,
-    primary: generateCSSPalette(primary),
-    complementary: generateCSSPalette(complementary),
-    accents: accentsLight,
-  },
-  dark: {
-    background: {
-      default: bgDark.css('hsl'),
-    },
-    text: textDark,
-    links: linksDark,
-    primary: generateCSSPalette(primary),
-    complementary: generateCSSPalette(complementary),
-    accents: accentsDark,
-  },
-};
-return tailwindPalette;
-}
-
-
-function generateCSSPalette(palette: paletteMaterialDesign): paletteCSS {
-let paletteOutput: paletteCSS = {} as paletteCSS;
-Object.entries(palette).forEach(([key, color]) => {
-  paletteOutput[key] = color.css('hsl');
-});
-return paletteOutput;
-}
-
-
+// backgroundImage: {
+//   // 'gradient-light': 'linear-gradient(to bottom, #f2f9fd, #ebf7fa, #e4f4f6, #ddf2f1, #d8efea)',
+//   'gradient-light': `linear-gradient(to bottom, ${backgroundColor['50']}, ${backgroundColor['200']})`,
+//   'gradient-light-short': `linear-gradient(to bottom, ${secondary['200']}, ${secondary['100']})`,
+//   'gradient-dark': `linear-gradient(to bottom, ${backgroundColor['800']}, ${backgroundColor['900']}, ${backgroundColor['950']})`,
+// },
 
 // // Wikipedia's text color converted to OKLCH
 // const defaultText = '#202122';
@@ -143,9 +145,9 @@ return paletteOutput;
 // const initialColor = chroma(defaultText).set('oklch.h', chroma(colorInput).get('oklch.h'));
 
 // const sortedByL = colorFunctions.sortColorsByP([
-//   findContrastLevel(initialColor, bgColorInput, 'highest', 9, 7), 
-//   findContrastLevel(initialColor, bgColorInput, 'lowest', 9, 4.5), 
-//   findContrastLevel(initialColor, bgColorInput, 'middle', 9, 7)], 
+//   findContrastLevel(initialColor, bgColorInput, 'highest', 9, 7),
+//   findContrastLevel(initialColor, bgColorInput, 'lowest', 9, 4.5),
+//   findContrastLevel(initialColor, bgColorInput, 'middle', 9, 7)],
 //   'l');
 
 // let mostContrast = sortedByL[0];
@@ -158,7 +160,6 @@ return paletteOutput;
 //   darker: mostContrast.css('hsl'),
 // }
 // }
-
 
 // // Hue 220%
 // const defaultInitialLink = '#3366CC';
@@ -182,7 +183,7 @@ return paletteOutput;
 //   colorFunctions.validateColor(textColor);
 //   colorFunctions.validateColor(primaryColorInput);
 //   colorFunctions.validateColor(bgColorInput);
-  
+
 //   const closestColors = colorFunctions.complemetarySplitColors(primaryColorInput);
 
 //   let closestColorsSorted = colorFunctions.sortColorsByDifferenceHue(defaultInitialLink, closestColors);
@@ -211,7 +212,7 @@ return paletteOutput;
 //   colorFunctions.validateColor(bgColorInput);
 //   const complementary = colorFunctions.complemetaryColor(colorInput);
 //   const complementarySplits = colorFunctions.complemetarySplitColors(colorInput);
-  
+
 //   return {
 //     primary: findContrastLevel(colorInput, bgColorInput, 'first', 9, 3).css('hsl'),
 //     complementary: findContrastLevel(complementary, bgColorInput, 'first', 9, 3).css('hsl'),
@@ -219,8 +220,3 @@ return paletteOutput;
 //     complementarySplit2: findContrastLevel(complementarySplits[2], bgColorInput, 'first', 9, 3).css('hsl'),
 //   }
 // }
-
-
-
-
-

@@ -14,12 +14,21 @@
     "preset": "ts-jest",
     "testEnvironment": "node"
   },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": true
+  },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "@astrojs/mdx": "^2.0.4",
     "@astrojs/rss": "^4.0.2",
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/ts-plugin": "^1.5.0",
     "@iconify-json/mdi": "^1.1.64",
     "@material/material-color-utilities": "^0.2.7",
     "@tailwindcss/typography": "^0.5.10",
@@ -47,6 +56,7 @@
   "devDependencies": {
     "@types/chroma-js": "^2.4.3",
     "@types/node": "^20.11.16",
+    "prettier": "^3.2.5",
     "tailwind-material-colors": "^1.2.0",
     "tailwind-material-surfaces": "^2.0.0",
     "tailwind-mode-aware-colors": "^1.5.0"

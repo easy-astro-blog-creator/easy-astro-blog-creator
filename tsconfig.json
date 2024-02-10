@@ -3,5 +3,11 @@
     "allowJs": false,
     "checkJs": false,
     "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+    }
   }
 }
