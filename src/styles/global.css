@@ -66,17 +66,17 @@
         font-weight: 433;
     }
     /* For unvisited links. TIL! */
-    .easy-link:link {
-        @apply text-semantic-secondary-light dark:text-semantic-secondary-dark;
-    }
-    .easy-link:visited {
-        @apply text-semantic-tertiary-light dark:text-semantic-tertiary-dark;
-    }
-    
-    .easy-link:active {
+    .easy-link:link, .easy-link-always-link  {
         @apply text-semantic-primary-light dark:text-semantic-primary-dark;
     }
-    .easy-link:hover, .easy-link:focus, .easy-link:active {
+    .easy-link:visited, .easy-link-always-visited {
+        @apply text-semantic-secondary-light dark:text-semantic-secondary-dark;
+    }
+    .easy-link:active, .easy-link-always-active {
+        @apply text-semantic-tertiary-light dark:text-semantic-tertiary-dark;
+        text-decoration: underline;
+    }
+    .easy-link:hover, .easy-link-always-hover, .easy-link:focus {
         text-decoration: underline;
     }
 }

@@ -1,8 +1,7 @@
-// import chroma = require("chroma-js");
-// import chroma from 'chroma-js';
+import { DynamicScheme, MaterialDynamicColors, hexFromArgb } from '@material/material-color-utilities';
 import chroma from 'chroma-js';
 import { findContrastLevel, adjustContrastViaLuminance } from './checkContrast';
-import { generateScheme, SchemeVariant, MaterialColorUtilitiesScheme } from './scheme';
+import { SchemeVariant, MaterialColorUtilitiesScheme, generateDynamicScheme, createSchemeObject } from './scheme';
 import { validateColor } from './utils';
 import { generateTonalPalette, paletteTailwind } from './palette';
 
@@ -13,51 +12,43 @@ export type CustomThemeConfig = {
 	 * Can be any valid CSS color format, including hex, rgb, rgba, hsl, hsla, and named colors.
 	 * @see validateColor
 	 */
-	primary: string | chroma.Color;
+	primary: string;
 	/**
 	 * A type for the color scheme, expected to be one of the values in the `SchemeVariant` enum.
 	 * If not provided, the default value is `SchemeVariant.TONAL_SPOT`
 	 * @default SchemeVariant.TONAL_SPOT
 	 * @see SchemeVariant
 	 */
-	schemeTypeMCU: SchemeVariant | undefined;
+	schemeVariant: SchemeVariant | undefined;
 	/**
 	 * Optional Colors.
 	 * If all supplied @see SchemeTypeMCU is not used.
 	 * Otherwise, if any supplied the supplied will be used to generate that color of the scheme.
 	 */
-	secondary: string | chroma.Color | undefined;
-	tertiary: string | chroma.Color | undefined;
-	neutral: string | chroma.Color | undefined;
-	neutralVarient: string | chroma.Color | undefined;
+	secondary: string | undefined;
+	tertiary: string | undefined;
+	neutral: string | undefined;
+	neutralVarient: string | undefined;
 };
 
 export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): TailwindTheme {
-	if (!themeConfig.primary) {
-		throw new Error('Primary color is required');
-	}
-	validateColor(themeConfig.primary);
-	if (themeConfig.secondary) {
-		validateColor(themeConfig.secondary);
-	}
-	if (themeConfig.tertiary) {
-		validateColor(themeConfig.tertiary);
-	}
-	if (themeConfig.neutral) {
-		validateColor(themeConfig.neutral);
-	}
-	if (themeConfig.neutralVarient) {
-		validateColor(themeConfig.neutralVarient);
-	}
-	const semanticScheme = generateScheme(themeConfig);
+	const lightScheme = generateDynamicScheme(themeConfig, false);
+	const darkScheme = generateDynamicScheme(themeConfig, true);
+
+	const semanticScheme = createSchemeObject(lightScheme, darkScheme);
+	const primaryPalette = hexFromArgb(MaterialDynamicColors.primaryPaletteKeyColor.getArgb(lightScheme));
+	const secondaryPalette = hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(lightScheme));
+	const tertiaryPalette = hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(lightScheme));
+	const neutralPalette = hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(lightScheme));
+	const neutralVariantPalette = hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(lightScheme));
 	return {
 		colors: {
 			semantic: semanticScheme,
-			'primary-palette': generateTonalPalette(semanticScheme['primary-palette-key-color']),
-			'secondary-palette': generateTonalPalette(semanticScheme['secondary-palette-key-color']),
-			'tertiary-palette': generateTonalPalette(semanticScheme['tertiary-palette-key-color']),
-			'neutral-palette': generateTonalPalette(semanticScheme['neutral-palette-key-color']),
-			'neutral-variant-palette': generateTonalPalette(semanticScheme['neutral-variant-palette-key-color']),
+			'primary-palette': generateTonalPalette(primaryPalette, 'mcu', true),
+			'secondary-palette': generateTonalPalette(secondaryPalette, 'mcu', true),
+			'tertiary-palette': generateTonalPalette(tertiaryPalette, 'mcu', true),
+			'neutral-palette': generateTonalPalette(neutralPalette, 'mcu', true),
+			'neutral-variant-palette': generateTonalPalette(neutralVariantPalette, 'mcu', true),
 			transparent: 'transparent',
 			current: 'currentColor',
 			black: '#000000',

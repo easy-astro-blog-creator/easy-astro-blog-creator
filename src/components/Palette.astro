@@ -20,9 +20,27 @@ const palettes = {
 const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
 ---
-
-<div class="w-11/12 grid grid-rows-6 gap-1">
-    <div class="grid grid-cols-[repeat(15,_minmax(0,_1fr))] place-content-center">
+<div class="w-11/12 grid"> 
+    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded ">
+        <h1 class="col-start-1 col-span-2">Text</h1>
+        <p class="col-start-3 col-span-2">Default Text</p>
+        <p class="font-bold col-span-2">Bold Text</p>
+        <p class="col-span-2 italic">Italic Text</p>
+        <p class="col-span-2">Heading Text</p>
+        <p class="col-span-3">Subheading Text</p>
+    </div>
+    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded">
+        <h1 class="col-start-1 col-span-2">Links</h1>
+        <p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
+        <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
+        <p class="col-span-2 easy-link easy-link-always-visited">Visited Link</p>
+        <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-visited">Hovered</p>
+        <p class="col-span-2 easy-link easy-link-always-active">Active Link</p>
+    </div>
+</div>
+</div>
+<div class="w-11/12 pr-8 pb-8 grid grid-rows-6 gap-1 border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded">
+    <div class="grid p-2 my-2 grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center ">
         {
             paletteSteps.map((step, index) => (
                 <div class="col-span-1 text-center text-sm" style={{ gridColumnStart: index + 3 }}>{step}</div>
@@ -31,15 +49,14 @@ const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
     </div>
     {
         Object.entries(palettes).map(([colorName, colorFamily]) => (
-            <div class="grid grid-cols-[repeat(15,_minmax(0,_1fr))] gap-1">
+            <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1">
                 <div class="col-start-1 col-span-2 text-right place-self-center">{colorName}</div>
                 {
                     Object.entries(colorFamily).map(([shadeValue, colorCode]) => (
-                        <div class="rounded py-10 px-5" style={{ backgroundColor: colorCode, color: colorCode }}>
+                        <div class="rounded py-8 px-2" style={{ backgroundColor: colorCode, color: colorCode }}>
                             </div>
                             ))
                         }
-                <div class="col-start-15 col-span-2  place-self-center">{colorName}</div>
             </div>
         ))
     }

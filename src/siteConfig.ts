@@ -29,14 +29,15 @@ export const GITHUB_URL = 'https://github.com/shelbyjenkins';
 export const CUSTOM_THEME: CustomThemeConfig = {
 	// Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
 	primary: '#40a1e6',
-	schemeTypeMCU: SchemeVariant.FIDELITY,
+	schemeVariant: SchemeVariant.SPLIT_COMPLEMENTARY,
+	// The following are only used if `schemeVariant.CUSTOM`
 	// Secondary colors highlight or complement the primary color. These are to be used sparingly to make the UI elements stand out.
-	secondary: '',
+	secondary: '#D07D12',
 	// Tetriary or Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
-	tertiary: '',
+	tertiary: '#003E1F',
 	//  Background color is the color of the main content area. It is used to set the mood of the UI.
-	neutral: '',
-	neutralVarient: '',
+	neutral: '#d4e9f8',
+	neutralVarient: '#E8F5F2',
 };
 // Meteor #D07D12 208, 125, 18
 // Aqua Squeeze #E8F5F2 232, 245, 242
