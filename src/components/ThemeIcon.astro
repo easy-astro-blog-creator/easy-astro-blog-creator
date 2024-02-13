@@ -15,13 +15,13 @@
         @apply hidden dark:block;
     }
     #themeToggle {
-        @apply fill-semantic-on-background-light dark:fill-semantic-on-background-dark;
+        @apply fill-semantic-on-background dark:fill-semantic-on-background;
     } 
     #themeToggle:hover {
-        @apply fill-semantic-tertiary-light dark:fill-semantic-primary-dark;
+        @apply fill-semantic-tertiary dark:fill-semantic-primary;
     }
     #themeToggle:active {
-        @apply fill-semantic-primary-light dark:fill-semantic-tertiary-dark;
+        @apply fill-semantic-primary dark:fill-semantic-tertiary;
     }
 
 
@@ -55,17 +55,15 @@
                 document.documentElement.classList.remove('dark');
             };
             document.documentElement.classList.add('light');
-            // if (moonElement) sunElement.style.setProperty('fill', 'var(--heading-color)');
         } else {
             if (document.documentElement.classList.contains('light')) {
                 document.documentElement.classList.remove('light');
             };
             document.documentElement.classList.add('dark')
-            // if (moonElement) sunElement.style.fill = 'transparent';
         }
     };
 
-    applyTheme(); // Apply the initial theme
+    applyTheme();
   
     document.getElementById("themeToggle").addEventListener("click", () => applyTheme(true));
   </script>

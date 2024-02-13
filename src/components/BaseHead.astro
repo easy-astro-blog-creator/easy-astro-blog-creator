@@ -27,7 +27,7 @@ function formatCanonicalURL(url: string | URL) {
 const {page_title, page_description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
 
 const socialImage = await (async () => {
-    let image; // Declare image variable in the outer scope
+    let image; 
 
     if (heroImage) {
         image = await getImage({ src: heroImage, format: 'webp' });

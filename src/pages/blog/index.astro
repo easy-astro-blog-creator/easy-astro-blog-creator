@@ -34,10 +34,10 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 									<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">{formatDescription(post.data.description, post.body)}</div>
 									<div class="pt-1 text-2xl lg:text-base italic font-normal">{getReadingTime(post.body)}</div>
 								</div>
-								<div class="flex justify-center items-center w-4/12 h-full">
+								<div class="flex justify-center items-center w-4/12 h-auto max-w-[90%] max-h-[90%]">
 									{
-										post.data.heroImage &&
-										<Image class="h-auto w-auto" style="max-width: 90%; max-height: 90%;" src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+										// post.data.heroImage &&
+										// <Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
 									}
 								</div>
 							</a>
@@ -51,7 +51,8 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 </BaseLayout>
 <style>	
 	a:hover h1 {
-		@apply text-accent-color-500  dark:text-accent-color-300;
+		/* @apply text-accent-color-500  dark:text-accent-color-300; */
+		@apply text-semantic-primary;
 	}
 	a:hover img {
 		@apply shadow-xl;

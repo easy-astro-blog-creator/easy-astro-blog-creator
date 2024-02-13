@@ -1,16 +1,9 @@
 // src/index.ts
 
-import { CustomThemeConfig, genenerateTailwindTheme } from './theme';
-import { generateScheme, SchemeVariant } from './scheme';
-import { validateColor } from './utils';
+import { CustomThemeConfig, genenerateTailwindTheme, updateTailwindTheme } from './theme';
+import { generateDynamicScheme, SchemeVariant } from './scheme';
 import { findContrastLevel } from './checkContrast';
-import { paletteTailwind } from './palette';
+import { paletteTw } from './palette';
 
-export {
-	genenerateTailwindTheme,
-	CustomThemeConfig,
-	SchemeVariant,
-	generateScheme,
-	findContrastLevel,
-	paletteTailwind,
-};
+export { genenerateTailwindTheme, updateTailwindTheme, SchemeVariant, generateDynamicScheme, findContrastLevel };
+export type { paletteTw, CustomThemeConfig };

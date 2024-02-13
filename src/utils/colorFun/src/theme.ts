@@ -1,9 +1,6 @@
 import { DynamicScheme, MaterialDynamicColors, hexFromArgb } from '@material/material-color-utilities';
-import chroma from 'chroma-js';
-import { findContrastLevel, adjustContrastViaLuminance } from './checkContrast';
-import { SchemeVariant, MaterialColorUtilitiesScheme, generateDynamicScheme, createSchemeObject } from './scheme';
-import { validateColor } from './utils';
-import { generateTonalPalette, paletteTailwind } from './palette';
+import { SchemeVariant, McuScheme, MCU_SCHEME_VARS, generateDynamicScheme, createSchemeObject } from './scheme';
+import { generateTonalPalette, paletteTw, generateTonalPaletteVars } from './palette';
 
 export type CustomThemeConfig = {
 	/**
@@ -35,68 +32,165 @@ export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): Tailwin
 	const lightScheme = generateDynamicScheme(themeConfig, false);
 	const darkScheme = generateDynamicScheme(themeConfig, true);
 
-	const semanticScheme = createSchemeObject(lightScheme, darkScheme);
-	const primaryPalette = hexFromArgb(MaterialDynamicColors.primaryPaletteKeyColor.getArgb(lightScheme));
-	const secondaryPalette = hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(lightScheme));
-	const tertiaryPalette = hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(lightScheme));
-	const neutralPalette = hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(lightScheme));
-	const neutralVariantPalette = hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(lightScheme));
+	const primaryPalette = generateTonalPalette(
+		hexFromArgb(MaterialDynamicColors.primaryPaletteKeyColor.getArgb(lightScheme)),
+		'mcu'
+	);
+	const secondaryPalette = generateTonalPalette(
+		hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(lightScheme)),
+		'mcu'
+	);
+	const tertiaryPalette = generateTonalPalette(
+		hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(lightScheme)),
+		'mcu'
+	);
+	const neutralPalette = generateTonalPalette(
+		hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(lightScheme)),
+		'mcu'
+	);
+	const neutralVariantPalette = generateTonalPalette(
+		hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(lightScheme)),
+		'mcu'
+	);
+
 	return {
 		colors: {
-			semantic: semanticScheme,
-			'primary-palette': generateTonalPalette(primaryPalette, 'mcu', true),
-			'secondary-palette': generateTonalPalette(secondaryPalette, 'mcu', true),
-			'tertiary-palette': generateTonalPalette(tertiaryPalette, 'mcu', true),
-			'neutral-palette': generateTonalPalette(neutralPalette, 'mcu', true),
-			'neutral-variant-palette': generateTonalPalette(neutralVariantPalette, 'mcu', true),
+			semantic: MCU_SCHEME_VARS,
+			primary: generateTonalPaletteVars('primary'),
+			secondary: generateTonalPaletteVars('secondary'),
+			tertiary: generateTonalPaletteVars('tertiary'),
+			neutral: generateTonalPaletteVars('neutral'),
+			'neutral-variant': generateTonalPaletteVars('neutral-variant'),
 			transparent: 'transparent',
 			current: 'currentColor',
 			black: '#000000',
 			white: '#ffffff',
 		},
-		fontFamily: {
-			sans: ['REM', 'sans-serif'],
+		variables: {
+			DEFAULT: {
+				colors: {
+					semantic: createSchemeObject(lightScheme),
+					primary: primaryPalette,
+					secondary: secondaryPalette,
+					tertiary: tertiaryPalette,
+					neutral: neutralPalette,
+					'neutral-variant': neutralVariantPalette,
+					transparent: 'transparent',
+					current: 'currentColor',
+					black: '#000000',
+					white: '#ffffff',
+				},
+			},
+		},
+		darkVariables: {
+			DEFAULT: {
+				colors: {
+					semantic: createSchemeObject(darkScheme),
+					primary: primaryPalette,
+					secondary: secondaryPalette,
+					tertiary: tertiaryPalette,
+					neutral: neutralPalette,
+					'neutral-variant': neutralVariantPalette,
+					transparent: 'transparent',
+					current: 'currentColor',
+					black: '#000000',
+					white: '#ffffff',
+				},
+			},
 		},
 	};
 }
 
+export function updateTailwindTheme(sheet: CSSStyleSheet) {
+	const CUSTOM_THEME: CustomThemeConfig = {
+		primary: '#D07D12',
+		schemeVariant: SchemeVariant.TONAL_SPOT,
+		secondary: '#D07D12',
+		tertiary: '#003E1F',
+		neutral: '#d4e9f8',
+		neutralVarient: '#E8F5F2',
+	};
+	const unwrapVarName = (input: string): string => input.replace(/var\((--[a-zA-Z0-9_-]*)\)/g, '$1');
+
+	const newTheme = genenerateTailwindTheme(CUSTOM_THEME);
+	let lightRule = ':root {';
+
+	let testKey;
+	Object.entries(MCU_SCHEME_VARS).forEach(([key, value]) => {
+		lightRule += `${unwrapVarName(value)}: ${newTheme.variables.DEFAULT.colors.semantic[key]};`;
+		testKey = unwrapVarName(value);
+	});
+	lightRule += '}';
+
+	const rules = sheet.cssRules;
+	console.log(lightRule);
+	for (let i = 0; i < rules.length; i++) {
+		let rule: CSSStyleRule = rules[i] as CSSStyleRule;
+		// console.log(rule.selectorText);
+		if (rule.selectorText === ':root.dark') {
+			console.log('found dark');
+			sheet.deleteRule(i);
+			// sheet.insertRule(lightRule, i);
+		}
+	}
+	for (let i = 0; i < rules.length; i++) {
+		let rule: CSSStyleRule = rules[i] as CSSStyleRule;
+		if (rule.selectorText === ':root' && rule.style.getPropertyValue(unwrapVarName(testKey))) {
+			console.log('found light');
+			sheet.deleteRule(i);
+			sheet.insertRule(lightRule, rules.length);
+		}
+	}
+	const abc = sheet.cssRules;
+	console.log(abc);
+	return 123;
+}
+
 type TailwindTheme = {
 	colors: {
-		semantic: MaterialColorUtilitiesScheme;
-		'primary-palette': paletteTailwind;
-		'secondary-palette': paletteTailwind;
-		'tertiary-palette': paletteTailwind;
-		'neutral-palette': paletteTailwind;
-		'neutral-variant-palette': paletteTailwind;
+		semantic: McuScheme;
+		primary: paletteTw;
+		secondary: paletteTw;
+		tertiary: paletteTw;
+		neutral: paletteTw;
+		'neutral-variant': paletteTw;
 		transparent: 'transparent';
 		current: 'currentColor';
 		black: '#000000';
 		white: '#ffffff';
 	};
-	fontFamily: {
-		[key: string]: string[];
+	variables: {
+		DEFAULT: {
+			colors: {
+				semantic: typeof MCU_SCHEME_VARS;
+				primary: paletteTw;
+				secondary: paletteTw;
+				tertiary: paletteTw;
+				neutral: paletteTw;
+				'neutral-variant': paletteTw;
+				transparent: 'transparent';
+				current: 'currentColor';
+				black: '#000000';
+				white: '#ffffff';
+			};
+		};
 	};
-};
-
-type DaisyuiTheme = {
-	primary: string;
-	'primary-content': string;
-	secondary: string;
-	'secondary-content': string;
-	accent: string;
-	'accent-content': string;
-	neutral: string;
-	'neutral-content': string;
-	'base-100': string;
-	'base-200': string;
-	'base-300': string;
-	'base-content': string;
-	info: string;
-	success: string;
-	warning: string;
-	'warning-content': string;
-	error: string;
-	'error-content': string;
+	darkVariables: {
+		DEFAULT: {
+			colors: {
+				semantic: typeof MCU_SCHEME_VARS;
+				primary: paletteTw;
+				secondary: paletteTw;
+				tertiary: paletteTw;
+				neutral: paletteTw;
+				'neutral-variant': paletteTw;
+				transparent: 'transparent';
+				current: 'currentColor';
+				black: '#000000';
+				white: '#ffffff';
+			};
+		};
+	};
 };
 
 // type linkPalette = {

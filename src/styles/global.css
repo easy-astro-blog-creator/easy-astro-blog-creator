@@ -31,7 +31,6 @@
     border-bottom-left-radius: 0.4rem;
     }
 } */
-
 @layer base {
     :root {
         --box-shadow: 0 2px 6px rgb(var(--accent) / 0.1), 0 8px 24px rgb(var(--accent) / 0.1),
@@ -47,10 +46,10 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        /* @apply bg-light-background-default dark:bg-dark-background-default;
-        @apply text-light-text-default dark:text-dark-text-default; */
-        @apply bg-semantic-background-light dark:bg-semantic-background-dark;
-        @apply text-semantic-on-background-light dark:text-semantic-on-background-dark;
+        /* @apply bg-background-default dark:bg-background-default;
+        @apply text-text-default dark:text-text-default; */
+        @apply bg-semantic-background dark:bg-semantic-background;
+        @apply text-semantic-on-background dark:text-semantic-on-background;
         
     }
     main {
@@ -67,13 +66,13 @@
     }
     /* For unvisited links. TIL! */
     .easy-link:link, .easy-link-always-link  {
-        @apply text-semantic-primary-light dark:text-semantic-primary-dark;
+        @apply text-semantic-primary dark:text-semantic-primary;
     }
     .easy-link:visited, .easy-link-always-visited {
-        @apply text-semantic-secondary-light dark:text-semantic-secondary-dark;
+        @apply text-semantic-secondary dark:text-semantic-secondary;
     }
     .easy-link:active, .easy-link-always-active {
-        @apply text-semantic-tertiary-light dark:text-semantic-tertiary-dark;
+        @apply text-semantic-tertiary dark:text-semantic-tertiary;
         text-decoration: underline;
     }
     .easy-link:hover, .easy-link-always-hover, .easy-link:focus {

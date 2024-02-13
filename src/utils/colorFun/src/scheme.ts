@@ -15,14 +15,15 @@ import {
 } from '@material/material-color-utilities';
 
 import { CustomThemeConfig } from './theme';
-import { validateColor } from './utils';
 import {
 	toHct,
+	toOklchCss,
 	complemetaryColor,
 	complemetarySplitColors,
 	triadicColors,
 	analogousColors,
 	tetradicColors,
+	validateColor,
 } from './colorFunctions';
 
 export enum SchemeVariant {
@@ -44,7 +45,7 @@ export enum SchemeVariant {
 // Copies from @material/material-color-utilities instead of importing
 // `import Variant from '@material/material-color-utilities/scheme/variant';
 // Because it's not exported from the package
-export enum Variant {
+enum Variant {
 	MONOCHROME,
 	NEUTRAL,
 	TONAL_SPOT,
@@ -215,121 +216,91 @@ export function generateSchemeCustom(themeConfig: CustomThemeConfig, mode: boole
 	});
 }
 
-export type MaterialColorUtilitiesScheme = {
-	// Light
-	'primary-light': string;
-	'on-primary-light': string;
-	'primary-container-light': string;
-	'on-primary-container-light': string;
-	'secondary-light': string;
-	'on-secondary-light': string;
-	'secondary-container-light': string;
-	'on-secondary-container-light': string;
-	'tertiary-light': string;
-	'on-tertiary-light': string;
-	'tertiary-container-light': string;
-	'on-tertiary-container-light': string;
-	'background-light': string;
-	'on-background-light': string;
-	'surface-light': string;
-	'on-surface-light': string;
-	'surface-variant-light': string;
-	'on-surface-variant-light': string;
-	'outline-light': string;
-	'outline-variant-light': string;
-	'inverse-surface-light': string;
-	'inverse-on-surface-light': string;
-	'error-light': string;
-	'on-error-light': string;
-	'error-container-light': string;
-	'on-error-container-light': string;
-	// Dark
-	'primary-dark': string;
-	'on-primary-dark': string;
-	'primary-container-dark': string;
-	'on-primary-container-dark': string;
-	'secondary-dark': string;
-	'on-secondary-dark': string;
-	'secondary-container-dark': string;
-	'on-secondary-container-dark': string;
-	'tertiary-dark': string;
-	'on-tertiary-dark': string;
-	'tertiary-container-dark': string;
-	'on-tertiary-container-dark': string;
-	'background-dark': string;
-	'on-background-dark': string;
-	'surface-dark': string;
-	'on-surface-dark': string;
-	'surface-variant-dark': string;
-	'on-surface-variant-dark': string;
-	'outline-dark': string;
-	'outline-variant-dark': string;
-	'inverse-surface-dark': string;
-	'inverse-on-surface-dark': string;
-	'error-dark': string;
-	'on-error-dark': string;
-	'error-container-dark': string;
-	'on-error-container-dark': string;
+export type McuScheme = {
+	primary: string;
+	'on-primary': string;
+	'primary-container': string;
+	'on-primary-container': string;
+	secondary: string;
+	'on-secondary': string;
+	'secondary-container': string;
+	'on-secondary-container': string;
+	tertiary: string;
+	'on-tertiary': string;
+	'tertiary-container': string;
+	'on-tertiary-container': string;
+	background: string;
+	'on-background': string;
+	surface: string;
+	'on-surface': string;
+	'surface-variant': string;
+	'on-surface-variant': string;
+	outline: string;
+	'outline-variant': string;
+	'inverse-surface': string;
+	'inverse-on-surface': string;
+	error: string;
+	'on-error': string;
+	'error-container': string;
+	'on-error-container': string;
 };
 
-export function createSchemeObject(
-	lightScheme: DynamicScheme,
-	darkScheme: DynamicScheme
-): MaterialColorUtilitiesScheme {
+export const MCU_SCHEME_VARS = {
+	primary: 'var(--colors-semantic-primary)',
+	'on-primary': 'var(--colors-semantic-on-primary)',
+	'primary-container': 'var(--colors-semantic-primary-container)',
+	'on-primary-container': 'var(--colors-semantic-on-primary-container)',
+	secondary: 'var(--colors-semantic-secondary)',
+	'on-secondary': 'var(--colors-semantic-on-secondary)',
+	'secondary-container': 'var(--colors-semantic-secondary-container)',
+	'on-secondary-container': 'var(--colors-semantic-on-secondary-container)',
+	tertiary: 'var(--colors-semantic-tertiary)',
+	'on-tertiary': 'var(--colors-semantic-on-tertiary)',
+	'tertiary-container': 'var(--colors-semantic-tertiary-container)',
+	'on-tertiary-container': 'var(--colors-semantic-on-tertiary-container)',
+	background: 'var(--colors-semantic-background)',
+	'on-background': 'var(--colors-semantic-on-background)',
+	surface: 'var(--colors-semantic-surface)',
+	'on-surface': 'var(--colors-semantic-on-surface)',
+	'surface-variant': 'var(--colors-semantic-surface-variant)',
+	'on-surface-variant': 'var(--colors-semantic-on-surface-variant)',
+	outline: 'var(--colors-semantic-outline)',
+	'outline-variant': 'var(--colors-semantic-outline-variant)',
+	'inverse-surface': 'var(--colors-semantic-inverse-surface)',
+	'inverse-on-surface': 'var(--colors-semantic-inverse-on-surface)',
+	error: 'var(--colors-semantic-error)',
+	'on-error': 'var(--colors-semantic-on-error)',
+	'error-container': 'var(--colors-semantic-error-container)',
+	'on-error-container': 'var(--colors-semantic-on-error-container)',
+};
+
+export function createSchemeObject(scheme: DynamicScheme): McuScheme {
 	return {
-		// Light
-		'primary-light': hexFromArgb(MaterialDynamicColors.primary.getArgb(lightScheme)),
-		'on-primary-light': hexFromArgb(MaterialDynamicColors.onPrimary.getArgb(lightScheme)),
-		'primary-container-light': hexFromArgb(MaterialDynamicColors.primaryContainer.getArgb(lightScheme)),
-		'on-primary-container-light': hexFromArgb(MaterialDynamicColors.onPrimaryContainer.getArgb(lightScheme)),
-		'secondary-light': hexFromArgb(MaterialDynamicColors.secondary.getArgb(lightScheme)),
-		'on-secondary-light': hexFromArgb(MaterialDynamicColors.onSecondary.getArgb(lightScheme)),
-		'secondary-container-light': hexFromArgb(MaterialDynamicColors.secondaryContainer.getArgb(lightScheme)),
-		'on-secondary-container-light': hexFromArgb(MaterialDynamicColors.onSecondaryContainer.getArgb(lightScheme)),
-		'tertiary-light': hexFromArgb(MaterialDynamicColors.tertiary.getArgb(lightScheme)),
-		'on-tertiary-light': hexFromArgb(MaterialDynamicColors.onTertiary.getArgb(lightScheme)),
-		'tertiary-container-light': hexFromArgb(MaterialDynamicColors.tertiaryContainer.getArgb(lightScheme)),
-		'on-tertiary-container-light': hexFromArgb(MaterialDynamicColors.onTertiaryContainer.getArgb(lightScheme)),
-		'background-light': hexFromArgb(MaterialDynamicColors.background.getArgb(lightScheme)),
-		'on-background-light': hexFromArgb(MaterialDynamicColors.onBackground.getArgb(lightScheme)),
-		'surface-light': hexFromArgb(MaterialDynamicColors.surface.getArgb(lightScheme)),
-		'on-surface-light': hexFromArgb(MaterialDynamicColors.onSurface.getArgb(lightScheme)),
-		'surface-variant-light': hexFromArgb(MaterialDynamicColors.surfaceVariant.getArgb(lightScheme)),
-		'on-surface-variant-light': hexFromArgb(MaterialDynamicColors.onSurfaceVariant.getArgb(lightScheme)),
-		'outline-light': hexFromArgb(MaterialDynamicColors.outline.getArgb(lightScheme)),
-		'outline-variant-light': hexFromArgb(MaterialDynamicColors.outlineVariant.getArgb(lightScheme)),
-		'inverse-surface-light': hexFromArgb(MaterialDynamicColors.inverseSurface.getArgb(lightScheme)),
-		'inverse-on-surface-light': hexFromArgb(MaterialDynamicColors.inverseOnSurface.getArgb(lightScheme)),
-		'error-light': hexFromArgb(MaterialDynamicColors.error.getArgb(lightScheme)),
-		'on-error-light': hexFromArgb(MaterialDynamicColors.onError.getArgb(lightScheme)),
-		'error-container-light': hexFromArgb(MaterialDynamicColors.errorContainer.getArgb(lightScheme)),
-		'on-error-container-light': hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(lightScheme)),
-		// Dark
-		'primary-dark': hexFromArgb(MaterialDynamicColors.primary.getArgb(darkScheme)),
-		'on-primary-dark': hexFromArgb(MaterialDynamicColors.onPrimary.getArgb(darkScheme)),
-		'primary-container-dark': hexFromArgb(MaterialDynamicColors.primaryContainer.getArgb(darkScheme)),
-		'on-primary-container-dark': hexFromArgb(MaterialDynamicColors.onPrimaryContainer.getArgb(darkScheme)),
-		'secondary-dark': hexFromArgb(MaterialDynamicColors.secondary.getArgb(darkScheme)),
-		'on-secondary-dark': hexFromArgb(MaterialDynamicColors.onSecondary.getArgb(darkScheme)),
-		'secondary-container-dark': hexFromArgb(MaterialDynamicColors.secondaryContainer.getArgb(darkScheme)),
-		'on-secondary-container-dark': hexFromArgb(MaterialDynamicColors.onSecondaryContainer.getArgb(darkScheme)),
-		'tertiary-dark': hexFromArgb(MaterialDynamicColors.tertiary.getArgb(darkScheme)),
-		'on-tertiary-dark': hexFromArgb(MaterialDynamicColors.onTertiary.getArgb(darkScheme)),
-		'tertiary-container-dark': hexFromArgb(MaterialDynamicColors.tertiaryContainer.getArgb(darkScheme)),
-		'on-tertiary-container-dark': hexFromArgb(MaterialDynamicColors.onTertiaryContainer.getArgb(darkScheme)),
-		'background-dark': hexFromArgb(MaterialDynamicColors.background.getArgb(darkScheme)),
-		'on-background-dark': hexFromArgb(MaterialDynamicColors.onBackground.getArgb(darkScheme)),
-		'surface-dark': hexFromArgb(MaterialDynamicColors.surface.getArgb(darkScheme)),
-		'on-surface-dark': hexFromArgb(MaterialDynamicColors.onSurface.getArgb(darkScheme)),
-		'surface-variant-dark': hexFromArgb(MaterialDynamicColors.surfaceVariant.getArgb(darkScheme)),
-		'on-surface-variant-dark': hexFromArgb(MaterialDynamicColors.onSurfaceVariant.getArgb(darkScheme)),
-		'outline-dark': hexFromArgb(MaterialDynamicColors.outline.getArgb(darkScheme)),
-		'outline-variant-dark': hexFromArgb(MaterialDynamicColors.outlineVariant.getArgb(darkScheme)),
-		'inverse-surface-dark': hexFromArgb(MaterialDynamicColors.inverseSurface.getArgb(darkScheme)),
-		'inverse-on-surface-dark': hexFromArgb(MaterialDynamicColors.inverseOnSurface.getArgb(darkScheme)),
-		'error-dark': hexFromArgb(MaterialDynamicColors.error.getArgb(darkScheme)),
-		'on-error-dark': hexFromArgb(MaterialDynamicColors.onError.getArgb(darkScheme)),
-		'error-container-dark': hexFromArgb(MaterialDynamicColors.errorContainer.getArgb(darkScheme)),
-		'on-error-container-dark': hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(darkScheme)),
+		primary: toOklchCss(hexFromArgb(MaterialDynamicColors.primary.getArgb(scheme))),
+		'on-primary': toOklchCss(hexFromArgb(MaterialDynamicColors.onPrimary.getArgb(scheme))),
+		'primary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.primaryContainer.getArgb(scheme))),
+		'on-primary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.onPrimaryContainer.getArgb(scheme))),
+		secondary: toOklchCss(hexFromArgb(MaterialDynamicColors.secondary.getArgb(scheme))),
+		'on-secondary': toOklchCss(hexFromArgb(MaterialDynamicColors.onSecondary.getArgb(scheme))),
+		'secondary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.secondaryContainer.getArgb(scheme))),
+		'on-secondary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.onSecondaryContainer.getArgb(scheme))),
+		tertiary: toOklchCss(hexFromArgb(MaterialDynamicColors.tertiary.getArgb(scheme))),
+		'on-tertiary': toOklchCss(hexFromArgb(MaterialDynamicColors.onTertiary.getArgb(scheme))),
+		'tertiary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.tertiaryContainer.getArgb(scheme))),
+		'on-tertiary-container': toOklchCss(hexFromArgb(MaterialDynamicColors.onTertiaryContainer.getArgb(scheme))),
+		background: toOklchCss(hexFromArgb(MaterialDynamicColors.background.getArgb(scheme))),
+		'on-background': toOklchCss(hexFromArgb(MaterialDynamicColors.onBackground.getArgb(scheme))),
+		surface: toOklchCss(hexFromArgb(MaterialDynamicColors.surface.getArgb(scheme))),
+		'on-surface': toOklchCss(hexFromArgb(MaterialDynamicColors.onSurface.getArgb(scheme))),
+		'surface-variant': toOklchCss(hexFromArgb(MaterialDynamicColors.surfaceVariant.getArgb(scheme))),
+		'on-surface-variant': toOklchCss(hexFromArgb(MaterialDynamicColors.onSurfaceVariant.getArgb(scheme))),
+		outline: toOklchCss(hexFromArgb(MaterialDynamicColors.outline.getArgb(scheme))),
+		'outline-variant': toOklchCss(hexFromArgb(MaterialDynamicColors.outlineVariant.getArgb(scheme))),
+		'inverse-surface': toOklchCss(hexFromArgb(MaterialDynamicColors.inverseSurface.getArgb(scheme))),
+		'inverse-on-surface': toOklchCss(hexFromArgb(MaterialDynamicColors.inverseOnSurface.getArgb(scheme))),
+		error: toOklchCss(hexFromArgb(MaterialDynamicColors.error.getArgb(scheme))),
+		'on-error': toOklchCss(hexFromArgb(MaterialDynamicColors.onError.getArgb(scheme))),
+		'error-container': toOklchCss(hexFromArgb(MaterialDynamicColors.errorContainer.getArgb(scheme))),
+		'on-error-container': toOklchCss(hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(scheme))),
 	};
 }

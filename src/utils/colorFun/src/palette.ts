@@ -1,10 +1,9 @@
-import { hexFromArgb, TonalPalette } from '@material/material-color-utilities';
 import chroma from 'chroma-js';
+import { hexFromArgb, TonalPalette } from '@material/material-color-utilities';
 
-import { validateColor } from './utils';
-import { toHct } from './colorFunctions';
+import { toHct, validateColor, toOklchCss } from './colorFunctions';
 
-export type paletteTailwind = {
+export type paletteTw = {
 	50: string;
 	100: string;
 	200: string;
@@ -20,12 +19,11 @@ export type paletteTailwind = {
 
 export function generateTonalPalette(
 	color: string | chroma.Color,
-	mode: 'mcu' | 'chroma' | 'chromaBlended' = 'mcu',
-	cssHsl: boolean
-): paletteTailwind {
+	mode: 'mcu' | 'chroma' | 'chromaBlended' = 'mcu'
+): paletteTw {
 	validateColor(color);
 
-	let tonalPaletteHex: paletteTailwind;
+	let tonalPaletteHex: paletteTw;
 	if (mode === 'mcu') {
 		tonalPaletteHex = generateTonalPaletteMCU(color);
 	} else if (mode === 'chroma') {
@@ -33,38 +31,32 @@ export function generateTonalPalette(
 	} else if (mode === 'chromaBlended') {
 		tonalPaletteHex = generateTonalPaletteChromaBlended(color);
 	}
-
-	if (cssHsl) {
-		Object.entries(tonalPaletteHex).forEach(([key, value]) => {
-			tonalPaletteHex[key] = chroma(value).css('hsl');
-		});
-	}
 	return tonalPaletteHex;
 }
 
-export function generateTonalPaletteMCU(color: string | chroma.Color): paletteTailwind {
+export function generateTonalPaletteMCU(color: string | chroma.Color): paletteTw {
 	// const stepsMCU = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95];
 	validateColor(color);
 	const tonalPalette = TonalPalette.fromHct(toHct(color));
 	return {
-		50: hexFromArgb(tonalPalette.tone(95)),
-		100: hexFromArgb(tonalPalette.tone(90)),
-		200: hexFromArgb(tonalPalette.tone(80)),
-		300: hexFromArgb(tonalPalette.tone(70)),
-		400: hexFromArgb(tonalPalette.tone(60)),
-		500: hexFromArgb(tonalPalette.tone(50)),
-		600: hexFromArgb(tonalPalette.tone(40)),
-		700: hexFromArgb(tonalPalette.tone(30)),
-		800: hexFromArgb(tonalPalette.tone(20)),
-		900: hexFromArgb(tonalPalette.tone(10)),
-		950: hexFromArgb(tonalPalette.tone(5)),
+		50: toOklchCss(hexFromArgb(tonalPalette.tone(95))),
+		100: toOklchCss(hexFromArgb(tonalPalette.tone(90))),
+		200: toOklchCss(hexFromArgb(tonalPalette.tone(80))),
+		300: toOklchCss(hexFromArgb(tonalPalette.tone(70))),
+		400: toOklchCss(hexFromArgb(tonalPalette.tone(60))),
+		500: toOklchCss(hexFromArgb(tonalPalette.tone(50))),
+		600: toOklchCss(hexFromArgb(tonalPalette.tone(40))),
+		700: toOklchCss(hexFromArgb(tonalPalette.tone(30))),
+		800: toOklchCss(hexFromArgb(tonalPalette.tone(20))),
+		900: toOklchCss(hexFromArgb(tonalPalette.tone(10))),
+		950: toOklchCss(hexFromArgb(tonalPalette.tone(5))),
 	};
 }
 
 export function generateTonalPaletteChroma(
 	color: string | chroma.Color,
 	mode: 'hsl' | 'rgb' | 'oklab' | 'oklch' = 'oklch'
-): paletteTailwind {
+): paletteTw {
 	// Chroma's Colorscale works backwards than the tailwinds/material format
 	const stepsTailwind = [11, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
@@ -75,24 +67,24 @@ export function generateTonalPaletteChroma(
 
 	let palette = {};
 	for (let i = 0; i <= stepsTailwind.length; i++) {
-		palette[i] = colorScale(stepsTailwind[i] / 1000).hex();
+		palette[i] = colorScale(stepsTailwind[i] / 1000).css();
 	}
 	return {
-		50: palette[0],
-		100: palette[1],
-		200: palette[2],
-		300: palette[3],
-		400: palette[4],
-		500: palette[5],
-		600: palette[6],
-		700: palette[7],
-		800: palette[8],
-		900: palette[9],
-		950: palette[10],
+		50: toOklchCss(palette[0]),
+		100: toOklchCss(palette[1]),
+		200: toOklchCss(palette[2]),
+		300: toOklchCss(palette[3]),
+		400: toOklchCss(palette[4]),
+		500: toOklchCss(palette[5]),
+		600: toOklchCss(palette[6]),
+		700: toOklchCss(palette[7]),
+		800: toOklchCss(palette[8]),
+		900: toOklchCss(palette[9]),
+		950: toOklchCss(palette[10]),
 	};
 }
 
-function generateTonalPaletteChromaBlended(colorInput: string | chroma.Color): paletteTailwind {
+export function generateTonalPaletteChromaBlended(colorInput: string | chroma.Color): paletteTw {
 	type ColorMode = 'oklab' | 'oklch' | 'hsl';
 	const modes: ColorMode[] = ['oklab', 'oklch', 'hsl'];
 	let initialPalettes = modes.map((mode) => generateTonalPaletteChroma(colorInput, mode));
@@ -103,7 +95,23 @@ function generateTonalPaletteChromaBlended(colorInput: string | chroma.Color): p
 		for (let palette of initialPalettes) {
 			colors.push(palette[key]);
 		}
-		paletteOutput[key] = chroma.average(colors, 'oklch', [1, 1, 1.33]);
+		paletteOutput[key] = toOklchCss(chroma.average(colors, 'oklch', [1, 1, 1.33]));
 	});
 	return paletteOutput;
+}
+
+export function generateTonalPaletteVars(paletteName: string): paletteTw {
+	return {
+		50: `var(--colors-${paletteName}-50)`,
+		100: `var(--colors-${paletteName}-100)`,
+		200: `var(--colors-${paletteName}-200)`,
+		300: `var(--colors-${paletteName}-300)`,
+		400: `var(--colors-${paletteName}-400)`,
+		500: `var(--colors-${paletteName}-500)`,
+		600: `var(--colors-${paletteName}-600)`,
+		700: `var(--colors-${paletteName}-700)`,
+		800: `var(--colors-${paletteName}-800)`,
+		900: `var(--colors-${paletteName}-900)`,
+		950: `var(--colors-${paletteName}-950)`,
+	};
 }
