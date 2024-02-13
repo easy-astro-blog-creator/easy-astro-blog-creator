@@ -41,6 +41,7 @@
     "astro-seo": "^0.8.0",
     "chroma-js": "^2.4.2",
     "cssnano": "^6.0.3",
+    "daisyui": "^4.7.1",
     "jest": "^29.7.0",
     "mdast-util-to-string": "^4.0.0",
     "postcss": "^8.4.35",

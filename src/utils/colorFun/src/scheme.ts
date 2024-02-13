@@ -27,19 +27,19 @@ import {
 } from './colorFunctions';
 
 export enum SchemeVariant {
-	MONOCHROME,
-	NEUTRAL,
-	TONAL_SPOT,
-	VIBRANT,
-	EXPRESSIVE,
-	FIDELITY,
-	CONTENT,
-	COMPLEMENTARY,
-	SPLIT_COMPLEMENTARY,
-	TRIADIC,
-	ANALOGOUS,
-	TETRADIC,
-	CUSTOM,
+	MONOCHROME = 'monochrome',
+	NEUTRAL = 'neutral',
+	TONAL_SPOT = 'tonal_spot',
+	VIBRANT = 'vibrant',
+	EXPRESSIVE = 'expressive',
+	FIDELITY = 'fidelity',
+	CONTENT = 'content',
+	COMPLEMENTARY = 'complementary',
+	SPLIT_COMPLEMENTARY = 'split_complementary',
+	TRIADIC = 'triadic',
+	ANALOGOUS = 'analogous',
+	TETRADIC = 'tetradic',
+	CUSTOM = 'custom',
 }
 
 // Copies from @material/material-color-utilities instead of importing

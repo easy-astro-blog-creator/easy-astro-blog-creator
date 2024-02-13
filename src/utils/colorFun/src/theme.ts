@@ -28,6 +28,53 @@ export type CustomThemeConfig = {
 	neutralVarient: string | undefined;
 };
 
+type TailwindTheme = {
+	colors: {
+		semantic: McuScheme;
+		primary: paletteTw;
+		secondary: paletteTw;
+		tertiary: paletteTw;
+		neutral: paletteTw;
+		'neutral-variant': paletteTw;
+		transparent: 'transparent';
+		current: 'currentColor';
+		black: '#000000';
+		white: '#ffffff';
+	};
+	variables: {
+		DEFAULT: {
+			colors: {
+				semantic: typeof MCU_SCHEME_VARS;
+				primary: paletteTw;
+				secondary: paletteTw;
+				tertiary: paletteTw;
+				neutral: paletteTw;
+				'neutral-variant': paletteTw;
+				transparent: 'transparent';
+				current: 'currentColor';
+				black: '#000000';
+				white: '#ffffff';
+			};
+		};
+	};
+	darkVariables: {
+		DEFAULT: {
+			colors: {
+				semantic: typeof MCU_SCHEME_VARS;
+				primary: paletteTw;
+				secondary: paletteTw;
+				tertiary: paletteTw;
+				neutral: paletteTw;
+				'neutral-variant': paletteTw;
+				transparent: 'transparent';
+				current: 'currentColor';
+				black: '#000000';
+				white: '#ffffff';
+			};
+		};
+	};
+};
+
 export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): TailwindTheme {
 	const lightScheme = generateDynamicScheme(themeConfig, false);
 	const darkScheme = generateDynamicScheme(themeConfig, true);
@@ -100,98 +147,6 @@ export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): Tailwin
 		},
 	};
 }
-
-export function updateTailwindTheme(sheet: CSSStyleSheet) {
-	const CUSTOM_THEME: CustomThemeConfig = {
-		primary: '#D07D12',
-		schemeVariant: SchemeVariant.TONAL_SPOT,
-		secondary: '#D07D12',
-		tertiary: '#003E1F',
-		neutral: '#d4e9f8',
-		neutralVarient: '#E8F5F2',
-	};
-	const unwrapVarName = (input: string): string => input.replace(/var\((--[a-zA-Z0-9_-]*)\)/g, '$1');
-
-	const newTheme = genenerateTailwindTheme(CUSTOM_THEME);
-	let lightRule = ':root {';
-
-	let testKey;
-	Object.entries(MCU_SCHEME_VARS).forEach(([key, value]) => {
-		lightRule += `${unwrapVarName(value)}: ${newTheme.variables.DEFAULT.colors.semantic[key]};`;
-		testKey = unwrapVarName(value);
-	});
-	lightRule += '}';
-
-	const rules = sheet.cssRules;
-	console.log(lightRule);
-	for (let i = 0; i < rules.length; i++) {
-		let rule: CSSStyleRule = rules[i] as CSSStyleRule;
-		// console.log(rule.selectorText);
-		if (rule.selectorText === ':root.dark') {
-			console.log('found dark');
-			sheet.deleteRule(i);
-			// sheet.insertRule(lightRule, i);
-		}
-	}
-	for (let i = 0; i < rules.length; i++) {
-		let rule: CSSStyleRule = rules[i] as CSSStyleRule;
-		if (rule.selectorText === ':root' && rule.style.getPropertyValue(unwrapVarName(testKey))) {
-			console.log('found light');
-			sheet.deleteRule(i);
-			sheet.insertRule(lightRule, rules.length);
-		}
-	}
-	const abc = sheet.cssRules;
-	console.log(abc);
-	return 123;
-}
-
-type TailwindTheme = {
-	colors: {
-		semantic: McuScheme;
-		primary: paletteTw;
-		secondary: paletteTw;
-		tertiary: paletteTw;
-		neutral: paletteTw;
-		'neutral-variant': paletteTw;
-		transparent: 'transparent';
-		current: 'currentColor';
-		black: '#000000';
-		white: '#ffffff';
-	};
-	variables: {
-		DEFAULT: {
-			colors: {
-				semantic: typeof MCU_SCHEME_VARS;
-				primary: paletteTw;
-				secondary: paletteTw;
-				tertiary: paletteTw;
-				neutral: paletteTw;
-				'neutral-variant': paletteTw;
-				transparent: 'transparent';
-				current: 'currentColor';
-				black: '#000000';
-				white: '#ffffff';
-			};
-		};
-	};
-	darkVariables: {
-		DEFAULT: {
-			colors: {
-				semantic: typeof MCU_SCHEME_VARS;
-				primary: paletteTw;
-				secondary: paletteTw;
-				tertiary: paletteTw;
-				neutral: paletteTw;
-				'neutral-variant': paletteTw;
-				transparent: 'transparent';
-				current: 'currentColor';
-				black: '#000000';
-				white: '#ffffff';
-			};
-		};
-	};
-};
 
 // type linkPalette = {
 // initial: string;

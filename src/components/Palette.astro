@@ -1,5 +1,5 @@
 ---
-import { updateTailwindTheme, genenerateTailwindTheme} from 'src/utils/colorFun/src/index';
+import { genenerateTailwindTheme, SchemeVariant} from 'src/utils/colorFun/src/index';
 import { CUSTOM_THEME } from 'src/siteConfig';
 
 const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
@@ -12,21 +12,48 @@ const palettes = {
     'neutral': colors['neutral'],
     'neutral-variant': colors['neutral-variant'],
 };
-const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
-// <palette-input>
-//     <div class="w-11/12 my-2 h-24 gap-2 grid grid-cols-3 place-items-center border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded">
-//         <!-- <select class="select select-primary">
-//             <option disabled selected>Select Scheme</option>
-//             <option>SPLIT_COMPLEMENTARY</option>
-//         </select>
-//         <input type="text" placeholder="Enter Color" class="input w-full max-w-xs " /> -->
-//         <button aria-label="Color Input">change it</button><span>0</span>
-//     </div>
-// </palette-input>
+const paletteSteps = Object.keys(colors['primary']);
 ---
+<palette-input>
+    <form name="color-form" class="w-11/12  px-4  place-items-center text-xs">
+        <div class="w-11/12  px-4 h-24 gap-8 grid grid-cols-2  place-items-center">
+            <label class="form-control w-full max-w-xs gap-2">
+                <div class="label">
+                    <span class="text-center w-full">Select Scheme</span>
+                </div>
+                <select id="scheme-select" class="select min-w-max select-sm rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s">
+                    {
+                        Object.entries(SchemeVariant).map(([key, variant]) => {
+                            if (variant === CUSTOM_THEME.schemeVariant) {
+                                return <option selected="true" value={key}>{variant}</option>;
+                            } else {
+                                return <option value={key}>{variant}</option>;
+                            }
+                        })
+                    }
+                </select>
+            </label>
+            <label class="form-control w-full max-w-xs gap-2 ">
+                <div class="label">
+                    <span class="text-center w-full">Primary Color</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" value={CUSTOM_THEME.primary} id="color-input-text" class="input input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s" />
+                    <input type="color" value={CUSTOM_THEME.primary} id="color-input-color" class="input p-1 input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s" />
+                </div>
+            </label>
+        </div>
+        <!-- <details class="collapse group border-2  w-full">
+            <summary class="collapse-title text-right text-xl list-['⚙️'] group-open:list-['💯']"></summary>
+            <div class="collapse-content"> 
+              <p>content</p>
+            </div>
+          </details> -->
+    </form>
+</palette-input>
 <div class="w-11/12 grid"> 
-    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded ">
+    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded ">
         <h1 class="col-start-1 col-span-2">Text</h1>
         <p class="col-start-3 col-span-2">Default Text</p>
         <p class="font-bold col-span-2">Bold Text</p>
@@ -34,7 +61,7 @@ const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
         <p class="col-span-2">Heading Text</p>
         <p class="col-span-3">Subheading Text</p>
     </div>
-    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded">
+    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded">
         <h1 class="col-start-1 col-span-2">Links</h1>
         <p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
         <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
@@ -44,7 +71,7 @@ const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
     </div>
 </div>
 </div>
-<div class="w-11/12 pr-8 pb-8 my-2 grid grid-rows-6 gap-1 border-2 border-semantic-on-background-light/60 dark:border-semantic-on-background-dark/60 rounded">
+<div class="w-11/12 pr-8 pb-8 my-2 grid grid-rows-6 gap-1 border-2 border-semantic-on-background/60  rounded">
     <div class="grid p-2 my-2 grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center ">
         {
             paletteSteps.map((step, index) => (
@@ -66,28 +93,56 @@ const paletteSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
         ))
     }
 </div>
-<!-- <script>
-    import { updateTailwindTheme } from 'src/utils/colorFun/src/index';
-    
+<script>
+    import { updateTailwindTheme, SchemeVariant, CustomThemeConfig, validateColorFromForm } from 'src/utils/colorFun/src/index';
+    document['color-form'].reset()
+
     class PaletteInput extends HTMLElement {
-      constructor() {
-        super();
-        let count = 0;
-        const colorInput = this.querySelector('button');
-        const countSpan = this.querySelector('span');
-        colorInput.addEventListener('click', () => {
-            for (const sheet of document.styleSheets) {
-                if (sheet.cssRules.length > 100) {
-                    count = updateTailwindTheme(sheet) + count
+        constructor() {
+            super();
+            
+            const colorInputText = document.getElementById('color-input-text') as HTMLInputElement;
+            const colorInputColor = document.getElementById('color-input-color') as HTMLInputElement;
+            const schemeSelect = document.getElementById('scheme-select') as HTMLSelectElement;
+            let currentColorValue = colorInputText.value;
+
+            colorInputText.addEventListener('input', () => {
+                let colorMaybe = validateColorFromForm(colorInputText.value);
+                if (!(colorMaybe === undefined)) {
+                    console.log(colorMaybe)
+                    currentColorValue = colorMaybe;
+                    colorInputColor.value = colorMaybe;
+                    updateTheme()
                 }
+            });
+            colorInputColor.addEventListener('input', () => {
+                let colorMaybe = validateColorFromForm(colorInputColor.value);
+                if (!(colorMaybe === undefined)) {
+                    console.log(colorMaybe)
+                    currentColorValue = colorMaybe;
+                    colorInputText.value = colorMaybe;
+                    updateTheme()
+                }
+            });
+
+            schemeSelect.addEventListener('change', () => {
+                updateTheme()
+            });
+
+            function updateTheme() {
+                const selectedSchemeVariant = schemeSelect.value;
+                const newConfig: CustomThemeConfig = {
+                    primary: currentColorValue,
+                    schemeVariant: SchemeVariant[selectedSchemeVariant as keyof typeof SchemeVariant],
+                    secondary: '#D07D12',
+                    tertiary: '#003E1F',
+                    neutral: '#d4e9f8',
+                    neutralVarient: '#E8F5F2',
+                };
+                updateTailwindTheme(document.styleSheets, newConfig)
             }
-            
-            
-            countSpan.textContent = count.toString();
-        });
-      }
-    }
-  
+        }
+    };
     customElements.define('palette-input', PaletteInput);
-</script> -->
+</script>
 

@@ -46,17 +46,14 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        /* @apply bg-background-default dark:bg-background-default;
-        @apply text-text-default dark:text-text-default; */
-        @apply bg-semantic-background dark:bg-semantic-background;
-        @apply text-semantic-on-background dark:text-semantic-on-background;
-        
+        @apply bg-semantic-background;
+        @apply text-semantic-on-background;
     }
     main {
        @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
     }
     article {
-       @apply flex flex-col grow justify-normal;
+       @apply flex flex-col grow justify-normal; 
     }
 
     /* Hyperlinks */
@@ -66,13 +63,13 @@
     }
     /* For unvisited links. TIL! */
     .easy-link:link, .easy-link-always-link  {
-        @apply text-semantic-primary dark:text-semantic-primary;
+        @apply text-semantic-primary;
     }
     .easy-link:visited, .easy-link-always-visited {
-        @apply text-semantic-secondary dark:text-semantic-secondary;
+        @apply text-semantic-secondary;
     }
     .easy-link:active, .easy-link-always-active {
-        @apply text-semantic-tertiary dark:text-semantic-tertiary;
+        @apply text-semantic-tertiary;
         text-decoration: underline;
     }
     .easy-link:hover, .easy-link-always-hover, .easy-link:focus {

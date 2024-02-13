@@ -159,3 +159,9 @@ export function validateColor(color: string | chroma.Color) {
 		);
 	}
 }
+export function validateColorFromForm(color: string | chroma.Color): string | undefined {
+	if (!chroma.valid(color, 'hex')) {
+		return;
+	}
+	return chroma(color).hex();
+}
