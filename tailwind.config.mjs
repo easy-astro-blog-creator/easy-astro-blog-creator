@@ -32,5 +32,5 @@ export default {
 	theme: {
 		extend: genenerateTailwindTheme(CUSTOM_THEME),
 	},
-	darkMode: ['media'],
+	darkMode: 'media',
 };

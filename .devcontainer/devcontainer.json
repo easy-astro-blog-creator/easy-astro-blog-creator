@@ -1,12 +1,13 @@
 {
-	"name": "personal blog",
-	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {"version": "latest"}
-	},
+	"name": "easy-astro-blog-creator",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
     "remoteUser": "root",
+	// "postCreateCommand": "npm install",
+	"postCreateCommand": "npm install && npm run build",
+	"waitFor": "postCreateCommand",
+	"postStartCommand": "npm run dev",
     "customizations": {
 		"vscode": {
 			"extensions": [

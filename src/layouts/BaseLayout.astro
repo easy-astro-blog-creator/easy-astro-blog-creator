@@ -10,8 +10,8 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = As
 <html lang="en">
 	<head>
 		<BaseHead page_title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}/>
-		<Navbar />
 	</head>
+	<Navbar />
 	<body>
 		<slot />
 		<Footer />

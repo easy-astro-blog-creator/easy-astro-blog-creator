@@ -2,7 +2,7 @@
 
 import { CustomThemeConfig, genenerateTailwindTheme } from './theme';
 import { generateDynamicScheme, SchemeVariant } from './scheme';
-import { findContrastLevel } from './checkContrast';
+// import { findContrastLevel } from './checkContrast';
 import { paletteTw } from './palette';
 import { updateTailwindTheme } from './interactive';
 import { validateColor, validateColorFromForm } from './colorFunctions';
@@ -12,7 +12,7 @@ export {
 	updateTailwindTheme,
 	SchemeVariant,
 	generateDynamicScheme,
-	findContrastLevel,
+	// findContrastLevel,
 	validateColor,
 	validateColorFromForm,
 };

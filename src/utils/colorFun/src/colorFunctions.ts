@@ -21,7 +21,7 @@ export function complemetaryColor(inputColor: string | chroma.Color, mode: 'hsl'
 	validateColor(inputColor);
 	if (mode === 'hsl') {
 		return chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 180) % 360);
-	} else if (mode === 'oklch') {
+	} else {
 		return chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 180) % 360);
 	}
 }
@@ -35,7 +35,7 @@ export function complemetarySplitColors(
 		const splitComplement1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 150) % 360);
 		const splitComplement2 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 210) % 360);
 		return [splitComplement1, splitComplement2];
-	} else if (mode === 'oklch') {
+	} else {
 		const splitComplement1 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 150) % 360);
 		const splitComplement2 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 210) % 360);
 		return [splitComplement1, splitComplement2];
@@ -50,7 +50,7 @@ export function analogousColors(inputColor: string | chroma.Color, mode: 'hsl' |
 		const analogous3 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') - 24) % 360);
 		const analogous4 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') - 45) % 360);
 		return [analogous1, analogous2, analogous3, analogous4];
-	} else if (mode === 'oklch') {
+	} else {
 		const analogous1 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 24) % 360);
 		const analogous2 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 45) % 360);
 		const analogous3 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') - 24) % 360);
@@ -65,7 +65,7 @@ export function triadicColors(inputColor: string | chroma.Color, mode: 'hsl' | '
 		const triadic1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 120) % 360);
 		const triadic2 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 240) % 360);
 		return [triadic1, triadic2];
-	} else if (mode === 'oklch') {
+	} else {
 		const triadic1 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 120) % 360);
 		const triadic2 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 240) % 360);
 		return [triadic1, triadic2];
@@ -79,7 +79,7 @@ export function tetradicColors(inputColor: string | chroma.Color, mode: 'hsl' | 
 		const tetradic2 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 180) % 360);
 		const tetradic3 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 240) % 360);
 		return [tetradic1, tetradic2, tetradic3];
-	} else if (mode === 'oklch') {
+	} else {
 		const tetradic1 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 60) % 360);
 		const tetradic2 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 180) % 360);
 		const tetradic3 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 240) % 360);
@@ -93,8 +93,7 @@ export function squareColors(inputColor: string | chroma.Color, mode: 'hsl' | 'o
 		const square2 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 180) % 360);
 		const square3 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 270) % 360);
 		return [square1, square2, square3];
-	}
-	if (mode === 'oklch') {
+	} else {
 		const square1 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 90) % 360);
 		const square2 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 180) % 360);
 		const square3 = chroma(inputColor).set('oklch.h', (chroma(inputColor).get('oklch.h') + 270) % 360);

@@ -37,43 +37,39 @@ const socialImage = await (async () => {
 	const fullImage = new URL(image.src, GITHUB_PAGES_URL).toString();
 	return { src: fullImage, alt: heroAlt };
 })();
-
 // See https://github.com/jonasmerlin/astro-seo
 ---
-<html  lang="en">
-	<head>
-    	<SEO
-			title={page_title && `${page_title}`}
-			titleTemplate={`%s — ${SITE_TITLE}`}
-			titleDefault={SITE_TITLE}
-			description={page_description}
-			canonical={canonicalURL}
-			charset="utf-8"
-			openGraph={{
-				basic: {
-					title: page_title || SITE_TITLE,
-					type: "website",
-					image: socialImage.src,
-					url: canonicalURL,
-				},
-				optional: {
-					description: page_description,
-					siteName: SITE_TITLE,
-				},
-				image: {
-					alt: socialImage.alt,
-				},
-				article: {
-					publishedTime: pubDate,
-					modifiedTime: updatedDate,
-					authors: [FULL_NAME]
-				}
-			}}
-			extend={{
-				// extending the default link tags
-				link: [{ rel: "icon", type: FAVICON_TYPE, href: FAVICON_URL }],
-			}}
-		/>
-  	</head>
-</html>
+<SEO
+	title={page_title && `${page_title}`}
+	titleTemplate={`%s — ${SITE_TITLE}`}
+	titleDefault={SITE_TITLE}
+	description={page_description}
+	canonical={canonicalURL}
+	charset="utf-8"
+	openGraph={{
+		basic: {
+			title: page_title || SITE_TITLE,
+			type: "website",
+			image: socialImage.src,
+			url: canonicalURL,
+		},
+		optional: {
+			description: page_description,
+			siteName: SITE_TITLE,
+		},
+		image: {
+			alt: socialImage.alt,
+		},
+		article: {
+			publishedTime: pubDate,
+			modifiedTime: updatedDate,
+			authors: [FULL_NAME]
+		}
+	}}
+	extend={{
+		// extending the default link tags
+		link: [{ rel: "icon", type: FAVICON_TYPE, href: FAVICON_URL }],
+	}}
+/>
+
 

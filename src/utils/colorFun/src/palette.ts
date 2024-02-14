@@ -24,12 +24,12 @@ export function generateTonalPalette(
 	validateColor(color);
 
 	let tonalPaletteHex: paletteTw;
-	if (mode === 'mcu') {
-		tonalPaletteHex = generateTonalPaletteMCU(color);
-	} else if (mode === 'chroma') {
+	if (mode === 'chroma') {
 		tonalPaletteHex = generateTonalPaletteChroma(color);
 	} else if (mode === 'chromaBlended') {
 		tonalPaletteHex = generateTonalPaletteChromaBlended(color);
+	} else {
+		tonalPaletteHex = generateTonalPaletteMCU(color);
 	}
 	return tonalPaletteHex;
 }
