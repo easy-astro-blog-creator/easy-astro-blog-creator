@@ -16,11 +16,11 @@
 				"github.copilot-chat",
 				"d-koppenhagen.file-tree-to-text-generator",
 				"astro-build.astro-vscode",
-				"unifiedjs.vscode-mdx",
 				"csstools.postcss",
 				"moalamri.inline-fold",
 				"bradlc.vscode-tailwindcss",
 				"ms-vscode.vscode-typescript-next",
+				"dbaeumer.vscode-eslint",
 				"esbenp.prettier-vscode"
 			]
 		}

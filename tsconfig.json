@@ -3,6 +3,7 @@
     "allowJs": false,
     "checkJs": false,
     "esModuleInterop": true,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
