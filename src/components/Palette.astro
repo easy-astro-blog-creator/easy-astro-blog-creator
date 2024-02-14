@@ -22,7 +22,7 @@ const paletteSteps = Object.keys(colors['primary']);
                 <div class="label">
                     <span class="text-center w-full">Select Scheme</span>
                 </div>
-                <select id="scheme-select" class="select min-w-max select-sm rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s">
+                <select id="scheme-select" class="select min-w-max select-sm rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold">
                     {
                         Object.entries(SchemeVariant).map(([key, variant]) => {
                             if (variant === CUSTOM_THEME.schemeVariant) {
@@ -39,8 +39,8 @@ const paletteSteps = Object.keys(colors['primary']);
                     <span class="text-center w-full">Primary Color</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value={CUSTOM_THEME.primary} id="color-input-text" class="input input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s" />
-                    <input type="color" value={CUSTOM_THEME.primary} id="color-input-color" class="input p-1 input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s" />
+                    <input type="text" value={CUSTOM_THEME.primary} id="color-input-text" class="input input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold" />
+                    <input type="color" value={CUSTOM_THEME.primary} id="color-input-color" class="input p-1 input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold" />
                 </div>
             </label>
         </div>
@@ -54,7 +54,7 @@ const paletteSteps = Object.keys(colors['primary']);
 </palette-input>
 <div class="w-11/12 grid"> 
     <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded ">
-        <h1 class="col-start-1 col-span-2">Text</h1>
+        <h1 class="col-start-1 col-span-2">text styles</h1>
         <p class="col-start-3 col-span-2">Default Text</p>
         <p class="font-bold col-span-2">Bold Text</p>
         <p class="col-span-2 italic">Italic Text</p>
@@ -62,7 +62,7 @@ const paletteSteps = Object.keys(colors['primary']);
         <p class="col-span-3">Subheading Text</p>
     </div>
     <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded">
-        <h1 class="col-start-1 col-span-2">Links</h1>
+        <h1 class="col-start-1 col-span-2">link styles</h1>
         <p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
         <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
         <p class="col-span-2 easy-link easy-link-always-visited">Visited Link</p>

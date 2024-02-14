@@ -1,6 +1,5 @@
 import {
 	hexFromArgb,
-	Hct,
 	MaterialDynamicColors,
 	argbFromHex,
 	TonalPalette,
@@ -54,6 +53,64 @@ enum Variant {
 	FIDELITY,
 	CONTENT,
 }
+
+export type McuScheme = {
+	primary: string;
+	'on-primary': string;
+	'primary-container': string;
+	'on-primary-container': string;
+	secondary: string;
+	'on-secondary': string;
+	'secondary-container': string;
+	'on-secondary-container': string;
+	tertiary: string;
+	'on-tertiary': string;
+	'tertiary-container': string;
+	'on-tertiary-container': string;
+	background: string;
+	'on-background': string;
+	surface: string;
+	'on-surface': string;
+	'surface-variant': string;
+	'on-surface-variant': string;
+	outline: string;
+	'outline-variant': string;
+	'inverse-surface': string;
+	'inverse-on-surface': string;
+	error: string;
+	'on-error': string;
+	'error-container': string;
+	'on-error-container': string;
+};
+
+export const MCU_SCHEME_VARS = {
+	primary: 'var(--colors-semantic-primary)',
+	'on-primary': 'var(--colors-semantic-on-primary)',
+	'primary-container': 'var(--colors-semantic-primary-container)',
+	'on-primary-container': 'var(--colors-semantic-on-primary-container)',
+	secondary: 'var(--colors-semantic-secondary)',
+	'on-secondary': 'var(--colors-semantic-on-secondary)',
+	'secondary-container': 'var(--colors-semantic-secondary-container)',
+	'on-secondary-container': 'var(--colors-semantic-on-secondary-container)',
+	tertiary: 'var(--colors-semantic-tertiary)',
+	'on-tertiary': 'var(--colors-semantic-on-tertiary)',
+	'tertiary-container': 'var(--colors-semantic-tertiary-container)',
+	'on-tertiary-container': 'var(--colors-semantic-on-tertiary-container)',
+	background: 'var(--colors-semantic-background)',
+	'on-background': 'var(--colors-semantic-on-background)',
+	surface: 'var(--colors-semantic-surface)',
+	'on-surface': 'var(--colors-semantic-on-surface)',
+	'surface-variant': 'var(--colors-semantic-surface-variant)',
+	'on-surface-variant': 'var(--colors-semantic-on-surface-variant)',
+	outline: 'var(--colors-semantic-outline)',
+	'outline-variant': 'var(--colors-semantic-outline-variant)',
+	'inverse-surface': 'var(--colors-semantic-inverse-surface)',
+	'inverse-on-surface': 'var(--colors-semantic-inverse-on-surface)',
+	error: 'var(--colors-semantic-error)',
+	'on-error': 'var(--colors-semantic-on-error)',
+	'error-container': 'var(--colors-semantic-error-container)',
+	'on-error-container': 'var(--colors-semantic-on-error-container)',
+};
 
 export function generateDynamicScheme(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
 	if (!themeConfig.primary) {
@@ -109,6 +166,7 @@ function generateSchemeComplementary(themeConfig: CustomThemeConfig, mode: boole
 		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(complementary).hue, 8),
 	});
 }
+
 function generateSchemeComplementarySplit(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
 	const [color1, color2] = complemetarySplitColors(themeConfig.primary);
 
@@ -215,64 +273,6 @@ export function generateSchemeCustom(themeConfig: CustomThemeConfig, mode: boole
 		neutralVariantPalette: neutralVariantPalette,
 	});
 }
-
-export type McuScheme = {
-	primary: string;
-	'on-primary': string;
-	'primary-container': string;
-	'on-primary-container': string;
-	secondary: string;
-	'on-secondary': string;
-	'secondary-container': string;
-	'on-secondary-container': string;
-	tertiary: string;
-	'on-tertiary': string;
-	'tertiary-container': string;
-	'on-tertiary-container': string;
-	background: string;
-	'on-background': string;
-	surface: string;
-	'on-surface': string;
-	'surface-variant': string;
-	'on-surface-variant': string;
-	outline: string;
-	'outline-variant': string;
-	'inverse-surface': string;
-	'inverse-on-surface': string;
-	error: string;
-	'on-error': string;
-	'error-container': string;
-	'on-error-container': string;
-};
-
-export const MCU_SCHEME_VARS = {
-	primary: 'var(--colors-semantic-primary)',
-	'on-primary': 'var(--colors-semantic-on-primary)',
-	'primary-container': 'var(--colors-semantic-primary-container)',
-	'on-primary-container': 'var(--colors-semantic-on-primary-container)',
-	secondary: 'var(--colors-semantic-secondary)',
-	'on-secondary': 'var(--colors-semantic-on-secondary)',
-	'secondary-container': 'var(--colors-semantic-secondary-container)',
-	'on-secondary-container': 'var(--colors-semantic-on-secondary-container)',
-	tertiary: 'var(--colors-semantic-tertiary)',
-	'on-tertiary': 'var(--colors-semantic-on-tertiary)',
-	'tertiary-container': 'var(--colors-semantic-tertiary-container)',
-	'on-tertiary-container': 'var(--colors-semantic-on-tertiary-container)',
-	background: 'var(--colors-semantic-background)',
-	'on-background': 'var(--colors-semantic-on-background)',
-	surface: 'var(--colors-semantic-surface)',
-	'on-surface': 'var(--colors-semantic-on-surface)',
-	'surface-variant': 'var(--colors-semantic-surface-variant)',
-	'on-surface-variant': 'var(--colors-semantic-on-surface-variant)',
-	outline: 'var(--colors-semantic-outline)',
-	'outline-variant': 'var(--colors-semantic-outline-variant)',
-	'inverse-surface': 'var(--colors-semantic-inverse-surface)',
-	'inverse-on-surface': 'var(--colors-semantic-inverse-on-surface)',
-	error: 'var(--colors-semantic-error)',
-	'on-error': 'var(--colors-semantic-on-error)',
-	'error-container': 'var(--colors-semantic-error-container)',
-	'on-error-container': 'var(--colors-semantic-on-error-container)',
-};
 
 export function createSchemeObject(scheme: DynamicScheme): McuScheme {
 	return {

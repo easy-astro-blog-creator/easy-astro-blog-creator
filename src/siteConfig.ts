@@ -24,8 +24,8 @@ export const GITHUB_URL = 'https://github.com/shelbyjenkins';
 /* Another fun tool is https://huemint.com/illustration-1/ */
 /* https://themes.ionevolve.com/ */
 /* Generate color codes with https://uicolors.app/create */
-
 /* Generate gradients with https://mycolor.space/gradient?ori=to+bottom&hex=%23102C41&hex2=%230F2424&sub=1 */
+
 export const CUSTOM_THEME: CustomThemeConfig = {
 	// Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
 	primary: '#40a1e6',

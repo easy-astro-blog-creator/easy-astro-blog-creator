@@ -1,4 +1,4 @@
-import { SchemeVariant, McuScheme, MCU_SCHEME_VARS } from './scheme';
+import { McuScheme, MCU_SCHEME_VARS } from './scheme';
 import { paletteTw } from './palette';
 import { genenerateTailwindTheme, CustomThemeConfig } from './theme';
 

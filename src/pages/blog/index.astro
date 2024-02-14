@@ -36,8 +36,8 @@ const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
 								</div>
 								<div class="flex justify-center items-center w-4/12 h-auto max-w-[90%] max-h-[90%]">
 									{
-										// post.data.heroImage &&
-										// <Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+										post.data.heroImage &&
+										<Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
 									}
 								</div>
 							</a>
