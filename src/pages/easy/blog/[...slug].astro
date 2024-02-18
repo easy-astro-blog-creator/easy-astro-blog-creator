@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import '../../styles/blog.css'
+import BlogPost from '../../../layouts/BlogPost.astro';
+import '../../../styles/blog.css'
 
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     return paths;
 }
 
-type Props = CollectionEntry<'blog'>;
+type Props = CollectionEntry<'easy'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
