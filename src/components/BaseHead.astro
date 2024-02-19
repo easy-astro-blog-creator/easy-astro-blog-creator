@@ -3,13 +3,14 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import { SEO } from "astro-seo";
-import { FAVICON_TYPE, FAVICON_URL, SITE_TITLE, FULL_NAME, GITHUB_PAGES_URL} from '../siteConfig';
+import { easyConfig } from '../siteConfig';
 import { getImage } from 'astro:assets';
 import defaultSocialImage from '../images/default-social-image.png';
+
 /**
  * Enforce some standard canonical URL formatting across the site.
  */
-const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, GITHUB_PAGES_URL));
+const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, easyConfig.github_pages_url));
 function formatCanonicalURL(url: string | URL) {
     let path = url.toString();
     const hasQueryParams = path.includes("?");
@@ -34,7 +35,7 @@ const socialImage = await (async () => {
     } else {
         image = await getImage({ src: defaultSocialImage, format: 'webp' });
     }
-	const fullImage = new URL(image.src, GITHUB_PAGES_URL).toString();
+	const fullImage = new URL(image.src, easyConfig.github_pages_url).toString();
 	return { src: fullImage, alt: heroAlt };
 })();
 // See https://github.com/jonasmerlin/astro-seo
@@ -42,21 +43,21 @@ const socialImage = await (async () => {
 
 <SEO
 	title={page_title && `${page_title}`}
-	titleTemplate={`%s — ${SITE_TITLE}`}
-	titleDefault={SITE_TITLE}
+	titleTemplate={`%s — ${easyConfig.site_title}`}
+	titleDefault={easyConfig.site_title}
 	description={page_description}
 	canonical={canonicalURL}
 	charset="utf-8"
 	openGraph={{
 		basic: {
-			title: page_title || SITE_TITLE,
+			title: page_title || easyConfig.site_title,
 			type: "website",
 			image: socialImage.src,
 			url: canonicalURL,
 		},
 		optional: {
 			description: page_description,
-			siteName: SITE_TITLE,
+			siteName: easyConfig.site_title,
 		},
 		image: {
 			alt: socialImage.alt,
@@ -64,12 +65,12 @@ const socialImage = await (async () => {
 		article: {
 			publishedTime: pubDate,
 			modifiedTime: updatedDate,
-			authors: [FULL_NAME]
+			authors: [easyConfig.full_name]
 		}
 	}}
 	extend={{
 		// extending the default link tags
-		link: [{ rel: "icon", type: FAVICON_TYPE, href: FAVICON_URL }],
+		link: [{ rel: "icon", type: easyConfig.favicon_type, href: easyConfig.favicon_url }],
 	}}
 />
 

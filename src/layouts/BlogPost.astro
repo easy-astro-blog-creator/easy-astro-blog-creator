@@ -8,40 +8,35 @@ import BaseLayout from './BaseLayout.astro';
 const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = Astro.props;
 ---
 <BaseLayout page_title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}>
-	<main>
-		<article class="w-full flex flex-col items-center">
-			<div class="flex flex-col items-center pb-4 ">
-				<div class="w-6/12 lg:w-5/12 p-1">
-					{
-						heroImage  &&
-						<Image style="box-shadow: var(--box-shadow);" src={heroImage} alt={heroAlt || ''} />
-					}
+	<article>
+		<div class="w-7/12 p-1">
+			{	
+				heroImage  &&
+				<Image style="box-shadow: var(--box-shadow);" src={heroImage} alt={heroAlt || ''} />
+			}
+		</div>
+		<div class="flex flex-col pt-8">
+			<h1 class="text-4xl">{title}</h1>
+			<div class="flex items-center pt-4 pl-2 pb-5 text-l space-x-4 text-sm">					
+				<div>{getReadingTime(body)}</div>
+				<div>·</div>
+				<div>
+					Published on
+					<FormattedDate date={pubDate} />
 				</div>
-				<div class="flex flex-col pt-8 max-w-prose" style="color: var(--heading-color);">
-					<h1 class="text-6xl lg:text-4xl">{title}</h1>
-					<div class="flex items-center pt-4 pl-2 pb-5 text-l space-x-4 text-3xl lg:text-sm">					
-						<div>{getReadingTime(body)}</div>
-						<div>·</div>
-						<div>
-							Published on
-							<FormattedDate date={pubDate} />
-						</div>
-						<div class="italic">
-							{updatedDate && (
-								<>
-									Updated on
-									<FormattedDate date={updatedDate} />
-								</>
-							)}
-						</div>
-					</div>
-					<!-- <hr class="ml-2 w-11/12 lg:w-full"/> -->
+				<div class="italic">
+					{updatedDate && (
+						<>
+							Updated on
+							<FormattedDate date={updatedDate} />
+						</>
+					)}
 				</div>
 			</div>
-			<article class="max-w-prose">
-				<slot />
-			</article>
-		</article>
-	</main>
+			<!-- <hr class="ml-2 w-11/12 lg:w-full"/> -->
+		</div>
+		<div class="article-text">
+			<slot />
+		</div>
+	</article>
 </BaseLayout>
-  

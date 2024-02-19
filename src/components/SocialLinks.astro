@@ -1,29 +1,36 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { FIRST_NAME, LINKEDIN_URL, TWITTER_URL, GITHUB_URL} from '../siteConfig';
+import { easyConfig } from '../siteConfig';
 // See https://github.com/natemoo-re/astro-icon
 // and https://icon-sets.iconify.design/ for more icons
+const { href, class: className, ...props} = Astro.props;
 ---
 
-<nav >
-    <div class="grid grid-flow-col gap-4">
-        <a href={LINKEDIN_URL} >
+
+    <div class:list={[
+        'social',
+        className,
+        'flex',
+        'flex-col',
+        'gap-2',
+        // 'place-content-center'
+        ]} 
+        {...props}>
+        <slot />
+        <a href={easyConfig.linkedin_url} >
             <Icon name="mdi:linkedin"/>
         </a>    
-        <a href={TWITTER_URL} >
+        <a href={easyConfig.twitter_url} >
             <Icon name="mdi:twitter"/>
         </a>    
-        <a href={GITHUB_URL} >
+        <a href={easyConfig.github_url} >
             <Icon name="mdi:github"/>
         </a>
     </div>
-    <div class="divider divider-neutral w-full ">Follow {FIRST_NAME}</div>
-</nav>
+
 
 <style>
     [data-icon] {
-        text-decoration: none;
-        @apply w-20 lg:w-12;
-        height: auto;
+        margin-left: calc(1ch / -3);
     }
 </style>

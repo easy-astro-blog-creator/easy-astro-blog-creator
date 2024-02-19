@@ -42,6 +42,7 @@
         }
     }
 
+    /* Remove this at some point. Used for hero images. */
     :root {
         --box-shadow: 0 2px 6px rgb(var(--accent) / 0.1), 0 8px 24px rgb(var(--accent) / 0.1),
         0 16px 32px rgb(var(--accent) / 0.1);
@@ -51,21 +52,32 @@
         font-weight: 300;
     }
     body {
-        min-height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        height: 100dvh;
         @apply bg-semantic-background;
         @apply text-semantic-on-background;
+       
     }
     main {
-       @apply w-11/12 lg:w-9/12 h-full flex flex-col grow justify-center items-center;
-    }
+		display: flex;
+		flex-direction: column;
+        align-items: flex-start;
+		margin-left: 12rem;
+		margin-right: 5dvw;
+		padding-top: 4dvw;
+		padding-bottom: 4rem;
+		min-height: 100%;
+		max-width: calc(100svw - 16rem);
+	}
     article {
-       @apply flex flex-col grow justify-normal; 
-    }
+		display: flex;
+		flex-direction: column;
+        align-items: center;
+		margin-left: 2rem;
+		width: clamp(45ch, 90ch, calc(100%- 2rem));
+	}
+	.article-text {
+		width: clamp(45ch, 75ch, 100%);
+	}
 
     /* Hyperlinks */
     .easy-link {

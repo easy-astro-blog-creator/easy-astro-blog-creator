@@ -8,15 +8,20 @@ import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 import tailwind from '@astrojs/tailwind';
 // Site Config
-import { GITHUB_PAGES_URL } from '/src/siteConfig';
+import { easyConfig } from '/src/siteConfig';
 
 // https://astro.build/config
 export default defineConfig({
 	output: 'static',
-	site: GITHUB_PAGES_URL,
+	site: easyConfig.github_pages_url,
 	integrations: [
 		sitemap(),
-		icon(),
+		icon({
+			include: {
+				// Include only three `mdi` icons in the bundle
+				solar: ['double-alt-arrow-down-line-duotone'],
+			},
+		}),
 		tailwind({
 			applyBaseStyles: false,
 		}),

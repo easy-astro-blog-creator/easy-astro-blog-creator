@@ -1,16 +1,40 @@
 ---
-import SocialLinks from "./SocialLinks.astro"
-import { FULL_NAME } from '../siteConfig';
+import { easyConfig } from '../siteConfig';
 const today = new Date();
 ---
 
+<aside class="footer-text">
+	<p>
+		Use <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a> to create your own GitHub Pages blog!
+	</p>
+	<div></div>
+	<p>&copy; {today.getFullYear()} {easyConfig.full_name}. All rights reserved.</p>
+</aside>
 
-<footer class="footer gap-y-0 font-light text-3xl lg:text-sm footer-center p-10 rounded">
-	<SocialLinks />
-	<aside>
-		<p>
-			Use <a class="easy-link" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a> to create your own GitHub Pages blog!
-		</p>	  
-		<p>&copy; {today.getFullYear()} {FULL_NAME}. All rights reserved.</p>
-	</aside>
-</footer>
+<style>
+	.footer-text {
+		height: 70%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	  	font-size: .555rem;
+	}
+	div {
+		border-bottom-width: 1px;
+		border-color: theme(colors.semantic.on-surface-variant);
+		width: 12%;
+		margin:auto;
+	}
+	a {
+		background: linear-gradient(90deg, theme(colors.semantic.primary) 0%, theme(colors.semantic.secondary) 50%,  theme(colors.semantic.tertiary) 100% );
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+		font-weight: 600;
+		filter: contrast(1) saturate(1) blur(.1px);
+		transition: 3s ease;
+	}
+	a:hover {
+		filter: contrast(1.2) saturate(3) blur(.2px);
+	}
+</style>

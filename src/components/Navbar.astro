@@ -1,19 +1,174 @@
 ---
+import { Icon } from 'astro-icon/components'
 import HeaderLink from './HeaderLink.astro';
-import ThemeIcon from './ThemeIcon.astro';
-import { FIRST_NAME, FULL_NAME } from '../siteConfig';
+import { easyConfig } from '../siteConfig';
+import Footer from '../components/Footer.astro';
+import SocialLinks from './SocialLinks.astro';
 ---
 
-<header class="w-full">
-	<nav class="rounded-b-lg flex items-center justify-between mx-2  text-5xl lg:text-2xl">
-		<div>
-			<HeaderLink class="inline-block lg:hidden" href="/">{FIRST_NAME}</HeaderLink>
-			<HeaderLink class="hidden lg:inline-block" href="/">{FULL_NAME}</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/easy">EasyABC</HeaderLink>
-		</div>
-		<ThemeIcon />
-	</nav>
-</header>
-<div class="pb-6"></div>
+<nav id="navbar">
+	<ul class="h-full grid grid-rows-[repeat(20,_minmax(0,_1fr))]">
+		<li class="nav-item w-12 row-start-1 row-span-1">
+			<Icon id="logo-icon" name="solar:double-alt-arrow-down-line-duotone"/>
+			<!-- <HeaderLink class="logo logo-text" href="/">{easyConfig.first_name}</HeaderLink> -->
+		</li>
+		<li class="nav-item sub-text row-start-2">
+			<span class="italic">{easyConfig.site_description}</span>
+		</li>
+			
+		<li class="nav-item row-start-4 row-span-1 ">
+			
+			<HeaderLink class="logo logo-text " href="/blog">Blog</HeaderLink>
+			<!-- <ul class=" row-start-2">
+				<li>
+					<HeaderLink class="sub-text easy-link" href="/blog">All Posts</HeaderLink>
+				</li>
 
+			</ul> -->
+		</li>
+		<li class="nav-item row-start-5 row-span-1">
+		
+			<HeaderLink class="logo logo-text" href="/easy">EasyABC</HeaderLink>
+		</li>
+		<ul class="nav-item row-start-6 row-span-3">
+			<li>
+				<HeaderLink class="sub-text easy-link" href="/easy">Readme</HeaderLink>
+			</li>
+			<li>
+				<HeaderLink class="sub-text easy-link" href="/easy/blog">EasyABC Blog</HeaderLink>
+			</li>
+			<li>
+				<HeaderLink class="sub-text easy-link" href="/easy/theme">ColorFun</HeaderLink>
+			</li>
+		</ul>
+		<li class="nav-item row-start-[15] row-span-2">
+			<SocialLinks class="logo"/>
+		</li>
+		<footer class="nav-item row-start-[19] row-span-2 sub-text">
+			
+			<Footer />
+		</footer>
+	</ul>
+	
+</nav>
+<style>
+	#navbar {
+		position: fixed;
+		height: 99.70%;
+		width: 3rem;
+		top: .15%;
+		left: 0px;
+		@apply text-semantic-on-surface-variant;
+		@apply rounded-r-2xl;
+		transition: 150ms;
+		transition-property: all, width, opacity;
+		transition-duration: 777ms, 150ms, 150ms;
+		color: theme(colors.semantic.on-surface-variant);
+		background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 15%);
+
+	}
+	#navbar:hover {
+		width: 11rem;
+	}
+
+	.nav-item {
+	
+		/* display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center; */
+		position: relative;
+	}
+
+	.logo {
+		/* This ensures the logo is centered in the grid */
+		position: absolute;
+		/* (width of initial navbar - the size of a single char) / 2 */
+		left: calc((3rem - 1ch) / 2 );
+		/* (height of a single grid - the height of the line) / 2 */
+		top: calc((6vb - 1lh) / 2); 
+		font-weight: bold;
+		/* font-size: 2.25rem; */
+		font-size: 3.5vb;
+		letter-spacing: 0.222rem;
+		transition-property: all, width, opacity;
+		transition-duration: 777ms, 150ms, 150ms;
+		color: inherit;
+		
+	}
+	#logo-icon {
+		/* This ensures the logo is centered in the grid */
+		position: absolute;
+		/* (width of initial navbar - the size of a single char) / 2 */
+		left: calc((3rem - 4vb) /2 );
+		/* (height of a single grid - the height of the line) / 2 */
+		top: calc((5vb - 4vb) / 2); 
+		opacity: 1;
+		font-size: 4vb;
+		transition: 150ms;
+		rotate: -90deg;
+		/* filter: drop-shadow(linear-gradient(90deg, theme(colors.primary.400) 0%, theme(colors.secondary.400) 50%,  theme(colors.tertiary.400) 100% )); */
+	}
+
+	#navbar:hover #logo-icon {
+		/* (width of expanded navbar - the size of a single char) / 2 */
+		left: calc((19rem - 4vb) / 2 );
+		rotate: 0deg;
+	}
+	
+	.logo-text {
+	  opacity: 0;
+	}
+	#navbar:hover .logo-text {
+	  opacity: 1;
+	}
+
+	.sub-text {
+	  opacity: 0;
+	  width: 11rem;
+	  padding-left: calc((3rem - 1ch) / 2 );
+	  padding-right: calc((3rem - 1ch) / 2 );
+	  font-size: 1.77vb;
+	  @apply line-clamp-1;
+	  transition: 150ms;
+	}
+	#navbar:hover .sub-text {
+	  opacity: 1;
+	}
+
+
+	#navbar:before {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: linear-gradient(0deg, theme(colors.primary.400) 0%, theme(colors.secondary.400) 50%,  theme(colors.tertiary.400) 100% );
+		transform: translate3d(-11px, 0, 0 ) scale(1);
+		filter: blur(7px);
+		opacity: .55;
+		transition: opacity 0.3s;
+		border-top-right-radius: 1rem/* 16px */;
+		border-bottom-right-radius: 1rem/* 16px */;
+	}
+
+	#navbar::after {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
+		border-top-right-radius: 1rem/* 16px */;
+		border-bottom-right-radius: 1rem/* 16px */;
+	}
+
+        
+        
+</style>
+  
+  

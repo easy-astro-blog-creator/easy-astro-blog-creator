@@ -3,23 +3,38 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
 
-const { href, class: className, ...props } = Astro.props;
+const { href, class: className, ...props} = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = pathname === href || pathname.startsWith(`${href}/`);
+ 
 
+let isActive;
+let underlineWeight;
+let underlineOffset;
+
+if (className && className.includes('sub-text')){
+	underlineWeight = 'decoration-2';
+	underlineOffset = 'underline-offset-1';
+	isActive = pathname === href;
+} else {
+	underlineWeight = 'decoration-4';
+	underlineOffset = 'underline-offset-6';
+	isActive = pathname === href || pathname.startsWith(`${href}/`);
+}
 
 const underline = isActive ? 'underline' : 'no-underline';
+const underlineColor = 'decoration-semantic-primary';
 const bold = isActive ? 'font-bold' : 'font-medium';
+
 ---
 
-<a href={href} class:list={[
+<a style="" href={href} class:list={[
 	className,
-	'decoration-4',
-	'underline-offset-8',
-	'px-4',
+	underlineWeight,
+	underlineOffset,
 	bold,
 	underline,
+	underlineColor,
 	]} 
 	{...props}>
 	<slot />

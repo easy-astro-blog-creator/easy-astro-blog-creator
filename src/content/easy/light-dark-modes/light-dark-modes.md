@@ -70,7 +70,7 @@ export default {
 
 An example of a theme toggle script.
 ```js
-<script>
+<script is:inline>
     const getTheme = () => {
         if (typeof localStorage !== 'undefined') {
             const storedTheme = localStorage.getItem('theme');
