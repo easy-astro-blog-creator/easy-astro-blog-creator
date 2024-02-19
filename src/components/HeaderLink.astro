@@ -12,7 +12,7 @@ let isActive;
 let underlineWeight;
 let underlineOffset;
 
-if (className && className.includes('sub-text')){
+if (className && className.includes('link-sub')){
 	underlineWeight = 'decoration-2';
 	underlineOffset = 'underline-offset-1';
 	isActive = pathname === href;
@@ -39,3 +39,8 @@ const bold = isActive ? 'font-bold' : 'font-medium';
 	{...props}>
 	<slot />
 </a>
+<style>
+	a:hover {
+		color: theme(colors.semantic.secondary)
+	}
+</style>

@@ -5,19 +5,22 @@ const today = new Date();
 
 <aside class="footer-text">
 	<p>
-		Use <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a> to create your own GitHub Pages blog!
+		Create your own GitHub Pages blog with <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a>!
 	</p>
 	<div></div>
-	<p>&copy; {today.getFullYear()} {easyConfig.full_name}. All rights reserved.</p>
+	<p>&copy; {today.getFullYear()} {easyConfig.full_name}.</p>
 </aside>
 
 <style>
 	.footer-text {
-		height: 70%;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
+		justify-content: flex-start;
+		align-items: center;
+		text-align: center;
 	  	font-size: .555rem;
+		margin-top: 1rem;
+		margin-bottom: auto;
 	}
 	div {
 		border-bottom-width: 1px;
