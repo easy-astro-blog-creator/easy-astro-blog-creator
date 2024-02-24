@@ -1,33 +1,17 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import '../../../styles/blog.css'
-
+import { customGetCollection } from '../../../utils/customGetCollection';
 
 export async function getStaticPaths() {
-    const posts = await getCollection('easy');
-
-    // Map each post to a promise
-    const pathsPromises = posts.map((post) => {
-        const filename = post.slug.split('/').pop();
-        return {
-            params: { slug: filename },
-            props: post,
-        };
-    });
-
-    // Wait for all promises to resolve
-    const paths = await Promise.all(pathsPromises);
-
-    return paths;
+    return customGetCollection('easy', 'blog');
 }
-
 type Props = CollectionEntry<'easy'>;
 const post = Astro.props;
 const { Content } = await post.render();
-
 ---
 
-<BlogPost {...post.data} body={post.body}>
-	<Content />
+<BlogPost {...post.data}>
+    <Content />
 </BlogPost>

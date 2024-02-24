@@ -2,43 +2,42 @@
 import { easyConfig } from '../siteConfig';
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
-import { getReadingTime } from '../utils/readingTime';
 import { formatDescription } from '../utils/abbreviateDescription';
 import BaseLayout from './BaseLayout.astro';
+import { customGetCollection } from '../utils/customGetCollection';
 
-const { blogCollection, basePath }  = Astro.props;
-
+const { blogCollectionName, extraPath }  = Astro.props;
+const blogCollection = await customGetCollection(blogCollectionName, extraPath);
 let posts = blogCollection.sort((a, b) => {
-    // Use updatedDate if available, otherwise fall back to pubDate
-    const dateA = a.data.updatedDate ? new Date(a.data.updatedDate) : new Date(a.data.pubDate);
-    const dateB = b.data.updatedDate ? new Date(b.data.updatedDate) : new Date(b.data.pubDate);
+    // Sort by updatedDate if available, otherwise fall back to pubDate
+    const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
+    const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
     // Sort in descending order (newest first)
     return dateB.valueOf() - dateA.valueOf();
 });
-const heroImage = posts.length > 0 ? posts[0].data.heroImage : undefined;
-const heroAlt = posts.length > 0 ? posts[0].data.heroAlt : undefined;
+const heroImage = posts.length > 0 ? posts[0].props.data.heroImage : undefined;
+const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
 	<ul class="flex flex-col items-center gap-4 list-none ml-4 mr-14">
 		{
 			posts.map((post) => {
-				const filename = post.slug.split('/').pop();
 				return (
 					<li >
-						<a class="h-80 flex justify-between items-center no-underline" href={`${basePath}/${filename}/`}>
+						<a class="h-80 flex justify-between items-center no-underline" href={`${post.params.htmlSlug}/`}>
 							<div class="flex flex-col shrink-0 w-8/12 max-h-full pr-4 text-neutral-color-900 dark:text-neutral-color-50">
 								<div class="pb-1 text-2xl lg:text-base font-medium">
-									<FormattedDate date={post.data.updatedDate ? new Date(post.data.updatedDate) : new Date(post.data.pubDate)} />
+									<FormattedDate date={post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)} />
 								</div>
-								<h1 class="pb-1 text-3xl">{post.data.title}</h1>
-								<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">{formatDescription(post.data.description, post.body)}</div>
-								<div class="pt-1 text-2xl lg:text-base italic font-normal">{getReadingTime(post.body)}</div>
+								<h1 class="pb-1 text-3xl">{post.props.data.title}</h1>
+								<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">{formatDescription(post.props.data.description, post.props.body)}</div>
+								<div class="pt-1 text-2xl lg:text-base italic font-normal">{[post.props.data.readingTime]}</div>
 							</div>
 							<div class="flex justify-center items-center w-4/12 h-auto max-w-[90%] max-h-[90%]">
 								{
-									post.data.heroImage &&
-									<Image src={post.data.heroImage} alt={post.data.heroAlt || ''} />
+									post.props.data.heroImage &&
+									<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
 								}
 							</div>
 						</a>

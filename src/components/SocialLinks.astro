@@ -9,13 +9,13 @@ const { class: className, ...rest } = Astro.props;
 
 <div>
     <a href={easyConfig.linkedin_url} >
-        <Icon name="mdi:linkedin" size={'3vb'}/>
+        <Icon name="mdi:linkedin"/>
     </a>    
     <a href={easyConfig.twitter_url} >
-        <Icon name="mdi:twitter" size={'3vb'}/>
+        <Icon name="mdi:twitter"/>
     </a>    
-    <a href={easyConfig.github_url} class >
-        <Icon name="mdi:github" size={'3vb'}/>
+    <a href={easyConfig.github_url} >
+        <Icon name="mdi:github"/>
     </a>
 </div>
 
@@ -45,5 +45,7 @@ const { class: className, ...rest } = Astro.props;
 	}
     [data-icon] {
         margin-right: 1rem;
+        height: 3vb;
+        width: 3vb;
     }
 </style>

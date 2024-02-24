@@ -2,10 +2,11 @@
 import FormattedDate from '../components/FormattedDate.astro';
 import { Image }  from "astro:assets";
 import { formatDescription } from '../utils/abbreviateDescription';
-import { getReadingTime } from '../utils/readingTime';
+import { getReadingTime } from '../utils/postReadingTime';
 import BaseLayout from './BaseLayout.astro';
 
-const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = Astro.props;
+
+const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, readingTime} = Astro.props;
 ---
 <BaseLayout page_title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}>
 	<article>
@@ -18,7 +19,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = As
 		<div class="flex flex-col pt-8">
 			<h1 class="text-4xl">{title}</h1>
 			<div class="flex items-center pt-4 pl-2 pb-5 text-l space-x-4 text-sm">					
-				<div>{getReadingTime(body)}</div>
+				<div>{readingTime}</div>
 				<div>·</div>
 				<div>
 					Published on

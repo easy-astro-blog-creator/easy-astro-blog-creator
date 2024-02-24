@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import readingTime from 'reading-time';
 
 const blogCollection = defineCollection({
 	type: 'content',
@@ -6,8 +7,9 @@ const blogCollection = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string().optional(),
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
+			readingTime: z.string().optional(),
+			pubDate: z.date(),
+			updatedDate: z.date().optional(),
 			heroImage: image().optional(),
 			heroAlt: z.string().optional(),
 		}),

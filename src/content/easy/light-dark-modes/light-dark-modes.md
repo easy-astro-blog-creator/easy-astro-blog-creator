@@ -1,8 +1,7 @@
 ---
 title: 'Tailwind Dark Mode: With or Without Javascript.'
 description: 'How to support dark mode, user theme preference, Javascript theme toggles, and disabled Javascript.'
-pubDate: 'Feb 18 2024'
-updatedDate: 'Feb 18 2024'
+pubDate: 2024-02-18
 heroImagePath: './light-dark-modes/hero.jpg'
 heroImage: './hero.jpg'
 heroAlt: "A hero!"

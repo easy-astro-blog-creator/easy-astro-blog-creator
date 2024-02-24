@@ -1,7 +1,7 @@
 ---
 import AllBlogPosts from '../../../layouts/AllBlogPosts.astro';
-import { getCollection } from 'astro:content';
-const posts = (await getCollection('easy'));
 ---
-<AllBlogPosts blogCollection={posts} basePath="/easy/blog"/>
+<AllBlogPosts blogCollectionName='easy' extraPath="blog"/>
+
+
 
