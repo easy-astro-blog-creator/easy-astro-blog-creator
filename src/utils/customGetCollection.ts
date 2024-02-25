@@ -5,7 +5,6 @@ import { getReadingTime } from './postReadingTime';
 export async function customGetCollection(collectionName: ContentCollectionKey, extraPath?: string) {
 	const posts = await getCollection(collectionName);
 	const postPromises = posts.map((post) => {
-		// This in the case for nested paths such as the case of easy/blog
 		// This allows for both standalone markdown files in the collections root folder
 		// Or for folders to be added to collections root folder with markdown inside them
 		let newSlug: string;
@@ -27,7 +26,7 @@ export async function customGetCollection(collectionName: ContentCollectionKey, 
 			// Appends the extra path to the slug for example 'blog' from 'easy/blog'
 			htmlSlug = `${extraPath}/${newSlug}`;
 		} else {
-			// If there is no extra path, then the slug is the collection name
+			// If there is no extra path, then the slug starts with the the collection name
 			htmlSlug = `${collectionName}/${newSlug}`;
 		}
 

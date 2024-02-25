@@ -2,18 +2,20 @@
 
 import { CustomThemeConfig, genenerateTailwindTheme } from './theme';
 import { generateDynamicScheme, SchemeVariant } from './scheme';
-// import { findContrastLevel } from './checkContrast';
-import { paletteTw } from './palette';
+import { CustomTonalPalette } from './palette';
 import { updateTailwindTheme } from './interactive';
-import { validateColor, validateColorFromForm } from './colorFunctions';
+import { validateColor, validateColorFromForm, validateColorFromRange, toOklch, toOklchHue } from './colorFunctions';
 
 export {
 	genenerateTailwindTheme,
 	updateTailwindTheme,
 	SchemeVariant,
 	generateDynamicScheme,
-	// findContrastLevel,
 	validateColor,
 	validateColorFromForm,
+	validateColorFromRange,
+	toOklch,
+	toOklchHue,
 };
-export type { paletteTw, CustomThemeConfig };
+
+export type { CustomTonalPalette, CustomThemeConfig };

@@ -1,6 +1,6 @@
 import { DynamicScheme, MaterialDynamicColors, hexFromArgb } from '@material/material-color-utilities';
 import { SchemeVariant, McuScheme, MCU_SCHEME_VARS, generateDynamicScheme, createSchemeObject } from './scheme';
-import { generateTonalPalette, paletteTw, generateTonalPaletteVars } from './palette';
+import { generateTonalPalette, CustomTonalPalette, generateTwTonalPaletteVars } from './palette';
 
 export type CustomThemeConfig = {
 	/**
@@ -22,127 +22,150 @@ export type CustomThemeConfig = {
 	 * If all supplied @see SchemeTypeMCU is not used.
 	 * Otherwise, if any supplied the supplied will be used to generate that color of the scheme.
 	 */
-	secondary: string | undefined;
-	tertiary: string | undefined;
-	neutral: string | undefined;
-	neutralVarient: string | undefined;
+	// secondary: string | undefined;
+	// tertiary: string | undefined;
+	// neutral: string | undefined;
+	// neutralVarient: string | undefined;
 };
 
-type TailwindTheme = {
-	colors: {
-		semantic: McuScheme;
-		primary: paletteTw;
-		secondary: paletteTw;
-		tertiary: paletteTw;
-		neutral: paletteTw;
-		'neutral-variant': paletteTw;
-		transparent: 'transparent';
-		current: 'currentColor';
-		black: '#000000';
-		white: '#ffffff';
-	};
-	variables: {
-		DEFAULT: {
-			colors: {
-				semantic: typeof MCU_SCHEME_VARS;
-				primary: paletteTw;
-				secondary: paletteTw;
-				tertiary: paletteTw;
-				neutral: paletteTw;
-				'neutral-variant': paletteTw;
-				transparent: 'transparent';
-				current: 'currentColor';
-				black: '#000000';
-				white: '#ffffff';
-			};
-		};
-	};
-	darkVariables: {
-		DEFAULT: {
-			colors: {
-				semantic: typeof MCU_SCHEME_VARS;
-				primary: paletteTw;
-				secondary: paletteTw;
-				tertiary: paletteTw;
-				neutral: paletteTw;
-				'neutral-variant': paletteTw;
-				transparent: 'transparent';
-				current: 'currentColor';
-				black: '#000000';
-				white: '#ffffff';
-			};
-		};
-	};
-};
-
-export function genenerateTailwindTheme(themeConfig: CustomThemeConfig): TailwindTheme {
-	const lightScheme = generateDynamicScheme(themeConfig, false);
-	const darkScheme = generateDynamicScheme(themeConfig, true);
-
-	const primaryPalette = generateTonalPalette(
-		hexFromArgb(MaterialDynamicColors.primaryPaletteKeyColor.getArgb(lightScheme)),
-		'mcu'
-	);
-	const secondaryPalette = generateTonalPalette(
-		hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(lightScheme)),
-		'mcu'
-	);
-	const tertiaryPalette = generateTonalPalette(
-		hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(lightScheme)),
-		'mcu'
-	);
-	const neutralPalette = generateTonalPalette(
-		hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(lightScheme)),
-		'mcu'
-	);
-	const neutralVariantPalette = generateTonalPalette(
-		hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(lightScheme)),
-		'mcu'
-	);
-
-	return {
+// Collection of colors used as either a light or dark theme
+type BaseTheme = {
+	DEFAULT: {
 		colors: {
-			semantic: MCU_SCHEME_VARS,
-			primary: generateTonalPaletteVars('primary'),
-			secondary: generateTonalPaletteVars('secondary'),
-			tertiary: generateTonalPaletteVars('tertiary'),
-			neutral: generateTonalPaletteVars('neutral'),
-			'neutral-variant': generateTonalPaletteVars('neutral-variant'),
-			transparent: 'transparent',
-			current: 'currentColor',
-			black: '#000000',
-			white: '#ffffff',
+			semantic: McuScheme;
+			primary: CustomTonalPalette;
+			secondary: CustomTonalPalette;
+			tertiary: CustomTonalPalette;
+			neutral: CustomTonalPalette;
+			'neutral-variant': CustomTonalPalette;
+		};
+	};
+};
+
+// The main theme object injected into the tailwind config
+type TailwindTheme = {
+	colors: TailwindVars;
+	typography: TailwindTypographyTheme | undefined;
+	variables: BaseTheme;
+	darkVariables: BaseTheme;
+};
+
+// CSS variables required for the tailwind theme
+type TailwindVars = {
+	semantic: typeof MCU_SCHEME_VARS;
+	primary: CustomTonalPalette;
+	secondary: CustomTonalPalette;
+	tertiary: CustomTonalPalette;
+	neutral: CustomTonalPalette;
+	'neutral-variant': CustomTonalPalette;
+};
+
+type TailwindTypographyTheme = {
+	DEFAULT: {
+		css: {
+			a: {
+				fontWeight: string;
+				color: string;
+				textDecoration: string;
+			};
+		};
+	};
+	customTheme: {
+		css: {
+			'--tw-prose-body': string;
+			'--tw-prose-headings': string;
+			'--tw-prose-lead': string;
+			'--tw-prose-bold': string;
+			'--tw-prose-counters': string;
+			'--tw-prose-bullets': string;
+			'--tw-prose-hr': string;
+			'--tw-prose-quotes': string;
+			'--tw-prose-quote-borders': string;
+			'--tw-prose-captions': string;
+			'--tw-prose-code': string;
+			'--tw-prose-pre-code': string;
+			'--tw-prose-pre-bg': string;
+			'--tw-prose-th-borders': string;
+			'--tw-prose-td-borders': string;
+			'--tw-prose-kbd': string;
+			'--tw-prose-kbd-shadows': string;
+		};
+	};
+};
+
+export function generateBaseTheme(themeConfig: CustomThemeConfig, darkMode: boolean): BaseTheme {
+	const scheme = generateDynamicScheme(themeConfig, darkMode);
+	return {
+		DEFAULT: {
+			colors: {
+				semantic: createSchemeObject(scheme),
+				primary: generateTonalPalette(hexFromArgb(MaterialDynamicColors.primaryPaletteKeyColor.getArgb(scheme))),
+				secondary: generateTonalPalette(hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(scheme))),
+				tertiary: generateTonalPalette(hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(scheme))),
+				neutral: generateTonalPalette(hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(scheme))),
+				'neutral-variant': generateTonalPalette(
+					hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(scheme))
+				),
+			},
 		},
-		variables: {
-			DEFAULT: {
-				colors: {
-					semantic: createSchemeObject(lightScheme),
-					primary: primaryPalette,
-					secondary: secondaryPalette,
-					tertiary: tertiaryPalette,
-					neutral: neutralPalette,
-					'neutral-variant': neutralVariantPalette,
-					transparent: 'transparent',
-					current: 'currentColor',
-					black: '#000000',
-					white: '#ffffff',
+	};
+}
+
+export function genenerateTailwindTheme(
+	themeConfig: CustomThemeConfig,
+	typographyEnabled: boolean = false
+): TailwindTheme {
+	const tailwindVars = generateTailwindThemeVars();
+	const typographyTheme = typographyEnabled ? generateTailwindTypographyTheme(tailwindVars) : undefined;
+	return {
+		colors: tailwindVars,
+		variables: generateBaseTheme(themeConfig, false),
+		darkVariables: generateBaseTheme(themeConfig, true),
+		typography: typographyTheme,
+	};
+}
+
+function generateTailwindThemeVars(): TailwindVars {
+	return {
+		semantic: MCU_SCHEME_VARS,
+		primary: generateTwTonalPaletteVars('primary'),
+		secondary: generateTwTonalPaletteVars('secondary'),
+		tertiary: generateTwTonalPaletteVars('tertiary'),
+		neutral: generateTwTonalPaletteVars('neutral'),
+		'neutral-variant': generateTwTonalPaletteVars('neutral-variant'),
+	};
+}
+
+function generateTailwindTypographyTheme(tailwindVars: TailwindVars): TailwindTypographyTheme {
+	return {
+		DEFAULT: {
+			css: {
+				a: {
+					fontWeight: '422',
+					color: 'inherit',
+					textDecoration: 'inherit',
 				},
 			},
 		},
-		darkVariables: {
-			DEFAULT: {
-				colors: {
-					semantic: createSchemeObject(darkScheme),
-					primary: primaryPalette,
-					secondary: secondaryPalette,
-					tertiary: tertiaryPalette,
-					neutral: neutralPalette,
-					'neutral-variant': neutralVariantPalette,
-					transparent: 'transparent',
-					current: 'currentColor',
-					black: '#000000',
-					white: '#ffffff',
-				},
+		customTheme: {
+			css: {
+				'--tw-prose-body': MCU_SCHEME_VARS['on-background'],
+				'--tw-prose-headings': MCU_SCHEME_VARS['on-background'],
+				'--tw-prose-lead': MCU_SCHEME_VARS['on-primary-container'],
+				'--tw-prose-bold': MCU_SCHEME_VARS['on-background'],
+				'--tw-prose-counters': tailwindVars.primary[600],
+				'--tw-prose-bullets': tailwindVars.primary[400],
+				'--tw-prose-hr': tailwindVars.primary[300],
+				'--tw-prose-quotes': MCU_SCHEME_VARS['on-background'],
+				'--tw-prose-quote-borders': tailwindVars.primary[300],
+				'--tw-prose-captions': MCU_SCHEME_VARS['on-primary-container'],
+				'--tw-prose-code': 'inherit',
+				'--tw-prose-pre-code': tailwindVars.primary[100],
+				'--tw-prose-pre-bg': MCU_SCHEME_VARS['on-background'],
+				'--tw-prose-th-borders': tailwindVars.primary[300],
+				'--tw-prose-td-borders': tailwindVars.primary[200],
+				'--tw-prose-kbd': MCU_SCHEME_VARS['on-primary-container'],
+				'--tw-prose-kbd-shadows': MCU_SCHEME_VARS['primary-container'],
 			},
 		},
 	};

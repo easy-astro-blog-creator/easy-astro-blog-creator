@@ -1,18 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import {Content as ReadMe} from '/README.md';
-const SITE_TITLE = "Easy Astro Blog Creator";
-const SITE_DESCRIPTION = "Create and host a blog for free using github pages."
+import { Content as ReadMe } from '/README.md';
+const SITE_TITLE = 'Easy Astro Blog Creator';
+const SITE_DESCRIPTION = 'Create and host a blog for free using github pages.';
 import heroImage from '/public/images/easy-hero.png';
 const heroAlt = 'Easy logo.';
 ---
+
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
 	<article>
 		<!-- This is commented out because the github repo loads the image in the README.MD, but when deployed it does not. -->
 		<!-- <Image src={heroImage} alt={heroAlt} format="png" quality="100" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto;"/> -->
-		<div class="article-text">
+		<div class="article-text prose prose-customTheme">
 			<ReadMe />
 		</div>
 	</article>
-
 </BaseLayout>

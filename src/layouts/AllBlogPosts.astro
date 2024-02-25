@@ -6,56 +6,74 @@ import { formatDescription } from '../utils/abbreviateDescription';
 import BaseLayout from './BaseLayout.astro';
 import { customGetCollection } from '../utils/customGetCollection';
 
-const { blogCollectionName, extraPath }  = Astro.props;
+const { blogCollectionName, extraPath } = Astro.props;
 const blogCollection = await customGetCollection(blogCollectionName, extraPath);
 let posts = blogCollection.sort((a, b) => {
-    // Sort by updatedDate if available, otherwise fall back to pubDate
-    const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
-    const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
-    // Sort in descending order (newest first)
-    return dateB.valueOf() - dateA.valueOf();
+	// Sort by updatedDate if available, otherwise fall back to pubDate
+	const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
+	const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
+	// Sort in descending order (newest first)
+	return dateB.valueOf() - dateA.valueOf();
 });
 const heroImage = posts.length > 0 ? posts[0].props.data.heroImage : undefined;
 const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="flex flex-col items-center gap-4 list-none ml-4 mr-14">
+	<ul class="flex flex-col items-start gap-20 list-none ml-4 mr-14 py-4">
 		{
 			posts.map((post) => {
 				return (
-					<li >
-						<a class="h-80 flex justify-between items-center no-underline" href={`${post.params.htmlSlug}/`}>
-							<div class="flex flex-col shrink-0 w-8/12 max-h-full pr-4 text-neutral-color-900 dark:text-neutral-color-50">
-								<div class="pb-1 text-2xl lg:text-base font-medium">
-									<FormattedDate date={post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)} />
+					<>
+						<li class="min-w-full">
+							<a class="h-[12rem] min-w-full flex justify-between items-center no-underline" href={`${post.params.htmlSlug}/`}>
+								<div class="flex flex-col  shrink-0 max-w-[60%] max-h-full pr-4">
+									<div class="pb-1 text-2xl lg:text-base font-medium">
+										<FormattedDate
+											date={
+												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+											}
+										/>
+									</div>
+									<h1 class="pb-1 text-3xl font-medium">{post.props.data.title}</h1>
+									<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">
+										{formatDescription(post.props.data.description, post.props.body)}
+									</div>
+									<div class="pt-1 text-2xl lg:text-base italic font-normal">{[post.props.data.readingTime]}</div>
 								</div>
-								<h1 class="pb-1 text-3xl">{post.props.data.title}</h1>
-								<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">{formatDescription(post.props.data.description, post.props.body)}</div>
-								<div class="pt-1 text-2xl lg:text-base italic font-normal">{[post.props.data.readingTime]}</div>
-							</div>
-							<div class="flex justify-center items-center w-4/12 h-auto max-w-[90%] max-h-[90%]">
-								{
-									post.props.data.heroImage &&
-									<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
-								}
-							</div>
-						</a>
-					</li>
-					<hr />
+								<div class="flex justify-center items-center w-3/12 h-auto max-w-[80%] max-h-[80%]">
+									{post.props.data.heroImage ? (
+										<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
+									) : (
+										<div class="w-[200px] h-[200px] rounded bg-semantic-primary-container/20" />
+									)}
+								</div>
+							</a>
+						</li>
+						<hr />
+					</>
 				);
 			})
 		}
 	</ul>
-
 </BaseLayout>
-<style>	
+<style>
+	a {
+		@apply text-semantic-on-background;
+	}
+	a:hover {
+		text-decoration: none;
+	}
 	a:hover h1 {
-		/* @apply text-accent-color-500  dark:text-accent-color-300; */
 		@apply text-semantic-primary;
 	}
 	a:hover img {
-		@apply shadow-xl;
+		box-shadow: var(--box-shadow);
 	}
-
+	hr {
+		border-color: theme(colors.semantic.on-surface-variant/.25);
+		width: 12%;
+		margin: auto;
+		padding-top: 0.25rem;
+	}
 </style>

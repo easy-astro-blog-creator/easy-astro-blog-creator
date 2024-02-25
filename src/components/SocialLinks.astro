@@ -1,51 +1,50 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 import { easyConfig } from '../siteConfig';
 // See https://github.com/natemoo-re/astro-icon
 // and https://icon-sets.iconify.design/ for more icons
 const { class: className, ...rest } = Astro.props;
 ---
 
-
 <div>
-    <a href={easyConfig.linkedin_url} >
-        <Icon name="mdi:linkedin"/>
-    </a>    
-    <a href={easyConfig.twitter_url} >
-        <Icon name="mdi:twitter"/>
-    </a>    
-    <a href={easyConfig.github_url} >
-        <Icon name="mdi:github"/>
-    </a>
+	<a href={easyConfig.linkedin_url}>
+		<Icon name="mdi:linkedin" />
+	</a>
+	<a href={easyConfig.twitter_url}>
+		<Icon name="mdi:twitter" />
+	</a>
+	<a href={easyConfig.github_url}>
+		<Icon name="mdi:github" />
+	</a>
 </div>
 
-
-
 <style>
-    div {
+	div {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-        align-items: center;
-        gap: .25rem;
-        width: 3vb;
-        flex-grow: 0;
+		align-items: center;
+		gap: 0.25rem;
+		width: 3vb;
+		flex-grow: 0;
 		height: calc(5vb * 3);
 		z-index: 1;
 	}
-    a {
-        display: flex;
-        margin-left: 0;
-        margin-right: auto;
-        width: auto;
-        height: 3vb;
-    }
-    a:hover {
-		color: theme(colors.semantic.secondary)
+	a {
+		display: flex;
+		margin-left: 0;
+		margin-right: auto;
+		width: auto;
+		height: 3vb;
+		color: theme(colors.semantic.on-surface-variant);
 	}
-    [data-icon] {
-        margin-right: 1rem;
-        height: 3vb;
-        width: 3vb;
-    }
+
+	a:hover {
+		color: theme(colors.semantic.secondary);
+	}
+	[data-icon] {
+		margin-right: 1rem;
+		height: 3vb;
+		width: 3vb;
+	}
 </style>

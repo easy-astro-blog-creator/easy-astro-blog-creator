@@ -1,148 +1,204 @@
 ---
-import { genenerateTailwindTheme, SchemeVariant} from 'src/utils/colorFun/src/index';
+import { genenerateTailwindTheme, SchemeVariant, toOklchHue } from 'src/utils/colorFun/src/index';
 import { CUSTOM_THEME } from 'src/siteConfig';
 
 const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
 const colors = tailwindsTheme.colors;
 
 const palettes = {
-    'primary': colors['primary'],
-    'secondary': colors['secondary'],
-    'tertiary': colors['tertiary'],
-    'neutral': colors['neutral'],
-    'neutral-variant': colors['neutral-variant'],
+	primary: colors['primary'],
+	secondary: colors['secondary'],
+	tertiary: colors['tertiary'],
+	neutral: colors['neutral'],
+	'neutral-variant': colors['neutral-variant'],
 };
-
 const paletteSteps = Object.keys(colors['primary']);
 ---
+
 <palette-input>
-    <form name="color-form" class="w-11/12  px-4  place-items-center text-xs">
-        <div class="w-11/12  px-4 h-24 gap-8 grid grid-cols-2  place-items-center">
-            <label class="form-control w-full max-w-xs gap-2">
-                <div class="label">
-                    <span class="text-center w-full">Select Scheme</span>
-                </div>
-                <select id="scheme-select" class="select min-w-max select-sm rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold">
-                    {
-                        Object.entries(SchemeVariant).map(([key, variant]) => {
-                            if (variant === CUSTOM_THEME.schemeVariant) {
-                                return <option selected="true" value={key}>{variant}</option>;
-                            } else {
-                                return <option value={key}>{variant}</option>;
-                            }
-                        })
-                    }
-                </select>
-            </label>
-            <label class="form-control w-full max-w-xs gap-2 ">
-                <div class="label">
-                    <span class="text-center w-full">Primary Color</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" value={CUSTOM_THEME.primary} id="color-input-text" class="input input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold" />
-                    <input type="color" value={CUSTOM_THEME.primary} id="color-input-color" class="input p-1 input-sm w-full max-w-xs rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-s font-semibold" />
-                </div>
-            </label>
-        </div>
-        <!-- <details class="collapse group border-2  w-full">
-            <summary class="collapse-title text-right text-xl list-['⚙️'] group-open:list-['💯']"></summary>
-            <div class="collapse-content"> 
-              <p>content</p>
-            </div>
-          </details> -->
-    </form>
+	<form name="color-form" class="w-11/12 h-28 flex justify-around text-sm pb-4">
+		<label class="form-control h-full min-w-max gap-1">
+			<div class="label">
+				<span class="text-center w-full">Select Scheme</span>
+			</div>
+			<div id="scheme-select" class="form-control text-xs min-w-max grid grid-cols-5 gap-x-2 gap-y-1">
+				{
+					Object.entries(SchemeVariant).map(([key, variant]) => {
+						const isChecked = variant === CUSTOM_THEME.schemeVariant;
+						return (
+							<label class="label cursor-pointer min-w-max flex flex-col items-start border rounded-lg pb-1 px-2">
+								<span class="label-text pb-1">{variant}</span>
+								<input
+									type="radio"
+									value={key}
+									id={variant}
+									name="radio-10"
+									class="appearance-none border border-semantic-primary-container checked:border-semantic-primary checked:border-[5px] w-3 h-3 rounded-full"
+									checked={isChecked}
+								/>
+							</label>
+						);
+					})
+				}
+			</div>
+		</label>
+		<label class="form-control flex flex-col w-3/12 h-full items-center gap-4">
+			<div class="label">
+				<span class="text-center w-full">Input Primary Color</span>
+			</div>
+
+			<input
+				type="text"
+				value={CUSTOM_THEME.primary}
+				id="color-input-text"
+				class="input input-xs h-9 w-24 text-center rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-sm font-semibold"
+			/>
+			<input
+				type="range"
+				id="color-input-range"
+				min="0"
+				max="360"
+				value={toOklchHue(CUSTOM_THEME.primary)}
+				step="0.1"
+				class="h-4 w-full mx-2 rounded-full"
+			/>
+		</label>
+	</form>
 </palette-input>
-<div class="w-11/12 grid"> 
-    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded ">
-        <h1 class="col-start-1 col-span-2">text styles</h1>
-        <p class="col-start-3 col-span-2">Default Text</p>
-        <p class="font-bold col-span-2">Bold Text</p>
-        <p class="col-span-2 italic">Italic Text</p>
-        <p class="col-span-2">Heading Text</p>
-        <p class="col-span-3">Subheading Text</p>
-    </div>
-    <div class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60  rounded">
-        <h1 class="col-start-1 col-span-2">link styles</h1>
-        <p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
-        <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
-        <p class="col-span-2 easy-link easy-link-always-visited">Visited Link</p>
-        <p class="col-span-2 easy-link easy-link-always-hover easy-link-always-visited">Hovered</p>
-        <p class="col-span-2 easy-link easy-link-always-active">Active Link</p>
-    </div>
+<div class="w-11/12 grid pt-4">
+	<!-- <div
+		class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60 rounded"
+	>
+		<p class="col-start-1 col-span-2">text styles</p>
+		<p class="col-start-3 col-span-2">Default Text</p>
+		<p class="font-bold col-span-2">Bold Text</p>
+		<p class="col-span-2 italic">Italic Text</p>
+		<p class="col-span-2">Heading Text</p>
+		<p class="col-span-3">Subheading Text</p>
+	</div> -->
+	<div
+		class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60 rounded"
+	>
+		<p class="col-start-1 col-span-2">link styles</p>
+		<p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
+		<p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
+		<p class="col-span-2 easy-link easy-link-always-visited">Visited Link</p>
+		<p class="col-span-2 easy-link easy-link-always-hover easy-link-always-visited">Hovered</p>
+		<p class="col-span-2 easy-link easy-link-always-active">Active Link</p>
+	</div>
 </div>
+<div class="w-11/12 pr-8 pb-8 my-2 grid grid-rows-6 gap-1 border-2 border-semantic-on-background/60 rounded">
+	<div class="grid p-2 my-2 grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center">
+		{
+			paletteSteps.map((step, index) => (
+				<div
+					class="col-span-1 text-center text-sm"
+					style={{
+						gridColumnStart: index + 3,
+					}}
+				>
+					{step}
+				</div>
+			))
+		}
+	</div>
+	{
+		Object.entries(palettes).map(([colorName, colorFamily]) => (
+			<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1">
+				<div class="col-start-1 col-span-2 text-right place-self-center">{colorName}</div>
+				{Object.keys(colorFamily).map((shadeValue) => (
+					<div
+						class="rounded py-8 px-2"
+						style={{
+							backgroundColor: `oklch(var(--colors-${colorName}-${shadeValue}))`,
+						}}
+					/>
+				))}
+			</div>
+		))
+	}
 </div>
-<div class="w-11/12 pr-8 pb-8 my-2 grid grid-rows-6 gap-1 border-2 border-semantic-on-background/60  rounded">
-    <div class="grid p-2 my-2 grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center ">
-        {
-            paletteSteps.map((step, index) => (
-                <div class="col-span-1 text-center text-sm" style={{ gridColumnStart: index + 3 }}>{step}</div>
-            ))
-        }
-    </div>
-    {
-        Object.entries(palettes).map(([colorName, colorFamily]) => (
-            <div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1">
-                <div class="col-start-1 col-span-2 text-right place-self-center">{colorName}</div>
-                {
-                    Object.entries(colorFamily).map(([shadeValue, colorCode]) => (
-                        <div class="rounded py-8 px-2" style={{ backgroundColor: colorCode, color: colorCode }}>
-                            </div>
-                            ))
-                        }
-            </div>
-        ))
-    }
-</div>
+<style>
+	input[type='range'] {
+		appearance: none;
+		background-image: linear-gradient(
+			90deg,
+			oklch(45.12% 0.267 0),
+			oklch(45.12% 0.267 90),
+			oklch(45.12% 0.267 180),
+			oklch(45.12% 0.267 270),
+			oklch(45.12% 0.267 360)
+		);
+	}
+</style>
 <script>
-    import { updateTailwindTheme, SchemeVariant, CustomThemeConfig, validateColorFromForm } from 'src/utils/colorFun/src/index';
-    document['color-form'].reset()
+	import {
+		updateTailwindTheme,
+		SchemeVariant,
+		CustomThemeConfig,
+		validateColorFromForm,
+		validateColorFromRange,
+		toOklchHue,
+	} from 'src/utils/colorFun/src/index';
+	document['color-form'].reset();
 
-    class PaletteInput extends HTMLElement {
-        constructor() {
-            super();
-            
-            const colorInputText = document.getElementById('color-input-text') as HTMLInputElement;
-            const colorInputColor = document.getElementById('color-input-color') as HTMLInputElement;
-            const schemeSelect = document.getElementById('scheme-select') as HTMLSelectElement;
-            let currentColorValue = colorInputText.value;
+	class PaletteInput extends HTMLElement {
+		constructor() {
+			super();
 
-            colorInputText.addEventListener('input', () => {
-                let colorMaybe = validateColorFromForm(colorInputText.value);
-                if (!(colorMaybe === undefined)) {
-                    console.log(colorMaybe)
-                    currentColorValue = colorMaybe;
-                    colorInputColor.value = colorMaybe;
-                    updateTheme()
-                }
-            });
-            colorInputColor.addEventListener('input', () => {
-                let colorMaybe = validateColorFromForm(colorInputColor.value);
-                if (!(colorMaybe === undefined)) {
-                    console.log(colorMaybe)
-                    currentColorValue = colorMaybe;
-                    colorInputText.value = colorMaybe;
-                    updateTheme()
-                }
-            });
+			const colorInputText = document.getElementById('color-input-text') as HTMLInputElement;
+			const colorInputRange = document.getElementById('color-input-range') as HTMLInputElement;
+			const schemeSelect = document.getElementById('scheme-select') as HTMLSelectElement;
+			let currentColorValue = colorInputText.value;
 
-            schemeSelect.addEventListener('change', () => {
-                updateTheme()
-            });
+			colorInputText.addEventListener('input', () => {
+				let colorMaybe = validateColorFromForm(colorInputText.value);
+				if (!(colorMaybe === undefined)) {
+					currentColorValue = colorMaybe;
+					colorInputRange.value = toOklchHue(colorMaybe);
+					updateTheme();
+				}
+			});
+			colorInputRange.addEventListener('input', () => {
+				const l = '0.4512';
+				const c = '0.267';
+				const h = colorInputRange.value;
+				let colorMaybe = validateColorFromRange(l, c, h);
+				if (!(colorMaybe === undefined)) {
+					currentColorValue = colorMaybe;
+					colorInputText.value = colorMaybe;
+					updateTheme();
+				}
+			});
 
-            function updateTheme() {
-                const selectedSchemeVariant = schemeSelect.value;
-                const newConfig: CustomThemeConfig = {
-                    primary: currentColorValue,
-                    schemeVariant: SchemeVariant[selectedSchemeVariant as keyof typeof SchemeVariant],
-                    secondary: '#D07D12',
-                    tertiary: '#003E1F',
-                    neutral: '#d4e9f8',
-                    neutralVarient: '#E8F5F2',
-                };
-                updateTailwindTheme(document.styleSheets, newConfig)
-            }
-        }
-    };
-    customElements.define('palette-input', PaletteInput);
+			function getSelectedScheme() {
+				const radios = schemeSelect.querySelectorAll('input[type="radio"]');
+				let selectedValue;
+				radios.forEach((radio) => {
+					if ((radio as HTMLInputElement).checked) {
+						selectedValue = (radio as HTMLInputElement).value;
+					}
+				});
+				return selectedValue;
+			}
+
+			schemeSelect.addEventListener('change', function (e) {
+				updateTheme();
+			});
+
+			function updateTheme() {
+				const selectedSchemeVariant = getSelectedScheme();
+				const newConfig: CustomThemeConfig = {
+					primary: currentColorValue,
+					schemeVariant: SchemeVariant[selectedSchemeVariant as keyof typeof SchemeVariant],
+					secondary: '#D07D12',
+					tertiary: '#003E1F',
+					neutral: '#d4e9f8',
+					neutralVarient: '#E8F5F2',
+				};
+				updateTailwindTheme(document.styleSheets, newConfig);
+			}
+		}
+	}
+	customElements.define('palette-input', PaletteInput);
 </script>
-

@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config';
 // Remark plugins
 import imgAttr from 'remark-imgattr';
 import remarkUnwrapImages from 'remark-unwrap-images';
-import codeTitle from 'remark-code-title';
 
 // Astro integrations
 import sitemap from '@astrojs/sitemap';
@@ -30,8 +29,8 @@ export default defineConfig({
 		}),
 	],
 	markdown: {
-		// remarkPlugins: [imgAttr, codeTitle, remarkUnwrapImages]
-		remarkPlugins: [imgAttr, codeTitle],
+		remarkPlugins: [imgAttr, remarkUnwrapImages],
+		// remarkPlugins: [imgAttr],
 	},
 	build: {
 		inlineStylesheets: 'never',

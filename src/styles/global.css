@@ -2,65 +2,41 @@
 /* Get fonts from https://fonts.google.com/ */
 @import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* { 
-    min-width: 0;
+* {
+	min-width: 0;
 }
- 
-
-/* @layer base {
-    div[data-remark-code-title] {
-        background-color: #60a5fa;
-        border-top-left-radius: 0.4rem;
-        border-top-right-radius: 0.4rem;
-        color: #000;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        font-family: monospace;
-      }
-      
-    div[data-remark-code-title] + pre {
-    margin-top: 0;
-    border-bottom-right-radius: 0.4rem;
-    border-bottom-left-radius: 0.4rem;
-    }
-} */
 
 @layer base {
-    @media (scripting: none) {
-        @media (prefers-color-scheme: dark) {
-            :root {
-                @apply dark
-            }
-        }
-    }
+	@media (scripting: none) {
+		@media (prefers-color-scheme: dark) {
+			:root {
+				@apply dark;
+			}
+		}
+	}
 
-    /* Remove this at some point. Used for hero images. */
-    :root {
-        --box-shadow: 0 2px 6px rgb(var(--accent) / 0.1), 0 8px 24px rgb(var(--accent) / 0.1),
-        0 16px 32px rgb(var(--accent) / 0.1);
-    }
-    html {
-        font-size: 16px;
-        font-weight: 300;
-    }
-    body {
-        height: 100dvh;
-        @apply bg-semantic-background;
-        @apply text-semantic-on-background;
-       
-    }
-    main {
+	/* Remove this at some point. Used for hero images. */
+	:root {
+		--box-shadow: 0 2px 6px oklch(var(--colors-semantic-primary) / 0.2), 0 8px 24px oklch(var(--colors-semantic-primary) / 0.2),
+			0 16px 32px oklch(var(--colors-semantic-primary) / 0.2);
+	}
+	html {
+		font-size: 18px;
+		font-weight: 300;
+	}
+	body {
+		height: 100dvh;
+		@apply bg-semantic-background;
+		@apply text-semantic-on-background;
+	}
+	main {
 		display: flex;
 		flex-direction: column;
-        align-items: flex-start;
+		align-items: flex-start;
 		margin-left: 12rem;
 		margin-right: 5dvw;
 		padding-top: 4dvw;
@@ -68,115 +44,56 @@
 		min-height: 100%;
 		max-width: calc(100svw - 16rem);
 	}
-    article {
+	article {
 		display: flex;
 		flex-direction: column;
-        align-items: center;
+		align-items: center;
 		margin-left: 2rem;
-		width: clamp(45ch, 90ch, calc(100%- 2rem));
+		/* width: clamp(45ch, 90ch, calc(100% - 2rem)); */
 	}
 	.article-text {
-		width: clamp(45ch, 75ch, 100%);
+		max-width: clamp(45ch, 90ch, 100%) !important;
 	}
 
-    /* Hyperlinks */
-    .easy-link {
-        letter-spacing: 0.033rem;
-        font-weight: 433;
-    }
-    /* For unvisited links. TIL! */
-    .easy-link:link, .easy-link-always-link  {
-        @apply text-semantic-primary;
-    }
-    .easy-link:visited, .easy-link-always-visited {
-        @apply text-semantic-secondary;
-    }
-    .easy-link:active, .easy-link-always-active {
-        @apply text-semantic-tertiary;
-        text-decoration: underline;
-    }
-    .easy-link:hover, .easy-link-always-hover, .easy-link:focus {
-        text-decoration: underline;
-    }
+	/* Hyperlinks */
+	a {
+		letter-spacing: 0.023rem;
+	}
+	/* For unvisited links. TIL! */
+	a:link,
+	.easy-link-always-link {
+		@apply text-semantic-primary;
+	}
+	a:visited,
+	.easy-link-always-visited {
+		@apply text-semantic-secondary;
+	}
+	a:active,
+	.easy-link-always-active {
+		@apply text-semantic-tertiary;
+		text-decoration: underline;
+	}
+	a:hover,
+	.easy-link-always-hover,
+	a:focus {
+		text-decoration: underline;
+	}
 }
 
-    /* ul {
-        @apply list-disc;
-        @apply pl-0; 
-    }
-    ul > li > ul {
-        @apply pl-8;
-    }
-    li::marker {
-        color: var(--accent);   
-    } */
-    /* code {
-        padding: 2px 5px;
-        background-color: var(--code-background-color);
-        color: var(--code-font-color);
-        border-radius: 2px;
-    }
-    pre {
-        padding: 1.5em;
-        @apply my-4;
-        border-radius: 8px;
-    }
-    pre > code {
-        all: unset;
-    } 
-    div[data-remark-code-title] {
-        background-color: #60a5fa;
-        border-top-left-radius: 0.4rem;
-        border-top-right-radius: 0.4rem;
-        color: #000;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        font-family: monospace;
-      }
-      
-    div[data-remark-code-title] + pre {
-    margin-top: 0;
-    border-bottom-right-radius: 0.4rem;
-    border-bottom-left-radius: 0.4rem;
-    }
-    blockquote {
-        border-left: 4px solid var(--accent);
-        padding: 0 0 0 20px;
-        margin: 0px;
-        font-size: 1.333em;
-    }   */
-    /* img {
-        @apply rounded-xl;
-    }
-    hr {
-        border: none;           
-        height: 1px;           
-        background-color: var(--hr-background-color);
-        width: 6%;             
-        margin: 10px auto;     
-    } */
-
-
-
- 
- 
 .sr-only {
-     border: 0;
-     padding: 0;
-     margin: 0;
-     position: absolute !important;
-     height: 1px;
-     width: 1px;
-     overflow: hidden;
-     /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-     clip: rect(1px 1px 1px 1px);
-     /* maybe deprecated but we need to support legacy browsers */
-     clip: rect(1px, 1px, 1px, 1px);
-     /* modern browsers, clip-path works inwards from each corner */
-     clip-path: inset(50%);
-     /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
-     white-space: nowrap;
- }
- 
- 
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+	clip: rect(1px 1px 1px 1px);
+	/* maybe deprecated but we need to support legacy browsers */
+	clip: rect(1px, 1px, 1px, 1px);
+	/* modern browsers, clip-path works inwards from each corner */
+	clip-path: inset(50%);
+	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+	white-space: nowrap;
+}

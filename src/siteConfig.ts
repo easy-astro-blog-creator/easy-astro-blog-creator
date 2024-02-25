@@ -46,21 +46,17 @@ export const easyConfig = {
 
 export const CUSTOM_THEME: CustomThemeConfig = {
 	// Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
-	primary: '#40a1e6',
+	primary: '#40a1e6', // Curious Blue #40a1e6 64, 161, 230
 	schemeVariant: SchemeVariant.SPLIT_COMPLEMENTARY,
 	// The following are only used if `schemeVariant.CUSTOM`
 	// Secondary colors highlight or complement the primary color. These are to be used sparingly to make the UI elements stand out.
-	secondary: '#D07D12',
 	// Tetriary or Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
-	tertiary: '#003E1F',
 	//  Background color is the color of the main content area. It is used to set the mood of the UI.
-	neutral: '#d4e9f8',
-	neutralVarient: '#E8F5F2',
 };
+
 // Meteor #D07D12 208, 125, 18
 // Aqua Squeeze #E8F5F2 232, 245, 242
 // Pattens Blue #d4e9f8 212, 233, 248
-// Curious Blue #40a1e6 64, 161, 230
 // Astronaut Blue #19405c
 // Britich Racing Green #003E1F 0, 62, 31
 

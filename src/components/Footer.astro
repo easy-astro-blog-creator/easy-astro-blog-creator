@@ -5,7 +5,9 @@ const today = new Date();
 
 <aside class="footer-text">
 	<p>
-		Create your own GitHub Pages blog with <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a>!
+		Create your own GitHub Pages blog with <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator"
+			>easy-astro-blog-creator</a
+		>!
 	</p>
 	<div></div>
 	<p>&copy; {today.getFullYear()} {easyConfig.full_name}.</p>
@@ -18,7 +20,7 @@ const today = new Date();
 		justify-content: flex-start;
 		align-items: center;
 		text-align: center;
-	  	font-size: .555rem;
+		font-size: 0.555rem;
 		margin-top: 1rem;
 		margin-bottom: auto;
 	}
@@ -26,18 +28,24 @@ const today = new Date();
 		border-bottom-width: 1px;
 		border-color: theme(colors.semantic.on-surface-variant);
 		width: 12%;
-		margin:auto;
+		margin: auto;
+		padding-top: 0.25rem;
 	}
 	a {
-		background: linear-gradient(90deg, theme(colors.semantic.primary) 0%, theme(colors.semantic.secondary) 50%,  theme(colors.semantic.tertiary) 100% );
+		background: linear-gradient(
+			90deg,
+			theme(colors.semantic.primary) 0%,
+			theme(colors.semantic.secondary) 50%,
+			theme(colors.semantic.tertiary) 100%
+		);
 		background-clip: text;
 		-webkit-background-clip: text;
 		color: transparent;
 		font-weight: 600;
-		filter: contrast(1) saturate(1) blur(.1px);
+		filter: contrast(1) saturate(1) blur(0.1px);
 		transition: 3s ease;
 	}
 	a:hover {
-		filter: contrast(1.2) saturate(3) blur(.2px);
+		filter: contrast(1.2) saturate(3) blur(0.2px);
 	}
 </style>

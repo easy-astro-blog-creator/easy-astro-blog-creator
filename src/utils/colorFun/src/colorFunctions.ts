@@ -11,10 +11,10 @@ export function toOklch(color: string | chroma.Color): string {
 	const oklchColor = chroma(color).oklch();
 	return `${oklchColor[0] * 100}% ${oklchColor[1]} ${oklchColor[2]}`;
 }
-export function toOklchCss(color: string | chroma.Color): string {
+export function toOklchHue(color: string | chroma.Color): string {
 	validateColor(color);
 	const oklchColor = chroma(color).oklch();
-	return `oklch(${oklchColor[0] * 100}% ${oklchColor[1]} ${oklchColor[2]})`;
+	return oklchColor[2].toString();
 }
 
 export function complemetaryColor(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color {
@@ -26,10 +26,7 @@ export function complemetaryColor(inputColor: string | chroma.Color, mode: 'hsl'
 	}
 }
 
-export function complemetarySplitColors(
-	inputColor: string | chroma.Color,
-	mode: 'hsl' | 'oklch' = 'oklch'
-): chroma.Color[] {
+export function complemetarySplitColors(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color[] {
 	validateColor(inputColor);
 	if (mode === 'hsl') {
 		const splitComplement1 = chroma(inputColor).set('hsl.h', (chroma(inputColor).get('hsl.h') + 150) % 360);
@@ -116,10 +113,7 @@ export function sortColorsByP(testColors: chroma.Color[], param: 'l' | 'c' | 'h'
 	return testColors;
 }
 
-export function findClosestSchemeHue(
-	matchColor: chroma.Color | string,
-	testColors: { [key: string]: [chroma.Color] }
-): string {
+export function findClosestSchemeHue(matchColor: chroma.Color | string, testColors: { [key: string]: [chroma.Color] }): string {
 	validateColor(matchColor);
 	let closestScheme = '';
 	let closestMatch = Infinity;
@@ -153,13 +147,19 @@ export function getDifferenceHue(color1: chroma.Color | string, color2: chroma.C
 
 export function validateColor(color: string | chroma.Color) {
 	if (!chroma.valid(color)) {
-		throw new Error(
-			`Invalid color: ${color}. See https://gka.github.io/chroma.js/#chroma-valid for valid color formats.`
-		);
+		throw new Error(`Invalid color: ${color}. See https://gka.github.io/chroma.js/#chroma-valid for valid color formats.`);
 	}
 }
 export function validateColorFromForm(color: string | chroma.Color): string | undefined {
 	if (!chroma.valid(color, 'hex')) {
+		return;
+	}
+	return chroma(color).hex();
+}
+export function validateColorFromRange(l: string, c: string, h: string): string | undefined {
+	const color = chroma.oklch(Number(l), Number(c), Number(h)).hex();
+	if (!chroma.valid(color, 'hex')) {
+		console.log('invalid color: ', color);
 		return;
 	}
 	return chroma(color).hex();
