@@ -5,16 +5,16 @@ import heroImage from '../images/headshot.png';
 const heroAlt = 'A headshot.';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout page_title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-<div class="flex flex-col items-center justify-center w-full">
-	
-	<h1 class="pb-3">Hello There</h1>
-	<Image src={heroImage} alt={heroAlt} class="w-1/4 p-4 rounded-3xl"/>
-	
-	<p>
-		Welcome to my about me page.
-	</p>
-</div>
 
-
+<BaseLayout
+	page_title={easyConfig.site_title}
+	page_description={easyConfig.site_description}
+	heroImage={heroImage}
+	heroAlt={heroAlt}
+>
+	<div class="flex w-full flex-col items-center justify-center">
+		<h1 class="pb-3">Hello There</h1>
+		<Image src={heroImage} alt={heroAlt} class="w-1/4 rounded-3xl p-4" />
+		<p>Welcome to my about me page.</p>
+	</div>
 </BaseLayout>

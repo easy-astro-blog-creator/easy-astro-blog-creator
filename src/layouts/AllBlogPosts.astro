@@ -6,8 +6,8 @@ import { formatDescription } from '../utils/abbreviateDescription';
 import BaseLayout from './BaseLayout.astro';
 import { customGetCollection } from '../utils/customGetCollection';
 
-const { blogCollectionName, extraPath } = Astro.props;
-const blogCollection = await customGetCollection(blogCollectionName, extraPath);
+const { blogCollectionName, basePath } = Astro.props;
+const blogCollection = await customGetCollection(blogCollectionName, basePath);
 let posts = blogCollection.sort((a, b) => {
 	// Sort by updatedDate if available, otherwise fall back to pubDate
 	const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);

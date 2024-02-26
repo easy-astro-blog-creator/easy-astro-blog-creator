@@ -5,7 +5,7 @@ import '../../styles/blog.css';
 import { customGetCollection } from '../../utils/customGetCollection';
 
 export async function getStaticPaths() {
-	return customGetCollection('blog');
+	return customGetCollection('blog', 'blog');
 }
 
 type Props = CollectionEntry<'blog'>;
