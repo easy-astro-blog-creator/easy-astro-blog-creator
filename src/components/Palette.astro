@@ -16,24 +16,24 @@ const paletteSteps = Object.keys(colors['primary']);
 ---
 
 <palette-input>
-	<form name="color-form" class="w-11/12 h-28 flex justify-around text-sm pb-4">
+	<form name="color-form" class="flex h-28 w-11/12 justify-around pb-4 text-sm">
 		<label class="form-control h-full min-w-max gap-1">
 			<div class="label">
-				<span class="text-center w-full">Select Scheme</span>
+				<span class="w-full text-center">Select Scheme</span>
 			</div>
-			<div id="scheme-select" class="form-control text-xs min-w-max grid grid-cols-5 gap-x-2 gap-y-1">
+			<div id="scheme-select" class="form-control grid min-w-max grid-cols-5 gap-x-2 gap-y-1 text-xs">
 				{
 					Object.entries(SchemeVariant).map(([key, variant]) => {
 						const isChecked = variant === CUSTOM_THEME.schemeVariant;
 						return (
-							<label class="label cursor-pointer min-w-max flex flex-col items-start border rounded-lg pb-1 px-2">
+							<label class="label flex min-w-max cursor-pointer flex-col items-start rounded-lg border px-2 pb-1">
 								<span class="label-text pb-1">{variant}</span>
 								<input
 									type="radio"
 									value={key}
 									id={variant}
 									name="radio-10"
-									class="appearance-none border border-semantic-primary-container checked:border-semantic-primary checked:border-[5px] w-3 h-3 rounded-full"
+									class="h-3 w-3 appearance-none rounded-full border border-semantic-primary-container checked:border-[5px] checked:border-semantic-primary"
 									checked={isChecked}
 								/>
 							</label>
@@ -42,16 +42,16 @@ const paletteSteps = Object.keys(colors['primary']);
 				}
 			</div>
 		</label>
-		<label class="form-control flex flex-col w-3/12 h-full items-center gap-4">
+		<label class="form-control flex h-full w-3/12 flex-col items-center gap-4">
 			<div class="label">
-				<span class="text-center w-full">Input Primary Color</span>
+				<span class="w-full text-center">Input Primary Color</span>
 			</div>
 
 			<input
 				type="text"
 				value={CUSTOM_THEME.primary}
 				id="color-input-text"
-				class="input input-xs h-9 w-24 text-center rounded bg-semantic-surface-variant text-semantic-on-surface-variant text-sm font-semibold"
+				class="input input-xs h-9 w-24 rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
 			/>
 			<input
 				type="range"
@@ -60,12 +60,12 @@ const paletteSteps = Object.keys(colors['primary']);
 				max="360"
 				value={toOklchHue(CUSTOM_THEME.primary)}
 				step="0.1"
-				class="h-4 w-full mx-2 rounded-full"
+				class="mx-2 h-4 w-full rounded-full"
 			/>
 		</label>
 	</form>
 </palette-input>
-<div class="w-11/12 grid pt-4">
+<div class="grid w-11/12 pt-4">
 	<!-- <div
 		class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60 rounded"
 	>
@@ -77,18 +77,18 @@ const paletteSteps = Object.keys(colors['primary']);
 		<p class="col-span-3">Subheading Text</p>
 	</div> -->
 	<div
-		class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60 rounded"
+		class="my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center rounded border-2 border-semantic-on-background/60 py-2"
 	>
-		<p class="col-start-1 col-span-2">link styles</p>
-		<p class="col-start-3 col-span-2 easy-link easy-link-always-link">Default Link</p>
-		<p class="col-span-2 easy-link easy-link-always-hover easy-link-always-link">Hovered</p>
-		<p class="col-span-2 easy-link easy-link-always-visited">Visited Link</p>
-		<p class="col-span-2 easy-link easy-link-always-hover easy-link-always-visited">Hovered</p>
-		<p class="col-span-2 easy-link easy-link-always-active">Active Link</p>
+		<p class="col-span-2 col-start-1">link styles</p>
+		<p class="easy-link easy-link-always-link col-span-2 col-start-3">Default Link</p>
+		<p class="easy-link easy-link-always-hover easy-link-always-link col-span-2">Hovered</p>
+		<p class="easy-link easy-link-always-visited col-span-2">Visited Link</p>
+		<p class="easy-link easy-link-always-hover easy-link-always-visited col-span-2">Hovered</p>
+		<p class="easy-link easy-link-always-active col-span-2">Active Link</p>
 	</div>
 </div>
-<div class="w-11/12 pr-8 pb-8 my-2 grid grid-rows-6 gap-1 border-2 border-semantic-on-background/60 rounded">
-	<div class="grid p-2 my-2 grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center">
+<div class="my-2 grid w-11/12 grid-rows-6 gap-1 rounded border-2 border-semantic-on-background/60 pb-8 pr-8">
+	<div class="my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center p-2">
 		{
 			paletteSteps.map((step, index) => (
 				<div
@@ -105,10 +105,10 @@ const paletteSteps = Object.keys(colors['primary']);
 	{
 		Object.entries(palettes).map(([colorName, colorFamily]) => (
 			<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1">
-				<div class="col-start-1 col-span-2 text-right place-self-center">{colorName}</div>
+				<div class="col-span-2 col-start-1 place-self-center text-right">{colorName}</div>
 				{Object.keys(colorFamily).map((shadeValue) => (
 					<div
-						class="rounded py-8 px-2"
+						class="rounded px-2 py-8"
 						style={{
 							backgroundColor: `oklch(var(--colors-${colorName}-${shadeValue}))`,
 						}}
@@ -171,18 +171,21 @@ const paletteSteps = Object.keys(colors['primary']);
 				}
 			});
 
-			function getSelectedScheme() {
+			function getSelectedScheme(): string {
 				const radios = schemeSelect.querySelectorAll('input[type="radio"]');
-				let selectedValue;
+				let selectedValue: string | undefined;
 				radios.forEach((radio) => {
 					if ((radio as HTMLInputElement).checked) {
 						selectedValue = (radio as HTMLInputElement).value;
 					}
 				});
+				if (selectedValue === undefined) {
+					throw new Error('No scheme selected');
+				}
 				return selectedValue;
 			}
 
-			schemeSelect.addEventListener('change', function (e) {
+			schemeSelect.addEventListener('change', () => {
 				updateTheme();
 			});
 
@@ -191,10 +194,10 @@ const paletteSteps = Object.keys(colors['primary']);
 				const newConfig: CustomThemeConfig = {
 					primary: currentColorValue,
 					schemeVariant: SchemeVariant[selectedSchemeVariant as keyof typeof SchemeVariant],
-					secondary: '#D07D12',
-					tertiary: '#003E1F',
-					neutral: '#d4e9f8',
-					neutralVarient: '#E8F5F2',
+					// secondary: '#D07D12',
+					// tertiary: '#003E1F',
+					// neutral: '#d4e9f8',
+					// neutralVarient: '#E8F5F2',
 				};
 				updateTailwindTheme(document.styleSheets, newConfig);
 			}

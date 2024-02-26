@@ -2,7 +2,7 @@ import { type ContentCollectionKey, getCollection } from 'astro:content';
 import { postModifiedDate } from './postModifiedDate';
 import { getReadingTime } from './postReadingTime';
 
-export async function customGetCollection(collectionName: ContentCollectionKey, extraPath?: string) {
+export async function customGetCollection(collectionName: ContentCollectionKey, basePath: string) {
 	const posts = await getCollection(collectionName);
 	const postPromises = posts.map((post) => {
 		// This allows for both standalone markdown files in the collections root folder
@@ -17,21 +17,12 @@ export async function customGetCollection(collectionName: ContentCollectionKey, 
 			newSlug = `${slugSplits.pop()}`;
 		}
 		filePath = `src/content/${collectionName}/${post.id}`;
+
 		post.data.updatedDate = postModifiedDate(filePath, post.data.pubDate, post.data.updatedDate);
 		post.data.readingTime = getReadingTime(post.body);
 
-		// Due to how static paths are generated, we need to create a new slug for links to the post
-		let htmlSlug: string;
-		if (extraPath) {
-			// Appends the extra path to the slug for example 'blog' from 'easy/blog'
-			htmlSlug = `${extraPath}/${newSlug}`;
-		} else {
-			// If there is no extra path, then the slug starts with the the collection name
-			htmlSlug = `${collectionName}/${newSlug}`;
-		}
-
 		return {
-			params: { slug: newSlug, htmlSlug: htmlSlug },
+			params: { slug: `${newSlug}`, htmlSlug: `/${basePath}/${newSlug}/` },
 			props: post,
 		};
 	});

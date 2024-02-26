@@ -1,5 +1,4 @@
 import { defineCollection, z } from 'astro:content';
-import readingTime from 'reading-time';
 
 const blogCollection = defineCollection({
 	type: 'content',

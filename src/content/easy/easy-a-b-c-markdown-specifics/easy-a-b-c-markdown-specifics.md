@@ -2,9 +2,8 @@
 title: 'EasyABC Markdown Specifics'
 description: 'This is a guide for specific markdown syntax used in EasyABC.'
 pubDate: 2024-01-24
-heroImagePath: './easy-markdown-specifics/hero.jpg'
 heroImage: './hero.jpg'
-heroAlt: "A hero!"
+heroAlt: 'A hero!'
 ---
 
 This is a guide for specific markdown syntax used in EasyABC.
@@ -33,24 +32,25 @@ Add captions to images by adding the `caption` class to a tag like:
 <h3> Why this exists </h3>
 
 Markdown (and the Astro rendering engine) natively supports adding images with the syntax:
+
 ```sh
 ![Alt text](./example.png)
 ```
 
 ![The example renders too small and not centered!](./example.png)
 
-However, it does not provide away to style the image at all. This means the image will be at their original resolution, so you may end up with images that are larger or smaller than desired. Additionally, they will be be not be centered. *The example renders too small and not centered on desktop.*
+However, it does not provide away to style the image at all. This means the image will be at their original resolution, so you may end up with images that are larger or smaller than desired. Additionally, they will be be not be centered. _The example renders too small and not centered on desktop._
 
 <h3> A quick fix </h3>
 
-Astro supports Remark plugins, and with the [remark-imgattr](https://github.com/OliverSpeir/remark-imgattr) plugin we can inline styles for image! 
+Astro supports Remark plugins, and with the [remark-imgattr](https://github.com/OliverSpeir/remark-imgattr) plugin we can inline styles for image!
 
 ```sh
 ![Alt text](./example.png)(
   style: '
     width: 36vw;
-    display: flex; 
-    margin-right: auto; 
+    display: flex;
+    margin-right: auto;
     margin-left: auto;
     margin-bottom: 2em;
     margin-top: 1em;
@@ -58,14 +58,14 @@ Astro supports Remark plugins, and with the [remark-imgattr](https://github.com/
 ```
 
 ![This for example sets an image to 33vw and centers it. But this is a bit verbose!](./example.png)(
-    style: '
-    width: 36vw;
-    display: flex; 
-    margin-right: auto; 
-    margin-left: auto;
-    margin-bottom: 2em;
-    margin-top: 1em;
-  ')
+style: '
+width: 36vw;
+display: flex;
+margin-right: auto;
+margin-left: auto;
+margin-bottom: 2em;
+margin-top: 1em;
+')
 
 This example sets an image to 40vw and centers it. But this is a bit verbose and too much to coding when we're doing creative writing!
 
@@ -95,9 +95,8 @@ I've defined a caption class you can use for your `<p>` tags.
 ```
 
 ![Alt text](./example.png)(class:'small')
+
 <p class="caption">The Caption</p>
-
-
 
 <h3> Define your own classes </h3>
 

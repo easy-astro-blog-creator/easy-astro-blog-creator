@@ -1,13 +1,17 @@
 import { execSync } from 'child_process';
-3;
+
 export const postModifiedDate = (filepath: string, pubDate: Date, updatedDate: Date | undefined): Date | undefined => {
-	if (!updatedDate) {
+	if (!updatedDate || isNaN(updatedDate.getTime())) {
 		try {
 			const result: Buffer = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`);
 			const dateString: string = result.toString().split('T')[0];
 			updatedDate = new Date(dateString);
+			if (isNaN(updatedDate.getTime())) {
+				return undefined;
+			}
 		} catch (error) {
-			throw new Error(`Error getting the last modified date for ${filepath}.`);
+			console.log(`Error getting the last modified date for ${filepath}.`);
+			return undefined;
 		}
 	}
 	// If the specified date is the same day as the pubDate

@@ -61,7 +61,7 @@ export const CUSTOM_THEME: CustomThemeConfig = {
 // Britich Racing Green #003E1F 0, 62, 31
 
 // Function to capitalize the first letter of each word
-function capitalizeName(name) {
+function capitalizeName(name: string): string {
 	return name
 		.split(' ') // Split the name into parts
 		.map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()) // Capitalize the first letter of each part

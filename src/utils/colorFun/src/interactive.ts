@@ -23,7 +23,7 @@ function updatePalette(
 
 	Object.entries(colorVars).forEach(([key, varExpression]) => {
 		const property = unwrapVarName(varExpression);
-		let colorVal;
+		let colorVal: string;
 		if (property.includes('--colors')) {
 			colorVal = `${colorValues[key]}`;
 		} else {

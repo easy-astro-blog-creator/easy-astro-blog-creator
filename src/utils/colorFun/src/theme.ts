@@ -1,4 +1,4 @@
-import { DynamicScheme, MaterialDynamicColors, hexFromArgb } from '@material/material-color-utilities';
+import { MaterialDynamicColors, hexFromArgb } from '@material/material-color-utilities';
 import { SchemeVariant, McuScheme, MCU_SCHEME_VARS, generateDynamicScheme, createSchemeObject } from './scheme';
 import { generateTonalPalette, CustomTonalPalette, generateTwTonalPaletteVars } from './palette';
 
@@ -103,18 +103,13 @@ export function generateBaseTheme(themeConfig: CustomThemeConfig, darkMode: bool
 				secondary: generateTonalPalette(hexFromArgb(MaterialDynamicColors.secondaryPaletteKeyColor.getArgb(scheme))),
 				tertiary: generateTonalPalette(hexFromArgb(MaterialDynamicColors.tertiaryPaletteKeyColor.getArgb(scheme))),
 				neutral: generateTonalPalette(hexFromArgb(MaterialDynamicColors.neutralPaletteKeyColor.getArgb(scheme))),
-				'neutral-variant': generateTonalPalette(
-					hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(scheme))
-				),
+				'neutral-variant': generateTonalPalette(hexFromArgb(MaterialDynamicColors.neutralVariantPaletteKeyColor.getArgb(scheme))),
 			},
 		},
 	};
 }
 
-export function genenerateTailwindTheme(
-	themeConfig: CustomThemeConfig,
-	typographyEnabled: boolean = false
-): TailwindTheme {
+export function genenerateTailwindTheme(themeConfig: CustomThemeConfig, typographyEnabled: boolean = false): TailwindTheme {
 	const tailwindVars = generateTailwindThemeVars();
 	const typographyTheme = typographyEnabled ? generateTailwindTypographyTheme(tailwindVars) : undefined;
 	return {

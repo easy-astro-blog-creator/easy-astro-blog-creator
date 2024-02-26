@@ -2,9 +2,8 @@
 title: 'Markdown Style Guide'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
 pubDate: 2022-07-01
-heroImagePath: './markdown-style-guide/hero.jpg'
 heroImage: './hero.jpg'
-heroAlt: "A hero!"
+heroAlt: 'A hero!'
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
@@ -39,6 +38,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 #### Syntax:
 
 This section was edited for storing images in src folder. This works whether the image is nested in the collections root folder or within a nested folder where the markdown file is.
+
 ```markdown
 ![Alt text](./hero.jpg)
 ```
@@ -108,13 +108,13 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Example HTML5 Document</title>
+	</head>
+	<body>
+		<p>Test</p>
+	</body>
 </html>
 ```
 ````
@@ -124,13 +124,13 @@ Output
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Example HTML5 Document</title>
+	</head>
+	<body>
+		<p>Test</p>
+	</body>
 </html>
 ```
 

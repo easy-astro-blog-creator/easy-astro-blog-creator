@@ -7,9 +7,9 @@ const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
 
-let isActive;
-let underlineWeight;
-let underlineOffset;
+let isActive: boolean;
+let underlineWeight: string;
+let underlineOffset: string;
 
 if (className && className.includes('link-sub')) {
 	underlineWeight = 'decoration-2';

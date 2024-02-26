@@ -4,7 +4,6 @@ import {
 	argbFromHex,
 	TonalPalette,
 	DynamicScheme,
-	SchemeMonochrome,
 	SchemeNeutral,
 	SchemeTonalSpot,
 	SchemeVibrant,
@@ -118,8 +117,8 @@ export function generateDynamicScheme(themeConfig: CustomThemeConfig, mode: bool
 
 	// These are the preset dynamic schemes that are available in the Material Color Utilities library
 	switch (themeConfig.schemeVariant) {
-		case SchemeVariant.MONOCHROME:
-			return new SchemeMonochrome(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.MONOCHROME:
+		// 	return new SchemeMonochrome(toHct(themeConfig.primary), mode, 0);
 		case SchemeVariant.NEUTRAL:
 			return new SchemeNeutral(toHct(themeConfig.primary), mode, 0);
 		case SchemeVariant.TONAL_SPOT:
@@ -140,10 +139,10 @@ export function generateDynamicScheme(themeConfig: CustomThemeConfig, mode: bool
 			return generateSchemeTriadic(themeConfig, mode);
 		case SchemeVariant.ANALOGOUS:
 			return generateSchemeAnalogous(themeConfig, mode);
-		case SchemeVariant.TETRADIC:
-			return generateSchemeTetradic(themeConfig, mode);
-		case SchemeVariant.CUSTOM:
-			return generateSchemeCustom(themeConfig, mode);
+		// case SchemeVariant.TETRADIC:
+		// 	return generateSchemeTetradic(themeConfig, mode);
+		// case SchemeVariant.CUSTOM:
+		// 	return generateSchemeCustom(themeConfig, mode);
 		default:
 			return new SchemeTonalSpot(toHct(themeConfig.primary), mode, 0);
 	}
@@ -224,7 +223,7 @@ function generateSchemeTriadic(themeConfig: CustomThemeConfig, mode: boolean): D
 	});
 }
 function generateSchemeAnalogous(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
-	const [color1, color2, color3, color4] = analogousColors(themeConfig.primary);
+	const [unused, color2, unused2, color4] = analogousColors(themeConfig.primary);
 
 	return new DynamicScheme({
 		sourceColorArgb: argbFromHex(themeConfig.primary),
@@ -253,46 +252,46 @@ function generateSchemeTetradic(themeConfig: CustomThemeConfig, mode: boolean): 
 		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(color3).hue, 8),
 	});
 }
-function generateSchemeCustom(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
-	let secondaryPalette;
-	let tertiaryPalette;
-	let neutralPalette;
-	let neutralVariantPalette;
+// function generateSchemeCustom(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
+// 	let secondaryPalette;
+// 	let tertiaryPalette;
+// 	let neutralPalette;
+// 	let neutralVariantPalette;
 
-	if (themeConfig.secondary) {
-		validateColor(themeConfig.secondary);
-		secondaryPalette = TonalPalette.fromHct(toHct(themeConfig.secondary));
-	} else {
-		secondaryPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 16.0);
-	}
-	if (themeConfig.tertiary) {
-		validateColor(themeConfig.tertiary);
-		tertiaryPalette = TonalPalette.fromHct(toHct(themeConfig.tertiary));
-	} else {
-		tertiaryPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue + 60, 24.0);
-	}
-	if (themeConfig.neutral) {
-		validateColor(themeConfig.neutral);
-		neutralPalette = TonalPalette.fromHct(toHct(themeConfig.neutral));
-	} else {
-		neutralPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4.0);
-	}
-	if (themeConfig.neutralVarient) {
-		validateColor(themeConfig.neutralVarient);
-		neutralVariantPalette = TonalPalette.fromHct(toHct(themeConfig.neutralVarient));
-	} else {
-		neutralVariantPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 8.0);
-	}
+// 	if (themeConfig.secondary) {
+// 		validateColor(themeConfig.secondary);
+// 		secondaryPalette = TonalPalette.fromHct(toHct(themeConfig.secondary));
+// 	} else {
+// 		secondaryPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 16.0);
+// 	}
+// 	if (themeConfig.tertiary) {
+// 		validateColor(themeConfig.tertiary);
+// 		tertiaryPalette = TonalPalette.fromHct(toHct(themeConfig.tertiary));
+// 	} else {
+// 		tertiaryPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue + 60, 24.0);
+// 	}
+// 	if (themeConfig.neutral) {
+// 		validateColor(themeConfig.neutral);
+// 		neutralPalette = TonalPalette.fromHct(toHct(themeConfig.neutral));
+// 	} else {
+// 		neutralPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4.0);
+// 	}
+// 	if (themeConfig.neutralVarient) {
+// 		validateColor(themeConfig.neutralVarient);
+// 		neutralVariantPalette = TonalPalette.fromHct(toHct(themeConfig.neutralVarient));
+// 	} else {
+// 		neutralVariantPalette = TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 8.0);
+// 	}
 
-	return new DynamicScheme({
-		sourceColorArgb: argbFromHex(themeConfig.primary),
-		variant: Variant.TONAL_SPOT,
-		isDark: mode,
-		contrastLevel: 0.0,
-		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
-		secondaryPalette: secondaryPalette,
-		tertiaryPalette: tertiaryPalette,
-		neutralPalette: neutralPalette,
-		neutralVariantPalette: neutralVariantPalette,
-	});
-}
+// 	return new DynamicScheme({
+// 		sourceColorArgb: argbFromHex(themeConfig.primary),
+// 		variant: Variant.TONAL_SPOT,
+// 		isDark: mode,
+// 		contrastLevel: 0.0,
+// 		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
+// 		secondaryPalette: secondaryPalette,
+// 		tertiaryPalette: tertiaryPalette,
+// 		neutralPalette: neutralPalette,
+// 		neutralVariantPalette: neutralVariantPalette,
+// 	});
+// }

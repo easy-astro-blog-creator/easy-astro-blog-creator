@@ -1,4 +1,5 @@
 ---
+// import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Content as ReadMe } from '/README.md';
 const SITE_TITLE = 'Easy Astro Blog Creator';
@@ -10,9 +11,28 @@ const heroAlt = 'Easy logo.';
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
 	<article>
 		<!-- This is commented out because the github repo loads the image in the README.MD, but when deployed it does not. -->
-		<!-- <Image src={heroImage} alt={heroAlt} format="png" quality="100" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto;"/> -->
-		<div class="article-text prose prose-customTheme">
+		<!-- <Image
+			src={heroImage}
+			alt={heroAlt}
+			format="png"
+			quality="100"
+			style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto;"
+			class="mb-8 rounded-lg"
+		/> -->
+		<div id="article-text" class="prose prose-customTheme max-w-none">
 			<ReadMe />
 		</div>
 	</article>
 </BaseLayout>
+<style>
+	article {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-left: 2rem;
+		width: clamp(45ch, 120ch, calc(100% - 2rem));
+	}
+	#article-text {
+		width: clamp(45ch, 75ch, 100%);
+	}
+</style>

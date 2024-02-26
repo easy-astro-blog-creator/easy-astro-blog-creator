@@ -20,15 +20,15 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="flex flex-col items-start gap-20 list-none ml-4 mr-14 py-4">
+	<ul class="ml-4 mr-14 flex list-none flex-col items-start gap-20 py-4">
 		{
 			posts.map((post) => {
 				return (
 					<>
 						<li class="min-w-full">
-							<a class="h-[12rem] min-w-full flex justify-between items-center no-underline" href={`${post.params.htmlSlug}/`}>
-								<div class="flex flex-col  shrink-0 max-w-[60%] max-h-full pr-4">
-									<div class="pb-1 text-2xl lg:text-base font-medium">
+							<a class="flex h-[12rem] min-w-full items-center justify-between no-underline" href={`${post.params.htmlSlug}`}>
+								<div class="flex max-h-full  max-w-[60%] shrink-0 flex-col pr-4">
+									<div class="pb-1 text-2xl font-medium lg:text-base">
 										<FormattedDate
 											date={
 												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
@@ -36,16 +36,16 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 										/>
 									</div>
 									<h1 class="pb-1 text-3xl font-medium">{post.props.data.title}</h1>
-									<div class="pb-0 text-3xl lg:text-lg line-clamp-3 lg:line-clamp-4 ">
+									<div class="line-clamp-3 pb-0 text-3xl lg:line-clamp-4 lg:text-lg ">
 										{formatDescription(post.props.data.description, post.props.body)}
 									</div>
-									<div class="pt-1 text-2xl lg:text-base italic font-normal">{[post.props.data.readingTime]}</div>
+									<div class="pt-1 text-2xl font-normal italic lg:text-base">{[post.props.data.readingTime]}</div>
 								</div>
-								<div class="flex justify-center items-center w-3/12 h-auto max-w-[80%] max-h-[80%]">
+								<div class="flex h-auto max-h-[80%] w-3/12 max-w-[80%] items-center justify-center">
 									{post.props.data.heroImage ? (
 										<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
 									) : (
-										<div class="w-[200px] h-[200px] rounded bg-semantic-primary-container/20" />
+										<div class="h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
 									)}
 								</div>
 							</a>

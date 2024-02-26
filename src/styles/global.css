@@ -44,16 +44,6 @@
 		min-height: 100%;
 		max-width: calc(100svw - 16rem);
 	}
-	article {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-left: 2rem;
-		/* width: clamp(45ch, 90ch, calc(100% - 2rem)); */
-	}
-	.article-text {
-		max-width: clamp(45ch, 90ch, 100%) !important;
-	}
 
 	/* Hyperlinks */
 	a {
