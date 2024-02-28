@@ -8,193 +8,214 @@ import SocialLinks from './SocialLinks.astro';
 
 <nav id="navbar">
 	<div id="navbar-fun-line"></div>
-	<Icon id="logo-icon" name="solar:double-alt-arrow-down-line-duotone" />
-	<ul id="nav-list">
-		<li class="nav-item row-start-2 row-end-4">
+	<Icon id="logo-icon" class="hidden md:block" name="solar:double-alt-arrow-down-line-duotone" />
+	<ul id="nav-list" class="flex h-full w-full flex-row-reverse items-center justify-around md:grid">
+		<li class="nav-item md:row-start-2 md:row-end-4">
 			<HeaderLink class="link-header" href="/blog">Blog</HeaderLink>
-			<span class="link-sub italic">{easyConfig.site_description}</span>
+			<span class="link-sub hidden italic">{easyConfig.site_description}</span>
 		</li>
-		<li class="nav-item row-start-5 row-end-6">
+		<li class="nav-item md:row-start-5 md:row-end-6">
 			<HeaderLink class="link-header" href="/">About</HeaderLink>
-			<span class="link-sub italic">{easyConfig.first_name}</span>
 		</li>
-		<li class="nav-item row-start-7 row-end-9">
-			<HeaderLink class="link-header" href="/easy">EasyABC</HeaderLink>
-			<ul class="grid h-full grid-rows-3">
-				<li>
-					<HeaderLink class="link-sub" href="/easy">Readme</HeaderLink>
+		{
+			easyConfig.easyabc_enabled && (
+				<li class="nav-item md:row-start-7 md:row-end-9">
+					<HeaderLink class="link-header" href="/easy">
+						EasyABC
+					</HeaderLink>
+					<ul class="hidden h-full md:grid md:grid-rows-3">
+						<li>
+							<HeaderLink class="link-sub" href="/easy">
+								Readme
+							</HeaderLink>
+						</li>
+						<li>
+							<HeaderLink class="link-sub" href="/easy/blog">
+								EasyABC Blog
+							</HeaderLink>
+						</li>
+						<li>
+							<HeaderLink class="link-sub" href="/easy/theme">
+								ColorFun
+							</HeaderLink>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<HeaderLink class="link-sub" href="/easy/blog">EasyABC Blog</HeaderLink>
-				</li>
-				<li>
-					<HeaderLink class="link-sub" href="/easy/theme">ColorFun</HeaderLink>
-				</li>
-			</ul>
+			)
+		}
+		<li class="nav-item md:row-start-[16] md:row-end-[19]">
+			<SocialLinks />
 		</li>
-		<li id="social-links" class="row-start-[16] row-end-[19]">
-			<SocialLinks class="link-sub" />
-		</li>
-		<li class="nav-item link-sub row-start-[19] row-end-[21]">
+		<li class="nav-item link-sub hidden md:row-start-[19] md:row-end-[21] md:block">
 			<Footer />
 		</li>
 	</ul>
 </nav>
 <style>
-	#navbar {
-		position: fixed;
-		height: 100%;
-		width: 3rem;
-		top: 0px;
-		left: 0px;
-		@apply text-semantic-on-surface-variant;
-		@apply rounded-r-2xl;
-		transition:
-			color 777ms,
-			background-color 777ms,
-			width 500ms;
-		color: theme(colors.semantic.on-surface-variant);
-		background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 15%);
+	@media (max-width: 767px) {
+		#navbar {
+			position: fixed;
+			height: 7vh;
+			width: 100%;
+			bottom: 0px;
+			left: 0px;
+			top: unset;
+			padding-bottom: env(safe-area-inset-bottom);
+			@apply text-semantic-on-surface-variant;
+			transition:
+				color 777ms,
+				background-color 777ms,
+				width 500ms;
+			color: theme(colors.semantic.on-surface-variant);
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 10%);
+		}
 	}
-	#logo-icon {
-		/* This ensures the logo is centered in the grid */
-		position: absolute;
-		/* (width of initial navbar - the size of a single char) / 2 */
-		left: calc((3rem - 4vb) / 2);
-		/* (height of a single grid - the height of the line) / 2 */
-		top: calc((5vb - 4vb) / 2);
-		opacity: 1;
-		font-size: 4vb;
-		transition:
-			rotate 400ms,
-			left 500ms,
-			color 300ms;
-		rotate: 180deg;
-		@apply text-neutral-variant-400 dark:text-neutral-variant-400;
-	}
-	#navbar-fun-line {
-		width: 1px;
-		height: 100%;
-		top: calc(((5vb) / 2) + 5px);
-		left: calc(calc((3rem - 4vb) / 2) + (4vb / 2) - 5px);
-		position: absolute;
-		border-image-source: linear-gradient(
-			0deg,
-			theme(colors.primary.400) 0%,
-			theme(colors.secondary.400) 30%,
-			theme(colors.tertiary.400) 60%,
-			color-mix(in srgb, theme(colors.primary.400), transparent 90%) 90%
-		);
-		border-image-slice: 1;
-		border-left-width: 9px;
-		opacity: 0.11;
-		filter: blur(14px) saturate(100%);
-		transition:
-			top 444ms 0s ease-out,
-			filter 1s 50ms ease-in-out,
-			opacity 5s 250ms ease-in-out;
-	}
-	#nav-list {
-		height: 100%;
-		display: grid;
-		grid-template-rows: repeat(20, minmax(0, 1fr));
-	}
-	#social-links {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 3rem;
-		height: 100%;
-	}
-	.nav-item {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		width: fit-content;
-		justify-content: space-evenly;
-		height: 100%;
-		padding-left: calc((2rem - 1ch) / 2);
-	}
-	.link-header {
-		font-weight: bold;
-		font-size: 3vb;
-		letter-spacing: 0.222rem;
-		transition: opacity 25ms;
-		opacity: 0;
-	}
-	.link-sub {
-		opacity: 0;
-		max-width: 11rem;
-		padding-left: calc((2rem - 2ch) / 2);
-		font-size: 1.5vb;
-		transition: opacity 25ms;
-	}
-	#navbar:hover .nav-item {
-		width: 11rem;
-	}
-	#navbar:hover {
-		width: 11rem;
-		transition:
-			color 777ms,
-			background-color 777ms,
-			width 150ms;
-	}
-	#navbar:hover #navbar-fun-line {
-		top: 100vb;
-		opacity: 1;
-		filter: blur(4px) saturate(200%);
-		transition: 0ms;
-	}
-	#navbar:hover #logo-icon {
-		/* (width of expanded navbar - the size of a single char) / 2 */
-		left: calc((19rem - 4vb) / 2);
-		rotate: 270deg;
-		color: theme(colors.neutral-variant.400);
-		@apply text-neutral-variant-600 dark:text-neutral-variant-200;
-		transition:
-			rotate 300ms,
-			left 200ms,
-			color 300ms;
-	}
-	#navbar:hover .link-header {
-		transition: opacity 400ms;
-		opacity: 1;
-	}
-	#navbar:hover .link-sub {
-		opacity: 1;
-		transition: opacity 400ms;
-	}
-	#navbar:before {
-		content: '';
-		z-index: -1;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: linear-gradient(
-			0deg,
-			theme(colors.primary.400) 0%,
-			theme(colors.secondary.400) 50%,
-			theme(colors.tertiary.400) 100%
-		);
-		transform: translate3d(-2px, 0, 0) scale(1);
-		filter: blur(2px);
-		opacity: 0.55;
-		transition: opacity 0.3s;
-		border-top-right-radius: 1rem /* 16px */;
-		border-bottom-right-radius: 1rem /* 16px */;
-	}
-	#navbar::after {
-		content: '';
-		z-index: -1;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: inherit;
-		border-top-right-radius: 1rem /* 16px */;
-		border-bottom-right-radius: 1rem /* 16px */;
+	@media (min-width: 768px) {
+		#navbar {
+			position: fixed;
+			height: 100%;
+			width: 5vw;
+			top: 0px;
+			left: 0px;
+			bottom: unset;
+			@apply rounded-r-2xl;
+		}
+		#logo-icon {
+			/* This ensures the logo is centered in the grid */
+			position: absolute;
+			/* (width of initial navbar - the size of a single char) / 2 */
+			left: calc((5vw - 4vb) / 2);
+			/* (height of a single grid - the height of the line) / 2 */
+			top: calc((5vb - 3vb) / 2);
+			opacity: 1;
+			font-size: 4vb;
+			transition:
+				rotate 400ms,
+				left 500ms,
+				color 300ms;
+			rotate: 180deg;
+			@apply text-neutral-variant-400 dark:text-neutral-variant-400;
+		}
+		#navbar-fun-line {
+			width: 1px;
+			height: 100%;
+			top: calc(((5vb) / 2) + 5px);
+			left: calc(calc((5vw - 4vb) / 2) + (4vb / 2) - 5px);
+			position: absolute;
+			border-image-source: linear-gradient(
+				0deg,
+				theme(colors.primary.400) 0%,
+				theme(colors.secondary.400) 30%,
+				theme(colors.tertiary.400) 60%,
+				color-mix(in srgb, theme(colors.primary.400), transparent 90%) 90%
+			);
+			border-image-slice: 1;
+			border-left-width: 9px;
+			opacity: 0.11;
+			filter: blur(14px) saturate(100%);
+			transition:
+				top 444ms 0s ease-out,
+				filter 1s 50ms ease-in-out,
+				opacity 5s 250ms ease-in-out;
+		}
+		#nav-list {
+			height: 100%;
+			grid-template-rows: repeat(20, minmax(0, 1fr));
+			justify-content: unset;
+			align-items: unset;
+		}
+		.nav-item {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 5vw;
+			justify-content: space-evenly;
+			height: 100%;
+			padding-left: calc((5vw - 4vb) / 2);
+			padding-right: calc((5vw - 4vb) / 2);
+		}
+		.link-header {
+			font-weight: bold;
+			font-size: 3vb;
+			letter-spacing: 0.222rem;
+			transition: opacity 0ms;
+			opacity: 0;
+		}
+		.link-sub {
+			display: unset;
+			opacity: 0;
+			max-width: 22vw;
+			padding-left: calc((4vw - 2ch) / 2);
+			font-size: 1.5vb;
+			transition: opacity 0ms;
+		}
+		#navbar:hover .nav-item {
+			width: 22vw;
+		}
+		#navbar:hover {
+			width: 22vw;
+			transition:
+				color 777ms,
+				background-color 777ms,
+				width 150ms;
+		}
+		#navbar:hover #navbar-fun-line {
+			top: 100vb;
+			opacity: 1;
+			filter: blur(4px) saturate(200%);
+			transition: 0ms;
+		}
+		#navbar:hover #logo-icon {
+			/* (width of expanded navbar - the size of a single char) / 2 */
+			left: calc((38vw - 4vb) / 2);
+			rotate: 270deg;
+			color: theme(colors.neutral-variant.400);
+			@apply text-neutral-variant-600 dark:text-neutral-variant-200;
+			transition:
+				rotate 300ms,
+				left 200ms,
+				color 300ms;
+		}
+		#navbar:hover .link-header {
+			transition: opacity 400ms;
+			opacity: 1;
+		}
+		#navbar:hover .link-sub {
+			opacity: 1;
+			transition: opacity 400ms;
+		}
+		#navbar:before {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: linear-gradient(
+				0deg,
+				theme(colors.primary.400) 0%,
+				theme(colors.secondary.400) 50%,
+				theme(colors.tertiary.400) 100%
+			);
+			transform: translate3d(-2px, 0, 0) scale(1);
+			filter: blur(2px);
+			opacity: 0.55;
+			transition: opacity 0.3s;
+			border-top-right-radius: 1rem /* 16px */;
+			border-bottom-right-radius: 1rem /* 16px */;
+		}
+		#navbar::after {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: inherit;
+			border-top-right-radius: 1rem /* 16px */;
+			border-bottom-right-radius: 1rem /* 16px */;
+		}
 	}
 </style>

@@ -5,36 +5,109 @@ import { easyConfig } from '../siteConfig';
 // and https://icon-sets.iconify.design/ for more icons
 ---
 
-<div>
-	<a href={easyConfig.linkedin_url}>
-		<Icon name="mdi:linkedin" />
-	</a>
-	<a href={easyConfig.twitter_url}>
-		<Icon name="mdi:twitter" />
-	</a>
-	<a href={easyConfig.github_url}>
-		<Icon name="mdi:github" is:inline />
-	</a>
+<div id="social-widget" class="dropdown">
+	<div
+		id="social-links"
+		tabindex="0"
+		class="sm:dropdown-content sm:z-[1] md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-2 md:hidden"
+	>
+		{
+			Object.entries(easyConfig.social_media).map(([key, value]) =>
+				value ? (
+					<a href={value}>
+						<Icon name={`mdi:${key}`} />
+					</a>
+				) : null
+			)
+		}
+	</div>
+	<!-- <Icon id="social-icon" class="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 opacity-70" name="mdi:emoticon-plus-outline" /> -->
+	<Icon
+		id="social-icon"
+		class="social-icon md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:opacity-70"
+		name="mdi:account-multiple-plus-outline"
+		tabindex="0"
+	/>
+	<span class="hidden md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3 md:tracking-wider">connect</span>
 </div>
 
 <style>
-	div {
-		display: flex;
-		flex-direction: column;
-		row-gap: 1rem;
-		z-index: 1;
+	#social-icon {
+		width: 4vb;
+		height: 4vb;
 	}
-	a {
-		color: theme(colors.semantic.on-surface-variant);
-		width: fit-content;
+	@media (max-width: 767px) {
+		#social-links {
+			bottom: 7vh;
+			height: 15vh;
+			width: 88vw;
+			flex-wrap: wrap;
+			flex-direction: row;
+			row-gap: 0.77rem;
+			column-gap: 0.77rem;
+			border-radius: 1rem;
+			padding: 0.55rem;
+			background: theme(colors.semantic.surface-variant/.95);
+			display: flex;
+		}
+		svg {
+			width: 5vb;
+			height: 5vb;
+		}
+		a {
+			color: theme(colors.semantic.on-surface);
+		}
+	}
+
+	@media (min-width: 768px) {
+		#social-widget {
+			display: flex;
+		}
+		#social-widget {
+			display: grid;
+			container-name: socialWidget;
+			container-type: size;
+			grid-template-rows: 75% 25%;
+			grid-template-columns: 25% 75%;
+			width: 100%;
+			height: 100%;
+			overflow: clip;
+			z-index: 1;
+			padding-right: calc((2rem - 2ch) / 2);
+		}
+		#social-links {
+			flex-direction: row;
+			flex-wrap: wrap;
+			row-gap: 0.77rem;
+			column-gap: 0.77rem;
+			padding-bottom: 1.33rem;
+			align-content: flex-end;
+			justify-content: flex-start;
+		}
+
+		svg {
+			width: 3vb;
+			height: 3vb;
+		}
+		a {
+			color: theme(colors.semantic.on-surface-variant);
+		}
+		@container socialWidget (width > 4rem) {
+			#social-links {
+				display: flex;
+				padding-left: calc((8vw - 2ch) / 2);
+			}
+			#social-icon {
+				opacity: 1;
+				transition: 600ms;
+			}
+			span {
+				display: flex;
+			}
+		}
 	}
 
 	a:hover {
 		color: theme(colors.semantic.secondary);
-	}
-
-	svg {
-		width: 3vb;
-		height: 3vb;
 	}
 </style>

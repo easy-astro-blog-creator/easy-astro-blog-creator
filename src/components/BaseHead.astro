@@ -2,7 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import { SEO } from "astro-seo";
+import { SEO } from 'astro-seo';
 import { easyConfig } from '../siteConfig';
 import { getImage } from 'astro:assets';
 import defaultSocialImage from '../images/default-social-image.png';
@@ -12,34 +12,36 @@ import defaultSocialImage from '../images/default-social-image.png';
  */
 const canonicalURL = formatCanonicalURL(new URL(Astro.url.pathname, easyConfig.github_pages_url));
 function formatCanonicalURL(url: string | URL) {
-    let path = url.toString();
-    const hasQueryParams = path.includes("?");
+	let path = url.toString();
+	const hasQueryParams = path.includes('?');
 
-    // If there are query params, make sure the URL has no trailing slash
-    if (hasQueryParams) {
-        path = path.replace(/\/?$/, "");
-    } else {
-        // Otherwise, canonical URL always has a trailing slash
-        path = path.replace(/\/?$/, "/");
-    }
-    return path;
+	// If there are query params, make sure the URL has no trailing slash
+	if (hasQueryParams) {
+		path = path.replace(/\/?$/, '');
+	} else {
+		// Otherwise, canonical URL always has a trailing slash
+		path = path.replace(/\/?$/, '/');
+	}
+	return path;
 }
 
-const {page_title, page_description, heroImage, heroAlt, pubDate, updatedDate} = Astro.props;
+const { page_title, page_description, heroImage, heroAlt, pubDate, updatedDate } = Astro.props;
 
 const socialImage = await (async () => {
-    let image; 
+	let image;
 
-    if (heroImage) {
-        image = await getImage({ src: heroImage, format: 'webp' });
-    } else {
-        image = await getImage({ src: defaultSocialImage, format: 'webp' });
-    }
+	if (heroImage) {
+		image = await getImage({ src: heroImage, format: 'webp' });
+	} else {
+		image = await getImage({ src: defaultSocialImage, format: 'webp' });
+	}
 	const fullImage = new URL(image.src, easyConfig.github_pages_url).toString();
 	return { src: fullImage, alt: heroAlt };
 })();
 // See https://github.com/jonasmerlin/astro-seo
 ---
+
+<meta name="viewport" content="width=device-width height=device-height" />
 
 <SEO
 	title={page_title && `${page_title}`}
@@ -51,7 +53,7 @@ const socialImage = await (async () => {
 	openGraph={{
 		basic: {
 			title: page_title || easyConfig.site_title,
-			type: "website",
+			type: 'website',
 			image: socialImage.src,
 			url: canonicalURL,
 		},
@@ -65,13 +67,11 @@ const socialImage = await (async () => {
 		article: {
 			publishedTime: pubDate,
 			modifiedTime: updatedDate,
-			authors: [easyConfig.full_name]
-		}
+			authors: [easyConfig.full_name],
+		},
 	}}
 	extend={{
 		// extending the default link tags
-		link: [{ rel: "icon", type: easyConfig.favicon_type, href: easyConfig.favicon_url }],
+		link: [{ rel: 'icon', type: easyConfig.favicon_type, href: easyConfig.favicon_url }],
 	}}
 />
-
-

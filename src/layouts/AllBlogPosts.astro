@@ -20,42 +20,44 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="ml-4 mr-14 flex list-none flex-col items-start gap-20 py-4">
-		{
-			posts.map((post) => {
-				return (
-					<>
-						<li class="min-w-full">
-							<a class="flex h-[12rem] min-w-full items-center justify-between no-underline" href={`${post.params.htmlSlug}`}>
-								<div class="flex max-h-full  max-w-[60%] shrink-0 flex-col pr-4">
-									<div class="pb-1 text-2xl font-medium lg:text-base">
-										<FormattedDate
-											date={
-												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
-											}
-										/>
+	<article>
+		<ul class="md:gap-15 ml-4 mr-14 flex list-none flex-col items-start gap-10 py-4">
+			{
+				posts.map((post) => {
+					return (
+						<>
+							<li class="min-w-full">
+								<a class="flex min-w-full items-center justify-between no-underline" href={`${post.params.htmlSlug}`}>
+									<div class="flex max-h-full  max-w-[60%] shrink-0 flex-col pr-4">
+										<div class="pb-1 text-sm font-medium md:text-base">
+											<FormattedDate
+												date={
+													post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+												}
+											/>
+										</div>
+										<h1 class="pb-1 text-2xl font-medium">{post.props.data.title}</h1>
+										<div class="line-clamp-3 pb-0 text-base md:line-clamp-4  ">
+											{formatDescription(post.props.data.description, post.props.body)}
+										</div>
+										<div class="pt-1 text-base font-normal italic md:text-base">{[post.props.data.readingTime]}</div>
 									</div>
-									<h1 class="pb-1 text-3xl font-medium">{post.props.data.title}</h1>
-									<div class="line-clamp-3 pb-0 text-3xl lg:line-clamp-4 lg:text-lg ">
-										{formatDescription(post.props.data.description, post.props.body)}
+									<div class="flex h-auto max-h-[80%] w-3/12 max-w-[80%] items-center justify-center">
+										{post.props.data.heroImage ? (
+											<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
+										) : (
+											<div class="h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
+										)}
 									</div>
-									<div class="pt-1 text-2xl font-normal italic lg:text-base">{[post.props.data.readingTime]}</div>
-								</div>
-								<div class="flex h-auto max-h-[80%] w-3/12 max-w-[80%] items-center justify-center">
-									{post.props.data.heroImage ? (
-										<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
-									) : (
-										<div class="h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
-									)}
-								</div>
-							</a>
-						</li>
-						<hr />
-					</>
-				);
-			})
-		}
-	</ul>
+								</a>
+							</li>
+							<hr />
+						</>
+					);
+				})
+			}
+		</ul>
+	</article>
 </BaseLayout>
 <style>
 	a {

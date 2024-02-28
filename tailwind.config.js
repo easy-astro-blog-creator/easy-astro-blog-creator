@@ -15,12 +15,15 @@ export default {
 		logs: false, // Shows info about daisyUI version and used config in the console when building your CSS
 		themeRoot: ':root', // The element that receives theme color CSS variables
 	},
-
 	fontFamily: {
 		sans: ['REM', 'sans-serif'],
 	},
 	theme: {
 		extend: customTailwindTheme,
+		screens: {
+			sm: { min: '1px', max: '767px' },
+			md: { min: '768px' },
+		},
 	},
 	darkMode: 'class',
 };

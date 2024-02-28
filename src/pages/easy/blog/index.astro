@@ -1,5 +1,6 @@
 ---
 import AllBlogPosts from '../../../layouts/AllBlogPosts.astro';
+import { easyConfig } from 'src/siteConfig';
 ---
 
-<AllBlogPosts blogCollectionName="easy" basePath="easy/blog" />
+{easyConfig.easyabc_enabled && <AllBlogPosts blogCollectionName="easy" basePath="easy/blog" />}

@@ -1,13 +1,18 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Palette from '../../components/Palette.astro';
+import { easyConfig } from 'src/siteConfig';
 
 const PAGE_TITLE = 'EasyABC Theme';
 const PAGE_DESCRIPTION = 'Viewing and applying Themes for EasyABC';
-
 ---
-<BaseLayout page_title={PAGE_TITLE} page_description={PAGE_DESCRIPTION}>
-    <div class="px-4 rounded-lg w-full">
-        <Palette/>
-    </div>
-</BaseLayout>
+
+{
+	easyConfig.easyabc_enabled && (
+		<BaseLayout page_title={PAGE_TITLE} page_description={PAGE_DESCRIPTION}>
+			<div class="w-full rounded-lg px-4">
+				<Palette />
+			</div>
+		</BaseLayout>
+	)
+}

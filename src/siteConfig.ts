@@ -4,37 +4,55 @@ import { SchemeVariant, CustomThemeConfig } from '../src/utils/colorFun/src';
 const FULL_NAME = 'shelby jenkins';
 const FIRST_NAME = 'shelby';
 
-const capitalized_first_name = capitalizeName(FIRST_NAME);
-const capitalized_full_name = capitalizeName(FULL_NAME);
-
-const SITE_TITLE = `${capitalized_first_name}'s Blog`; // Shows up in the tab bar of your browser
-const SITE_DESCRIPTION = `The personal blog of ${capitalized_full_name}.`;
-const FAVICON_URL = '/favicon.png';
-// image/svg+xml or image/png
-// See https://www.w3.org/2005/10/howto-favicon
-const FAVICON_TYPE = 'image/png';
-
 // Github Pages configuration
 const GITHUB_USERNAME = 'shelbyjenkins';
-const GITHUB_PAGES_URL = `https://${GITHUB_USERNAME}.github.io`; // Right now this is the only supported format
 
-// Social media links
+const PRIMARY_COLOR = '#40a1e6'; // Curious Blue #40a1e6 64, 161, 230
+const THEME_VARIANT = SchemeVariant.SPLIT_COMPLEMENTARY;
+
+// Social media links - leave blank if you don't want to display a link
 const LINKEDIN_URL = 'https://www.linkedin.com/in/jshelbyj/';
 const TWITTER_URL = 'https://twitter.com/j_shelby_j';
 const GITHUB_URL = 'https://github.com/shelbyjenkins';
+const YOUTUBE_URL = '';
+const FACEBOOK_URL = '';
+const INSTAGRAM_URL = '';
+const SNAPCHAT_URL = '';
+const MASTODON_URL = '';
+const DISCORD_URL = '';
+const TWITCH_URL = '';
 
+const FAVICON_URL = '/favicon.png';
+// See https://www.w3.org/2005/10/howto-favicon
+// image/svg+xml or image/png
+const FAVICON_TYPE = 'image/png';
+
+// Build and deploy with the EasyABC section of the site included. Disable for personal blogs.
+const EASYABC_ENABLED = true;
+
+// Feel free to edit the following, but it's optional.
 export const easyConfig = {
-	first_name: capitalized_first_name,
-	full_name: capitalized_full_name,
-	site_title: SITE_TITLE,
-	site_description: SITE_DESCRIPTION,
+	first_name: capitalizeName(FIRST_NAME),
+	full_name: capitalizeName(FULL_NAME),
+	site_title: `${capitalizeName(FIRST_NAME)}'s Blog`,
+	site_description: `The personal blog of ${capitalizeName(FULL_NAME)}.`,
 	favicon_url: FAVICON_URL,
 	favicon_type: FAVICON_TYPE,
 	github_username: GITHUB_USERNAME,
-	github_pages_url: GITHUB_PAGES_URL,
-	linkedin_url: LINKEDIN_URL,
-	twitter_url: TWITTER_URL,
-	github_url: GITHUB_URL,
+	github_pages_url: `https://${GITHUB_USERNAME}.github.io`, // Right now this is the only supported format,
+	social_media: {
+		linkedin: LINKEDIN_URL,
+		twitter: TWITTER_URL,
+		github: GITHUB_URL,
+		youtube: YOUTUBE_URL,
+		facebook: FACEBOOK_URL,
+		instagram: INSTAGRAM_URL,
+		snapchat: SNAPCHAT_URL,
+		mastodon: MASTODON_URL,
+		discord: DISCORD_URL,
+		twitch: TWITCH_URL,
+	},
+	easyabc_enabled: EASYABC_ENABLED,
 };
 
 /* Color Palette */
@@ -46,19 +64,13 @@ export const easyConfig = {
 
 export const CUSTOM_THEME: CustomThemeConfig = {
 	// Primary colors are use most frequently used across your UI and imparts a distinct identity to the product.
-	primary: '#40a1e6', // Curious Blue #40a1e6 64, 161, 230
-	schemeVariant: SchemeVariant.SPLIT_COMPLEMENTARY,
+	primary: PRIMARY_COLOR, // Curious Blue #40a1e6 64, 161, 230
+	schemeVariant: THEME_VARIANT,
 	// The following are only used if `schemeVariant.CUSTOM`
 	// Secondary colors highlight or complement the primary color. These are to be used sparingly to make the UI elements stand out.
 	// Tetriary or Accent Color refers to a color used to emphasize key parts of the UI, such as the active tab, focused input texts, checked boxes, etc.
 	//  Background color is the color of the main content area. It is used to set the mood of the UI.
 };
-
-// Meteor #D07D12 208, 125, 18
-// Aqua Squeeze #E8F5F2 232, 245, 242
-// Pattens Blue #d4e9f8 212, 233, 248
-// Astronaut Blue #19405c
-// Britich Racing Green #003E1F 0, 62, 31
 
 // Function to capitalize the first letter of each word
 function capitalizeName(name: string): string {

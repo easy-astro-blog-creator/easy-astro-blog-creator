@@ -3,22 +3,32 @@ import BaseHead from '../components/BaseHead.astro';
 import Navbar from '../components/Navbar.astro';
 import { formatDescription } from '../utils/abbreviateDescription';
 import ThemeIcon from '../components/ThemeIcon.astro';
-
-const { title, description, pubDate, updatedDate, heroImage, heroAlt, body} = Astro.props;
+import Footer from '../components/Footer.astro';
+const { title, description, pubDate, updatedDate, heroImage, heroAlt, body } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en">
-<head>
-	<BaseHead page_title={title} page_description={await formatDescription(description, body)} heroImage={heroImage} heroAlt={heroAlt} pubDate={pubDate} updatedDate={updatedDate}/>
-</head>
-
-	<header>
-		<Navbar />
-		<ThemeIcon />
-	</header>
+	<head>
+		<BaseHead
+			page_title={title}
+			page_description={await formatDescription(description, body)}
+			heroImage={heroImage}
+			heroAlt={heroAlt}
+			pubDate={pubDate}
+			updatedDate={updatedDate}
+		/>
+	</head>
 	<body>
+		<header>
+			<Navbar />
+			<ThemeIcon />
+		</header>
 		<main>
 			<slot />
+			<div class="sm:block md:hidden">
+				<Footer />
+			</div>
 		</main>
 	</body>
 </html>

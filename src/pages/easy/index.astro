@@ -1,38 +1,40 @@
 ---
-// import { Image } from 'astro:assets';
+import heroImage from '/public/images/easy-hero.png';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Content as ReadMe } from '/README.md';
+import { easyConfig } from 'src/siteConfig';
+
 const SITE_TITLE = 'Easy Astro Blog Creator';
 const SITE_DESCRIPTION = 'Create and host a blog for free using github pages.';
-import heroImage from '/public/images/easy-hero.png';
 const heroAlt = 'Easy logo.';
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
-	<article>
-		<!-- This is commented out because the github repo loads the image in the README.MD, but when deployed it does not. -->
-		<!-- <Image
-			src={heroImage}
-			alt={heroAlt}
-			format="png"
-			quality="100"
-			style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto;"
-			class="mb-8 rounded-lg"
-		/> -->
-		<div id="article-text" class="prose prose-customTheme max-w-none">
-			<ReadMe />
-		</div>
-	</article>
-</BaseLayout>
-<style>
-	article {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-left: 2rem;
-		width: clamp(45ch, 120ch, calc(100% - 2rem));
-	}
-	#article-text {
-		width: clamp(45ch, 75ch, 100%);
-	}
-</style>
+{
+	easyConfig.easyabc_enabled && (
+		<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
+			<ul class="gap-4 sm:flex md:hidden ">
+				<li>
+					<a class="link-sub" href="/easy">
+						Readme
+					</a>
+				</li>
+				<li>
+					<a class="link-sub" href="/easy/blog">
+						EasyABC Blog
+					</a>
+				</li>
+				<li>
+					<a class="link-sub" href="/easy/theme">
+						ColorFun
+					</a>
+				</li>
+			</ul>
+			<article>
+				<div id="article-text" class="prose prose-customTheme max-w-none">
+					<ReadMe />
+				</div>
+			</article>
+		</BaseLayout>
+	)
+}
+<style></style>

@@ -3,15 +3,21 @@ import { type CollectionEntry } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import '../../../styles/blog.css';
 import { customGetCollection } from '../../../utils/customGetCollection';
-
+import { easyConfig } from 'src/siteConfig';
 export async function getStaticPaths() {
-	return customGetCollection('easy', 'easy/blog');
+	if (easyConfig.easyabc_enabled) {
+		return customGetCollection('easy', 'easy/blog');
+	}
 }
 type Props = CollectionEntry<'easy'>;
 const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+{
+	easyConfig.easyabc_enabled && (
+		<BlogPost {...post.data}>
+			<Content />
+		</BlogPost>
+	)
+}
