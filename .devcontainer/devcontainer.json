@@ -3,12 +3,9 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-    "remoteUser": "root",
-	// "postCreateCommand": "npm install",
-	"postCreateCommand": "npm install && npm run build",
-	"waitFor": "postCreateCommand",
-	"postStartCommand": "npm run dev",
-    "customizations": {
+	"remoteUser": "root",
+	"postCreateCommand": "npm install",
+	"customizations": {
 		"vscode": {
 			"extensions": [
 				"github.vscode-pull-request-github",
@@ -17,7 +14,6 @@
 				"github.copilot-chat",
 				"d-koppenhagen.file-tree-to-text-generator",
 				"astro-build.astro-vscode",
-				"csstools.postcss",
 				"moalamri.inline-fold",
 				"bradlc.vscode-tailwindcss",
 				"ms-vscode.vscode-typescript-next",
