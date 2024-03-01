@@ -12,24 +12,24 @@ const heroAlt = 'Easy logo.';
 {
 	easyConfig.easyabc_enabled && (
 		<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
-			<ul class="gap-4 sm:flex md:hidden ">
-				<li>
-					<a class="link-sub" href="/easy">
-						Readme
-					</a>
-				</li>
-				<li>
-					<a class="link-sub" href="/easy/blog">
-						EasyABC Blog
-					</a>
-				</li>
-				<li>
-					<a class="link-sub" href="/easy/theme">
-						ColorFun
-					</a>
-				</li>
-			</ul>
 			<article>
+				<ul class="gap-4 pb-2 sm:flex md:hidden ">
+					<li>
+						<a class="link-sub" href="/easy">
+							Readme
+						</a>
+					</li>
+					<li>
+						<a class="link-sub" href="/easy/blog">
+							EasyABC Blog
+						</a>
+					</li>
+					<li>
+						<a class="link-sub" href="/easy/theme">
+							ColorFun
+						</a>
+					</li>
+				</ul>
 				<div id="article-text" class="prose prose-customTheme max-w-none">
 					<ReadMe />
 				</div>

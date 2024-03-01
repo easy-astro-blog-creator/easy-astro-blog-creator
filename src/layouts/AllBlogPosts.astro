@@ -20,7 +20,7 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="md:gap-20 flex w-full list-none flex-col items-start gap-7 py-4 pl-1 pr-1 md:pl-24 md:pr-16">
+	<ul class="md:gap-20 flex w-full list-none flex-col items-start gap-7 py-4 pl-2 pr-2 md:pl-24 md:pr-16">
 		{
 			posts.map((post) => {
 				return (

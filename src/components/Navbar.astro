@@ -55,7 +55,6 @@ import SocialLinks from './SocialLinks.astro';
 	#navbar {
 		position: fixed;
 		z-index: 1;
-		background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
 		color: theme(colors.semantic.on-surface-variant);
 		transition:
 			color 777ms,
@@ -70,6 +69,7 @@ import SocialLinks from './SocialLinks.astro';
 			left: 0px;
 			top: unset;
 			padding-bottom: calc(1vh + env(safe-area-inset-bottom));
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 5%);
 		}
 	}
 	@media (min-width: 768px) {
@@ -80,6 +80,7 @@ import SocialLinks from './SocialLinks.astro';
 			left: 0px;
 			bottom: unset;
 			@apply rounded-r-2xl;
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
 		}
 		#logo-icon {
 			/* This ensures the logo is centered in the grid */

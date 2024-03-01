@@ -4,20 +4,20 @@ const today = new Date();
 ---
 
 <aside class="footer-text">
-	<p>
+	<p class="m-0 pb-1">
 		Create your own GitHub Pages blog with <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator"
 			>easy-astro-blog-creator</a
 		>!
 	</p>
-	<div></div>
-	<p>&copy; {today.getFullYear()} {easyConfig.full_name}.</p>
+	<p id="divider" class="mx-auto h-0"></p>
+	<p class="m-0 pt-1">&copy; {today.getFullYear()} {easyConfig.full_name}.</p>
 </aside>
 
 <style>
 	.footer-text {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: space-around;
 		align-items: center;
 		text-align: center;
 		font-size: 0.5rem;
@@ -25,12 +25,10 @@ const today = new Date();
 		margin-bottom: auto;
 		margin-right: 1rem;
 	}
-	div {
+	#divider {
 		border-bottom-width: 1px;
 		border-color: theme(colors.semantic.on-surface-variant);
 		width: 12%;
-		margin: auto;
-		padding-top: 0.25rem;
 	}
 	a {
 		background: linear-gradient(

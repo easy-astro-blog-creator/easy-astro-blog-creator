@@ -57,8 +57,8 @@
 	@media (max-width: 767px) {
 		main {
 			height: 93vh;
-			padding-left: 1vw;
-			padding-right: 1vw;
+			padding-left: 2vw;
+			padding-right: 2vw;
 		}
 		article {
 			padding-left: 3vw;
