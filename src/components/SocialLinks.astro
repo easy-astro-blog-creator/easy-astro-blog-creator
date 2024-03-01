@@ -5,7 +5,7 @@ import { easyConfig } from '../siteConfig';
 // and https://icon-sets.iconify.design/ for more icons
 ---
 
-<div id="social-widget" class="dropdown">
+<div id="social-widget" class="dropdown flex">
 	<div
 		id="social-links"
 		tabindex="0"
@@ -21,14 +21,17 @@ import { easyConfig } from '../siteConfig';
 			)
 		}
 	</div>
-	<!-- <Icon id="social-icon" class="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2 opacity-70" name="mdi:emoticon-plus-outline" /> -->
+	<!-- <Icon id="social-icon" class="md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 opacity-70" name="mdi:emoticon-plus-outline" /> -->
 	<Icon
 		id="social-icon"
-		class="social-icon md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:opacity-70"
+		class="social-icon md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:self-end md:opacity-70"
 		name="mdi:account-multiple-plus-outline"
 		tabindex="0"
 	/>
-	<span class="hidden md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3 md:tracking-wider">connect</span>
+	<span
+		class="hidden font-extralight md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3 md:ml-3 md:max-h-max md:self-end md:tracking-wider"
+		>connect</span
+	>
 </div>
 
 <style>
@@ -39,8 +42,8 @@ import { easyConfig } from '../siteConfig';
 	@media (max-width: 767px) {
 		#social-links {
 			bottom: 7vh;
-			height: 15vh;
-			width: 88vw;
+			width: max-content;
+			max-width: 88vw;
 			flex-wrap: wrap;
 			flex-direction: row;
 			row-gap: 0.77rem;
@@ -49,6 +52,8 @@ import { easyConfig } from '../siteConfig';
 			padding: 0.55rem;
 			background: theme(colors.semantic.surface-variant/.95);
 			display: flex;
+			border-width: 4px;
+			border-color: theme(colors.semantic.primary/.44);
 		}
 		svg {
 			width: 5vb;
@@ -73,16 +78,15 @@ import { easyConfig } from '../siteConfig';
 			height: 100%;
 			overflow: clip;
 			z-index: 1;
-			padding-right: calc((2rem - 2ch) / 2);
+			padding-right: calc((3rem - 2ch) / 2);
 		}
 		#social-links {
-			flex-direction: row;
 			flex-wrap: wrap;
 			row-gap: 0.77rem;
+			padding-top: 1rem;
 			column-gap: 0.77rem;
-			padding-bottom: 1.33rem;
 			align-content: flex-end;
-			justify-content: flex-start;
+			justify-content: space-evenly;
 		}
 
 		svg {
@@ -95,7 +99,7 @@ import { easyConfig } from '../siteConfig';
 		@container socialWidget (width > 4rem) {
 			#social-links {
 				display: flex;
-				padding-left: calc((8vw - 2ch) / 2);
+				padding-left: calc((4vw - 2ch) / 2);
 			}
 			#social-icon {
 				opacity: 1;

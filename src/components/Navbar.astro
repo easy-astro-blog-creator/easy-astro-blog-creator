@@ -43,36 +43,37 @@ import SocialLinks from './SocialLinks.astro';
 				</li>
 			)
 		}
-		<li class="nav-item md:row-start-[16] md:row-end-[19]">
+		<li class="nav-item md:row-start-[12] md:row-end-[18]">
 			<SocialLinks />
 		</li>
-		<li class="nav-item link-sub hidden md:row-start-[19] md:row-end-[21] md:block">
+		<li class="nav-item link-sub hidden md:row-start-[18] md:row-end-[21] md:block">
 			<Footer />
 		</li>
 	</ul>
 </nav>
 <style>
+	#navbar {
+		position: fixed;
+		z-index: 1;
+		background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
+		color: theme(colors.semantic.on-surface-variant);
+		transition:
+			color 777ms,
+			background-color 777ms,
+			width 500ms;
+	}
 	@media (max-width: 767px) {
 		#navbar {
-			position: fixed;
 			height: 7vh;
 			width: 100%;
 			bottom: 0px;
 			left: 0px;
 			top: unset;
-			padding-bottom: env(safe-area-inset-bottom);
-			@apply text-semantic-on-surface-variant;
-			transition:
-				color 777ms,
-				background-color 777ms,
-				width 500ms;
-			color: theme(colors.semantic.on-surface-variant);
-			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 10%);
+			padding-bottom: calc(1vh + env(safe-area-inset-bottom));
 		}
 	}
 	@media (min-width: 768px) {
 		#navbar {
-			position: fixed;
 			height: 100%;
 			width: 5vw;
 			top: 0px;
@@ -107,7 +108,7 @@ import SocialLinks from './SocialLinks.astro';
 				theme(colors.primary.400) 0%,
 				theme(colors.secondary.400) 30%,
 				theme(colors.tertiary.400) 60%,
-				color-mix(in srgb, theme(colors.primary.400), transparent 90%) 90%
+				color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
 			);
 			border-image-slice: 1;
 			border-left-width: 9px;
@@ -132,11 +133,11 @@ import SocialLinks from './SocialLinks.astro';
 			justify-content: space-evenly;
 			height: 100%;
 			padding-left: calc((5vw - 4vb) / 2);
-			padding-right: calc((5vw - 4vb) / 2);
+			padding-right: calc((2.5vw - 4vb) / 2);
 		}
 		.link-header {
 			font-weight: bold;
-			font-size: 3vb;
+			font-size: 3.33vb;
 			letter-spacing: 0.222rem;
 			transition: opacity 0ms;
 			opacity: 0;
@@ -144,16 +145,17 @@ import SocialLinks from './SocialLinks.astro';
 		.link-sub {
 			display: unset;
 			opacity: 0;
-			max-width: 22vw;
+			max-width: 16vw;
 			padding-left: calc((4vw - 2ch) / 2);
-			font-size: 1.5vb;
+			font-size: 1.77vb;
 			transition: opacity 0ms;
+			color: theme(colors.semantic.on-surface-variant/.96);
 		}
 		#navbar:hover .nav-item {
-			width: 22vw;
+			width: 16vw;
 		}
 		#navbar:hover {
-			width: 22vw;
+			width: 16vw;
 			transition:
 				color 777ms,
 				background-color 777ms,
@@ -167,7 +169,7 @@ import SocialLinks from './SocialLinks.astro';
 		}
 		#navbar:hover #logo-icon {
 			/* (width of expanded navbar - the size of a single char) / 2 */
-			left: calc((38vw - 4vb) / 2);
+			left: calc((28vw - 4vb) / 2);
 			rotate: 270deg;
 			color: theme(colors.neutral-variant.400);
 			@apply text-neutral-variant-600 dark:text-neutral-variant-200;
