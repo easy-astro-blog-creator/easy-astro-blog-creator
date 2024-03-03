@@ -19,11 +19,55 @@
 		}
 	}
 
-	/* Remove this at some point. Used for hero images. */
 	:root {
-		--box-shadow: 0 2px 6px oklch(var(--colors-semantic-primary) / 0.2), 0 8px 24px oklch(var(--colors-semantic-primary) / 0.2),
-			0 16px 32px oklch(var(--colors-semantic-primary) / 0.2);
+		--box-shadow: 0 2px 6px oklch(var(--colors-semantic-primary) / 0.2), 0 8px 24px oklch(var(--colors-semantic-secondary) / 0.2),
+			0 16px 32px oklch(var(--colors-semantic-tertiary) / 0.2);
+
+		--linear-gradient-y: linear-gradient(
+			0deg,
+			theme(colors.primary.400) 0%,
+			theme(colors.secondary.400) 50%,
+			theme(colors.tertiary.400) 100%
+		);
+		--linear-gradient-x: linear-gradient(
+			90deg,
+			theme(colors.primary.400) 0%,
+			theme(colors.secondary.400) 50%,
+			theme(colors.tertiary.400) 100%
+		);
 	}
+	.shadow-gradient {
+		/* Required properties */
+		position: relative;
+	}
+
+	.shadow-gradient:before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--linear-gradient-y);
+		transform: translate3d(0px, 5px, 0) scale(0.98);
+		filter: blur(20px);
+		opacity: 0.5;
+		transition: opacity 0.3s;
+		border-radius: inherit;
+	}
+	.shadow-gradient::after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
+		border-radius: inherit;
+	}
+
 	html {
 		font-size: 18px;
 		font-weight: 300;
@@ -57,14 +101,16 @@
 	@media (max-width: 767px) {
 		main {
 			height: 93vh;
-			padding-left: 2vw;
-			padding-right: 2vw;
+			padding-left: 3vw;
+			padding-right: 3vw;
+			font-size: 16px;
 		}
 		article {
 			padding-left: 3vw;
 			padding-right: 3vw;
 		}
 		#article-text {
+			overflow-x: clip;
 			width: 100%;
 		}
 	}

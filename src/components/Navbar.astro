@@ -60,6 +60,7 @@ import SocialLinks from './SocialLinks.astro';
 			color 777ms,
 			background-color 777ms,
 			width 500ms;
+		background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
 	}
 	@media (max-width: 767px) {
 		#navbar {
@@ -69,7 +70,15 @@ import SocialLinks from './SocialLinks.astro';
 			left: 0px;
 			top: unset;
 			padding-bottom: calc(1vh + env(safe-area-inset-bottom));
-			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 5%);
+		}
+		#navbar:before {
+			transform: translate3d(0px, 2px, 0) scale(1);
+			border-top-right-radius: 0rem;
+			border-bottom-right-radius: 0rem;
+		}
+		#navbar::after {
+			border-top-right-radius: 0rem;
+			border-bottom-right-radius: 0rem;
 		}
 	}
 	@media (min-width: 768px) {
@@ -80,14 +89,10 @@ import SocialLinks from './SocialLinks.astro';
 			left: 0px;
 			bottom: unset;
 			@apply rounded-r-2xl;
-			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
 		}
 		#logo-icon {
-			/* This ensures the logo is centered in the grid */
 			position: absolute;
-			/* (width of initial navbar - the size of a single char) / 2 */
 			left: calc((5vw - 4vb) / 2);
-			/* (height of a single grid - the height of the line) / 2 */
 			top: calc((5vb - 3vb) / 2);
 			opacity: 1;
 			font-size: 4vb;
@@ -188,37 +193,37 @@ import SocialLinks from './SocialLinks.astro';
 			transition: opacity 400ms;
 		}
 		#navbar:before {
-			content: '';
-			z-index: -1;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background: linear-gradient(
-				0deg,
-				theme(colors.primary.400) 0%,
-				theme(colors.secondary.400) 50%,
-				theme(colors.tertiary.400) 100%
-			);
-			transform: translate3d(-2px, 0, 0) scale(1);
-			filter: blur(2px);
-			opacity: 0.55;
-			transition: opacity 0.3s;
+			transform: translate3d(-2px, 0px, 0) scale(1);
 			border-top-right-radius: 1rem /* 16px */;
 			border-bottom-right-radius: 1rem /* 16px */;
 		}
 		#navbar::after {
-			content: '';
-			z-index: -1;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background: inherit;
 			border-top-right-radius: 1rem /* 16px */;
 			border-bottom-right-radius: 1rem /* 16px */;
 		}
+	}
+	#navbar:before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--linear-gradient-y);
+
+		filter: blur(2px);
+		opacity: 0.55;
+		transition: opacity 0.3s;
+	}
+	#navbar::after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
 	}
 </style>

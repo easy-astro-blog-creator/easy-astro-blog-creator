@@ -48,19 +48,21 @@ import { easyConfig } from '../siteConfig';
 			flex-direction: row;
 			row-gap: 0.77rem;
 			column-gap: 0.77rem;
-			border-radius: 1rem;
 			padding: 0.55rem;
-			background: theme(colors.semantic.surface-variant/.95);
 			display: flex;
-			border-width: 4px;
-			border-color: theme(colors.semantic.primary/.44);
+			background:
+				linear-gradient(theme(colors.semantic.surface-variant), theme(colors.semantic.surface-variant)) padding-box,
+				var(--linear-gradient-x) border-box;
+			border-radius: 0.55rem;
+			border: 4px dotted transparent;
 		}
+
 		svg {
 			width: 5vb;
 			height: 5vb;
 		}
 		a {
-			color: theme(colors.semantic.on-surface);
+			color: theme(colors.semantic.on-surface-variant);
 		}
 	}
 

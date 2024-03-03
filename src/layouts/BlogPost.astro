@@ -16,12 +16,12 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 	updatedDate={updatedDate}
 >
 	<article>
-		<div class="w-7/12 p-1">
-			{heroImage && <Image style="box-shadow: var(--box-shadow);" src={heroImage} alt={heroAlt || ''} />}
+		<div class="shadow-gradient w-7/12 p-1">
+			{heroImage && <Image class="rounded-sm" src={heroImage} alt={heroAlt || ''} />}
 		</div>
-		<div class="flex flex-col pt-8">
-			<h1 class="text-4xl">{title}</h1>
-			<div class="text-l flex items-center space-x-4 pb-5 pl-2 pt-4 text-sm">
+		<div class="flex w-full flex-col items-center pb-2 pt-4 text-center md:w-10/12">
+			<h1 class="text-3xl md:text-4xl">{title}</h1>
+			<div class="flex items-center space-x-4 pb-5 pl-2 pt-4 text-sm">
 				<div>{readingTime}</div>
 				<div>·</div>
 				<div>

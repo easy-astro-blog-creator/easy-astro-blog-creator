@@ -20,12 +20,12 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="md:gap-20 flex w-full list-none flex-col items-start gap-7 py-4 pl-2 pr-2 md:pl-24 md:pr-16">
+	<ul class="md:gap-15 flex w-full list-none flex-col items-start gap-7 py-4 pl-2 pr-2 md:pl-24 md:pr-16">
 		{
 			posts.map((post) => {
 				return (
 					<>
-						<li class="min-w-full">
+						<li class="min-w-full md:py-8">
 							<a class="flex min-w-full items-center justify-between no-underline" href={`${post.params.htmlSlug}`}>
 								<div class="flex max-h-full max-w-[70%] shrink-0 flex-col pr-4">
 									<div class="pb-1 text-xs font-medium md:text-base">
@@ -35,17 +35,17 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 											}
 										/>
 									</div>
-									<h1 class="pb-1 text-xl font-medium">{post.props.data.title}</h1>
+									<h1 class="pb-1 text-lg font-semibold md:text-xl ">{post.props.data.title}</h1>
 									<div class="line-clamp-3 pb-0 text-sm md:line-clamp-4  ">
 										{formatDescription(post.props.data.description, post.props.body)}
 									</div>
 									<div class="pt-1 text-xs font-normal italic md:text-base">{[post.props.data.readingTime]}</div>
 								</div>
-								<div class="flex h-auto max-h-[80%] w-[30%] max-w-[80%] items-center justify-center">
+								<div class="flex h-auto max-h-[80%] w-[30%] max-w-[80%] items-center justify-center ">
 									{post.props.data.heroImage ? (
-										<Image src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
+										<Image class="rounded-sm" src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
 									) : (
-										<div class="h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
+										<div class="shadow-gradient h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
 									)}
 								</div>
 							</a>
