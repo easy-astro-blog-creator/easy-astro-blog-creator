@@ -16,12 +16,12 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 	updatedDate={updatedDate}
 >
 	<article>
-		<div class="shadow-gradient w-7/12 p-1">
-			{heroImage && <Image class="rounded-sm" src={heroImage} alt={heroAlt || ''} />}
-		</div>
-		<div class="flex w-full flex-col items-center pb-2 pt-4 text-center md:w-10/12">
+		<div class="lg:w-9/12 flex w-full flex-col items-center pb-2 pt-4 text-center">
+			<div class="shadow-gradient lg:max-w-[66%] mb-6 flex rounded">
+				{heroImage && <Image class="lg:max-h-[39vh]  w-auto  rounded" src={heroImage} alt={heroAlt || ''} />}
+			</div>
 			<h1 class="text-3xl md:text-4xl">{title}</h1>
-			<div class="flex items-center space-x-4 pb-5 pl-2 pt-4 text-sm">
+			<div class="flex items-center space-x-4 pb-2 pl-2 pt-4 text-sm">
 				<div>{readingTime}</div>
 				<div>·</div>
 				<div>
@@ -39,6 +39,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 					}
 				</div>
 			</div>
+			<hr class="lg:w-[66%] mb-5 mt-1 w-full border-semantic-on-surface-variant/10" />
 		</div>
 		<div id="article-text" class="prose prose-customTheme max-w-none">
 			<slot />

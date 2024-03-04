@@ -18,12 +18,7 @@ export default defineConfig({
 	site: easyConfig.github_pages_url,
 	integrations: [
 		sitemap(),
-		icon({
-			include: {
-				// Include only three `mdi` icons in the bundle
-				solar: ['double-alt-arrow-down-line-duotone'],
-			},
-		}),
+		icon(),
 		tailwind({
 			applyBaseStyles: false,
 		}),

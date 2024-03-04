@@ -11,63 +11,6 @@
 }
 
 @layer base {
-	@media (scripting: none) {
-		@media (prefers-color-scheme: dark) {
-			:root {
-				@apply dark;
-			}
-		}
-	}
-
-	:root {
-		--box-shadow: 0 2px 6px oklch(var(--colors-semantic-primary) / 0.2), 0 8px 24px oklch(var(--colors-semantic-secondary) / 0.2),
-			0 16px 32px oklch(var(--colors-semantic-tertiary) / 0.2);
-
-		--linear-gradient-y: linear-gradient(
-			0deg,
-			theme(colors.primary.400) 0%,
-			theme(colors.secondary.400) 50%,
-			theme(colors.tertiary.400) 100%
-		);
-		--linear-gradient-x: linear-gradient(
-			90deg,
-			theme(colors.primary.400) 0%,
-			theme(colors.secondary.400) 50%,
-			theme(colors.tertiary.400) 100%
-		);
-	}
-	.shadow-gradient {
-		/* Required properties */
-		position: relative;
-	}
-
-	.shadow-gradient:before {
-		content: '';
-		z-index: -1;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: var(--linear-gradient-y);
-		transform: translate3d(0px, 5px, 0) scale(0.98);
-		filter: blur(20px);
-		opacity: 0.5;
-		transition: opacity 0.3s;
-		border-radius: inherit;
-	}
-	.shadow-gradient::after {
-		content: '';
-		z-index: -1;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: inherit;
-		border-radius: inherit;
-	}
-
 	html {
 		font-size: 18px;
 		font-weight: 300;
@@ -127,6 +70,11 @@
 			width: clamp(45ch, 70ch, 100%);
 		}
 	}
+	@media (min-width: 1024px) {
+		#article-text {
+			width: clamp(45ch, 80ch, 100%);
+		}
+	}
 
 	/* Hyperlinks */
 	a {
@@ -150,6 +98,60 @@
 	.easy-link-always-hover,
 	a:focus {
 		text-decoration: underline;
+	}
+	@media (scripting: none) {
+		@media (prefers-color-scheme: dark) {
+			:root {
+				@apply dark;
+			}
+		}
+	}
+
+	:root {
+		--linear-gradient-y: linear-gradient(
+			0deg,
+			theme(colors.primary.400) 0%,
+			theme(colors.secondary.400) 50%,
+			theme(colors.tertiary.400) 100%
+		);
+		--linear-gradient-x: linear-gradient(
+			90deg,
+			theme(colors.primary.400) 0%,
+			theme(colors.secondary.400) 50%,
+			theme(colors.tertiary.400) 100%
+		);
+	}
+	.shadow-gradient {
+		/* Required properties */
+		position: relative;
+		background: theme(colors.semantic.background);
+	}
+
+	.shadow-gradient:before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--linear-gradient-y);
+		transform: translate3d(0px, 5px, 0) scale(0.98);
+		filter: blur(20px);
+		opacity: 0.5;
+		transition: opacity 0.3s;
+		border-radius: inherit;
+	}
+	.shadow-gradient::after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
+		border-radius: inherit;
 	}
 }
 

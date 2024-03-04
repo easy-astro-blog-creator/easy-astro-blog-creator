@@ -9,7 +9,7 @@ import { easyConfig } from '../siteConfig';
 	<div
 		id="social-links"
 		tabindex="0"
-		class="sm:dropdown-content sm:z-[1] md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-2 md:hidden"
+		class="sm:dropdown-content sm:z-[1] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:hidden"
 	>
 		{
 			Object.entries(easyConfig.social_media).map(([key, value]) =>
@@ -21,23 +21,24 @@ import { easyConfig } from '../siteConfig';
 			)
 		}
 	</div>
+	<hr class="mt-2 hidden w-full border-semantic-on-surface-variant/10 md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3" />
 	<!-- <Icon id="social-icon" class="md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 opacity-70" name="mdi:emoticon-plus-outline" /> -->
 	<Icon
 		id="social-icon"
-		class="social-icon md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:self-end md:opacity-70"
+		class="self-center md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:opacity-70"
 		name="mdi:account-multiple-plus-outline"
 		tabindex="0"
 	/>
 	<span
-		class="hidden font-extralight md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3 md:ml-3 md:max-h-max md:self-end md:tracking-wider"
+		class="hidden max-h-max self-center justify-self-center font-extralight tracking-widest md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3"
 		>connect</span
 	>
 </div>
 
 <style>
 	#social-icon {
-		width: 4vb;
-		height: 4vb;
+		width: 3vb;
+		height: 3vb;
 	}
 	@media (max-width: 767px) {
 		#social-links {
@@ -56,7 +57,9 @@ import { easyConfig } from '../siteConfig';
 			border-radius: 0.55rem;
 			border: 4px dotted transparent;
 		}
-
+		#social-icon {
+			margin-bottom: -0.3rem;
+		}
 		svg {
 			width: 5vb;
 			height: 5vb;
@@ -83,12 +86,12 @@ import { easyConfig } from '../siteConfig';
 			padding-right: calc((3rem - 2ch) / 2);
 		}
 		#social-links {
-			flex-wrap: wrap;
+			flex-wrap: wrap-reverse;
 			row-gap: 0.77rem;
 			padding-top: 1rem;
 			column-gap: 0.77rem;
-			align-content: flex-end;
-			justify-content: space-evenly;
+			align-content: flex-start;
+			padding-right: calc((1.5rem - 2ch) / 2);
 		}
 
 		svg {
@@ -101,13 +104,15 @@ import { easyConfig } from '../siteConfig';
 		@container socialWidget (width > 4rem) {
 			#social-links {
 				display: flex;
-				padding-left: calc((4vw - 2ch) / 2);
 			}
 			#social-icon {
 				opacity: 1;
 				transition: 600ms;
 			}
 			span {
+				display: flex;
+			}
+			hr {
 				display: flex;
 			}
 		}

@@ -20,37 +20,45 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="md:gap-15 flex w-full list-none flex-col items-start gap-7 py-4 pl-2 pr-2 md:pl-24 md:pr-16">
+	<ul class="flex w-full list-none flex-col items-start py-4 pl-2 pr-2 md:pl-24 md:pr-16">
 		{
-			posts.map((post) => {
+			posts.map((post, i) => {
 				return (
 					<>
-						<li class="min-w-full md:py-8">
-							<a class="flex min-w-full items-center justify-between no-underline" href={`${post.params.htmlSlug}`}>
-								<div class="flex max-h-full max-w-[70%] shrink-0 flex-col pr-4">
-									<div class="pb-1 text-xs font-medium md:text-base">
+						<li class="mb-4 max-h-[30vh] min-w-full ">
+							<a class="group flex min-w-full items-center justify-between hover:no-underline" href={`${post.params.htmlSlug}`}>
+								<div class="lg:w-10/12 flex max-h-full w-full flex-col">
+									<div class="lg:text-xs text-xs font-medium text-semantic-on-background/70 md:text-base">
 										<FormattedDate
 											date={
 												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
 											}
 										/>
 									</div>
-									<h1 class="pb-1 text-lg font-semibold md:text-xl ">{post.props.data.title}</h1>
-									<div class="line-clamp-3 pb-0 text-sm md:line-clamp-4  ">
-										{formatDescription(post.props.data.description, post.props.body)}
+									<div class="lg:h-[15vh] flex w-full">
+										<div class="pr-10">
+											<h1 class="lg:font-bold text-lg font-semibold group-hover:text-semantic-primary md:text-xl ">
+												{post.props.data.title}
+											</h1>
+											<div class="lg:font-medium line-clamp-6 text-sm md:line-clamp-4 ">
+												{formatDescription(post.props.data.description, post.props.body)}
+											</div>
+										</div>
+										<div class="group-hover:shadow-gradient lg:h-[15vh] lg:w-[15vh] ml-auto mr-0 flex h-[5vh] w-[5vh] shrink-0">
+											{post.props.data.heroImage ? (
+												<Image class="rounded object-cover" src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
+											) : (
+												<div class="h-full w-full rounded bg-semantic-primary-container/20" />
+											)}
+										</div>
 									</div>
-									<div class="pt-1 text-xs font-normal italic md:text-base">{[post.props.data.readingTime]}</div>
-								</div>
-								<div class="flex h-auto max-h-[80%] w-[30%] max-w-[80%] items-center justify-center ">
-									{post.props.data.heroImage ? (
-										<Image class="rounded-sm" src={post.props.data.heroImage} alt={post.props.data.heroAlt || ''} />
-									) : (
-										<div class="shadow-gradient h-[200px] w-[200px] rounded bg-semantic-primary-container/20" />
-									)}
+									<div class="lg:text-xs pt-5 text-xs font-normal italic text-semantic-on-background/70 md:text-base">
+										{[post.props.data.readingTime]}
+									</div>
+									{posts.length != i + 1 && <hr class="mt-7 w-full border-semantic-on-surface-variant/5 " />}
 								</div>
 							</a>
 						</li>
-						<hr />
 					</>
 				);
 			})
@@ -59,21 +67,6 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 </BaseLayout>
 <style>
 	a {
-		@apply text-semantic-on-background;
-	}
-	a:hover {
-		text-decoration: none;
-	}
-	a:hover h1 {
-		@apply text-semantic-primary;
-	}
-	a:hover img {
-		box-shadow: var(--box-shadow);
-	}
-	hr {
-		border-color: theme(colors.semantic.on-surface-variant/.25);
-		width: 12%;
-		margin: auto;
-		padding-top: 0.25rem;
+		color: theme(colors.semantic.on-background);
 	}
 </style>

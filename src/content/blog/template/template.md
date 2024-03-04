@@ -1,16 +1,16 @@
 ---
 title: 'Template for creating new posts'
-# Optional 
+# Optional
 description: 'If provided the description field will be used for previews. If not provided, the first 3-4 lines from the post will be used as a description.'
 
-# Published date is required and in the format of ISO-8601: `yyyy-mm-dd`. For more info see https://docs.astro.build/en/guides/content-collections/#working-with-dates-in-the-frontmatter 
+# Published date is required and in the format of ISO-8601: `yyyy-mm-dd`. For more info see https://docs.astro.build/en/guides/content-collections/#working-with-dates-in-the-frontmatter
 pubDate: 2024-01-01
 # Optionally specify an update date. If not provided, one will be generated from the git history. Only if the post has been changed since the day published.
-# updatedDate: 
+# updatedDate:
 
 heroImage: './hero.png'
 # Optional
-heroAlt: "Describe the image for screen readers."
+heroAlt: 'Describe the image for screen readers.'
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
