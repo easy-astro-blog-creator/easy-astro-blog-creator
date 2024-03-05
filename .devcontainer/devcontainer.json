@@ -18,7 +18,8 @@
 				"bradlc.vscode-tailwindcss",
 				"ms-vscode.vscode-typescript-next",
 				"dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"csstools.postcss"
 			]
 		}
 	}

@@ -1,0 +1,300 @@
+---
+import { Icon } from 'astro-icon/components';
+import HeaderLink from './HeaderLink.astro';
+import { easyConfig } from '../../siteConfig';
+import Footer from '../Footer.astro';
+import SocialLinks from './SocialLinks.astro';
+import EasyABCLinks from './EasyABCLinks.astro';
+import ThemeIcon from '../navbar/ThemeIcon.astro';
+---
+
+<nav id="navbar-desktop">
+	<div id="navbar-fun-line"></div>
+	<Icon id="nav-icon" class="block" name="solar:double-alt-arrow-down-line-duotone" />
+	<ul id="nav-list" class="grid h-full w-full items-center justify-around">
+		<li class="nav-item row-start-2 row-end-4">
+			<HeaderLink class="link-header" href="/blog">Blog</HeaderLink>
+			<span class="text-sub hidden italic">{easyConfig.site_description}</span>
+		</li>
+		<li class="nav-item row-start-5 row-end-6">
+			<HeaderLink class="link-header" href="/">About</HeaderLink>
+		</li>
+		<EasyABCLinks class="nav-item row-start-7 row-end-9" />
+		<li class="nav-item row-start-[12] row-end-[18]">
+			<SocialLinks />
+		</li>
+		<li class="nav-item text-sub row-start-[18] row-end-[21] block">
+			<Footer />
+		</li>
+	</ul>
+</nav>
+<nav id="navbar-mobile" class="flex">
+	<div id="navbar-fun-line"></div>
+	<ul class="grid h-full w-full grid-cols-4 grid-rows-1 items-stretch justify-items-stretch">
+		<li class="nav-item col-start-1 col-end-2">
+			<SocialLinks />
+		</li>
+		<li class="nav-item col-start-2 col-end-3">toggle</li>
+		<!-- <li class="nav-item col-start-2 col-end-3"><ThemeIcon /></li> -->
+		<li class="nav-item col-start-3 col-end-4">
+			<Icon id="nav-icon" class="text-[3.44vb]" name="material-symbols:ios-share" />
+		</li>
+		<li id="nav-content-list" class="nav-item dropdown col-start-4 col-end-5 flex h-full">
+			<div tabindex="0" id="nav-content-mobile" class="dropdown-content z-[1]">
+				<ul class="flex h-full w-full flex-col-reverse items-start justify-start gap-16 pb-[9svh] pt-[4.5svh]">
+					<li class="">
+						<HeaderLink class="link-header mobile" href="/">About</HeaderLink>
+					</li>
+					<li class="flex flex-col">
+						<HeaderLink class="link-header mobile" href="/blog">Blog</HeaderLink>
+						<span class="text-sub italic">{easyConfig.site_description}</span>
+					</li>
+					<EasyABCLinks class="py-8" />
+				</ul>
+			</div>
+			<div class="flex h-full w-full items-center justify-center" role="button" tabindex="0">
+				<Icon
+					id="nav-icon"
+					class="-rotate-90 text-[4.44vb] text-neutral-variant-400"
+					name="solar:double-alt-arrow-down-line-duotone"
+				/>
+			</div>
+		</li>
+	</ul>
+</nav>
+<style>
+	@media (max-width: 767px) {
+		#navbar-desktop {
+			display: none;
+		}
+		#navbar-mobile {
+			position: fixed;
+			z-index: 1;
+			color: theme(colors.semantic.on-surface-variant);
+			transition:
+				color 777ms,
+				background-color 777ms,
+				width 500ms;
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 15%);
+			height: 7svh;
+			width: 100%;
+			bottom: 0px;
+			left: 0px;
+			padding-bottom: calc(1svh + env(safe-area-inset-bottom));
+		}
+		.nav-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		#nav-icon {
+			margin-right: 3vb;
+			transition:
+				rotate 400ms,
+				left 500ms,
+				color 300ms;
+		}
+		#nav-content-list:focus-within #nav-icon,
+		#nav-content-list:active #nav-icon {
+			rotate: -90deg;
+			@apply text-neutral-variant-700 dark:text-neutral-variant-200;
+		}
+		#nav-content-mobile {
+			bottom: 7svh;
+			right: 0;
+			width: 33vw;
+			height: fit-content;
+			border-top-left-radius: 2rem;
+			border-bottom-left-radius: 2rem;
+			z-index: -2;
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 11%);
+			padding-left: 2.5svw;
+			padding-right: 1svw;
+		}
+		#navbar-mobile :global(.link-header) {
+			font-weight: bold;
+			font-size: 2vb;
+			letter-spacing: 0.222rem;
+		}
+		#navbar-mobile :global(.text-sub) {
+			font-size: 1.77vb;
+			color: theme(colors.semantic.on-surface-variant/.96);
+			padding-left: 2svw;
+			padding-top: 0.5rem;
+		}
+	}
+	@media (min-width: 768px) {
+		#navbar-mobile {
+			display: none;
+		}
+		#navbar-desktop {
+			position: fixed;
+			z-index: 1;
+			color: theme(colors.semantic.on-surface-variant);
+			transition:
+				color 777ms,
+				background-color 777ms,
+				width 500ms;
+			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
+			height: 100%;
+			width: 5vw;
+			top: 0px;
+			left: 0px;
+			@apply rounded-r-2xl;
+		}
+		#navbar-desktop-fun-line {
+			width: 1px;
+			height: 100%;
+			top: calc(((5vb) / 2) + 5px);
+			left: calc(calc((5vw - 4vb) / 2) + (4vb / 2) - 5px);
+			position: absolute;
+			border-image-source: linear-gradient(
+				0deg,
+				theme(colors.primary.400) 0%,
+				theme(colors.secondary.400) 30%,
+				theme(colors.tertiary.400) 60%,
+				color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
+			);
+			border-image-slice: 1;
+			border-left-width: 9px;
+			opacity: 0.11;
+			filter: blur(14px) saturate(100%);
+			transition:
+				top 444ms 0s ease-out,
+				filter 1s 50ms ease-in-out,
+				opacity 5s 250ms ease-in-out;
+		}
+		#nav-list {
+			height: 100%;
+			grid-template-rows: repeat(20, minmax(0, 1fr));
+		}
+		.nav-item {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 5vw;
+			justify-content: space-evenly;
+			height: 100%;
+			padding-left: calc((5vw - 4vb) / 2);
+			padding-right: calc((2.5vw - 4vb) / 2);
+		}
+		#nav-icon {
+			position: absolute;
+			left: calc((5vw - 4vb) / 2);
+			top: calc((5vb - 3vb) / 2);
+			opacity: 1;
+			font-size: 4vb;
+			transition:
+				rotate 400ms,
+				left 500ms,
+				color 300ms;
+			rotate: 180deg;
+			@apply text-neutral-variant-400;
+		}
+		#navbar-desktop:hover .nav-item {
+			width: 16vw;
+		}
+		#navbar-desktop:hover {
+			width: 16vw;
+			transition:
+				color 777ms,
+				background-color 777ms,
+				width 150ms;
+		}
+		#navbar-desktop:hover #navbar-desktop-fun-line {
+			top: 100vb;
+			opacity: 1;
+			filter: blur(4px) saturate(200%);
+			transition: 0ms;
+		}
+		#navbar-desktop:hover #nav-icon {
+			/* (width of expanded navbar-desktop - the size of a single char) / 2 */
+			left: calc((28vw - 4vb) / 2);
+			rotate: 270deg;
+			color: theme(colors.neutral-variant.400);
+			@apply text-neutral-variant-600 dark:text-neutral-variant-200;
+			transition:
+				rotate 300ms,
+				left 200ms,
+				color 300ms;
+		}
+		#navbar-desktop :global(.link-header) {
+			font-weight: bold;
+			font-size: 3.33vb;
+			letter-spacing: 0.222rem;
+			transition: opacity 0ms;
+			opacity: 0;
+		}
+		#navbar-desktop:hover :global(.link-header) {
+			transition: opacity 400ms;
+			opacity: 1;
+		}
+		#navbar-desktop :global(.text-sub) {
+			display: unset;
+			opacity: 0;
+			max-width: 16vw;
+			padding-left: calc((4vw - 2ch) / 2);
+			font-size: 1.77vb;
+			transition: opacity 0ms;
+			color: theme(colors.semantic.on-surface-variant/.96);
+		}
+		#navbar-desktop:hover :global(.text-sub) {
+			opacity: 1;
+			transition: opacity 400ms;
+		}
+		#navbar-desktop:before {
+			transform: translate3d(-2px, 0px, 0) scale(1);
+			border-top-right-radius: 1rem /* 16px */;
+			border-bottom-right-radius: 1rem /* 16px */;
+		}
+		#navbar-desktop::after {
+			border-top-right-radius: 1rem /* 16px */;
+			border-bottom-right-radius: 1rem /* 16px */;
+		}
+	}
+	#navbar-desktop:before,
+	#navbar-mobile:before,
+	#nav-content-mobile:before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--linear-gradient-y);
+		filter: blur(2px);
+		opacity: 0.55;
+		transition: opacity 0.3s;
+	}
+	#navbar-desktop::after,
+	#navbar-mobile::after,
+	#nav-content-mobile::after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
+	}
+	#nav-content-mobile:before {
+		filter: blur(1px);
+		border-top-left-radius: 2rem;
+		border-bottom-left-radius: 2rem;
+	}
+	#nav-content-mobile::after {
+		border-top-left-radius: 2rem;
+		border-bottom-left-radius: 2rem;
+	}
+	#navbar-mobile:before {
+		transform: translate3d(0px, 2px, 0) scale(1);
+		border-top-right-radius: 0rem;
+		border-bottom-right-radius: 0rem;
+	}
+	#navbar-mobile::after {
+		border-top-right-radius: 0rem;
+		border-bottom-right-radius: 0rem;
+	}
+</style>

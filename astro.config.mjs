@@ -25,7 +25,6 @@ export default defineConfig({
 	],
 	markdown: {
 		remarkPlugins: [imgAttr, remarkUnwrapImages],
-		// remarkPlugins: [imgAttr],
 	},
 	build: {
 		inlineStylesheets: 'never',

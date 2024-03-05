@@ -81,7 +81,7 @@
 		letter-spacing: 0.023rem;
 	}
 	/* For unvisited links. TIL! */
-	a:link,
+	/* a:link,
 	.easy-link-always-link {
 		@apply text-semantic-primary;
 	}
@@ -98,7 +98,7 @@
 	.easy-link-always-hover,
 	a:focus {
 		text-decoration: underline;
-	}
+	} */
 	@media (scripting: none) {
 		@media (prefers-color-scheme: dark) {
 			:root {

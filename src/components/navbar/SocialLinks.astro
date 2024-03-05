@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { easyConfig } from '../siteConfig';
+import { easyConfig } from '../../siteConfig';
 // See https://github.com/natemoo-re/astro-icon
 // and https://icon-sets.iconify.design/ for more icons
 ---
@@ -22,9 +22,9 @@ import { easyConfig } from '../siteConfig';
 		}
 	</div>
 	<hr class="mt-2 hidden w-full border-semantic-on-surface-variant/10 md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3" />
-	<!-- <Icon id="social-icon" class="md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 opacity-70" name="mdi:emoticon-plus-outline" /> -->
 	<Icon
 		id="social-icon"
+		role="button"
 		class="self-center md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:opacity-70"
 		name="mdi:account-multiple-plus-outline"
 		tabindex="0"
@@ -37,8 +37,11 @@ import { easyConfig } from '../siteConfig';
 
 <style>
 	#social-icon {
-		width: 3vb;
-		height: 3vb;
+		width: 4vb;
+		height: 4vb;
+		opacity: 1;
+
+		transition: 900ms;
 	}
 	@media (max-width: 767px) {
 		#social-links {
@@ -106,8 +109,8 @@ import { easyConfig } from '../siteConfig';
 				display: flex;
 			}
 			#social-icon {
-				opacity: 1;
-				transition: 600ms;
+				opacity: 0;
+				transition: 50ms;
 			}
 			span {
 				display: flex;
