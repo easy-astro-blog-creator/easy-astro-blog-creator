@@ -5,12 +5,11 @@ import { easyConfig } from '../../siteConfig';
 // and https://icon-sets.iconify.design/ for more icons
 ---
 
-<div id="social-widget" class="dropdown flex">
-	<div
-		id="social-links"
-		tabindex="0"
-		class="sm:dropdown-content sm:z-[1] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:hidden"
-	>
+<div id="social-widget-mobile" class="dropdown flex h-full w-full justify-center md:hidden">
+	<div class="flex h-full w-full flex-col justify-center self-center" role="button" tabindex="0">
+		<Icon id="social-icon" class="self-center" name="material-symbols:face-retouching-natural-outline-rounded" />
+	</div>
+	<div id="social-links" tabindex="0" class="dropdown-content z-[1]">
 		{
 			Object.entries(easyConfig.social_media).map(([key, value]) =>
 				value ? (
@@ -21,31 +20,37 @@ import { easyConfig } from '../../siteConfig';
 			)
 		}
 	</div>
-	<hr class="mt-2 hidden w-full border-semantic-on-surface-variant/10 md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3" />
-	<Icon
-		id="social-icon"
-		role="button"
-		class="self-center md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-3 md:opacity-70"
-		name="mdi:account-multiple-plus-outline"
-		tabindex="0"
-	/>
-	<span
-		class="hidden max-h-max self-center justify-self-center font-extralight tracking-widest md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3"
-		>connect</span
-	>
+</div>
+<div id="social-widget-desktop" class="dropdown grid h-full w-full sm:hidden">
+	<div id="social-links" tabindex="0" class="collapse row-start-1 row-end-2 flex content-start justify-center opacity-0">
+		{
+			Object.entries(easyConfig.social_media).map(([key, value]) =>
+				value ? (
+					<a href={value}>
+						<Icon name={`mdi:${key}`} />
+					</a>
+				) : null
+			)
+		}
+	</div>
+	<div class="row-start-2 row-end-3 flex flex-col items-center justify-start">
+		<Icon
+			id="social-icon"
+			role="button"
+			class="opacity-70"
+			name="material-symbols:face-retouching-natural-outline-rounded"
+			tabindex="0"
+		/>
+		<hr class="collapse mt-2 w-full border-semantic-on-surface-variant/10 opacity-0" />
+		<span class="collapse max-h-max font-extralight tracking-widest opacity-0">connect</span>
+	</div>
 </div>
 
 <style>
-	#social-icon {
-		width: 4vb;
-		height: 4vb;
-		opacity: 1;
-
-		transition: 900ms;
-	}
 	@media (max-width: 767px) {
 		#social-links {
-			bottom: 7vh;
+			bottom: 9vh;
+			left: 1vw;
 			width: max-content;
 			max-width: 88vw;
 			flex-wrap: wrap;
@@ -62,6 +67,8 @@ import { easyConfig } from '../../siteConfig';
 		}
 		#social-icon {
 			margin-bottom: -0.3rem;
+			width: 4vb;
+			height: 4vb;
 		}
 		svg {
 			width: 5vb;
@@ -73,19 +80,10 @@ import { easyConfig } from '../../siteConfig';
 	}
 
 	@media (min-width: 768px) {
-		#social-widget {
-			display: flex;
-		}
-		#social-widget {
-			display: grid;
+		#social-widget-desktop {
 			container-name: socialWidget;
 			container-type: size;
-			grid-template-rows: 75% 25%;
-			grid-template-columns: 25% 75%;
-			width: 100%;
-			height: 100%;
-			overflow: clip;
-			z-index: 1;
+			grid-template-rows: 70% 30%;
 			padding-right: calc((3rem - 2ch) / 2);
 		}
 		#social-links {
@@ -93,10 +91,16 @@ import { easyConfig } from '../../siteConfig';
 			row-gap: 0.77rem;
 			padding-top: 1rem;
 			column-gap: 0.77rem;
-			align-content: flex-start;
 			padding-right: calc((1.5rem - 2ch) / 2);
+			transition:
+				visibility 0ms 0ms,
+				opacity 0ms 0ms;
 		}
-
+		#social-icon {
+			width: 4vb;
+			height: 4vb;
+			transition: opacity 700ms 350ms;
+		}
 		svg {
 			width: 3vb;
 			height: 3vb;
@@ -104,19 +108,39 @@ import { easyConfig } from '../../siteConfig';
 		a {
 			color: theme(colors.semantic.on-surface-variant);
 		}
+		span,
+		hr {
+			transition:
+				visibility 0ms 0ms,
+				opacity 0ms 0ms;
+		}
+
 		@container socialWidget (width > 4rem) {
 			#social-links {
-				display: flex;
+				opacity: 1;
+				transition:
+					visibility 100ms 50ms,
+					opacity 100ms 50ms;
+				visibility: visible;
 			}
 			#social-icon {
+				transition: 0ms;
+				visibility: collapse;
 				opacity: 0;
-				transition: 50ms;
 			}
 			span {
-				display: flex;
+				opacity: 1;
+				visibility: visible;
+				transition:
+					visibility 100ms 50ms,
+					opacity 100ms 50ms;
 			}
 			hr {
-				display: flex;
+				opacity: 1;
+				visibility: visible;
+				transition:
+					visibility 100ms 50ms,
+					opacity 100ms 50ms;
 			}
 		}
 	}

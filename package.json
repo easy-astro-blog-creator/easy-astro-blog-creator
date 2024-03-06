@@ -34,7 +34,6 @@
 		"@astrojs/ts-plugin": "^1.5.1",
 		"@iconify-json/material-symbols": "^1.1.74",
 		"@iconify-json/mdi": "^1.1.64",
-		"@iconify-json/solar": "^1.1.9",
 		"@material/material-color-utilities": "^0.2.7",
 		"@mertasan/tailwindcss-variables": "^2.7.0",
 		"@tailwindcss/typography": "^0.5.10",

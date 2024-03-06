@@ -4,14 +4,13 @@ import HeaderLink from './HeaderLink.astro';
 import { easyConfig } from '../../siteConfig';
 import Footer from '../Footer.astro';
 import SocialLinks from './SocialLinks.astro';
-import EasyABCLinks from './EasyABCLinks.astro';
 import ThemeIcon from '../navbar/ThemeIcon.astro';
 ---
 
 <nav id="navbar-desktop">
 	<div id="navbar-fun-line"></div>
-	<Icon id="nav-icon" class="block" name="solar:double-alt-arrow-down-line-duotone" />
-	<ul id="nav-list" class="grid h-full w-full items-center justify-around">
+	<Icon id="nav-icon" class="block" name="material-symbols:keyboard-double-arrow-left-rounded" />
+	<ul class="grid h-full w-full grid-rows-[repeat(20,_minmax(0,_1fr))] items-center justify-around">
 		<li class="nav-item row-start-2 row-end-4">
 			<HeaderLink class="link-header" href="/blog">Blog</HeaderLink>
 			<span class="text-sub hidden italic">{easyConfig.site_description}</span>
@@ -19,7 +18,35 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 		<li class="nav-item row-start-5 row-end-6">
 			<HeaderLink class="link-header" href="/">About</HeaderLink>
 		</li>
-		<EasyABCLinks class="nav-item row-start-7 row-end-9" />
+		{
+			easyConfig.easyabc_enabled && (
+				<li class="nav-item row-start-7 row-end-9">
+					<HeaderLink class="link-header" href="/easy">
+						EasyABC
+					</HeaderLink>
+					<ul class="grid h-max grid-rows-3">
+						<li>
+							<HeaderLink class="text-sub" href="/easy">
+								{' '}
+								Readme{' '}
+							</HeaderLink>
+						</li>
+						<li>
+							<HeaderLink class="text-sub" href="/easy/blog">
+								{' '}
+								EasyABC Blog{' '}
+							</HeaderLink>
+						</li>
+						<li>
+							<HeaderLink class="text-sub" href="/easy/theme">
+								{' '}
+								ColorFun{' '}
+							</HeaderLink>
+						</li>
+					</ul>
+				</li>
+			)
+		}
 		<li class="nav-item row-start-[12] row-end-[18]">
 			<SocialLinks />
 		</li>
@@ -30,16 +57,17 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 </nav>
 <nav id="navbar-mobile" class="flex">
 	<div id="navbar-fun-line"></div>
-	<ul class="grid h-full w-full grid-cols-4 grid-rows-1 items-stretch justify-items-stretch">
-		<li class="nav-item col-start-1 col-end-2">
+	<ul class="grid h-full w-full grid-cols-4 grid-rows-1 items-stretch justify-items-stretch py-1">
+		<li class="col-start-1 col-end-2 flex flex-col items-center justify-center">
 			<SocialLinks />
 		</li>
-		<li class="nav-item col-start-2 col-end-3">toggle</li>
-		<!-- <li class="nav-item col-start-2 col-end-3"><ThemeIcon /></li> -->
-		<li class="nav-item col-start-3 col-end-4">
-			<Icon id="nav-icon" class="text-[3.44vb]" name="material-symbols:ios-share" />
+		<li class="col-start-2 col-end-3 flex flex-col items-center justify-center">
+			<div class="flex h-full w-full flex-col justify-center">
+				<Icon id="" class="self-center text-[4vb]" name="material-symbols:ios-share-rounded" />
+				<!-- <li class="nav-item col-start-2 col-end-3"><ThemeIcon /></li> -->
+			</div>
 		</li>
-		<li id="nav-content-list" class="nav-item dropdown col-start-4 col-end-5 flex h-full">
+		<li id="nav-content-list" class="dropdown col-start-4 col-end-5 flex h-full w-full items-center justify-center">
 			<div tabindex="0" id="nav-content-mobile" class="dropdown-content z-[1]">
 				<ul class="flex h-full w-full flex-col-reverse items-start justify-start gap-16 pb-[9svh] pt-[4.5svh]">
 					<li class="">
@@ -49,14 +77,43 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 						<HeaderLink class="link-header mobile" href="/blog">Blog</HeaderLink>
 						<span class="text-sub italic">{easyConfig.site_description}</span>
 					</li>
-					<EasyABCLinks class="py-8" />
+					{
+						easyConfig.easyabc_enabled && (
+							<li class=" py-8">
+								<HeaderLink class="link-header" href="/easy">
+									EasyABC
+								</HeaderLink>
+								<ul class="grid h-max grid-rows-3 gap-5 pt-5">
+									<li>
+										<HeaderLink class="text-sub" href="/easy">
+											{' '}
+											Readme{' '}
+										</HeaderLink>
+									</li>
+									<li>
+										<HeaderLink class="text-sub" href="/easy/blog">
+											{' '}
+											EasyABC Blog{' '}
+										</HeaderLink>
+									</li>
+									<li>
+										<HeaderLink class="text-sub" href="/easy/theme">
+											{' '}
+											ColorFun{' '}
+										</HeaderLink>
+									</li>
+								</ul>
+							</li>
+						)
+					}
 				</ul>
 			</div>
-			<div class="flex h-full w-full items-center justify-center" role="button" tabindex="0">
+			<div class="" role="button" tabindex="0">
 				<Icon
 					id="nav-icon"
-					class="-rotate-90 text-[4.44vb] text-neutral-variant-400"
-					name="solar:double-alt-arrow-down-line-duotone"
+					viewBox="0 0 24 24"
+					class="rotate-180 text-[6vb] text-neutral-variant-400"
+					name="material-symbols:keyboard-double-arrow-left-rounded"
 				/>
 			</div>
 		</li>
@@ -80,7 +137,7 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			width: 100%;
 			bottom: 0px;
 			left: 0px;
-			padding-bottom: calc(1svh + env(safe-area-inset-bottom));
+			padding-bottom: calc(env(safe-area-inset-bottom));
 		}
 		.nav-item {
 			display: flex;
@@ -88,7 +145,6 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			justify-content: center;
 		}
 		#nav-icon {
-			margin-right: 3vb;
 			transition:
 				rotate 400ms,
 				left 500ms,
@@ -122,6 +178,24 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			padding-left: 2svw;
 			padding-top: 0.5rem;
 		}
+		#nav-content-mobile:before {
+			filter: blur(1px);
+			border-top-left-radius: 2rem;
+			border-bottom-left-radius: 2rem;
+		}
+		#nav-content-mobile::after {
+			border-top-left-radius: 2rem;
+			border-bottom-left-radius: 2rem;
+		}
+		#navbar-mobile:before {
+			transform: translate3d(0px, 2px, 0) scale(1);
+			border-top-right-radius: 0rem;
+			border-bottom-right-radius: 0rem;
+		}
+		#navbar-mobile::after {
+			border-top-right-radius: 0rem;
+			border-bottom-right-radius: 0rem;
+		}
 	}
 	@media (min-width: 768px) {
 		#navbar-mobile {
@@ -129,7 +203,6 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 		}
 		#navbar-desktop {
 			position: fixed;
-			z-index: 1;
 			color: theme(colors.semantic.on-surface-variant);
 			transition:
 				color 777ms,
@@ -140,33 +213,15 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			width: 5vw;
 			top: 0px;
 			left: 0px;
-			@apply rounded-r-2xl;
+			border-top-right-radius: 1rem;
+			border-bottom-right-radius: 1rem;
 		}
-		#navbar-desktop-fun-line {
-			width: 1px;
-			height: 100%;
-			top: calc(((5vb) / 2) + 5px);
-			left: calc(calc((5vw - 4vb) / 2) + (4vb / 2) - 5px);
-			position: absolute;
-			border-image-source: linear-gradient(
-				0deg,
-				theme(colors.primary.400) 0%,
-				theme(colors.secondary.400) 30%,
-				theme(colors.tertiary.400) 60%,
-				color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
-			);
-			border-image-slice: 1;
-			border-left-width: 9px;
-			opacity: 0.11;
-			filter: blur(14px) saturate(100%);
+		#navbar-desktop:hover {
+			width: 16vw;
 			transition:
-				top 444ms 0s ease-out,
-				filter 1s 50ms ease-in-out,
-				opacity 5s 250ms ease-in-out;
-		}
-		#nav-list {
-			height: 100%;
-			grid-template-rows: repeat(20, minmax(0, 1fr));
+				color 777ms,
+				background-color 777ms,
+				width 150ms;
 		}
 		.nav-item {
 			display: flex;
@@ -177,6 +232,9 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			height: 100%;
 			padding-left: calc((5vw - 4vb) / 2);
 			padding-right: calc((2.5vw - 4vb) / 2);
+		}
+		#navbar-desktop:hover .nav-item {
+			width: 16vw;
 		}
 		#nav-icon {
 			position: absolute;
@@ -189,23 +247,7 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 				left 500ms,
 				color 300ms;
 			rotate: 180deg;
-			@apply text-neutral-variant-400;
-		}
-		#navbar-desktop:hover .nav-item {
-			width: 16vw;
-		}
-		#navbar-desktop:hover {
-			width: 16vw;
-			transition:
-				color 777ms,
-				background-color 777ms,
-				width 150ms;
-		}
-		#navbar-desktop:hover #navbar-desktop-fun-line {
-			top: 100vb;
-			opacity: 1;
-			filter: blur(4px) saturate(200%);
-			transition: 0ms;
+			color: theme(colors.neutral-variant.400);
 		}
 		#navbar-desktop:hover #nav-icon {
 			/* (width of expanded navbar-desktop - the size of a single char) / 2 */
@@ -251,6 +293,36 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 			border-top-right-radius: 1rem /* 16px */;
 			border-bottom-right-radius: 1rem /* 16px */;
 		}
+		#navbar-fun-line {
+			width: 1px;
+			height: 100%;
+			top: calc(((5vb) / 2) + 5px);
+			left: calc(calc((5vw - 4vb) / 2) + (4vb / 2) - 5px);
+		}
+		#navbar-desktop:hover #navbar-fun-line {
+			top: 100vb;
+			opacity: 1;
+			filter: blur(4px) saturate(200%);
+			transition: 0ms;
+		}
+	}
+	#navbar-fun-line {
+		position: absolute;
+		border-image-source: linear-gradient(
+			0deg,
+			theme(colors.primary.400) 0%,
+			theme(colors.secondary.400) 30%,
+			theme(colors.tertiary.400) 60%,
+			color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
+		);
+		border-image-slice: 1;
+		border-left-width: 9px;
+		opacity: 0.11;
+		filter: blur(14px) saturate(100%);
+		transition:
+			top 444ms 0s ease-out,
+			filter 1s 50ms ease-in-out,
+			opacity 5s 250ms ease-in-out;
 	}
 	#navbar-desktop:before,
 	#navbar-mobile:before,
@@ -278,23 +350,5 @@ import ThemeIcon from '../navbar/ThemeIcon.astro';
 		bottom: 0;
 		left: 0;
 		background: inherit;
-	}
-	#nav-content-mobile:before {
-		filter: blur(1px);
-		border-top-left-radius: 2rem;
-		border-bottom-left-radius: 2rem;
-	}
-	#nav-content-mobile::after {
-		border-top-left-radius: 2rem;
-		border-bottom-left-radius: 2rem;
-	}
-	#navbar-mobile:before {
-		transform: translate3d(0px, 2px, 0) scale(1);
-		border-top-right-radius: 0rem;
-		border-bottom-right-radius: 0rem;
-	}
-	#navbar-mobile::after {
-		border-top-right-radius: 0rem;
-		border-bottom-right-radius: 0rem;
 	}
 </style>
