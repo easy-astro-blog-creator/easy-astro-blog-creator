@@ -5,22 +5,6 @@ import { easyConfig } from '../../siteConfig';
 // and https://icon-sets.iconify.design/ for more icons
 ---
 
-<div id="social-widget-mobile" class="dropdown flex h-full w-full justify-center md:hidden">
-	<div class="flex h-full w-full flex-col justify-center self-center" role="button" tabindex="0">
-		<Icon id="social-icon" class="self-center" name="material-symbols:face-retouching-natural-outline-rounded" />
-	</div>
-	<div id="social-links" tabindex="0" class="dropdown-content z-[1]">
-		{
-			Object.entries(easyConfig.social_media).map(([key, value]) =>
-				value ? (
-					<a href={value}>
-						<Icon name={`mdi:${key}`} />
-					</a>
-				) : null
-			)
-		}
-	</div>
-</div>
 <div id="social-widget-desktop" class="dropdown grid h-full w-full sm:hidden">
 	<div id="social-links" tabindex="0" class="collapse row-start-1 row-end-2 flex content-start justify-center opacity-0">
 		{
@@ -45,40 +29,27 @@ import { easyConfig } from '../../siteConfig';
 		<span class="collapse max-h-max font-extralight tracking-widest opacity-0">connect</span>
 	</div>
 </div>
-
+<div id="social-widget-mobile" class="dropdown flex h-full w-full justify-center md:hidden">
+	<div class="flex h-full w-full flex-col justify-center self-center" role="button" tabindex="0">
+		<Icon
+			id="social-icon"
+			class="self-center text-neutral-variant-400"
+			name="material-symbols:face-retouching-natural-outline-rounded"
+		/>
+	</div>
+	<div id="social-links" tabindex="0" class="dropdown-content flex">
+		{
+			Object.entries(easyConfig.social_media).map(([key, value]) =>
+				value ? (
+					<a href={value}>
+						<Icon name={`mdi:${key}`} />
+					</a>
+				) : null
+			)
+		}
+	</div>
+</div>
 <style>
-	@media (max-width: 767px) {
-		#social-links {
-			bottom: 9vh;
-			left: 1vw;
-			width: max-content;
-			max-width: 88vw;
-			flex-wrap: wrap;
-			flex-direction: row;
-			row-gap: 0.77rem;
-			column-gap: 0.77rem;
-			padding: 0.55rem;
-			display: flex;
-			background:
-				linear-gradient(theme(colors.semantic.surface-variant), theme(colors.semantic.surface-variant)) padding-box,
-				var(--linear-gradient-x) border-box;
-			border-radius: 0.55rem;
-			border: 4px dotted transparent;
-		}
-		#social-icon {
-			margin-bottom: -0.3rem;
-			width: 4vb;
-			height: 4vb;
-		}
-		svg {
-			width: 5vb;
-			height: 5vb;
-		}
-		a {
-			color: theme(colors.semantic.on-surface-variant);
-		}
-	}
-
 	@media (min-width: 768px) {
 		#social-widget-desktop {
 			container-name: socialWidget;
@@ -96,17 +67,19 @@ import { easyConfig } from '../../siteConfig';
 				visibility 0ms 0ms,
 				opacity 0ms 0ms;
 		}
+
 		#social-icon {
 			width: 4vb;
 			height: 4vb;
 			transition: opacity 700ms 350ms;
 		}
-		svg {
+		#social-links [data-icon] {
 			width: 3vb;
 			height: 3vb;
-		}
-		a {
 			color: theme(colors.semantic.on-surface-variant);
+		}
+		#social-links :is(a:hover) [data-icon] {
+			color: theme(colors.semantic.secondary);
 		}
 		span,
 		hr {
@@ -144,8 +117,47 @@ import { easyConfig } from '../../siteConfig';
 			}
 		}
 	}
+	@media (max-width: 767px) {
+		#social-links {
+			bottom: 9vh;
+			left: 1svw;
+			width: max-content;
+			max-width: 88vw;
+			flex-wrap: wrap;
+			flex-direction: row;
+			row-gap: 0.77rem;
+			column-gap: 0.77rem;
+			padding: 0.55rem;
+			display: flex;
+			border: 2px dotted transparent;
+			background:
+				linear-gradient(
+						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%),
+						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%)
+					)
+					padding-box,
+				var(--linear-gradient-x) border-box;
 
-	a:hover {
-		color: theme(colors.semantic.secondary);
+			border-radius: 0.55rem;
+		}
+
+		#social-icon {
+			margin-bottom: -0.25rem;
+			width: 4vb;
+			height: 4vb;
+			transition: color 300ms;
+		}
+		#social-widget-mobile:focus-within #social-icon,
+		#social-widget-mobile:active #social-icon {
+			@apply text-neutral-variant-700 dark:text-neutral-variant-200;
+		}
+		#social-links [data-icon] {
+			width: 5vb;
+			height: 5vb;
+			color: theme(colors.semantic.on-surface-variant);
+		}
+		#social-links :is(a:hover, a:focus, a:active) [data-icon] {
+			color: theme(colors.semantic.secondary);
+		}
 	}
 </style>

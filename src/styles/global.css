@@ -121,6 +121,32 @@
 			theme(colors.tertiary.400) 100%
 		);
 	}
+	.background-gradient {
+		position: relative;
+	}
+	.background-gradient:before {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--linear-gradient-y);
+		filter: blur(2px);
+		opacity: 0.55;
+		transition: opacity 0.3s;
+	}
+	.background-gradient::after {
+		content: '';
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: inherit;
+	}
 	.shadow-gradient {
 		/* Required properties */
 		position: relative;
