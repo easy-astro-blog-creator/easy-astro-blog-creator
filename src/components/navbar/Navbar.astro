@@ -4,6 +4,7 @@ import HeaderLink from './HeaderLink.astro';
 import { easyConfig } from '../../siteConfig';
 import Footer from '../Footer.astro';
 import SocialLinks from './SocialLinks.astro';
+import ShareIcon from './ShareIcon.astro';
 ---
 
 <nav id="navbar-desktop" class="background-gradient hidden text-semantic-on-surface-variant md:block">
@@ -63,14 +64,7 @@ import SocialLinks from './SocialLinks.astro';
 			<SocialLinks />
 		</li>
 		<li class="col-start-2 col-end-3 flex flex-col items-center justify-center">
-			<div class="flex h-full w-full flex-col justify-center">
-				<!-- color will be text-semantic-on-surface-variant -->
-				<Icon
-					id=""
-					class="self-center text-[4vb] text-neutral-variant-200 dark:text-neutral-variant-600"
-					name="material-symbols:ios-share-rounded"
-				/>
-			</div>
+			<ShareIcon mode="mobile" />
 		</li>
 		<li id="nav-content-list" class="dropdown col-start-3 col-end-4 flex h-full w-full items-center justify-center">
 			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content">

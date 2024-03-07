@@ -1,0 +1,81 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const mode = Astro.props.mode;
+---
+
+<!-- Medium to Large Screens -->{
+	mode === 'desktop' ? (
+		<button
+			class="flex flex-col justify-center bg-semantic-surface-variant/30 sm:hidden md:bottom-[3svh] md:right-[3svw] md:min-h-[6svw] md:w-[6svw] lg:min-h-[4svw] lg:w-[4svw]"
+			id="share-button-desktop"
+		>
+			<Icon class="h-auto w-7/12 self-center pb-1 text-semantic-on-surface-variant" name="material-symbols:ios-share-rounded" />
+		</button>
+	) : null
+}
+
+<!-- Mobile Screens -->
+{
+	mode === 'mobile' ? (
+		<div class="flex h-full w-full flex-col justify-center md:hidden lg:hidden" id="share-button-mobile">
+			<Icon id="" class="self-center text-[4vb] text-neutral-variant-400" name="material-symbols:ios-share-rounded" />
+		</div>
+	) : null
+}
+
+<style>
+	#share-button-desktop {
+		position: fixed;
+		height: auto;
+		z-index: 1;
+		border-radius: 100%;
+		transition:
+			scale 300ms,
+			filter 300ms,
+			backdrop-filter 300ms,
+			opacity 100ms;
+		cursor: pointer;
+	}
+</style>
+<script>
+	function handleShareButtonClick() {
+		const urlToShare = window.location.href;
+		const shareData = {
+			title: document.title,
+			url: urlToShare,
+		};
+
+		if (navigator.share) {
+			try {
+				navigator.share(shareData);
+				console.log('Content shared successfully');
+			} catch (error) {
+				console.error('Error sharing the content', error);
+			}
+		} else {
+			try {
+				navigator.clipboard.writeText(urlToShare);
+				alert('URL copied to clipboard');
+			} catch (error) {
+				console.error('Failed to copy the URL', error);
+			}
+		}
+	}
+
+	if (window.matchMedia('(max-width: 767px)').matches) {
+		let shareButton = document.getElementById('share-button-mobile');
+		if (!shareButton) {
+			throw new Error('share-button-mobile not found');
+		}
+		shareButton.addEventListener('click', handleShareButtonClick);
+	} else if (window.matchMedia('(min-width: 768px)').matches) {
+		let shareButton = document.getElementById('share-button-desktop');
+		if (!shareButton) {
+			throw new Error('share-button-desktop not found');
+		}
+		shareButton.addEventListener('click', handleShareButtonClick);
+	} else {
+		throw new Error('Media query failed to match any condition.');
+	}
+</script>

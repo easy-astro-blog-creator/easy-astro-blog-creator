@@ -1,0 +1,18 @@
+---
+const { bgColor, textColor, name } = Astro.props;
+---
+
+<div
+	class="flex h-14 w-14 items-center justify-center rounded border-2 md:w-24"
+	style={{
+		backgroundColor: `oklch(var(${bgColor}))`,
+		borderColor: `oklch(var(${textColor}))`,
+	}}
+>
+	<span
+		class="w-max overflow-hidden rounded px-1 pb-1 text-center text-[.6rem] font-medium md:text-xs"
+		style={{
+			color: `oklch(var(${textColor}))`,
+		}}>{name}</span
+	>
+</div>

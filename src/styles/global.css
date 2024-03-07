@@ -1,6 +1,23 @@
 /* In this file the theme is applied. 
-/* Get fonts from https://fonts.google.com/ */
-@import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* Get fonts from https://fonts.google.com/ and import like this:*/
+/* @import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
+
+/* Or use local fonts by putting them in public/fonts and adding them here */
+
+@font-face {
+	font-family: 'REM';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/REM-VariableFont_wght.ttf') format(truetype) tech(variations);
+}
+@font-face {
+	font-family: 'REM';
+	font-style: italic;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('/fonts/REM-Italic-VariableFont_wght.ttf') format(truetype) tech(variations);
+}
 
 @tailwind base;
 @tailwind components;
@@ -12,6 +29,7 @@
 
 @layer base {
 	html {
+		font-family: 'REM', sans-serif;
 		font-size: 18px;
 		font-weight: 300;
 		height: 100%;

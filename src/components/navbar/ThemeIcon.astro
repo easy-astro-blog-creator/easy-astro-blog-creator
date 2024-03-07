@@ -1,8 +1,7 @@
----
-import { Icon } from 'astro-icon/components';
----
-
-<button id="theme-toggle">
+<button
+	id="theme-toggle"
+	class="sm:right-[2svw] sm:top-[1svh] sm:w-[16svw] md:right-[3svw] md:top-[3svh] md:w-[7svw] lg:w-[5svw]"
+>
 	<svg viewBox="0 0 512 256" shape-rendering="geometricPrecision">
 		<svg id="sun" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd">
 			<g id="sun-inner">
@@ -37,9 +36,6 @@ import { Icon } from 'astro-icon/components';
 <style>
 	#theme-toggle {
 		position: fixed;
-		right: 2dvw;
-		top: 1dvh;
-		width: 22dvw;
 		height: auto;
 		z-index: 1;
 		border-radius: 1rem;
@@ -95,13 +91,6 @@ import { Icon } from 'astro-icon/components';
 	@media (scripting: none) {
 		#theme-toggle {
 			display: none;
-		}
-	}
-	@media (min-width: 768px) {
-		#theme-toggle {
-			top: 5dvh;
-			right: 5dvw;
-			width: 7svw;
 		}
 	}
 </style>

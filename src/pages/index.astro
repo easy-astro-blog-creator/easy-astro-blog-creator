@@ -12,11 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	heroImage={heroImage}
 	heroAlt={heroAlt}
 >
-	<article>
-		<div class="flex w-full flex-col items-center justify-center">
-			<h1 class="pb-3">Hello There</h1>
-			<Image src={heroImage} alt={heroAlt} class="w-1/4 rounded-3xl p-4" />
-			<p>Welcome to my about me page.</p>
-		</div>
-	</article>
+	<div class="flex w-full flex-col items-center justify-center">
+		<h1 class="pb-3">Hello There</h1>
+		<Image src={heroImage} alt={heroAlt} class="w-1/4 rounded-3xl p-4" />
+		<p>Welcome to my about me page.</p>
+	</div>
 </BaseLayout>

@@ -27,13 +27,13 @@ import {
 export enum SchemeVariant {
 	// MONOCHROME = 'monochrome',
 	NEUTRAL = 'neutral',
-	TONAL_SPOT = 'tonal_spot',
+	// TONAL_SPOT = 'tonal_spot',
 	VIBRANT = 'vibrant',
-	EXPRESSIVE = 'expressive',
-	FIDELITY = 'fidelity',
-	CONTENT = 'content',
-	COMPLEMENTARY = 'complement',
-	SPLIT_COMPLEMENTARY = 'split_complement',
+	// EXPRESSIVE = 'expressive',
+	// FIDELITY = 'fidelity',
+	// CONTENT = 'content',
+	COMPLEMENTARY = 'complementary',
+	// SPLIT_COMPLEMENTARY = 'split_complement',
 	TRIADIC = 'triadic',
 	ANALOGOUS = 'analogous',
 	// TETRADIC = 'tetradic',
@@ -121,19 +121,19 @@ export function generateDynamicScheme(themeConfig: CustomThemeConfig, mode: bool
 		// 	return new SchemeMonochrome(toHct(themeConfig.primary), mode, 0);
 		case SchemeVariant.NEUTRAL:
 			return new SchemeNeutral(toHct(themeConfig.primary), mode, 0);
-		case SchemeVariant.TONAL_SPOT:
-			return new SchemeTonalSpot(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.TONAL_SPOT:
+		// 	return new SchemeTonalSpot(toHct(themeConfig.primary), mode, 0);
 		case SchemeVariant.VIBRANT:
 			return new SchemeVibrant(toHct(themeConfig.primary), mode, 0);
-		case SchemeVariant.EXPRESSIVE:
-			return new SchemeExpressive(toHct(themeConfig.primary), mode, 0);
-		case SchemeVariant.FIDELITY:
-			return new SchemeFidelity(toHct(themeConfig.primary), mode, 0);
-		case SchemeVariant.CONTENT:
-			return new SchemeContent(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.EXPRESSIVE:
+		// 	return new SchemeExpressive(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.FIDELITY:
+		// 	return new SchemeFidelity(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.CONTENT:
+		// 	return new SchemeContent(toHct(themeConfig.primary), mode, 0);
+		// case SchemeVariant.COMPLEMENTARY:
+		// 	return generateSchemeComplementary(themeConfig, mode);
 		case SchemeVariant.COMPLEMENTARY:
-			return generateSchemeComplementary(themeConfig, mode);
-		case SchemeVariant.SPLIT_COMPLEMENTARY:
 			return generateSchemeComplementarySplit(themeConfig, mode);
 		case SchemeVariant.TRIADIC:
 			return generateSchemeTriadic(themeConfig, mode);

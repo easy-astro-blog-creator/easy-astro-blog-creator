@@ -1,6 +1,7 @@
 ---
 import { genenerateTailwindTheme, SchemeVariant, toOklchHue } from 'src/utils/colorFun/src/index';
 import { CUSTOM_THEME } from 'src/siteConfig';
+import PaletteSwatch from './PaletteSwatch.astro';
 
 const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
 const colors = tailwindsTheme.colors;
@@ -15,44 +16,93 @@ const palettes = {
 const paletteSteps = Object.keys(colors['primary']);
 ---
 
-<palette-input>
-	<form name="color-form" class="flex h-28 w-11/12 justify-around pb-4 text-sm">
-		<label class="form-control h-full min-w-max gap-1">
-			<div class="label">
-				<span class="w-full text-center">Select Scheme</span>
-			</div>
-			<div id="scheme-select" class="form-control grid min-w-max grid-cols-5 gap-x-2 gap-y-1 text-xs">
-				{
-					Object.entries(SchemeVariant).map(([key, variant]) => {
-						const isChecked = variant === CUSTOM_THEME.schemeVariant;
-						return (
-							<label class="label flex min-w-max cursor-pointer flex-col items-start rounded-lg border px-2 pb-1">
-								<span class="label-text pb-1">{variant}</span>
-								<input
-									type="radio"
-									value={key}
-									id={variant}
-									name="radio-10"
-									class="h-3 w-3 appearance-none rounded-full border border-semantic-primary-container checked:border-[5px] checked:border-semantic-primary"
-									checked={isChecked}
-								/>
-							</label>
-						);
-					})
-				}
-			</div>
-		</label>
-		<label class="form-control flex h-full w-3/12 flex-col items-center gap-4">
-			<div class="label">
-				<span class="w-full text-center">Input Primary Color</span>
-			</div>
+<div class="flex h-full w-full flex-col items-center justify-around overflow-x-clip md:w-[67svw]">
+	<palette-input class="w-full">
+		<form name="color-form" class="flex w-full flex-col justify-around text-xs font-medium">
+			<div class="flex w-full items-end justify-around md:items-center md:justify-center">
+				<label
+					class="form-control flex h-full w-3/12 flex-col items-center gap-1 text-left md:tooltip md:tooltip-top md:[--tooltip-color:theme(colors.semantic.primary-container)] md:[--tooltip-text-color:theme(colors.semantic.on-primary-container)]"
+					data-tip="The color used to generate the theme."
+				>
+					<div class="label">
+						<span class="w-full text-center">Primary Color <sup class="sm:hidden">🛈</sup></span>
+					</div>
 
-			<input
-				type="text"
-				value={CUSTOM_THEME.primary}
-				id="color-input-text"
-				class="input input-xs h-9 w-24 rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
-			/>
+					<input
+						type="text"
+						value={CUSTOM_THEME.primary}
+						id="color-input-text"
+						class="input input-xs h-9 w-24 rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
+					/>
+				</label>
+				<div class="dropdown dropdown-bottom flex flex-col items-center gap-1 md:hidden">
+					<div>
+						<span class="w-full text-center">Scheme </span>
+					</div>
+					<div
+						class="flex h-9 w-24 cursor-pointer items-center justify-center rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
+						tabindex="0"
+						role="button"
+					>
+						Select
+					</div>
+					<div tabindex="0" class="dropdown-content menu z-[1] w-max rounded-lg bg-semantic-surface-variant">
+						<div id="scheme-select-mobile" class="form-control flex flex-col justify-around">
+							{
+								Object.entries(SchemeVariant).map(([key, variant]) => {
+									// const isChecked = variant === CUSTOM_THEME.schemeVariant;
+									const isChecked = variant === CUSTOM_THEME.schemeVariant ? true : false;
+
+									return (
+										<label class="label flex cursor-pointer flex-col items-start border-x-2 border-b-2 border-semantic-on-surface-variant px-2 pb-1 first:rounded-t-lg first:border-t-2 last:rounded-b-lg last:border-b-2">
+											<span class="label-text pb-1">{variant}</span>
+											<input
+												type="radio"
+												value={key}
+												id={variant}
+												name="radio-mobile"
+												class="h-3 w-3 appearance-none rounded-full border-2 border-semantic-on-primary-container checked:border-[5px] checked:border-semantic-primary"
+												checked={isChecked}
+											/>
+										</label>
+									);
+								})
+							}
+						</div>
+					</div>
+				</div>
+				<label
+					class="form-control tooltip tooltip-top hidden h-full w-max gap-1 [--tooltip-color:theme(colors.semantic.primary-container)] [--tooltip-text-color:theme(colors.semantic.on-primary-container)] md:block"
+					data-tip="Variants generate colors from the primary input in different ways."
+				>
+					<div class="label">
+						<span class="w-full text-center">Select Scheme <sup>🛈</sup></span>
+					</div>
+					<div
+						id="scheme-select-desktop"
+						class="form-control flex h-full flex-row flex-wrap justify-around gap-x-2 md:justify-center"
+					>
+						{
+							Object.entries(SchemeVariant).map(([key, variant]) => {
+								const isChecked = variant === CUSTOM_THEME.schemeVariant;
+								return (
+									<label class="label flex cursor-pointer flex-col items-start rounded-lg border px-2 pb-1">
+										<span class="label-text pb-1">{variant}</span>
+										<input
+											type="radio"
+											value={key}
+											id={variant}
+											name="radio-desktop"
+											class="h-3 w-3 appearance-none rounded-full border-2 border-semantic-primary-container checked:border-[5px] checked:border-semantic-primary"
+											checked={isChecked}
+										/>
+									</label>
+								);
+							})
+						}
+					</div>
+				</label>
+			</div>
 			<input
 				type="range"
 				id="color-input-range"
@@ -60,23 +110,12 @@ const paletteSteps = Object.keys(colors['primary']);
 				max="360"
 				value={toOklchHue(CUSTOM_THEME.primary)}
 				step="0.1"
-				class="mx-2 h-4 w-full rounded-full"
+				class="mt-4 h-8 w-full rounded-full"
 			/>
-		</label>
-	</form>
-</palette-input>
-<div class="grid w-11/12 pt-4">
+		</form>
+	</palette-input>
+
 	<!-- <div
-		class="py-2 my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center border-2 border-semantic-on-background/60 rounded"
-	>
-		<p class="col-start-1 col-span-2">text styles</p>
-		<p class="col-start-3 col-span-2">Default Text</p>
-		<p class="font-bold col-span-2">Bold Text</p>
-		<p class="col-span-2 italic">Italic Text</p>
-		<p class="col-span-2">Heading Text</p>
-		<p class="col-span-3">Subheading Text</p>
-	</div> -->
-	<div
 		class="my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-items-center rounded border-2 border-semantic-on-background/60 py-2"
 	>
 		<p class="col-span-2 col-start-1">link styles</p>
@@ -85,38 +124,85 @@ const paletteSteps = Object.keys(colors['primary']);
 		<p class="easy-link easy-link-always-visited col-span-2">Visited Link</p>
 		<p class="easy-link easy-link-always-hover easy-link-always-visited col-span-2">Hovered</p>
 		<p class="easy-link easy-link-always-active col-span-2">Active Link</p>
-	</div>
-</div>
-<div class="my-2 grid w-11/12 grid-rows-6 gap-1 rounded border-2 border-semantic-on-background/60 pb-8 pr-8">
-	<div class="my-2 grid grid-cols-[repeat(13,_minmax(0,_1fr))] place-content-center p-2">
-		{
-			paletteSteps.map((step, index) => (
-				<div
-					class="col-span-1 text-center text-sm"
-					style={{
-						gridColumnStart: index + 3,
-					}}
-				>
-					{step}
-				</div>
-			))
-		}
-	</div>
-	{
-		Object.entries(palettes).map(([colorName, colorFamily]) => (
-			<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-1">
-				<div class="col-span-2 col-start-1 place-self-center text-right">{colorName}</div>
-				{Object.keys(colorFamily).map((shadeValue) => (
-					<div
-						class="rounded px-2 py-8"
-						style={{
-							backgroundColor: `oklch(var(--colors-${colorName}-${shadeValue}))`,
-						}}
-					/>
-				))}
+	</div> -->
+	<div class="mt-4 flex w-full flex-col items-center gap-1 rounded border-2 border-semantic-on-background/60 pb-2 pr-2 md:px-2">
+		<span class="font-medium">palette colors</span>
+		<div class="grid w-full gap-1 text-[.6rem] md:text-xs">
+			<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] self-end">
+				{
+					paletteSteps.map((step, index) => (
+						<div
+							class="col-span-1  self-center justify-self-center text-center md:text-sm"
+							style={{
+								gridColumnStart: index + 3,
+							}}
+						>
+							{step}
+						</div>
+					))
+				}
 			</div>
-		))
-	}
+			{
+				Object.entries(palettes).map(([colorName, colorFamily]) => (
+					<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-[.03rem]  md:gap-1 ">
+						<span class="col-span-2 col-start-1 mx-1 self-center justify-self-center hyphens-auto break-all text-center  md:mx-0 md:justify-self-end md:pr-2 ">
+							{colorName}
+						</span>
+						{Object.keys(colorFamily).map((shadeValue) => (
+							<div
+								class="h-8 w-full rounded md:h-12"
+								style={{
+									backgroundColor: `oklch(var(--colors-${colorName}-${shadeValue}))`,
+								}}
+							/>
+						))}
+					</div>
+				))
+			}
+		</div>
+	</div>
+	<div class="mt-4 flex w-full flex-col items-center gap-2 rounded border-2 border-semantic-on-background/60 px-1 pb-2 md:px-8">
+		<span class="font-medium">semantic colors</span>
+		<div class="grid w-full grid-cols-5 gap-[.1rem] md:gap-1">
+			<div class="col-start-1 col-end-2 flex flex-col items-center gap-[.1rem] md:gap-1">
+				<PaletteSwatch name="primary" bgColor="--colors-semantic-primary" textColor="--colors-semantic-on-primary" />
+				<PaletteSwatch
+					name="container"
+					bgColor="--colors-semantic-primary-container"
+					textColor="--colors-semantic-on-primary-container"
+				/>
+			</div>
+			<div class="col-start-2 col-end-3 flex flex-col items-center gap-[.1rem] md:gap-1">
+				<PaletteSwatch name="secondary" bgColor="--colors-semantic-secondary" textColor="--colors-semantic-on-secondary" />
+				<PaletteSwatch
+					name="container"
+					bgColor="--colors-semantic-secondary-container"
+					textColor="--colors-semantic-on-secondary-container"
+				/>
+			</div>
+			<div class="col-start-3 col-end-4 flex flex-col items-center gap-[.1rem] md:gap-1">
+				<PaletteSwatch name="tertiary" bgColor="--colors-semantic-tertiary" textColor="--colors-semantic-on-tertiary" />
+				<PaletteSwatch
+					name="container"
+					bgColor="--colors-semantic-tertiary-container"
+					textColor="--colors-semantic-on-tertiary-container"
+				/>
+			</div>
+
+			<div class="col-start-4 col-end-5 flex flex-col items-center gap-[.1rem] md:gap-1">
+				<PaletteSwatch name="bg" bgColor="--colors-semantic-background" textColor="--colors-semantic-on-background" />
+				<PaletteSwatch
+					name="surface-variant"
+					bgColor="--colors-semantic-surface-variant"
+					textColor="--colors-semantic-on-surface-variant"
+				/>
+			</div>
+			<div class="col-start-5 col-end-6 flex flex-col items-center gap-[.1rem] md:gap-1">
+				<PaletteSwatch name="outline" bgColor="--colors-semantic-outline" />
+				<PaletteSwatch name="outline-variant" bgColor="--colors-semantic-outline-variant" />
+			</div>
+		</div>
+	</div>
 </div>
 <style>
 	input[type='range'] {
@@ -148,7 +234,8 @@ const paletteSteps = Object.keys(colors['primary']);
 
 			const colorInputText = document.getElementById('color-input-text') as HTMLInputElement;
 			const colorInputRange = document.getElementById('color-input-range') as HTMLInputElement;
-			const schemeSelect = document.getElementById('scheme-select') as HTMLSelectElement;
+			const schemeSelectMobile = document.getElementById('scheme-select-mobile') as HTMLSelectElement;
+			const schemeSelectDesktop = document.getElementById('scheme-select-desktop') as HTMLSelectElement;
 			let currentColorValue = colorInputText.value;
 
 			colorInputText.addEventListener('input', () => {
@@ -172,9 +259,19 @@ const paletteSteps = Object.keys(colors['primary']);
 			});
 
 			function getSelectedScheme(): string {
-				const radios = schemeSelect.querySelectorAll('input[type="radio"]');
+				let radios: NodeListOf<HTMLInputElement>;
+				if (window.matchMedia('(max-width: 767px)').matches) {
+					radios = schemeSelectMobile.querySelectorAll('input[type="radio"]');
+				} else if (window.matchMedia('(min-width: 768px)').matches) {
+					radios = schemeSelectDesktop.querySelectorAll('input[type="radio"]');
+				} else {
+					throw new Error('Media query failed to match any condition.');
+				}
+
 				let selectedValue: string | undefined;
 				radios.forEach((radio) => {
+					console.log(radio);
+					console.log(radio.checked);
 					if ((radio as HTMLInputElement).checked) {
 						selectedValue = (radio as HTMLInputElement).value;
 					}
@@ -185,7 +282,10 @@ const paletteSteps = Object.keys(colors['primary']);
 				return selectedValue;
 			}
 
-			schemeSelect.addEventListener('change', () => {
+			schemeSelectMobile.addEventListener('change', () => {
+				updateTheme();
+			});
+			schemeSelectDesktop.addEventListener('change', () => {
 				updateTheme();
 			});
 
@@ -194,10 +294,6 @@ const paletteSteps = Object.keys(colors['primary']);
 				const newConfig: CustomThemeConfig = {
 					primary: currentColorValue,
 					schemeVariant: SchemeVariant[selectedSchemeVariant as keyof typeof SchemeVariant],
-					// secondary: '#D07D12',
-					// tertiary: '#003E1F',
-					// neutral: '#d4e9f8',
-					// neutralVarient: '#E8F5F2',
 				};
 				updateTailwindTheme(document.styleSheets, newConfig);
 			}

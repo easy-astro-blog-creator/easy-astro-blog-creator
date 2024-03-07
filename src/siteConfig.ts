@@ -8,7 +8,7 @@ const FIRST_NAME = 'shelby';
 const GITHUB_USERNAME = 'shelbyjenkins';
 
 const PRIMARY_COLOR = '#40a1e6'; // Curious Blue #40a1e6 64, 161, 230
-const THEME_VARIANT = SchemeVariant.SPLIT_COMPLEMENTARY;
+const THEME_VARIANT = SchemeVariant.COMPLEMENTARY;
 
 // Social media links - leave blank if you don't want to display a link
 const LINKEDIN_URL = 'https://www.linkedin.com/in/jshelbyj/';
