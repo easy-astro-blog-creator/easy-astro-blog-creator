@@ -7,7 +7,7 @@ const FIRST_NAME = 'shelby';
 // Github Pages configuration
 const GITHUB_USERNAME = 'shelbyjenkins';
 
-const PRIMARY_COLOR = '#40a1e6'; // Curious Blue #40a1e6 64, 161, 230
+const PRIMARY_COLOR = '#40a1e6'; // Curious Blue ! #40a1e6 64, 161, 230
 const THEME_VARIANT = SchemeVariant.COMPLEMENTARY;
 
 // Social media links - leave blank if you don't want to display a link
