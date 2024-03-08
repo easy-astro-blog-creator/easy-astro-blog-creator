@@ -66,6 +66,7 @@
 		"typescript-eslint": "^7.0.1"
 	},
 	"dependencies": {
-		"postcss": "^8.4.35"
+		"postcss": "^8.4.35",
+		"sharp": "^0.33.2"
 	}
 }
