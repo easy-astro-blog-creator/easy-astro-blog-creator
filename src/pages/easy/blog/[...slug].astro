@@ -3,7 +3,7 @@ import { type CollectionEntry } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import '../../../styles/blog.css';
 import { customGetCollection } from '../../../utils/customGetCollection';
-import { easyConfig } from 'src/siteConfig';
+import { easyConfig } from 'easyConfig';
 export async function getStaticPaths() {
 	if (easyConfig.easyabc_enabled) {
 		return customGetCollection('easy', 'easy/blog');

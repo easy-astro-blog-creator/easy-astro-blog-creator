@@ -10,7 +10,7 @@ import icon from 'astro-icon';
 import tailwind from '@astrojs/tailwind';
 
 // Site Config
-import { easyConfig } from '/src/siteConfig';
+import { easyConfig } from '/easyConfig';
 
 // https://astro.build/config
 export default defineConfig({

@@ -1,4 +1,5 @@
-import { SchemeVariant, CustomThemeConfig } from '../src/utils/colorFun/src';
+import { SchemeVariant, CustomThemeConfig } from './src/utils/colorFun/src';
+import { checkLoadDefaultImages } from './src/utils/checkLoadDefaultImages';
 
 // General site info
 const FULL_NAME = 'shelby jenkins';
@@ -22,7 +23,17 @@ const MASTODON_URL = '';
 const DISCORD_URL = '';
 const TWITCH_URL = '';
 
-const FAVICON_URL = '/favicon.png';
+//  About me config
+// A photo of you. It will be displayed in the about me section of the blog.
+const HEADSHOT_PATH = 'images/headshot.png';
+const HEADSHOT_ALT = 'A photo of Shelby Jenkins';
+
+// The default social image is what is used to generate the preview cards for Twitter, Facebook, etc.
+// This is used in the case your blog post does not include a hero image.
+// If not provided it defaults to the EasyABC logo.
+const DEFAULT_SOCIAL_IMAGE_PATH = 'images/defaultSocialImage.png';
+
+const FAVICON_PATH = 'favicon.png';
 // See https://www.w3.org/2005/10/howto-favicon
 // image/svg+xml or image/png
 const FAVICON_TYPE = 'image/png';
@@ -36,7 +47,16 @@ export const easyConfig = {
 	full_name: capitalizeName(FULL_NAME),
 	site_title: `${capitalizeName(FIRST_NAME)}'s Blog`,
 	site_description: `The personal blog of ${capitalizeName(FULL_NAME)}.`,
-	favicon_url: FAVICON_URL,
+	get headshot_path() {
+		return checkLoadDefaultImages(HEADSHOT_PATH, 'easy-abc/headshot.png');
+	},
+	headshot_alt: HEADSHOT_ALT,
+	get default_social_image() {
+		return checkLoadDefaultImages(DEFAULT_SOCIAL_IMAGE_PATH, 'easy-abc/easyHero.png');
+	},
+	get favicon_path() {
+		return checkLoadDefaultImages(FAVICON_PATH, 'easy-abc/favicon.png');
+	},
 	favicon_type: FAVICON_TYPE,
 	github_username: GITHUB_USERNAME,
 	github_pages_url: `https://${GITHUB_USERNAME}.github.io`, // Right now this is the only supported format,

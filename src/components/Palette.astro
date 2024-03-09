@@ -1,6 +1,6 @@
 ---
 import { genenerateTailwindTheme, SchemeVariant, toOklchHue } from 'src/utils/colorFun/src/index';
-import { CUSTOM_THEME } from 'src/siteConfig';
+import { CUSTOM_THEME } from 'easyConfig';
 import PaletteSwatch from './PaletteSwatch.astro';
 
 const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
@@ -21,7 +21,7 @@ const paletteSteps = Object.keys(colors['primary']);
 		<form name="color-form" class="flex w-full flex-col justify-around text-xs font-medium">
 			<div class="flex w-full items-end justify-around md:items-center md:justify-center">
 				<label
-					class="form-control flex h-full w-3/12 flex-col items-center gap-1 text-left md:tooltip md:tooltip-top md:[--tooltip-color:theme(colors.semantic.primary-container)] md:[--tooltip-text-color:theme(colors.semantic.on-primary-container)]"
+					class="form-control flex h-full w-3/12 flex-col items-center gap-1 text-left md:tooltip md:tooltip-bottom md:[--tooltip-color:theme(colors.semantic.primary-container)] md:[--tooltip-text-color:theme(colors.semantic.on-primary-container)]"
 					data-tip="The color used to generate the theme."
 				>
 					<div class="label">
@@ -35,6 +35,7 @@ const paletteSteps = Object.keys(colors['primary']);
 						class="input input-xs h-9 w-24 rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
 					/>
 				</label>
+				<!-- Mobile -->
 				<div class="dropdown dropdown-bottom flex flex-col items-center gap-1 md:hidden">
 					<div>
 						<span class="w-full text-center">Scheme </span>
@@ -71,8 +72,9 @@ const paletteSteps = Object.keys(colors['primary']);
 						</div>
 					</div>
 				</div>
+				<!-- Desktop -->
 				<label
-					class="form-control tooltip tooltip-top hidden h-full w-max gap-1 [--tooltip-color:theme(colors.semantic.primary-container)] [--tooltip-text-color:theme(colors.semantic.on-primary-container)] md:block"
+					class="form-control tooltip tooltip-bottom hidden h-full w-max gap-1 [--tooltip-color:theme(colors.semantic.primary-container)] [--tooltip-text-color:theme(colors.semantic.on-primary-container)] md:block"
 					data-tip="Variants generate colors from the primary input in different ways."
 				>
 					<div class="label">

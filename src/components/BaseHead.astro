@@ -3,10 +3,13 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import { SEO } from 'astro-seo';
-import { easyConfig } from '../siteConfig';
+import { easyConfig } from '../../easyConfig';
 import { getImage } from 'astro:assets';
-import defaultSocialImage from '../images/default-social-image.png';
+import { GetImageResult } from 'astro';
 
+const faviconPath = await easyConfig.favicon_path;
+// Use when no alt text is provided for the hero image
+const DEFAULT_SOCIAL_IMAGE_ALT = 'This is a hero image but no alt text was provided.';
 /**
  * Enforce some standard canonical URL formatting across the site.
  */
@@ -28,16 +31,18 @@ function formatCanonicalURL(url: string | URL) {
 const { page_title, page_description, heroImage, heroAlt, pubDate, updatedDate } = Astro.props;
 
 const socialImage = await (async () => {
-	let image;
+	let imageSrc: string;
 
 	if (heroImage) {
-		image = await getImage({ src: heroImage, format: 'webp' });
+		const image: GetImageResult = await getImage({ src: heroImage, format: 'webp' });
+		imageSrc = image.src;
 	} else {
-		image = await getImage({ src: defaultSocialImage, format: 'webp' });
+		imageSrc = await easyConfig.default_social_image;
 	}
-	const fullImage = new URL(image.src, easyConfig.github_pages_url).toString();
-	return { src: fullImage, alt: heroAlt };
+	const fullImage = new URL(imageSrc, easyConfig.github_pages_url).toString();
+	return { src: fullImage, alt: heroAlt || DEFAULT_SOCIAL_IMAGE_ALT };
 })();
+
 // See https://github.com/jonasmerlin/astro-seo
 ---
 
@@ -71,7 +76,6 @@ const socialImage = await (async () => {
 		},
 	}}
 	extend={{
-		// extending the default link tags
-		link: [{ rel: 'icon', type: easyConfig.favicon_type, href: easyConfig.favicon_url }],
+		link: [{ rel: 'icon', type: easyConfig.favicon_type, href: faviconPath }],
 	}}
 />

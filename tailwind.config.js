@@ -1,5 +1,5 @@
 import { genenerateTailwindTheme } from './src/utils/colorFun/src/index';
-import { CUSTOM_THEME } from './src/siteConfig';
+import { CUSTOM_THEME } from './easyConfig';
 
 const customTailwindTheme = genenerateTailwindTheme(CUSTOM_THEME, true);
 /** @type {import('tailwindcss').Config} */

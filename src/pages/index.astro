@@ -1,20 +1,14 @@
 ---
-import { easyConfig } from '../siteConfig';
-import { Image } from 'astro:assets';
-import heroImage from '../images/headshot.png';
-const heroAlt = 'A headshot.';
+import { easyConfig } from '../../easyConfig';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+const headshotPath = await easyConfig.headshot_path;
 ---
 
-<BaseLayout
-	page_title={easyConfig.site_title}
-	page_description={easyConfig.site_description}
-	heroImage={heroImage}
-	heroAlt={heroAlt}
->
+<BaseLayout page_title={easyConfig.site_title} page_description={easyConfig.site_description} heroAlt={easyConfig.headshot_alt}>
 	<div class="flex w-full flex-col items-center justify-center">
 		<h1 class="pb-3">Hello There</h1>
-		<Image src={heroImage} alt={heroAlt} class="w-1/4 rounded-3xl p-4" />
+		<img src={headshotPath} alt={easyConfig.headshot_alt} class="w-1/4 rounded-3xl p-4" />
 		<p>Welcome to my about me page.</p>
 	</div>
 </BaseLayout>

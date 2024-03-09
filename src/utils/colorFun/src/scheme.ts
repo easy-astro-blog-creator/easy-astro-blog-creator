@@ -7,20 +7,20 @@ import {
 	SchemeNeutral,
 	SchemeTonalSpot,
 	SchemeVibrant,
-	SchemeExpressive,
-	SchemeFidelity,
-	SchemeContent,
+	// SchemeExpressive,
+	// SchemeFidelity,
+	// SchemeContent,
 } from '@material/material-color-utilities';
 
 import { CustomThemeConfig } from './theme';
 import {
 	toHct,
 	toOklch,
-	complemetaryColor,
+	// complemetaryColor,
 	complemetarySplitColors,
 	triadicColors,
 	analogousColors,
-	tetradicColors,
+	// tetradicColors,
 	validateColor,
 } from './colorFunctions';
 
@@ -177,21 +177,21 @@ export function createSchemeObject(scheme: DynamicScheme): McuScheme {
 		'on-error-container': toOklch(hexFromArgb(MaterialDynamicColors.onErrorContainer.getArgb(scheme))),
 	};
 }
-function generateSchemeComplementary(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
-	const complementary = complemetaryColor(themeConfig.primary);
+// function generateSchemeComplementary(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
+// 	const complementary = complemetaryColor(themeConfig.primary);
 
-	return new DynamicScheme({
-		sourceColorArgb: argbFromHex(themeConfig.primary),
-		variant: Variant.TONAL_SPOT,
-		isDark: mode,
-		contrastLevel: 0.0,
-		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
-		secondaryPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 16),
-		tertiaryPalette: TonalPalette.fromHct(toHct(complementary)),
-		neutralPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4),
-		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(complementary).hue, 8),
-	});
-}
+// 	return new DynamicScheme({
+// 		sourceColorArgb: argbFromHex(themeConfig.primary),
+// 		variant: Variant.TONAL_SPOT,
+// 		isDark: mode,
+// 		contrastLevel: 0.0,
+// 		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
+// 		secondaryPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 16),
+// 		tertiaryPalette: TonalPalette.fromHct(toHct(complementary)),
+// 		neutralPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4),
+// 		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(complementary).hue, 8),
+// 	});
+// }
 function generateSchemeComplementarySplit(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
 	const [color1, color2] = complemetarySplitColors(themeConfig.primary);
 
@@ -223,7 +223,7 @@ function generateSchemeTriadic(themeConfig: CustomThemeConfig, mode: boolean): D
 	});
 }
 function generateSchemeAnalogous(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
-	const [unused, color2, unused2, color4] = analogousColors(themeConfig.primary);
+	const [, color2, , color4] = analogousColors(themeConfig.primary);
 
 	return new DynamicScheme({
 		sourceColorArgb: argbFromHex(themeConfig.primary),
@@ -237,21 +237,21 @@ function generateSchemeAnalogous(themeConfig: CustomThemeConfig, mode: boolean):
 		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 8),
 	});
 }
-function generateSchemeTetradic(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
-	const [color1, color2, color3] = tetradicColors(themeConfig.primary);
+// function generateSchemeTetradic(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
+// 	const [color1, color2, color3] = tetradicColors(themeConfig.primary);
 
-	return new DynamicScheme({
-		sourceColorArgb: argbFromHex(themeConfig.primary),
-		variant: Variant.TONAL_SPOT,
-		isDark: mode,
-		contrastLevel: 0.0,
-		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
-		secondaryPalette: TonalPalette.fromHct(toHct(color1)),
-		tertiaryPalette: TonalPalette.fromHct(toHct(color2)),
-		neutralPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4),
-		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(color3).hue, 8),
-	});
-}
+// 	return new DynamicScheme({
+// 		sourceColorArgb: argbFromHex(themeConfig.primary),
+// 		variant: Variant.TONAL_SPOT,
+// 		isDark: mode,
+// 		contrastLevel: 0.0,
+// 		primaryPalette: TonalPalette.fromHct(toHct(themeConfig.primary)),
+// 		secondaryPalette: TonalPalette.fromHct(toHct(color1)),
+// 		tertiaryPalette: TonalPalette.fromHct(toHct(color2)),
+// 		neutralPalette: TonalPalette.fromHueAndChroma(toHct(themeConfig.primary).hue, 4),
+// 		neutralVariantPalette: TonalPalette.fromHueAndChroma(toHct(color3).hue, 8),
+// 	});
+// }
 // function generateSchemeCustom(themeConfig: CustomThemeConfig, mode: boolean): DynamicScheme {
 // 	let secondaryPalette;
 // 	let tertiaryPalette;

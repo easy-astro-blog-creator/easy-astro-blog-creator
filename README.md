@@ -1,4 +1,4 @@
-<img src="/public/images/easy-hero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
+<img src="/public/easy-abc/easyHero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 <h1> Easy Astro Blog Creator </h1>
 
