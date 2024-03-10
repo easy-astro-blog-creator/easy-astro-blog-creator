@@ -61,13 +61,13 @@ function ensurePublicPath(path: string): string {
 
 function removePublicPath(path: string): string {
 	if (path.startsWith('/public/')) {
-		return path.slice(8);
-	}
-	if (path.startsWith('public/')) {
 		return path.slice(7);
 	}
-	if (path.startsWith('/')) {
-		return path.slice(1);
+	if (path.startsWith('public/')) {
+		return path.slice(6);
+	}
+	if (!path.startsWith('/')) {
+		return `/${path}`;
 	}
 	return path;
 }

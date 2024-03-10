@@ -14,6 +14,10 @@ import { easyConfig } from '/easyConfig';
 
 // https://astro.build/config
 export default defineConfig({
+	server: {
+		host: true,
+		port: 4321,
+	},
 	output: 'static',
 	site: easyConfig.github_pages_url,
 	integrations: [

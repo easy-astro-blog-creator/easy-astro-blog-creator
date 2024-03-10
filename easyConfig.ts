@@ -48,14 +48,14 @@ export const easyConfig = {
 	site_title: `${capitalizeName(FIRST_NAME)}'s Blog`,
 	site_description: `The personal blog of ${capitalizeName(FULL_NAME)}.`,
 	get headshot_path() {
-		return checkLoadDefaultImages(HEADSHOT_PATH, 'easy-abc/headshot.png');
+		return checkLoadDefaultImages(HEADSHOT_PATH, '/easy-abc/headshot.png');
 	},
 	headshot_alt: HEADSHOT_ALT,
 	get default_social_image() {
-		return checkLoadDefaultImages(DEFAULT_SOCIAL_IMAGE_PATH, 'easy-abc/easyHero.png');
+		return checkLoadDefaultImages(DEFAULT_SOCIAL_IMAGE_PATH, '/easy-abc/easyHero.png');
 	},
 	get favicon_path() {
-		return checkLoadDefaultImages(FAVICON_PATH, 'easy-abc/favicon.png');
+		return checkLoadDefaultImages(FAVICON_PATH, '/easy-abc/favicon.png');
 	},
 	favicon_type: FAVICON_TYPE,
 	github_username: GITHUB_USERNAME,

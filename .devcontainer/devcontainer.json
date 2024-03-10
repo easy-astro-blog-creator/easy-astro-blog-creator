@@ -3,6 +3,8 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
+
+	"runArgs": ["--publish", "4321:4321"],
 	"remoteUser": "root",
 	"postCreateCommand": "npm install",
 	"customizations": {

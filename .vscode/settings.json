@@ -1,18 +1,18 @@
 {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      "astro", // Enable .astro
-      "typescript", // Enable .ts
-      "typescriptreact" // Enable .tsx
-    ]
-  }
-  
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"astro", // Enable .astro
+		"typescript", // Enable .ts
+		"typescriptreact" // Enable .tsx
+	],
+	"remote.localPortHost": "allInterfaces"
+}
