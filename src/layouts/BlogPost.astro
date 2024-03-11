@@ -28,16 +28,21 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 					Published on
 					<FormattedDate date={pubDate} />
 				</div>
-				<div class="italic">
-					{
-						updatedDate && (
-							<>
-								Updated on
-								<FormattedDate date={updatedDate} />
-							</>
-						)
-					}
-				</div>
+				{
+					updatedDate && (
+						<>
+							<div>·</div>
+							<div class="italic">
+								<>
+									<>
+										Updated on
+										<FormattedDate date={updatedDate} />
+									</>
+								</>
+							</div>
+						</>
+					)
+				}
 			</div>
 			<hr class="mb-5 mt-1 w-full border-semantic-on-surface-variant/10 md:w-[66%]" />
 		</div>

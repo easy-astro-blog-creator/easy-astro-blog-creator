@@ -3,9 +3,9 @@ import { type CollectionEntry } from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import '../../../styles/blog.css';
 import { customGetCollection } from '../../../utils/customGetCollection';
-import { easyConfig } from 'easyConfig';
+import { easyConfig } from '@utils/easyConfig';
 export async function getStaticPaths() {
-	if (easyConfig.easyabc_enabled) {
+	if (easyConfig.easyAbcEnabled) {
 		return customGetCollection('easy', 'easy/blog');
 	}
 }
@@ -15,9 +15,10 @@ const { Content } = await post.render();
 ---
 
 {
-	easyConfig.easyabc_enabled && (
+	easyConfig.easyAbcEnabled && (
 		<BlogPost {...post.data}>
 			<Content />
 		</BlogPost>
 	)
 }
+../../../utils/easyConfig

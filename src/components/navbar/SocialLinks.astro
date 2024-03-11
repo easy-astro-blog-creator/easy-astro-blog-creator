@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { easyConfig } from '../../../easyConfig';
+import { easyConfig } from '../../utils/easyConfig';
 // See https://github.com/natemoo-re/astro-icon
 // and https://icon-sets.iconify.design/ for more icons
 ---
@@ -8,7 +8,7 @@ import { easyConfig } from '../../../easyConfig';
 <div id="social-widget-desktop" class="dropdown grid h-full w-full sm:hidden">
 	<div id="social-links" tabindex="0" class="collapse row-start-1 row-end-2 flex content-start justify-center opacity-0">
 		{
-			Object.entries(easyConfig.social_media).map(([key, value]) =>
+			Object.entries(easyConfig.socialMedia).map(([key, value]) =>
 				value ? (
 					<a href={value}>
 						<Icon name={`mdi:${key}`} />
@@ -39,7 +39,7 @@ import { easyConfig } from '../../../easyConfig';
 	</div>
 	<div id="social-links" tabindex="0" class="dropdown-content flex">
 		{
-			Object.entries(easyConfig.social_media).map(([key, value]) =>
+			Object.entries(easyConfig.socialMedia).map(([key, value]) =>
 				value ? (
 					<a href={value}>
 						<Icon name={`mdi:${key}`} />
@@ -51,31 +51,30 @@ import { easyConfig } from '../../../easyConfig';
 </div>
 <style>
 	@media (min-width: 768px) {
-		@media (min-width: 1440px) {
+		@media (min-width: 1281px) {
 			#social-links [data-icon] {
 				width: 4vb;
 				height: 4vb;
 			}
 			#social-icon {
-				width: 4vb;
-				height: 4vb;
+				width: 6vb;
+				height: 6vb;
 			}
 		}
-		@media (max-width: 1439px) {
+		@media (max-width: 1280px) {
 			#social-links [data-icon] {
-				width: 5vb;
-				height: 5vb;
+				width: 3.5vb;
+				height: 3.5vb;
 			}
 			#social-icon {
-				width: 8vb;
-				height: 8vb;
+				width: 4vb;
+				height: 4vb;
 			}
 		}
 		#social-widget-desktop {
 			container-name: socialWidget;
 			container-type: size;
 			grid-template-rows: 70% 30%;
-			padding-right: calc((3rem - 2ch) / 2);
 		}
 		#social-links {
 			flex-wrap: wrap-reverse;
@@ -137,7 +136,7 @@ import { easyConfig } from '../../../easyConfig';
 	}
 	@media (max-width: 767px) {
 		#social-links {
-			bottom: 9vh;
+			bottom: 11svh;
 			left: 3svw;
 			width: max-content;
 			max-width: 88vw;

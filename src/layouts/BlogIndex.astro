@@ -1,0 +1,137 @@
+---
+import { easyConfig } from '../utils/easyConfig';
+import FormattedDate from '../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
+import { formatDescription, titleLineCountIsOne } from '../utils/abbreviateDescription';
+import BaseLayout from './BaseLayout.astro';
+import { customGetCollection } from '../utils/customGetCollection';
+
+const { blogCollectionName, basePath } = Astro.props;
+const blogCollection = await customGetCollection(blogCollectionName, basePath);
+let posts = blogCollection.sort((a, b) => {
+	// Sort by updatedDate if available, otherwise fall back to pubDate
+	const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
+	const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
+	// Sort in descending order (newest first)
+	return dateB.valueOf() - dateA.valueOf();
+});
+const heroImage = posts.length > 0 ? posts[0].props.data.heroImage : undefined;
+const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
+---
+
+<BaseLayout title={easyConfig.siteTitle} page_description={easyConfig.siteDescription} heroImage={heroImage} heroAlt={heroAlt}>
+	<ul class="flex max-w-[110ch] list-none flex-col items-start py-4 pl-[6svw] pr-[6svw] sm:hidden">
+		{
+			posts.map((post, i) => {
+				return (
+					<>
+						<li class="flex h-[12.5rem] w-full flex-col">
+							<a
+								class="group flex h-full min-w-full items-center justify-between hover:no-underline"
+								href={`${post.params.htmlSlug}`}
+							>
+								<div class="flex h-full w-full flex-col justify-start ">
+									<div class="text-xs font-medium text-semantic-on-background/60 ">
+										<FormattedDate
+											date={
+												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+											}
+										/>
+									</div>
+									<div class="flex h-[5.75rem] w-full justify-between">
+										<div class="flex w-max flex-col">
+											<h1 class="line-clamp-2 hyphens-auto break-words text-lg font-bold  group-hover:text-semantic-primary ">
+												{post.props.data.title}
+											</h1>
+											{titleLineCountIsOne(post.props.data.title) ? (
+												<p class="line-clamp-3 text-sm ">
+													{formatDescription(post.props.data.description, post.props.body, 3, 100)}
+												</p>
+											) : (
+												<p class="line-clamp-2 text-sm ">
+													{formatDescription(post.props.data.description, post.props.body, 2, 100)}
+												</p>
+											)}
+										</div>
+
+										<div class="group-hover:shadow-gradient m-1 ml-12 aspect-square h-[140%] flex-shrink-0 rounded-xl   ">
+											{post.props.data.heroImage ? (
+												<Image
+													class="  h-full rounded-xl object-cover  "
+													src={post.props.data.heroImage}
+													alt={post.props.data.heroAlt || ''}
+												/>
+											) : (
+												<div class="h-full w-full rounded-xl bg-semantic-primary-container/20" />
+											)}
+										</div>
+									</div>
+									<div class="mb-auto mt-4 text-xs font-normal italic text-semantic-on-background/60 ">
+										{[post.props.data.readingTime]}
+									</div>
+									{posts.length != i + 1 && <hr class="mb-4 mt-auto w-full  border-semantic-on-surface-variant/10 " />}
+								</div>
+							</a>
+						</li>
+					</>
+				);
+			})
+		}
+	</ul>
+	<ul class="flex h-full w-full list-none flex-col items-start py-4 md:hidden">
+		{
+			posts.map((post, i) => {
+				return (
+					<>
+						<li class="flex h-[10rem] w-full flex-col ">
+							<a class="group flex h-full items-center justify-between hover:no-underline" href={`${post.params.htmlSlug}`}>
+								<div class="flex h-full w-full flex-col justify-start ">
+									<div class="text-xs font-medium text-semantic-on-background/60">
+										<FormattedDate
+											date={
+												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+											}
+										/>
+									</div>
+									<div class="flex h-[5.5rem] w-full justify-between ">
+										<div class="flex w-max flex-col">
+											<h1 class="line-clamp-2 hyphens-auto break-words text-base font-semibold leading-5 group-hover:text-semantic-primary  ">
+												{post.props.data.title}
+											</h1>
+											{titleLineCountIsOne(post.props.data.title) ? (
+												<p class="line-clamp-4 text-xs ">{formatDescription(post.props.data.description, post.props.body)}</p>
+											) : (
+												<p class="line-clamp-3 text-xs ">{formatDescription(post.props.data.description, post.props.body)}</p>
+											)}
+										</div>
+
+										<div class="ml-6 aspect-square h-full flex-shrink-0 p-1">
+											{post.props.data.heroImage ? (
+												<Image
+													class="h-full rounded-xl object-cover "
+													src={post.props.data.heroImage}
+													alt={post.props.data.heroAlt || ''}
+												/>
+											) : (
+												<div class="h-full w-full rounded-xl bg-semantic-primary-container/20" />
+											)}
+										</div>
+									</div>
+									<div class="mb-auto mt-3 text-xs font-normal italic  text-semantic-on-background/70 ">
+										{[post.props.data.readingTime]}
+									</div>
+								</div>
+							</a>
+							{posts.length != i + 1 && <hr class="mb-1.5 mt-auto w-full  border-semantic-on-surface-variant/10 " />}
+						</li>
+					</>
+				);
+			})
+		}
+	</ul>
+</BaseLayout>
+<style>
+	a {
+		color: theme(colors.semantic.on-background);
+	}
+</style>

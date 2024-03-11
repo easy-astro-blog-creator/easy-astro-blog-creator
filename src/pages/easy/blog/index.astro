@@ -1,6 +1,6 @@
 ---
-import AllBlogPosts from '../../../layouts/AllBlogPosts.astro';
-import { easyConfig } from 'easyConfig';
+import BlogIndex from '../../../layouts/BlogIndex.astro';
+import { easyConfig } from '@utils/easyConfig';
 ---
 
-{easyConfig.easyabc_enabled && <AllBlogPosts blogCollectionName="easy" basePath="easy/blog" />}
+{easyConfig.easyAbcEnabled && <BlogIndex blogCollectionName="easy" basePath="easy/blog" />}

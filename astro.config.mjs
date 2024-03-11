@@ -10,7 +10,7 @@ import icon from 'astro-icon';
 import tailwind from '@astrojs/tailwind';
 
 // Site Config
-import { easyConfig } from '/easyConfig';
+import { easyConfig } from '/src/utils/easyConfig';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +19,7 @@ export default defineConfig({
 		port: 4321,
 	},
 	output: 'static',
-	site: easyConfig.github_pages_url,
+	site: easyConfig.githubPagesUrl,
 	integrations: [
 		sitemap(),
 		icon(),

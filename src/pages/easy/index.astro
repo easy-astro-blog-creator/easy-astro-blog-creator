@@ -2,7 +2,7 @@
 import heroImage from '/public/easy-abc/easyHero.png';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { Content as ReadMe } from '/README.md';
-import { easyConfig } from 'easyConfig';
+import { easyConfig } from '@utils/easyConfig';
 
 const SITE_TITLE = 'Easy Astro Blog Creator';
 const SITE_DESCRIPTION = 'Create and host a blog for free using github pages.';
@@ -10,7 +10,7 @@ const heroAlt = 'Easy logo.';
 ---
 
 {
-	easyConfig.easyabc_enabled && (
+	easyConfig.easyAbcEnabled && (
 		<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} heroImage={heroImage} heroAlt={heroAlt}>
 			<article>
 				<div id="article-text" class="prose prose-customTheme max-w-none">

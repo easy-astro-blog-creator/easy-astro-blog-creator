@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import HeaderLink from './HeaderLink.astro';
-import { easyConfig } from '../../../easyConfig';
+import { easyConfig } from '../../utils/easyConfig';
 import Footer from '../Footer.astro';
 import SocialLinks from './SocialLinks.astro';
 import ShareIcon from './ShareIcon.astro';
@@ -13,13 +13,13 @@ import ShareIcon from './ShareIcon.astro';
 	<ul class="grid h-full w-full grid-rows-[repeat(20,_minmax(0,_1fr))] items-center justify-around">
 		<li class="nav-item row-start-2 row-end-4">
 			<HeaderLink class="link-header" href="/blog">Blog</HeaderLink>
-			<span class="text-sub hidden italic">{easyConfig.site_description}</span>
+			<span class="text-sub hidden italic">{easyConfig.siteDescription}</span>
 		</li>
 		<li class="nav-item row-start-5 row-end-6">
 			<HeaderLink class="link-header" href="/">About</HeaderLink>
 		</li>
 		{
-			easyConfig.easyabc_enabled && (
+			easyConfig.easyAbcEnabled && (
 				<li class="nav-item row-start-7 row-end-9">
 					<HeaderLink class="link-header" href="/easy">
 						EasyABC
@@ -57,7 +57,7 @@ import ShareIcon from './ShareIcon.astro';
 </nav>
 <nav
 	id="navbar-mobile"
-	class="background-gradient fixed bottom-0 left-0 flex h-[7svh] w-full text-semantic-on-surface-variant md:hidden"
+	class="background-gradient fixed bottom-0 left-0 flex h-[9svh] w-full text-semantic-on-surface-variant md:hidden"
 >
 	<ul class="grid h-full w-full grid-cols-3 grid-rows-1 items-stretch justify-items-stretch py-1">
 		<li class="col-start-1 col-end-2 flex flex-col items-center justify-center">
@@ -69,7 +69,7 @@ import ShareIcon from './ShareIcon.astro';
 		<li id="nav-content-list" class="dropdown col-start-3 col-end-4 flex h-full w-full items-center justify-center">
 			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content z-[1]">
 				{
-					easyConfig.easyabc_enabled && (
+					easyConfig.easyAbcEnabled && (
 						<li class="mx-2  h-max w-max">
 							<ul class="mb-4 grid h-max w-max grid-rows-3 gap-4 text-left">
 								<li>
@@ -118,36 +118,36 @@ import ShareIcon from './ShareIcon.astro';
 </nav>
 <style>
 	@media (min-width: 768px) {
-		@media (min-width: 1440px) {
+		@media (min-width: 1281px) {
 			#nav-arrow {
 				font-size: 5vb;
 				left: calc((5vw - 5vb) / 2);
 			}
 			#navbar-desktop :global(.link-header) {
-				font-size: 3.33vb;
+				font-size: 1.5rem;
 			}
 			#navbar-desktop :global(.text-sub) {
-				font-size: 1.77vb;
+				font-size: 0.77rem;
 			}
 			.nav-item {
-				padding-left: calc((5vw - 4vb) / 2);
-				padding-right: calc((2.5vw - 2vb) / 2);
+				padding-left: calc((5vw - 1.5rem) / 2);
+				padding-right: calc((5vw - 1.5rem) / 2);
 			}
 		}
-		@media (max-width: 1439px) {
+		@media (max-width: 1280px) {
 			#nav-arrow {
-				font-size: 6vb;
-				left: calc((5vw - 6vb) / 2);
+				font-size: 5vb;
+				left: calc((5vw - 5vb) / 2);
 			}
 			#navbar-desktop :global(.link-header) {
-				font-size: 4.44vb;
+				font-size: 1rem;
 			}
 			#navbar-desktop :global(.text-sub) {
-				font-size: 2.22vb;
+				font-size: 0.77rem;
 			}
 			.nav-item {
-				padding-left: calc((5vw - 4vb) / 2);
-				padding-right: calc((2.5vw - 4vb) / 2);
+				padding-left: calc((5vw - 1rem) / 2);
+				padding-right: calc((5vw - 1rem) / 2);
 			}
 		}
 
@@ -294,7 +294,7 @@ import ShareIcon from './ShareIcon.astro';
 			@apply text-neutral-variant-700 dark:text-neutral-variant-200;
 		}
 		#nav-content-mobile {
-			bottom: 9vh;
+			bottom: 11svh;
 			right: 3svw;
 			width: max-content;
 			max-width: 94svw;

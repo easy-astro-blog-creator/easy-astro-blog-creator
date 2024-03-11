@@ -1,5 +1,5 @@
 ---
-import { easyConfig } from '../../easyConfig';
+import { easyConfig } from '../utils/easyConfig';
 const today = new Date();
 ---
 
@@ -12,7 +12,7 @@ const today = new Date();
 	</p>
 	<hr class="my-1 w-3/12 border-semantic-on-surface-variant/10" />
 
-	<p class="m-0">&copy; {today.getFullYear()} {easyConfig.full_name}.</p>
+	<p class="m-0">&copy; {today.getFullYear()} {easyConfig.fullName}.</p>
 </aside>
 
 <style>
