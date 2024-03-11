@@ -118,6 +118,39 @@ import ShareIcon from './ShareIcon.astro';
 </nav>
 <style>
 	@media (min-width: 768px) {
+		@media (min-width: 1440px) {
+			#nav-arrow {
+				font-size: 5vb;
+				left: calc((5vw - 5vb) / 2);
+			}
+			#navbar-desktop :global(.link-header) {
+				font-size: 3.33vb;
+			}
+			#navbar-desktop :global(.text-sub) {
+				font-size: 1.77vb;
+			}
+			.nav-item {
+				padding-left: calc((5vw - 4vb) / 2);
+				padding-right: calc((2.5vw - 2vb) / 2);
+			}
+		}
+		@media (max-width: 1439px) {
+			#nav-arrow {
+				font-size: 6vb;
+				left: calc((5vw - 6vb) / 2);
+			}
+			#navbar-desktop :global(.link-header) {
+				font-size: 4.44vb;
+			}
+			#navbar-desktop :global(.text-sub) {
+				font-size: 2.22vb;
+			}
+			.nav-item {
+				padding-left: calc((5vw - 4vb) / 2);
+				padding-right: calc((2.5vw - 4vb) / 2);
+			}
+		}
+
 		#navbar-desktop {
 			position: fixed;
 			color: theme(colors.semantic.on-surface-variant);
@@ -147,18 +180,14 @@ import ShareIcon from './ShareIcon.astro';
 			width: 5vw;
 			justify-content: space-evenly;
 			height: 100%;
-			padding-left: calc((5vw - 4vb) / 2);
-			padding-right: calc((2.5vw - 4vb) / 2);
 		}
 		#navbar-desktop:hover .nav-item {
 			width: 16vw;
 		}
 		#nav-arrow {
 			position: absolute;
-			left: calc((5vw - 4vb) / 2);
 			top: calc((5vb - 3vb) / 2);
 			opacity: 1;
-			font-size: 4vb;
 			transition:
 				rotate 400ms,
 				left 500ms,
@@ -179,7 +208,6 @@ import ShareIcon from './ShareIcon.astro';
 		}
 		#navbar-desktop :global(.link-header) {
 			font-weight: bold;
-			font-size: 3.33vb;
 			letter-spacing: 0.222rem;
 			transition: opacity 0ms;
 			opacity: 0;
@@ -188,14 +216,19 @@ import ShareIcon from './ShareIcon.astro';
 			transition: opacity 400ms;
 			opacity: 1;
 		}
+		#navbar-desktop:hover :global(.link-header):hover {
+			color: theme(colors.semantic.secondary);
+		}
 		#navbar-desktop :global(.text-sub) {
 			display: unset;
 			opacity: 0;
 			max-width: 16vw;
 			padding-left: calc((4vw - 2ch) / 2);
-			font-size: 1.77vb;
 			transition: opacity 0ms;
 			color: theme(colors.semantic.on-surface-variant/.96);
+		}
+		#navbar-desktop :global(.text-sub):hover {
+			color: theme(colors.semantic.secondary);
 		}
 		#navbar-desktop:hover :global(.text-sub) {
 			opacity: 1;
@@ -239,6 +272,7 @@ import ShareIcon from './ShareIcon.astro';
 			transition: 0ms;
 		}
 	}
+
 	@media (max-width: 767px) {
 		#navbar-mobile {
 			transition:

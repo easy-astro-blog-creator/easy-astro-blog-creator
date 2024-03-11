@@ -17,10 +17,10 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 >
 	<article>
 		<div class="flex w-full flex-col items-center pb-2 pt-4 text-center lg:w-9/12">
-			<div class="shadow-gradient mb-6 flex rounded-xl lg:max-w-[66%]">
-				{heroImage && <Image class="w-auto  rounded-xl  lg:max-h-[39vh]" src={heroImage} alt={heroAlt || ''} />}
+			<div class="shadow-gradient mb-6 flex rounded-xl md:max-w-[66%]">
+				{heroImage && <Image class="w-auto  rounded-xl  md:max-h-[39vh] " src={heroImage} alt={heroAlt || ''} />}
 			</div>
-			<h1 class="text-3xl md:text-4xl">{title}</h1>
+			<h1 class="sm:text-xl md:text-4xl">{title}</h1>
 			<div class="flex items-center space-x-4 pb-2 pl-2 pt-4 text-sm">
 				<div>{readingTime}</div>
 				<div>·</div>
@@ -39,7 +39,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 					}
 				</div>
 			</div>
-			<hr class="mb-5 mt-1 w-full border-semantic-on-surface-variant/10 lg:w-[66%]" />
+			<hr class="mb-5 mt-1 w-full border-semantic-on-surface-variant/10 md:w-[66%]" />
 		</div>
 		<div id="article-text" class="prose prose-customTheme max-w-none">
 			<slot />

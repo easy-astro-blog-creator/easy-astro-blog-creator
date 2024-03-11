@@ -96,7 +96,7 @@
 			width: clamp(45ch, 70ch, 100%);
 		}
 	}
-	@media (min-width: 1024px) {
+	@media (min-width: 1440px) {
 		#article-text {
 			width: clamp(45ch, 80ch, 100%);
 		}
@@ -107,24 +107,20 @@
 		letter-spacing: 0.023rem;
 	}
 	/* For unvisited links. TIL! */
-	/* a:link,
-	.easy-link-always-link {
+	article a:link {
 		@apply text-semantic-primary;
 	}
-	a:visited,
-	.easy-link-always-visited {
+	article a:visited {
 		@apply text-semantic-secondary;
 	}
-	a:active,
-	.easy-link-always-active {
+	article a:active {
 		@apply text-semantic-tertiary;
 		text-decoration: underline;
 	}
-	a:hover,
-	.easy-link-always-hover,
-	a:focus {
+	article a:hover,
+	article a:focus {
 		text-decoration: underline;
-	} */
+	}
 	@media (scripting: none) {
 		@media (prefers-color-scheme: dark) {
 			:root {

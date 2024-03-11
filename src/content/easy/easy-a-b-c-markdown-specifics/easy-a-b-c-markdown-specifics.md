@@ -6,11 +6,7 @@ heroImage: './hero.jpg'
 heroAlt: 'A hero!'
 ---
 
-This is a guide for specific markdown syntax used in EasyABC.
-
-- This is in addition to the [general markdown guide.](/easy/markdown-style-guide)
-
-<hr>
+This is a guide for specific markdown syntax used in EasyABC. It is in addition to the [general markdown guide.](/easy/blog/markdown-style-guide)
 
 <h3> TL;DR </h3>
 

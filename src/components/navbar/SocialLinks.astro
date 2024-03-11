@@ -51,6 +51,26 @@ import { easyConfig } from '../../../easyConfig';
 </div>
 <style>
 	@media (min-width: 768px) {
+		@media (min-width: 1440px) {
+			#social-links [data-icon] {
+				width: 4vb;
+				height: 4vb;
+			}
+			#social-icon {
+				width: 4vb;
+				height: 4vb;
+			}
+		}
+		@media (max-width: 1439px) {
+			#social-links [data-icon] {
+				width: 5vb;
+				height: 5vb;
+			}
+			#social-icon {
+				width: 8vb;
+				height: 8vb;
+			}
+		}
 		#social-widget-desktop {
 			container-name: socialWidget;
 			container-type: size;
@@ -69,13 +89,9 @@ import { easyConfig } from '../../../easyConfig';
 		}
 
 		#social-icon {
-			width: 4vb;
-			height: 4vb;
 			transition: opacity 700ms 350ms;
 		}
 		#social-links [data-icon] {
-			width: 3vb;
-			height: 3vb;
 			color: theme(colors.semantic.on-surface-variant);
 		}
 		#social-links :is(a:hover) [data-icon] {
@@ -100,6 +116,8 @@ import { easyConfig } from '../../../easyConfig';
 				transition: 0ms;
 				visibility: collapse;
 				opacity: 0;
+				width: 0vb;
+				height: 0vb;
 			}
 			span {
 				opacity: 1;
