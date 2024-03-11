@@ -30,26 +30,29 @@
 @layer base {
 	html {
 		font-family: 'REM', sans-serif;
-		font-size: 18px;
-		font-weight: 300;
+		font-size: 16px;
 		height: 100%;
 	}
 	body {
 		@apply bg-semantic-background;
 		@apply text-semantic-on-background;
+		transition:
+			background-color 222ms,
+			color 222ms;
 		height: 100%;
 		width: 100%;
 		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
 	}
 	main {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		height: 100%;
+		min-height: 100%;
 		overflow-y: auto;
-		padding-top: calc(4vh + env(safe-area-inset-top));
-		padding-bottom: calc(4vh + env(safe-area-inset-bottom));
 		align-items: center;
+		flex-grow: 1;
 	}
 	article {
 		display: flex;
@@ -60,11 +63,14 @@
 		padding-bottom: 2vh;
 	}
 	@media (max-width: 767px) {
+		html {
+			font-size: 16px;
+		}
 		main {
-			height: 93vh;
 			padding-left: 3vw;
 			padding-right: 3vw;
-			font-size: 16px;
+			padding-top: calc(4svh + env(safe-area-inset-top));
+			padding-bottom: calc(11svh + env(safe-area-inset-bottom));
 		}
 		article {
 			padding-left: 3vw;
@@ -79,6 +85,8 @@
 		main {
 			padding-left: 2vw;
 			padding-right: 2vw;
+			padding-top: calc(4svh + env(safe-area-inset-top));
+			padding-bottom: calc(4svh + env(safe-area-inset-bottom));
 		}
 		article {
 			padding-left: 2vw;
@@ -169,6 +177,7 @@
 		/* Required properties */
 		position: relative;
 		background: theme(colors.semantic.background);
+		z-index: -1;
 	}
 
 	.shadow-gradient:before {

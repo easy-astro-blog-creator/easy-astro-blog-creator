@@ -16,12 +16,12 @@ const palettes = {
 const paletteSteps = Object.keys(colors['primary']);
 ---
 
-<div class="flex h-full w-full flex-col items-center justify-around overflow-x-clip md:w-[67svw]">
+<div class="flex w-full flex-grow flex-col items-center justify-around md:w-[67svw]">
 	<palette-input class="w-full">
 		<form name="color-form" class="flex w-full flex-col justify-around text-xs font-medium">
-			<div class="flex w-full items-end justify-around md:items-center md:justify-center">
+			<div class="flex w-full items-end justify-center md:items-center md:justify-center">
 				<label
-					class="form-control flex h-full w-3/12 flex-col items-center gap-1 text-left md:tooltip md:tooltip-bottom md:[--tooltip-color:theme(colors.semantic.primary-container)] md:[--tooltip-text-color:theme(colors.semantic.on-primary-container)]"
+					class="form-control flex h-full w-4/12 flex-col items-center gap-1 text-left md:tooltip md:tooltip-bottom md:[--tooltip-color:theme(colors.semantic.primary-container)] md:[--tooltip-text-color:theme(colors.semantic.on-primary-container)]"
 					data-tip="The color used to generate the theme."
 				>
 					<div class="label">
@@ -36,7 +36,7 @@ const paletteSteps = Object.keys(colors['primary']);
 					/>
 				</label>
 				<!-- Mobile -->
-				<div class="dropdown dropdown-bottom flex flex-col items-center gap-1 md:hidden">
+				<div class="dropdown dropdown-bottom flex w-4/12 flex-col items-center gap-1 md:hidden">
 					<div>
 						<span class="w-full text-center">Scheme </span>
 					</div>
@@ -147,7 +147,7 @@ const paletteSteps = Object.keys(colors['primary']);
 			{
 				Object.entries(palettes).map(([colorName, colorFamily]) => (
 					<div class="grid grid-cols-[repeat(13,_minmax(0,_1fr))] gap-[.03rem]  md:gap-1 ">
-						<span class="col-span-2 col-start-1 mx-1 self-center justify-self-center hyphens-auto break-all text-center  md:mx-0 md:justify-self-end md:pr-2 ">
+						<span class="col-span-2 col-start-1 mx-1 self-center justify-self-center hyphens-auto break-words text-center sm:text-[.5rem] md:mx-0 md:justify-self-end md:pr-2 ">
 							{colorName}
 						</span>
 						{Object.keys(colorFamily).map((shadeValue) => (

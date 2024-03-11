@@ -2,24 +2,50 @@ import { remark } from 'remark';
 import strip from 'strip-markdown';
 
 export const formatDescription = async (
+	type: string,
 	description: string | undefined,
-	text: string,
-	maxLines: number = 6
+	bodyText: string,
+	titleText: string
 ): Promise<string | undefined> => {
-	if (description && description.length > 0) return description;
-	if (!text || text.length === 0) return undefined;
-	try {
-		let bodyString = (await remark().use(strip).process(text)).toString();
-		// Removes the custom markdown classes.
-		bodyString = bodyString.replace(/\(class:[^)]*\)/g, '');
-		// Removes excess white space
-		bodyString = bodyString.replace(/\s+/g, ' ').trim();
-		// Estimate the average number of characters per line.
-		const avgCharsPerLine = 60; // This is a rough estimate and might vary.
-		const maxChars = avgCharsPerLine * maxLines;
+	if (description && description.length > 0) return handleTitle(type, description, titleText);
 
-		return bodyString.length > maxChars ? bodyString.substring(0, maxChars) + '...' : bodyString;
-	} catch (e) {
-		return undefined;
-	}
+	return handleTitle(type, bodyText, titleText);
 };
+async function handleTitle(type: string, descriptionText: string, titleText: string): Promise<string | undefined> {
+	let descriptionString = (await remark().use(strip).process(descriptionText)).toString();
+	let titleString = (await remark().use(strip).process(titleText)).toString();
+	// Removes the custom markdown classes.
+	descriptionString = descriptionString.replace(/\(class:[^)]*\)/g, '');
+	// Removes excess white space
+	descriptionString = descriptionString.replace(/\s+/g, ' ').trim();
+
+	// These are rough estimates based on default font sizes!!!
+	let maxChars = 0;
+	if (type === 'desktop') {
+		const maxLines: number = 5;
+		const avgCharsPerLineDescription = 75;
+		const avgCharsPerLineTitle = 45;
+		if (titleString.length / avgCharsPerLineTitle < 1) {
+			maxChars = avgCharsPerLineDescription * maxLines;
+		} else {
+			maxChars = avgCharsPerLineDescription * (maxLines - 1);
+		}
+	} else if (type === 'mobile') {
+		const maxLines: number = 5;
+		const avgCharsPerLineDescription = 40;
+		const avgCharsPerLineTitle = 20;
+		if (Math.ceil(titleString.length / avgCharsPerLineTitle) > maxLines) {
+			return undefined;
+		}
+		if (titleString.length / avgCharsPerLineTitle < 1) {
+			maxChars = avgCharsPerLineDescription * maxLines;
+		} else {
+			maxChars = avgCharsPerLineDescription * (maxLines - Math.ceil(titleString.length / avgCharsPerLineTitle));
+		}
+	}
+	if (descriptionString.length <= maxChars) {
+		return descriptionString;
+	} else {
+		return descriptionString.substring(0, maxChars) + '...';
+	}
+}

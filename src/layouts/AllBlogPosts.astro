@@ -20,31 +20,35 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
 <BaseLayout title={easyConfig.site_title} page_description={easyConfig.site_description} heroImage={heroImage} heroAlt={heroAlt}>
-	<ul class="flex w-full list-none flex-col items-start py-4 pl-2 pr-2 md:pl-24 md:pr-16">
+	<ul class="flex w-full list-none flex-col items-start py-4 md:pl-[15svw] md:pr-[7.5svw]">
 		{
 			posts.map((post, i) => {
 				return (
 					<>
-						<li class="mb-4 max-h-[30vh] min-w-full ">
+						<li class="mb-4  min-w-full ">
 							<a class="group flex min-w-full items-center justify-between hover:no-underline" href={`${post.params.htmlSlug}`}>
-								<div class="flex max-h-full w-full flex-col lg:w-10/12">
-									<div class="text-xs font-medium text-semantic-on-background/70 md:text-base lg:text-xs">
+								<div class="flex max-h-full w-full flex-col justify-start ">
+									<div class="font-medium text-semantic-on-background/70 sm:text-xs md:text-xs ">
 										<FormattedDate
 											date={
 												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
 											}
 										/>
 									</div>
-									<div class="flex w-full lg:h-[15vh]">
-										<div class="pr-10">
-											<h1 class="text-lg font-semibold group-hover:text-semantic-primary md:text-xl lg:font-bold ">
+									<div class="flex min-h-[12svh] w-full justify-between sm:max-h-[18svh] md:max-h-[16svh]">
+										<div class="mr-[5%] flex w-[60%] flex-col  ">
+											<h1 class="line-clamp-5 hyphens-auto break-words font-semibold group-hover:text-semantic-primary sm:line-clamp-5 sm:text-base sm:leading-5 md:line-clamp-2  md:text-lg md:font-bold ">
 												{post.props.data.title}
 											</h1>
-											<div class="line-clamp-6 text-sm md:line-clamp-4 lg:font-medium ">
-												{formatDescription(post.props.data.description, post.props.body)}
-											</div>
+											<p class="line-clamp-6 text-sm sm:hidden">
+												{formatDescription('desktop', post.props.data.description, post.props.body, post.props.data.title)}
+											</p>
+											<p class="line-clamp-5 text-xs md:hidden">
+												{formatDescription('mobile', post.props.data.description, post.props.body, post.props.data.title)}
+											</p>
 										</div>
-										<div class="group-hover:shadow-gradient ml-auto mr-0 flex h-[5vh] w-[5vh] shrink-0 rounded-xl lg:h-[15vh] lg:w-[15vh] ">
+
+										<div class="group-hover:shadow-gradient  flex  w-[35%]  rounded-xl  ">
 											{post.props.data.heroImage ? (
 												<Image
 													class="rounded-xl object-cover"
@@ -56,7 +60,7 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 											)}
 										</div>
 									</div>
-									<div class="pt-5 text-xs font-normal italic text-semantic-on-background/70 md:text-base lg:text-xs">
+									<div class="text-xs font-normal italic text-semantic-on-background/70 sm:pt-3 md:pt-5 md:text-base lg:text-xs">
 										{[post.props.data.readingTime]}
 									</div>
 									{posts.length != i + 1 && <hr class="mt-7 w-full border-semantic-on-surface-variant/5 " />}
@@ -74,4 +78,3 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 		color: theme(colors.semantic.on-background);
 	}
 </style>
-../../easyConfig

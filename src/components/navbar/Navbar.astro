@@ -67,7 +67,7 @@ import ShareIcon from './ShareIcon.astro';
 			<ShareIcon mode="mobile" />
 		</li>
 		<li id="nav-content-list" class="dropdown col-start-3 col-end-4 flex h-full w-full items-center justify-center">
-			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content">
+			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content z-[1]">
 				{
 					easyConfig.easyabc_enabled && (
 						<li class="mx-2  h-max w-max">
@@ -122,8 +122,8 @@ import ShareIcon from './ShareIcon.astro';
 			position: fixed;
 			color: theme(colors.semantic.on-surface-variant);
 			transition:
-				color 777ms,
-				background-color 777ms,
+				color 222ms,
+				background-color 222ms,
 				width 500ms;
 			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
 			height: 100%;
@@ -136,8 +136,8 @@ import ShareIcon from './ShareIcon.astro';
 		#navbar-desktop:hover {
 			width: 16vw;
 			transition:
-				color 777ms,
-				background-color 777ms,
+				color 222ms,
+				background-color 222ms,
 				width 150ms;
 		}
 		.nav-item {
@@ -242,8 +242,8 @@ import ShareIcon from './ShareIcon.astro';
 	@media (max-width: 767px) {
 		#navbar-mobile {
 			transition:
-				color 777ms,
-				background-color 777ms,
+				color 222ms,
+				background-color 222ms,
 				width 500ms;
 			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 15%);
 			padding-bottom: calc(env(safe-area-inset-bottom));
@@ -261,9 +261,9 @@ import ShareIcon from './ShareIcon.astro';
 		}
 		#nav-content-mobile {
 			bottom: 9vh;
-			right: 1svw;
+			right: 3svw;
 			width: max-content;
-			max-width: 98svw;
+			max-width: 94svw;
 			gap: 11svw;
 			display: flex;
 			align-items: flex-end;

@@ -5,8 +5,9 @@ const today = new Date();
 
 <aside class="footer-text">
 	<p class="m-0 pb-1">
-		Create your own GitHub Pages blog with <a class="" href="https://github.com/ShelbyJenkins/easy-astro-blog-creator"
-			>easy-astro-blog-creator</a
+		Create your own GitHub Pages blog with <a
+			class="sm:z-[-1] md:z-[1] md:blur-[0.1px]"
+			href="https://github.com/ShelbyJenkins/easy-astro-blog-creator">easy-astro-blog-creator</a
 		>!
 	</p>
 	<hr class="my-1 w-3/12 border-semantic-on-surface-variant/10" />
@@ -37,11 +38,11 @@ const today = new Date();
 		-webkit-background-clip: text;
 		color: transparent;
 		font-weight: 600;
-		filter: contrast(1) saturate(1) blur(0.1px);
+		filter: contrast(1) saturate(1);
 		transition: 3s ease;
+		position: relative;
 	}
 	a:hover {
-		filter: contrast(1.2) saturate(3) blur(0.2px);
+		filter: contrast(1.2) saturate(3) blur(0.33px);
 	}
 </style>
-../../easyConfig

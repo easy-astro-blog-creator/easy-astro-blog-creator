@@ -13,7 +13,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body } = A
 	<head>
 		<BaseHead
 			page_title={title}
-			page_description={await formatDescription(description, body)}
+			page_description={await formatDescription('mobile', description, body, title)}
 			heroImage={heroImage}
 			heroAlt={heroAlt}
 			pubDate={pubDate}
