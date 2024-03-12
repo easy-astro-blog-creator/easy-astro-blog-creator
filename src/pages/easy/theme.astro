@@ -3,13 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Palette from '../../components/Palette.astro';
 import { easyConfig } from '@utils/easyConfig';
 
-const PAGE_TITLE = 'EasyABC Theme';
-const PAGE_DESCRIPTION = 'Viewing and applying Themes for EasyABC';
+const pageTitle = 'EasyABC Theme';
+const pageDescription = 'Viewing and applying Themes for EasyABC';
 ---
 
 {
 	easyConfig.easyAbcEnabled && (
-		<BaseLayout page_title={PAGE_TITLE} page_description={PAGE_DESCRIPTION}>
+		<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
 			<Palette />
 		</BaseLayout>
 	)

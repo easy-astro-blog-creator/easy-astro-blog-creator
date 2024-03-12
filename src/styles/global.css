@@ -9,14 +9,14 @@
 	font-style: normal;
 	font-weight: 100 900;
 	font-display: swap;
-	src: url('fonts/REM-VariableFont_wght.ttf') format(truetype) tech(variations);
+	src: url('/fonts/REM-VariableFont_wght.ttf') format(truetype) tech(variations);
 }
 @font-face {
 	font-family: 'REM';
 	font-style: italic;
 	font-weight: 100 900;
 	font-display: swap;
-	src: url('fonts/REM-Italic-VariableFont_wght.ttf') format(truetype) tech(variations);
+	src: url('/fonts/REM-Italic-VariableFont_wght.ttf') format(truetype) tech(variations);
 }
 
 @tailwind base;
@@ -90,12 +90,12 @@
 			padding-right: 2vw;
 		}
 		#article-text {
-			width: clamp(45ch, 70ch, 100%);
+			width: clamp(45ch, 70ch, 70%);
 		}
 	}
 	@media (min-width: 1281px) {
 		#article-text {
-			width: clamp(45ch, 80ch, 100%);
+			width: clamp(45ch, 80ch, 67%);
 		}
 	}
 

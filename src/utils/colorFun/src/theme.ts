@@ -68,6 +68,21 @@ type TailwindTypographyTheme = {
 				color: string;
 				textDecoration: string;
 			};
+			code: {
+				backgroundColor: string;
+				marginBlock: string;
+				padding: string;
+				borderRadius: string;
+			};
+			'code::before': {
+				content: string;
+			};
+			'code::after': {
+				content: string;
+			};
+			kbd: {
+				boxShadow: string;
+			};
 		};
 	};
 	customTheme: {
@@ -111,12 +126,11 @@ export function generateBaseTheme(themeConfig: CustomThemeConfig, darkMode: bool
 
 export function genenerateTailwindTheme(themeConfig: CustomThemeConfig, typographyEnabled: boolean = false): TailwindTheme {
 	const tailwindVars = generateTailwindThemeVars();
-	const typographyTheme = typographyEnabled ? generateTailwindTypographyTheme(tailwindVars) : undefined;
 	return {
 		colors: tailwindVars,
 		variables: generateBaseTheme(themeConfig, false),
 		darkVariables: generateBaseTheme(themeConfig, true),
-		typography: typographyTheme,
+		typography: typographyEnabled ? generateTailwindTypographyTheme() : undefined,
 	};
 }
 
@@ -131,7 +145,7 @@ function generateTailwindThemeVars(): TailwindVars {
 	};
 }
 
-function generateTailwindTypographyTheme(tailwindVars: TailwindVars): TailwindTypographyTheme {
+function generateTailwindTypographyTheme(): TailwindTypographyTheme {
 	return {
 		DEFAULT: {
 			css: {
@@ -140,27 +154,42 @@ function generateTailwindTypographyTheme(tailwindVars: TailwindVars): TailwindTy
 					color: 'inherit',
 					textDecoration: 'inherit',
 				},
+				code: {
+					backgroundColor: 'oklch(var(--colors-semantic-surface-variant))',
+					padding: '.125rem .375rem',
+					marginBlock: '-.125rem',
+					borderRadius: '.25rem',
+				},
+				'code::before': {
+					content: '""',
+				},
+				'code::after': {
+					content: '""',
+				},
+				kbd: {
+					boxShadow: '0 0 0 1px oklch(var(--tw-prose-kbd-shadows) / .50), 0 3px 0 oklch(var(--tw-prose-kbd-shadows) / .50)',
+				},
 			},
 		},
 		customTheme: {
 			css: {
-				'--tw-prose-body': MCU_SCHEME_VARS['on-background'],
-				'--tw-prose-headings': MCU_SCHEME_VARS['on-background'],
-				'--tw-prose-lead': MCU_SCHEME_VARS['on-primary-container'],
-				'--tw-prose-bold': MCU_SCHEME_VARS['on-background'],
-				'--tw-prose-counters': tailwindVars.primary[600],
-				'--tw-prose-bullets': tailwindVars.primary[400],
-				'--tw-prose-hr': tailwindVars.primary[300],
-				'--tw-prose-quotes': MCU_SCHEME_VARS['on-background'],
-				'--tw-prose-quote-borders': tailwindVars.primary[300],
-				'--tw-prose-captions': MCU_SCHEME_VARS['on-primary-container'],
-				'--tw-prose-code': 'inherit',
-				'--tw-prose-pre-code': tailwindVars.primary[100],
-				'--tw-prose-pre-bg': MCU_SCHEME_VARS['on-background'],
-				'--tw-prose-th-borders': tailwindVars.primary[300],
-				'--tw-prose-td-borders': tailwindVars.primary[200],
-				'--tw-prose-kbd': MCU_SCHEME_VARS['on-primary-container'],
-				'--tw-prose-kbd-shadows': MCU_SCHEME_VARS['primary-container'],
+				'--tw-prose-body': 'oklch(var(--colors-semantic-on-background))',
+				'--tw-prose-headings': 'oklch(var(--colors-semantic-on-background))',
+				'--tw-prose-lead': 'oklch(var(--colors-semantic-on-primary-container))',
+				'--tw-prose-bold': 'oklch(var(--colors-semantic-on-background))',
+				'--tw-prose-counters': 'oklch(var(--colors-semantic-on-primary-container))',
+				'--tw-prose-bullets': 'oklch(var(--colors-semantic-on-primary-container))',
+				'--tw-prose-hr': 'oklch(var(--colors-semantic-outline))',
+				'--tw-prose-quotes': 'oklch(var(--colors-semantic-on-background))',
+				'--tw-prose-quote-borders': 'oklch(var(--colors-semantic-outline))',
+				'--tw-prose-captions': 'oklch(var(--colors-semantic-on-primary-container))',
+				'--tw-prose-code': 'oklch(var(--colors-semantic-on-surface-variant))',
+				'--tw-prose-pre-code': 'oklch(var(--colors-semantic-outline))',
+				'--tw-prose-pre-bg': 'oklch(var(--colors-semantic-on-background))',
+				'--tw-prose-th-borders': 'oklch(var(--colors-semantic-outline))',
+				'--tw-prose-td-borders': 'oklch(var(--colors-semantic-outline))',
+				'--tw-prose-kbd': 'oklch(var(--colors-semantic-on-primary-container))',
+				'--tw-prose-kbd-shadows': 'var(--colors-semantic-primary-container)',
 			},
 		},
 	};

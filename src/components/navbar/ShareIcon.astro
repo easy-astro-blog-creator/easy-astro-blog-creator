@@ -7,7 +7,7 @@ const mode = Astro.props.mode;
 <!-- Medium to Large Screens -->{
 	mode === 'desktop' ? (
 		<button
-			class="flex flex-col justify-center bg-semantic-surface-variant/30 sm:hidden md:bottom-[3svh] md:right-[3svw] md:min-h-[6svw] md:w-[6svw] lg:min-h-[4svw] lg:w-[4svw]"
+			class="flex flex-col justify-center bg-semantic-surface-variant/30  sm:hidden md:bottom-[3svh] md:right-[3svw] md:min-h-[5svw] md:w-[5svw] lg:min-h-[4svw] lg:w-[4svw]"
 			id="share-button-desktop"
 		>
 			<Icon class="h-auto w-7/12 self-center pb-1 text-semantic-on-surface-variant" name="material-symbols:ios-share-rounded" />
@@ -19,7 +19,11 @@ const mode = Astro.props.mode;
 {
 	mode === 'mobile' ? (
 		<div class="flex h-full w-full flex-col justify-center md:hidden lg:hidden" id="share-button-mobile">
-			<Icon id="" class="self-center text-[4vb] text-neutral-variant-400" name="material-symbols:ios-share-rounded" />
+			<Icon
+				id="share-button-mobile"
+				class="self-center text-[4vb] text-neutral-variant-400"
+				name="material-symbols:ios-share-rounded"
+			/>
 		</div>
 	) : null
 }
@@ -32,10 +36,24 @@ const mode = Astro.props.mode;
 		border-radius: 100%;
 		transition:
 			scale 300ms,
-			filter 300ms,
-			backdrop-filter 300ms,
-			opacity 100ms;
+			background-color 300ms;
 		cursor: pointer;
+	}
+	#share-button-desktop:hover {
+		background-color: theme(colors.semantic.surface-variant/35);
+	}
+	#share-button-desktop:active {
+		scale: 0.88;
+		transition-duration: 100ms;
+		transition-delay: 50ms;
+	}
+	@media (scripting: none) {
+		#share-button-desktop {
+			display: none;
+		}
+		#share-button-mobile {
+			display: none;
+		}
 	}
 </style>
 <script>

@@ -1,4 +1,4 @@
-import { SchemeVariant, CustomThemeConfig } from './colorFun/src';
+import { CustomThemeConfig } from './colorFun/src';
 import { checkLoadDefaultImages } from './checkLoadDefaultImages';
 import { easyAbcUserConfig } from '../../public/easyAbcUserConfig';
 

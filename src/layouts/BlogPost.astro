@@ -7,18 +7,18 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 ---
 
 <BaseLayout
-	page_title={title}
+	pageTitle={title}
 	body={body}
-	page_description={description}
+	pageDescription={description}
 	heroImage={heroImage}
 	heroAlt={heroAlt}
 	pubDate={pubDate}
 	updatedDate={updatedDate}
 >
 	<article>
-		<div class="flex w-full flex-col items-center pb-2 pt-4 text-center lg:w-9/12">
-			<div class="shadow-gradient mb-6 flex rounded-xl md:max-w-[66%]">
-				{heroImage && <Image class="w-auto  rounded-xl  md:max-h-[39vh] " src={heroImage} alt={heroAlt || ''} />}
+		<div class="flex w-full flex-col items-center pb-2 pt-4 text-center md:w-7/12 lg:w-8/12">
+			<div class="shadow-gradient mb-8 flex rounded-xl md:max-w-[77%] lg:max-w-[66%]">
+				{heroImage && <Image class="w-auto  rounded-xl  md:max-h-[45vh] lg:max-h-[39vh] " src={heroImage} alt={heroAlt || ''} />}
 			</div>
 			<h1 class="sm:text-xl md:text-4xl">{title}</h1>
 			<div class="flex items-center space-x-4 pb-2 pl-2 pt-4 text-sm">
@@ -44,7 +44,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroAlt, body, read
 					)
 				}
 			</div>
-			<hr class="mb-5 mt-1 w-full border-semantic-on-surface-variant/10 md:w-[66%]" />
+			<hr class="mb-8 mt-4 w-full border-semantic-on-surface-variant/10 md:w-[66%]" />
 		</div>
 		<div id="article-text" class="prose prose-customTheme max-w-none">
 			<slot />

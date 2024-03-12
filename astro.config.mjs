@@ -14,6 +14,14 @@ import { easyConfig } from '/src/utils/easyConfig';
 
 // https://astro.build/config
 export default defineConfig({
+	vite: {
+		resolve: {
+			preserveSymlinks: true, // Allows symlinking of public/personal-blog/posts to src/content/blog
+		},
+		build: {
+			reportCompressedSize: false,
+		},
+	},
 	server: {
 		host: true,
 		port: 4321,
@@ -29,6 +37,9 @@ export default defineConfig({
 	],
 	markdown: {
 		remarkPlugins: [imgAttr, remarkUnwrapImages],
+		shikiConfig: {
+			wrap: true,
+		},
 	},
 	build: {
 		inlineStylesheets: 'never',

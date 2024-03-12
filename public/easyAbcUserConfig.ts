@@ -24,17 +24,17 @@ const MASTODON_URL = '';
 const DISCORD_URL = '';
 const TWITCH_URL = '';
 
-//  About me config
+// About me config
 // A photo of you. It will be displayed in the about me section of the blog.
-const HEADSHOT_PATH = 'images/headshot.png';
+const HEADSHOT_PATH = 'personal-blog/images/headshot.png';
 const HEADSHOT_ALT = 'A photo of Shelby Jenkins';
 
 // The default social image is what is used to generate the preview cards for Twitter, Facebook, etc.
 // This is used in the case your blog post does not include a hero image.
 // If not provided it defaults to the EasyABC logo.
-const DEFAULT_SOCIAL_IMAGE_PATH = 'images/defaultSocialImage.png';
+const DEFAULT_SOCIAL_IMAGE_PATH = 'personal-blog/images/defaultSocialImage.png';
 
-const FAVICON_PATH = 'favicon.png';
+const FAVICON_PATH = 'personal-blog/favicon.png';
 // See https://www.w3.org/2005/10/howto-favicon
 // image/svg+xml or image/png
 const FAVICON_TYPE = 'image/png';

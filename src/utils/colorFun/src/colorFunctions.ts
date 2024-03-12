@@ -16,6 +16,11 @@ export function toOklchHue(color: string | chroma.Color): string {
 	const oklchColor = chroma(color).oklch();
 	return oklchColor[2].toString();
 }
+export function OklchToRGB(color: string | chroma.Color): string {
+	validateColor(color);
+	const rgbColor = chroma(color).rgb();
+	return `${rgbColor[0]} ${rgbColor[1]} ${rgbColor[2]}`;
+}
 
 export function complemetaryColor(inputColor: string | chroma.Color, mode: 'hsl' | 'oklch' = 'oklch'): chroma.Color {
 	validateColor(inputColor);

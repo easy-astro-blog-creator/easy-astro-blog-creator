@@ -4,7 +4,7 @@ import { CustomThemeConfig, genenerateTailwindTheme } from './theme';
 import { generateDynamicScheme, SchemeVariant } from './scheme';
 import { CustomTonalPalette } from './palette';
 import { updateTailwindTheme } from './interactive';
-import { validateColor, validateColorFromForm, validateColorFromRange, toOklch, toOklchHue } from './colorFunctions';
+import { validateColor, validateColorFromForm, validateColorFromRange, toOklch, toOklchHue, OklchToRGB } from './colorFunctions';
 
 export {
 	genenerateTailwindTheme,
@@ -16,6 +16,7 @@ export {
 	validateColorFromRange,
 	toOklch,
 	toOklchHue,
+	OklchToRGB,
 };
 
 export type { CustomTonalPalette, CustomThemeConfig };

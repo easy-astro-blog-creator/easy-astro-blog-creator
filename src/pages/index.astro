@@ -1,11 +1,11 @@
 ---
-import { easyConfig } from '../utils/easyConfig';
+import { easyConfig } from '@utils/easyConfig';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 const headshotPath = await easyConfig.headshotPath;
 ---
 
-<BaseLayout page_title={easyConfig.siteTitle} page_description={easyConfig.siteDescription} heroAlt={easyConfig.headshotAlt}>
+<BaseLayout pageTitle={easyConfig.siteTitle} pageDescription={easyConfig.siteDescription} heroAlt={easyConfig.headshotAlt}>
 	<div class="flex w-full flex-col items-center justify-center">
 		<h1 class="pb-3">Hello There</h1>
 		<img src={headshotPath} alt={easyConfig.headshotAlt} class="w-1/4 rounded-3xl p-4" />
