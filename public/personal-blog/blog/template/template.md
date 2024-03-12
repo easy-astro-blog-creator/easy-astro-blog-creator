@@ -4,9 +4,9 @@ title: 'Template for creating new posts'
 description: 'If provided the description field will be used for previews. If not provided, the first 3-4 lines from the post will be used as a description.'
 
 # Published date is required and in the format of ISO-8601: `yyyy-mm-dd`. For more info see https://docs.astro.build/en/guides/content-collections/#working-with-dates-in-the-frontmatter
-pubDate: 2024-01-01
+pubDate: 2023-01-01
 # Optionally specify an update date. If not provided, one will be generated from the git history. Only if the post has been changed since the day published.
-# updatedDate:
+updatedDate: 2023-01-01
 heroImage: './hero.png'
 # Optional
 heroAlt: 'Describe the image for screen readers.'
@@ -64,3 +64,9 @@ You can adjust the size and even add captions like:
 ```
 
 See [this post for more information about images](https://shelbyjenkins.github.io/easy/blog/easy-a-b-c-markdown-specifics/).
+
+## Removing Posts
+
+You can remove anything from your blog by rename it so that the file or directory starts with an underscore.
+
+For example to remove the template simply rename the folder `public/personal-blog/blog/_template`
