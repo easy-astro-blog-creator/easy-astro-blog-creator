@@ -12,7 +12,7 @@ export const formatDescription = async (
 	return handleDescription(bodyText, maxLines, charsPerLine);
 };
 export const titleLineCountIsOne = (titleText: string): boolean => {
-	const avgCharsPerLineTitle = 55;
+	const avgCharsPerLineTitle = 50;
 	const titleString = titleText.replace(/\s+/g, ' ').trim().toString();
 	if (titleString.length / avgCharsPerLineTitle < 1) {
 		return true;

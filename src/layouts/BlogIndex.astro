@@ -78,12 +78,12 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 			})
 		}
 	</ul>
-	<ul class="flex h-full w-full list-none flex-col items-start py-4 md:hidden">
+	<ul class="flex w-full list-none flex-col items-start py-4 md:hidden">
 		{
 			posts.map((post, i) => {
 				return (
 					<>
-						<li class="flex h-[10rem] w-full flex-col ">
+						<li class="flex h-[11rem] w-full flex-col ">
 							<a class="group flex h-full items-center justify-between hover:no-underline" href={`${post.params.htmlSlug}`}>
 								<div class="flex h-full w-full flex-col justify-start ">
 									<div class="text-xs font-medium text-semantic-on-background/60">
@@ -93,9 +93,9 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 											}
 										/>
 									</div>
-									<div class="flex h-[5.5rem] w-full justify-between ">
+									<div class="flex h-[6.25rem] w-full justify-between ">
 										<div class="flex w-max flex-col">
-											<h1 class="line-clamp-2 hyphens-auto break-words text-base font-semibold leading-5 group-hover:text-semantic-primary  ">
+											<h1 class="line-clamp-2  break-words text-base font-semibold leading-5 group-hover:text-semantic-primary  ">
 												{post.props.data.title}
 											</h1>
 											{titleLineCountIsOne(post.props.data.title) ? (

@@ -111,7 +111,7 @@ Here we should have some images of example usages
 
 ### Creating Posts
 
-- []
+- [Template and guide to creating posts](https://shelbyjenkins.github.io/blog/template/https://shelbyjenkins.github.io/blog/template/)
 
 ### Markdown
 
