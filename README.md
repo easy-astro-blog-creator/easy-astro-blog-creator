@@ -1,50 +1,55 @@
-<img src="/public/easy-abc/easyHero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
+<img src="public/easy-abc/easyHero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 <h2> Easy Astro Blog Creator </h2>
 
-- Free, no-code, in-browser blog template for Github Pages.
-- Retain complete control of your content, forever!
+> He not busy being born is busy dying
+
+- Create for your life and beyond with complete control of your content.
+- Free, using open source tools and professionally respected Github Pages.
+- Easy no-code, in-browser user experience.
 - Check out a live demo -> [EasyABC Live Demo](https://shelbyjenkins.github.io/)
 
-Your first post online in 5m ⬇️
+<img src="public/easy-abc/readme-browser-mockup-dark.png" alt="Alt text" style="height: 300px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
-Here we should have some images of example usages
+<h3>Your first post online in 5m ⬇️</h3>
 
-<details open>
+[Get started with the live documentation.](https://shelbyjenkins.github.io/easy/)
+
+<details closed>
 <summary><h2>Setup</h2></summary>
 
 <h4>Your Github Repo</h4>
 
 - Create a Github account.
-- Fork [this repository](https://github.com/easy-astro-blog-creator/easy-astro-blog-creator):
+- Fork [the repository](https://github.com/easy-astro-blog-creator/easy-astro-blog-creator):
 
-  screen shot of fork button
+<img src="public/easy-abc/readme-fork-button.png" alt="Alt text" style="width:90%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Name your repository with the format: `GITHUB_USERNAME.github.io`.
 
   - For example mine is `shelbyjenkins.github.io`.
 
-  screen shot of fork naming
+<img src="public/easy-abc/readme-fork-name.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Create a codespace from your forked repo.
 
-  Screenshot of clicking the code-codespace-plus button.
+<img src="public/easy-abc/readme-codespace.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 <h4>Preview the site</h4>
 
 - It will take a 60-120s for the codespace to build for the first time.
 
-- Once done, open a terminal, and start the local dev server with `npm run dev`.
+- After the codespace has finished building, open a terminal, and start the local dev server with `npm run dev`.
 
-  screen shot of starting the terminal
+<img src="public/easy-abc/readme-terminal.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
-- You can then click on the link in the terminal to open the preview in the browser
+- Click on the link in the terminal. This will open a local version of the site in your browser. You can use this to preview your changes.
 
-  screen shot of link
+<img src="public/easy-abc/readme-terminal-link.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 </details>
 
-<details open>
+<details closed>
   <summary><h2>Publish your Blog</h2></summary>
 
 <h4>Adding your content</h4>
@@ -73,11 +78,9 @@ Here we should have some images of example usages
 
   - Set the Source dropdown to Github Actions.
 
-  add screen shots here of settings and button
+<img src="public/easy-abc/readme-pages-config.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Create your first commit and Push it!
-
-  add screen shots here
 
 </details>
 

@@ -1,46 +1,52 @@
-<img src="/easy-abc/easyHero.png" alt="Alt text" style="height: 200px; width: auto; display: flex; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
+<img src="/easy-abc/easyHero.png" alt="Alt text" style="height: 200px; width: auto;  margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 <h2> Easy Astro Blog Creator </h2>
 
-- Free, no-code, in-browser blog template for Github Pages.
-- Retain complete control of your content, forever!
+> He not busy being born is busy dying
+
+- Create for your life and beyond with complete control of your content.
+- Free, using open source tools and professionally respected Github Pages.
+- Easy no-code, in-browser user experience.
 - Check out a live demo -> [EasyABC Live Demo](https://shelbyjenkins.github.io/)
 
-Your first post online in 5m ⬇️
+<img src="/easy-abc/readme-browser-mockup-light.png" class="flex dark:hidden" alt="Alt text" style="height: auto; width: 90%; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
+<img src="/easy-abc/readme-browser-mockup-dark.png" class="hidden dark:flex" alt="Alt text" style="height: auto; width: 90%; margin-right: auto; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
-Here we should have some images of example usages
+<h3>Your first post online in 5m ⬇️</h3>
 
 <details open>
 <summary><h2>Setup</h2></summary>
 
+While publishing this blog requires no coding or knowledge of HTML, you will still need to press some buttons in tools used by coders. Don't worry though. We have pictures for you.
+
 <h4>Your Github Repo</h4>
 
 - Create a Github account.
-- Fork [this repository](https://github.com/easy-astro-blog-creator/easy-astro-blog-creator):
+- Fork [the repository](https://github.com/easy-astro-blog-creator/easy-astro-blog-creator):
 
-  screen shot of fork button
+<img src="/easy-abc/readme-fork-button.png" alt="Alt text" style="width:90%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Name your repository with the format: `GITHUB_USERNAME.github.io`.
 
   - For example mine is `shelbyjenkins.github.io`.
 
-  screen shot of fork naming
+<img src="/easy-abc/readme-fork-name.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Create a codespace from your forked repo.
 
-  Screenshot of clicking the code-codespace-plus button.
+<img src="/easy-abc/readme-codespace.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 <h4>Preview the site</h4>
 
 - It will take a 60-120s for the codespace to build for the first time.
 
-- Once done, open a terminal, and start the local dev server with `npm run dev`.
+- After the codespace has finished building, open a terminal, and start the local dev server with `npm run dev`.
 
-  screen shot of starting the terminal
+<img src="/easy-abc/readme-terminal.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
-- You can then click on the link in the terminal to open the preview in the browser
+- Click on the link in the terminal. This will open a local version of the site in your browser. You can use this to preview your changes.
 
-  screen shot of link
+<img src="/easy-abc/readme-terminal-link.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 </details>
 
@@ -51,6 +57,7 @@ Here we should have some images of example usages
 
 - Your content will live in the `public/personal-blog/blog` folder.
   - By adding a a file to this folder, it will automatically be added to the blog.
+    <img src="/easy-abc/readme-folders.png" alt="Alt text" style="width:30%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 - Use the `public/personal-blog/blog/template` as a starter by copying and pasting it to duplicate it. Then rename the folder and `.md` file inside it to match.
 - Your new blog post will now be in your browser!
   - The template has more instructions for creating new posts. You can find [a live version of it here](https://shelbyjenkins.github.io/blog/template/).
@@ -73,16 +80,32 @@ Here we should have some images of example usages
 
   - Set the Source dropdown to Github Actions.
 
-  add screen shots here of settings and button
+<img src="/easy-abc/readme-pages-config.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 - Create your first commit and Push it!
 
-  add screen shots here
+    <img src="/easy-abc/readme-commit.png" alt="Alt text" style="width:30%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
 </details>
 
 <details closed>
   <summary><h2>Why</h2></summary>
+
+> I met a traveller from an antique land  
+> Who said: Two vast and trunkless legs of stone  
+> Stand in the desart. Near them, on the sand,  
+> Half sunk, a shattered visage lies, whose frown,  
+> And wrinkled lip, and sneer of cold command,  
+> Tell that its sculptor well those passions read  
+> Which yet survive, stamped on these lifeless things,  
+> The hand that mocked them and the heart that fed:  
+> And on the pedestal these words appear:  
+> "My name is Ozymandias, King of Kings:  
+> Look on my works, ye Mighty, and despair!"  
+> No thing beside remains. Round the decay  
+> Of that colossal wreck, boundless and bare  
+> The lone and level sands stretch far away.  
+> — <cite>Percy Shelley, [Ozymandias](https://en.wikipedia.org/wiki/Ozymandias)</cite>
 
   <h4>No Paywalls and Walled Gardens.</h4>
 
