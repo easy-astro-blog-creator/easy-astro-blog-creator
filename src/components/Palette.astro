@@ -1,7 +1,7 @@
 ---
 import { genenerateTailwindTheme, SchemeVariant, toOklchHue } from 'src/utils/colorFun/src/index';
 import { CUSTOM_THEME } from '@utils/easyConfig';
-import PaletteSwatch from './PaletteSwatch.astro';
+import PaletteSwatch from '@components/PaletteSwatch.astro';
 
 const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
 const colors = tailwindsTheme.colors;

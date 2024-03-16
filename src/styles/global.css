@@ -155,6 +155,7 @@
 		filter: blur(2px);
 		opacity: 0.55;
 		transition: opacity 0.3s;
+		border-radius: inherit;
 	}
 	.background-gradient::after {
 		content: '';
@@ -164,7 +165,9 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
+		opacity: inherit;
 		background: inherit;
+		border-radius: inherit;
 	}
 	.shadow-gradient {
 		/* Required properties */

@@ -1,10 +1,10 @@
 ---
 import { easyConfig } from '@utils/easyConfig';
-import FormattedDate from '../components/FormattedDate.astro';
+import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
-import { formatDescription, titleLineCountIsOne } from '../utils/abbreviateDescription';
-import BaseLayout from './BaseLayout.astro';
-import { customGetCollection } from '../utils/customGetCollection';
+import { formatDescription, titleLineCountIsOne } from '@utils/abbreviateDescription';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { customGetCollection } from '@utils/customGetCollection';
 
 const { blogCollectionName, basePath } = Astro.props;
 const blogCollection = await customGetCollection(blogCollectionName, basePath);

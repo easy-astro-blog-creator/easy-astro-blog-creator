@@ -28,6 +28,8 @@ const TWITCH_URL = '';
 // A photo of you. It will be displayed in the about me section of the blog.
 const HEADSHOT_PATH = 'personal-blog/images/headshot.png';
 const HEADSHOT_ALT = 'A photo of Shelby Jenkins';
+// Limited to three lines. Either one long line that breaks automatically or seperate with a newline.
+const ABOUT_ME = `Professional GTD'er\nAmateur software developer\nDreamer of Big Things`;
 
 // The default social image is what is used to generate the preview cards for Twitter, Facebook, etc.
 // This is used in the case your blog post does not include a hero image.
@@ -50,6 +52,7 @@ export const easyAbcUserConfig = {
 	siteDescription: `The personal blog of ${FULL_NAME}.`,
 	headShotPath: HEADSHOT_PATH,
 	headshotAlt: HEADSHOT_ALT,
+	aboutMe: ABOUT_ME,
 	defaultSocialImage: DEFAULT_SOCIAL_IMAGE_PATH,
 	faviconPath: FAVICON_PATH,
 	faviconType: FAVICON_TYPE,

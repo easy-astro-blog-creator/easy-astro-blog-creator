@@ -12,6 +12,7 @@ export const easyConfig = {
 		return checkLoadDefaultImages(easyAbcUserConfig.headShotPath, 'easy-abc/headshot.png');
 	},
 	headshotAlt: easyAbcUserConfig.headshotAlt,
+	aboutMe: easyAbcUserConfig.aboutMe,
 	get defaultSocialImage() {
 		return checkLoadDefaultImages(easyAbcUserConfig.defaultSocialImage, 'easy-abc/easyHero.png');
 	},

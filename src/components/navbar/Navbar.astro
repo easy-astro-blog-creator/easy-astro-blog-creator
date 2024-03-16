@@ -1,10 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from '@components/navbar/HeaderLink.astro';
 import { easyConfig } from '@utils/easyConfig';
-import Footer from '../Footer.astro';
-import SocialLinks from './SocialLinks.astro';
-import ShareIcon from './ShareIcon.astro';
+import Footer from '@components/Footer.astro';
+import SocialLinks from '@components/navbar/SocialLinks.astro';
+import ShareIcon from '@components/navbar/ShareIcon.astro';
 ---
 
 <nav id="navbar-desktop" class="background-gradient hidden text-semantic-on-surface-variant md:block">
@@ -66,8 +66,8 @@ import ShareIcon from './ShareIcon.astro';
 		<li class="col-start-2 col-end-3 flex flex-col items-center justify-center">
 			<ShareIcon mode="mobile" />
 		</li>
-		<li id="nav-content-list" class="dropdown col-start-3 col-end-4 flex h-full w-full items-center justify-center">
-			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content z-[1]">
+		<li id="nav-content-list" class="dropdown z-[999] col-start-3 col-end-4 flex h-full w-full items-center justify-center">
+			<ul tabindex="0" id="nav-content-mobile" class="dropdown-content z-[999]">
 				{
 					easyConfig.easyAbcEnabled && (
 						<li class="mx-2  h-max w-max">

@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry } from 'astro:content';
-import BlogPost from '../../../layouts/BlogPost.astro';
+import BlogPost from '@layouts/BlogPost.astro';
 import '../../../styles/blog.css';
-import { customGetCollection } from '../../../utils/customGetCollection';
+import { customGetCollection } from '@utils/customGetCollection';
 import { easyConfig } from '@utils/easyConfig';
 export async function getStaticPaths() {
 	if (easyConfig.easyAbcEnabled) {
