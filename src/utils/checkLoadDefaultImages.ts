@@ -36,7 +36,7 @@ async function checkForImage(base: string, imagePath: string): Promise<boolean> 
 			// Check if the file is not a directory
 			if (stats.isFile()) {
 				// Optionally, check for specific image file extensions
-				const validImageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.svg'];
+				const validImageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.svg', '.gif'];
 				const extension = path.extname(absolutePath).toLowerCase();
 				resolve(validImageExtensions.includes(extension));
 			} else {
