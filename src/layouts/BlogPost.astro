@@ -3,7 +3,7 @@ import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const { title, description, publishedDate, modifiedDate, heroImage, heroAlt, body, readingTime } = Astro.props;
+const { title, description, pubDate, modifiedDate, heroImage, heroAlt, body, readingTime } = Astro.props;
 ---
 
 <BaseLayout
@@ -12,7 +12,7 @@ const { title, description, publishedDate, modifiedDate, heroImage, heroAlt, bod
 	pageDescription={description}
 	heroImage={heroImage}
 	heroAlt={heroAlt}
-	publishedDate={publishedDate}
+	pubDate={pubDate}
 	modifiedDate={modifiedDate}
 >
 	<article>
@@ -26,7 +26,7 @@ const { title, description, publishedDate, modifiedDate, heroImage, heroAlt, bod
 				<div>·</div>
 				<div>
 					Published on
-					<FormattedDate date={publishedDate} />
+					<FormattedDate date={pubDate} />
 				</div>
 				{
 					modifiedDate && (

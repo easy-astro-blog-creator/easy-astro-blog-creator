@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-export const postModifiedDate = (filepath: string, publishedDate: Date, modifiedDate: Date | undefined): Date | undefined => {
+export const postModifiedDate = (filepath: string, pubDate: Date, modifiedDate: Date | undefined): Date | undefined => {
 	if (!modifiedDate || isNaN(modifiedDate.getTime())) {
 		try {
 			const result: Buffer = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`);
@@ -14,13 +14,13 @@ export const postModifiedDate = (filepath: string, publishedDate: Date, modified
 			return undefined;
 		}
 	}
-	// If the specified date is the same day as the publishedDate
-	if (publishedDate.getTime() === modifiedDate.getTime()) {
+	// If the specified date is the same day as the pubDate
+	if (pubDate.getTime() === modifiedDate.getTime()) {
 		modifiedDate = undefined;
 	}
-	// If the specified date is before the publishedDate, throw an error
-	else if (modifiedDate.getTime() < publishedDate.getTime()) {
-		throw new Error(`The specified modifiedDate: ${modifiedDate} is before the publication date ${publishedDate}.`);
+	// If the specified date is before the pubDate, throw an error
+	else if (modifiedDate.getTime() < pubDate.getTime()) {
+		throw new Error(`The specified modifiedDate: ${modifiedDate} is before the publication date ${pubDate}.`);
 	}
 	return modifiedDate;
 };

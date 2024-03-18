@@ -28,7 +28,7 @@ function formatCanonicalURL(url: string | URL) {
 	return path;
 }
 
-const { pageTitle, pageDescription, heroImage, heroImagePath, heroAlt, publishedDate, modifiedDate } = Astro.props;
+const { pageTitle, pageDescription, heroImage, heroImagePath, heroAlt, pubDate, modifiedDate } = Astro.props;
 
 const socialImage = await (async () => {
 	let imageSrc: string;
@@ -73,7 +73,7 @@ const socialImage = await (async () => {
 			alt: socialImage.alt,
 		},
 		article: {
-			publishedTime: publishedDate,
+			publishedTime: pubDate,
 			modifiedTime: modifiedDate,
 			authors: [easyConfig.fullName],
 		},

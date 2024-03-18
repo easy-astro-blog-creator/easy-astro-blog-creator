@@ -5,7 +5,7 @@ import { formatDescription } from '@utils/abbreviateDescription';
 import ThemeIcon from '@components/navbar/ThemeIcon.astro';
 import ShareIcon from '@components/navbar/ShareIcon.astro';
 import Footer from '@components/Footer.astro';
-const { pageTitle, pageDescription, publishedDate, modifiedDate, heroImage, heroImagePath, heroAlt, body } = Astro.props;
+const { pageTitle, pageDescription, pubDate, modifiedDate, heroImage, heroImagePath, heroAlt, body } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ const { pageTitle, pageDescription, publishedDate, modifiedDate, heroImage, hero
 			heroImage={heroImage}
 			heroImagePath={heroImagePath}
 			heroAlt={heroAlt}
-			publishedDate={publishedDate}
+			pubDate={pubDate}
 			modifiedDate={modifiedDate}
 		/>
 	</head>

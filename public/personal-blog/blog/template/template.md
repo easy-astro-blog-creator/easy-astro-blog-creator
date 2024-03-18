@@ -4,7 +4,7 @@ title: 'Template for creating new posts'
 description: 'This post is used to generate new posts. It also contains instructions for adding posts. '
 
 # Published date is required and in the format of ISO-8601: `yyyy-mm-dd`. For more info see https://docs.astro.build/en/guides/content-collections/#working-with-dates-in-the-frontmatter
-publishedDate: 2023-01-01
+pubDate: 2023-01-01
 # Optionally specify an update date. If not provided, one will be generated from the git history. Only if the post has been changed since the day published.
 modifiedDate: 2023-01-01
 heroImage: './hero.png'
@@ -35,7 +35,7 @@ At the top of each post is a section like:
 ---
 title: 'Template for creating new posts'
 description: 'If provided the description field will be used for previews. If not provided, the first 3-4 lines from the post will be used as a description.'
-publishedDate: 2024-01-01
+pubDate: 2024-01-01
 heroImage: './hero.png'
 heroAlt: 'Describe the image for screen readers.'
 ---

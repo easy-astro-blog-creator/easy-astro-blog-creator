@@ -4,9 +4,9 @@ import { customGetCollection } from '@utils/customGetCollection';
 
 const blogCollection = await customGetCollection('blog', 'blog');
 let posts = blogCollection.sort((a, b) => {
-	// Sort by modifiedDate if available, otherwise fall back to publishedDate
-	const dateA = a.props.data.modifiedDate ? new Date(a.props.data.modifiedDate) : new Date(a.props.data.publishedDate);
-	const dateB = b.props.data.modifiedDate ? new Date(b.props.data.modifiedDate) : new Date(b.props.data.publishedDate);
+	// Sort by modifiedDate if available, otherwise fall back to pubDate
+	const dateA = a.props.data.modifiedDate ? new Date(a.props.data.modifiedDate) : new Date(a.props.data.pubDate);
+	const dateB = b.props.data.modifiedDate ? new Date(b.props.data.modifiedDate) : new Date(b.props.data.pubDate);
 	// Sort in descending order (newest first)
 	return dateB.valueOf() - dateA.valueOf();
 });

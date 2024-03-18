@@ -1,7 +1,7 @@
 ---
 title: 'EasyABC Markdown Specifics'
 description: 'This is a guide for specific markdown syntax used in EasyABC.'
-publishedDate: 2024-01-24
+pubDate: 2024-01-24
 heroImage: './hero.jpg'
 heroAlt: 'A hero!'
 ---
