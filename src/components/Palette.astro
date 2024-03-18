@@ -1,9 +1,9 @@
 ---
 import { genenerateTailwindTheme, SchemeVariant, toOklchHue } from 'src/utils/colorFun/src/index';
-import { CUSTOM_THEME } from '@utils/easyConfig';
+import { customTheme } from '@utils/easyConfig';
 import PaletteSwatch from '@components/PaletteSwatch.astro';
 
-const tailwindsTheme = genenerateTailwindTheme(CUSTOM_THEME);
+const tailwindsTheme = genenerateTailwindTheme(customTheme);
 const colors = tailwindsTheme.colors;
 
 const palettes = {
@@ -30,7 +30,7 @@ const paletteSteps = Object.keys(colors['primary']);
 
 					<input
 						type="text"
-						value={CUSTOM_THEME.primary}
+						value={customTheme.primary}
 						id="color-input-text"
 						class="input input-xs h-9 w-24 rounded bg-semantic-surface-variant text-center text-sm font-semibold text-semantic-on-surface-variant"
 					/>
@@ -51,8 +51,8 @@ const paletteSteps = Object.keys(colors['primary']);
 						<div id="scheme-select-mobile" class="form-control flex flex-col justify-around">
 							{
 								Object.entries(SchemeVariant).map(([key, variant]) => {
-									// const isChecked = variant === CUSTOM_THEME.schemeVariant;
-									const isChecked = variant === CUSTOM_THEME.schemeVariant ? true : false;
+									// const isChecked = variant === customTheme.schemeVariant;
+									const isChecked = variant === customTheme.schemeVariant ? true : false;
 
 									return (
 										<label class="label flex cursor-pointer flex-col items-start border-x-2 border-b-2 border-semantic-on-surface-variant px-2 pb-1 first:rounded-t-lg first:border-t-2 last:rounded-b-lg last:border-b-2">
@@ -86,7 +86,7 @@ const paletteSteps = Object.keys(colors['primary']);
 					>
 						{
 							Object.entries(SchemeVariant).map(([key, variant]) => {
-								const isChecked = variant === CUSTOM_THEME.schemeVariant;
+								const isChecked = variant === customTheme.schemeVariant;
 								return (
 									<label class="label flex cursor-pointer flex-col items-start rounded-lg border px-2 pb-1">
 										<span class="label-text pb-1">{variant}</span>
@@ -110,7 +110,7 @@ const paletteSteps = Object.keys(colors['primary']);
 				id="color-input-range"
 				min="0"
 				max="360"
-				value={toOklchHue(CUSTOM_THEME.primary)}
+				value={toOklchHue(customTheme.primary)}
 				step="0.1"
 				class="mt-4 h-8 w-full rounded-full"
 			/>
@@ -200,8 +200,12 @@ const paletteSteps = Object.keys(colors['primary']);
 				/>
 			</div>
 			<div class="col-start-5 col-end-6 flex flex-col items-center gap-[.1rem] md:gap-1">
-				<PaletteSwatch name="outline" bgColor="--colors-semantic-outline" />
-				<PaletteSwatch name="outline-variant" bgColor="--colors-semantic-outline-variant" />
+				<PaletteSwatch name="outline" bgColor="--colors-semantic-outline" textColor="--colors-semantic-on-background" />
+				<PaletteSwatch
+					name="outline-variant"
+					bgColor="--colors-semantic-outline-variant"
+					textColor="--colors-semantic-on-background"
+				/>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,4 @@
 ---
-import { easyConfig } from '@utils/easyConfig';
 import FormattedDate from '@components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import { formatDescription, titleLineCountIsOne } from '@utils/abbreviateDescription';
@@ -9,9 +8,9 @@ import { customGetCollection } from '@utils/customGetCollection';
 const { blogCollectionName, basePath } = Astro.props;
 const blogCollection = await customGetCollection(blogCollectionName, basePath);
 let posts = blogCollection.sort((a, b) => {
-	// Sort by updatedDate if available, otherwise fall back to pubDate
-	const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
-	const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
+	// Sort by modifiedDate if available, otherwise fall back to publishedDate
+	const dateA = a.props.data.modifiedDate ? new Date(a.props.data.modifiedDate) : new Date(a.props.data.publishedDate);
+	const dateB = b.props.data.modifiedDate ? new Date(b.props.data.modifiedDate) : new Date(b.props.data.publishedDate);
 	// Sort in descending order (newest first)
 	return dateB.valueOf() - dateA.valueOf();
 });
@@ -19,7 +18,12 @@ const heroImage = posts.length > 0 ? posts[0].props.data.heroImage : undefined;
 const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 ---
 
-<BaseLayout title={easyConfig.siteTitle} pageDescription={easyConfig.siteDescription} heroImage={heroImage} heroAlt={heroAlt}>
+<BaseLayout
+	pageTitle="All posts"
+	pageDescription="This page is an index of all blog posts."
+	heroImage={heroImage}
+	heroAlt={heroAlt}
+>
 	<ul class="flex w-[70svw] list-none flex-col items-start py-4 pl-[7svw] pr-[7svw] sm:hidden">
 		{
 			posts.map((post, i) => {
@@ -34,7 +38,9 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 									<div class="text-xs font-medium text-semantic-on-background/60 ">
 										<FormattedDate
 											date={
-												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+												post.props.data.modifiedDate
+													? new Date(post.props.data.modifiedDate)
+													: new Date(post.props.data.publishedDate)
 											}
 										/>
 									</div>
@@ -89,7 +95,9 @@ const heroAlt = posts.length > 0 ? posts[0].props.data.heroAlt : undefined;
 									<div class="text-xs font-medium text-semantic-on-background/60">
 										<FormattedDate
 											date={
-												post.props.data.updatedDate ? new Date(post.props.data.updatedDate) : new Date(post.props.data.pubDate)
+												post.props.data.modifiedDate
+													? new Date(post.props.data.modifiedDate)
+													: new Date(post.props.data.publishedDate)
 											}
 										/>
 									</div>

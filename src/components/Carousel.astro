@@ -1,13 +1,12 @@
 ---
-import { easyConfig } from '@utils/easyConfig';
 import { Image } from 'astro:assets';
 import { customGetCollection } from '@utils/customGetCollection';
 
 const blogCollection = await customGetCollection('blog', 'blog');
 let posts = blogCollection.sort((a, b) => {
-	// Sort by updatedDate if available, otherwise fall back to pubDate
-	const dateA = a.props.data.updatedDate ? new Date(a.props.data.updatedDate) : new Date(a.props.data.pubDate);
-	const dateB = b.props.data.updatedDate ? new Date(b.props.data.updatedDate) : new Date(b.props.data.pubDate);
+	// Sort by modifiedDate if available, otherwise fall back to publishedDate
+	const dateA = a.props.data.modifiedDate ? new Date(a.props.data.modifiedDate) : new Date(a.props.data.publishedDate);
+	const dateB = b.props.data.modifiedDate ? new Date(b.props.data.modifiedDate) : new Date(b.props.data.publishedDate);
 	// Sort in descending order (newest first)
 	return dateB.valueOf() - dateA.valueOf();
 });
@@ -16,7 +15,7 @@ let posts = blogCollection.sort((a, b) => {
 <div
 	class="flex w-full flex-col items-center rounded-xl border-4 border-semantic-on-surface-variant text-semantic-on-surface-variant md:h-[63%] lg:h-[73%]"
 >
-	<span class="py-2 text-xs tracking-[.4rem] text-semantic-on-background">portfolio and/or content</span>
+	<span class="py-2 text-xs tracking-[.4rem] text-semantic-on-background">recent posts</span>
 	<div class="w-12/12 carousel" style="scrollbar-width: none;">
 		{
 			posts.map(
@@ -33,10 +32,10 @@ let posts = blogCollection.sort((a, b) => {
 								</div>
 								<div class="absolute left-0 h-full w-full py-6 sm:px-16 md:px-20">
 									<a
-										class="flex  h-full items-center justify-center text-left font-bold text-semantic-on-background hover:underline "
+										class="z-[3] flex h-full items-center justify-center text-left font-bold text-semantic-on-background hover:underline "
 										href={`${post.params.htmlSlug}`}
 									>
-										<span class="sm:z-[-1] sm:line-clamp-4 sm:text-[1.7rem] md:z-[3] md:line-clamp-3 md:text-[3.3rem] lg:line-clamp-4 lg:text-[4.4rem]">
+										<span class=" sm:z-[-1] sm:line-clamp-4 sm:text-[1.7rem] sm:underline md:z-[3] md:line-clamp-3 md:text-[3.3rem] lg:line-clamp-4 lg:text-[4.4rem]">
 											{post.props.data.title}
 										</span>
 									</a>

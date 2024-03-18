@@ -60,10 +60,10 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 	class="background-gradient fixed bottom-0 left-0 flex h-[9svh] w-full text-semantic-on-surface-variant md:hidden"
 >
 	<ul class="grid h-full w-full grid-cols-3 grid-rows-1 items-stretch justify-items-stretch py-1">
-		<li class="col-start-1 col-end-2 flex flex-col items-center justify-center">
+		<li class="mobile-navbar-icon col-start-1 col-end-2 flex flex-col items-center justify-center">
 			<SocialLinks />
 		</li>
-		<li class="col-start-2 col-end-3 flex flex-col items-center justify-center">
+		<li class="mobile-navbar-icon col-start-2 col-end-3 flex flex-col items-center justify-center">
 			<ShareIcon mode="mobile" />
 		</li>
 		<li id="nav-content-list" class="dropdown z-[999] col-start-3 col-end-4 flex h-full w-full items-center justify-center">
@@ -104,12 +104,12 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 					<HeaderLink class="link-header" href="/blog">Blog</HeaderLink>
 				</li>
 			</ul>
-			<div id="nav-arrow-wrapper" role="button" tabindex="0">
+			<div id="nav-arrow-wrapper" role="button" tabindex="0" class="mobile-navbar-icon">
 				<div id="navbar-fun-line"></div>
 				<Icon
 					id="nav-arrow"
 					viewBox="0 0 24 24"
-					class="navbar-fun-line rotate-180 text-[6vb] text-neutral-variant-400"
+					class="navbar-fun-line rotate-180"
 					name="material-symbols:keyboard-double-arrow-left-rounded"
 				/>
 			</div>
@@ -119,9 +119,12 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 <style>
 	@media (min-width: 768px) {
 		@media (min-width: 1281px) {
+			#navbar-desktop {
+				width: 4svw;
+			}
 			#nav-arrow {
 				font-size: 5vb;
-				left: calc((5vw - 5vb) / 2);
+				left: calc((4vw - 5vb) / 2);
 			}
 			#navbar-desktop :global(.link-header) {
 				font-size: 1.5rem;
@@ -135,6 +138,9 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 			}
 		}
 		@media (max-width: 1280px) {
+			#navbar-desktop {
+				width: 5svw;
+			}
 			#nav-arrow {
 				font-size: 5vb;
 				left: calc((5vw - 5vb) / 2);
@@ -158,9 +164,8 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 				color 222ms,
 				background-color 222ms,
 				width 500ms;
-			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 22%);
+			background-color: theme(colors.semantic.surface-variant/.78);
 			height: 100%;
-			width: 5vw;
 			top: 0px;
 			left: 0px;
 			border-top-right-radius: 1rem;
@@ -216,7 +221,7 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 			transition: opacity 400ms;
 			opacity: 1;
 		}
-		#navbar-desktop:hover :global(.link-header):hover {
+		#navbar-desktop:hover :global(.navbar-link):hover {
 			color: theme(colors.semantic.secondary);
 		}
 		#navbar-desktop :global(.text-sub) {
@@ -227,21 +232,19 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 			transition: opacity 0ms;
 			color: theme(colors.semantic.on-surface-variant/.96);
 		}
-		#navbar-desktop :global(.text-sub):hover {
-			color: theme(colors.semantic.secondary);
-		}
+
 		#navbar-desktop:hover :global(.text-sub) {
 			opacity: 1;
 			transition: opacity 400ms;
 		}
 		#navbar-desktop.background-gradient::before {
 			transform: translate3d(-2px, 0px, 0) scale(1);
-			border-top-right-radius: 1rem /* 16px */;
-			border-bottom-right-radius: 1rem /* 16px */;
+			border-top-right-radius: 1rem;
+			border-bottom-right-radius: 1rem;
 		}
 		#navbar-desktop.background-gradient::after {
-			border-top-right-radius: 1rem /* 16px */;
-			border-bottom-right-radius: 1rem /* 16px */;
+			border-top-right-radius: 1rem;
+			border-bottom-right-radius: 1rem;
 		}
 		#navbar-fun-line {
 			width: 1px;
@@ -254,7 +257,7 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 				theme(colors.primary.400) 0%,
 				theme(colors.secondary.400) 30%,
 				theme(colors.tertiary.400) 60%,
-				color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
+				theme(colors.primary.400/.30) 90%
 			);
 			position: absolute;
 			border-image-slice: 1;
@@ -279,19 +282,26 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 				color 222ms,
 				background-color 222ms,
 				width 500ms;
-			background-color: color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 15%);
+			background-color: theme(colors.semantic.outline-variant/.80);
 			padding-bottom: calc(env(safe-area-inset-bottom));
 		}
 		#nav-arrow {
-			transition:
-				rotate 400ms,
-				color 300ms;
+			transition: rotate 400ms;
+			font-size: 6vb;
 		}
-		#nav-content-list:focus-within #nav-arrow,
-		#nav-content-list:active #nav-arrow {
+		.mobile-navbar-icon {
+			color: theme(colors.semantic.on-background/.75);
+			transition: color 300ms;
+			font-size: 4vb;
+		}
+		:is(.mobile-navbar-icon:focus-within, .mobile-navbar-icon:active) #nav-arrow,
+		:is(.mobile-navbar-icon:focus-within, .mobile-navbar-icon:active) :global(#social-icon),
+		:is(.mobile-navbar-icon:focus-within, .mobile-navbar-icon:active) :global(#share-button-mobile) {
+			color: theme(colors.semantic.on-background/.90);
+		}
+		:is(.mobile-navbar-icon:focus-within, .mobile-navbar-icon:active) #nav-arrow {
 			rotate: -90deg;
 			transition: rotate 177ms;
-			@apply text-neutral-variant-700 dark:text-neutral-variant-200;
 		}
 		#nav-content-mobile {
 			bottom: 11svh;
@@ -306,11 +316,7 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 			border-radius: 1rem;
 			border: 2px dotted transparent;
 			background:
-				linear-gradient(
-						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%),
-						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%)
-					)
-					padding-box,
+				linear-gradient(theme(colors.semantic.outline-variant/.88), theme(colors.semantic.outline-variant/.88)) padding-box,
 				var(--linear-gradient-x) border-box;
 		}
 		#navbar-mobile :global(.link-header) {
@@ -320,7 +326,6 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 		}
 		#navbar-mobile :global(.text-sub) {
 			font-size: 1.77vb;
-			color: theme(colors.semantic.on-surface-variant/.96);
 			padding-left: 0.55rem;
 			font-weight: 500;
 		}
@@ -336,7 +341,7 @@ import ShareIcon from '@components/navbar/ShareIcon.astro';
 				theme(colors.primary.400) 0%,
 				theme(colors.secondary.400) 30%,
 				theme(colors.tertiary.400) 60%,
-				color-mix(in srgb, theme(colors.primary.400), transparent 70%) 90%
+				theme(colors.primary.400/.30) 90%
 			);
 			opacity: 1;
 			right: 300%;

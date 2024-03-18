@@ -19,11 +19,7 @@ const mode = Astro.props.mode;
 {
 	mode === 'mobile' ? (
 		<div class="flex h-full w-full flex-col justify-center md:hidden lg:hidden" id="share-button-mobile">
-			<Icon
-				id="share-button-mobile"
-				class="self-center text-[4vb] text-neutral-variant-400"
-				name="material-symbols:ios-share-rounded"
-			/>
+			<Icon id="share-button-mobile" class="self-center " name="material-symbols:ios-share-rounded" />
 		</div>
 	) : null
 }

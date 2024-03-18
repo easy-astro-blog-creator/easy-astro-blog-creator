@@ -1,19 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { easyConfig } from '@utils/easyConfig';
-// See https://github.com/natemoo-re/astro-icon
-// and https://icon-sets.iconify.design/ for more icons
+import SocialIcon from '@components/navbar/SocialIcon.astro';
 ---
 
 <div id="social-widget-desktop" class="dropdown grid h-full w-full sm:hidden">
 	<div id="social-links" tabindex="0" class="collapse row-start-1 row-end-2 flex content-start justify-center opacity-0">
 		{
-			Object.entries(easyConfig.socialMedia).map(([key, value]) =>
-				value ? (
-					<a href={value}>
-						<Icon name={`mdi:${key}`} />
-					</a>
-				) : null
+			Object.entries(easyConfig.socialMedia).map(([socialPlatform, data]) =>
+				data ? <SocialIcon socialPlatform={socialPlatform} data={data} /> : null
 			)
 		}
 	</div>
@@ -31,20 +26,12 @@ import { easyConfig } from '@utils/easyConfig';
 </div>
 <div id="social-widget-mobile" class="dropdown flex h-full w-full justify-center md:hidden">
 	<div class="flex h-full w-full flex-col justify-center self-center" role="button" tabindex="0">
-		<Icon
-			id="social-icon"
-			class="self-center text-neutral-variant-400"
-			name="material-symbols:face-retouching-natural-outline-rounded"
-		/>
+		<Icon id="social-icon" class="self-center" name="material-symbols:face-retouching-natural-outline-rounded" />
 	</div>
 	<div id="social-links" tabindex="0" class="dropdown-content flex">
 		{
-			Object.entries(easyConfig.socialMedia).map(([key, value]) =>
-				value ? (
-					<a href={value}>
-						<Icon name={`mdi:${key}`} />
-					</a>
-				) : null
+			Object.entries(easyConfig.socialMedia).map(([socialPlatform, data]) =>
+				data ? <SocialIcon socialPlatform={socialPlatform} data={data} /> : null
 			)
 		}
 	</div>
@@ -52,7 +39,7 @@ import { easyConfig } from '@utils/easyConfig';
 <style>
 	@media (min-width: 768px) {
 		@media (min-width: 1281px) {
-			#social-links [data-icon] {
+			#social-links :global([data-icon]) {
 				width: 4vb;
 				height: 4vb;
 			}
@@ -62,13 +49,13 @@ import { easyConfig } from '@utils/easyConfig';
 			}
 		}
 		@media (max-width: 1280px) {
-			#social-links [data-icon] {
+			#social-links :global([data-icon]) {
 				width: 3.5vb;
 				height: 3.5vb;
 			}
 			#social-icon {
-				width: 6vb;
-				height: 6vb;
+				width: 4vb;
+				height: 4vb;
 			}
 		}
 		#social-widget-desktop {
@@ -90,10 +77,10 @@ import { easyConfig } from '@utils/easyConfig';
 		#social-icon {
 			transition: opacity 700ms 350ms;
 		}
-		#social-links [data-icon] {
+		#social-links :global([data-icon]) {
 			color: theme(colors.semantic.on-surface-variant);
 		}
-		#social-links :is(a:hover) [data-icon] {
+		#social-links :global(:is(a:hover) [data-icon]) {
 			color: theme(colors.semantic.secondary);
 		}
 		span,
@@ -148,11 +135,7 @@ import { easyConfig } from '@utils/easyConfig';
 			display: flex;
 			border: 2px dotted transparent;
 			background:
-				linear-gradient(
-						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%),
-						color-mix(in srgb, theme(colors.semantic.surface-variant), transparent 12%)
-					)
-					padding-box,
+				linear-gradient(theme(colors.semantic.outline-variant/.88), theme(colors.semantic.outline-variant/.88)) padding-box,
 				var(--linear-gradient-x) border-box;
 
 			border-radius: 0.55rem;
@@ -160,20 +143,16 @@ import { easyConfig } from '@utils/easyConfig';
 
 		#social-icon {
 			margin-bottom: -0.25rem;
-			width: 4vb;
-			height: 4vb;
-			transition: color 300ms;
 		}
-		#social-widget-mobile:focus-within #social-icon,
+		/* #social-widget-mobile:focus-within #social-icon,
 		#social-widget-mobile:active #social-icon {
 			@apply text-neutral-variant-700 dark:text-neutral-variant-200;
-		}
-		#social-links [data-icon] {
+		} */
+		#social-links :global([data-icon]) {
 			width: 5vb;
 			height: 5vb;
-			color: theme(colors.semantic.on-surface-variant);
 		}
-		#social-links :is(a:hover, a:focus, a:active) [data-icon] {
+		#social-links :global(:is(a:hover, a:focus, a:active) [data-icon]) {
 			color: theme(colors.semantic.secondary);
 		}
 	}

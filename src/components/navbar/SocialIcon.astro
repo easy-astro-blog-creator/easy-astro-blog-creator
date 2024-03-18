@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+
+// See https://github.com/natemoo-re/astro-icon
+// and https://icon-sets.iconify.design/ for more icons
+
+const { socialPlatform, data } = Astro.props;
+
+let iconName: string;
+let title: string = `Connect on: ${socialPlatform}`;
+
+switch (socialPlatform) {
+	case 'linktree':
+		iconName = 'linktree';
+		break;
+	case 'discordServer':
+		iconName = 'discord-server';
+		title = `Join our Discord server`;
+		break;
+	default:
+		iconName = `mdi:${socialPlatform}`;
+}
+---
+
+<a href={data.url} title={title}>
+	<Icon name={iconName} />
+</a>

@@ -18,7 +18,7 @@ export async function customGetCollection(collectionName: ContentCollectionKey, 
 		}
 		filePath = `src/content/${collectionName}/${post.id}`;
 
-		post.data.updatedDate = postModifiedDate(filePath, post.data.pubDate, post.data.updatedDate);
+		post.data.modifiedDate = postModifiedDate(filePath, post.data.publishedDate, post.data.modifiedDate);
 		post.data.readingTime = getReadingTime(post.body);
 
 		return {

@@ -43,7 +43,7 @@
 		"@typescript-eslint/parser": "^7.1.1",
 		"astro": "^4.4.15",
 		"astro-icon": "^1.0.3",
-		"astro-seo": "^0.8.0",
+		"astro-seo": "^0.8.3",
 		"chroma-js": "^2.4.2",
 		"cssnano": "^6.0.3",
 		"daisyui": "^4.7.1",

@@ -26,11 +26,10 @@ const underlineColor = 'decoration-semantic-primary';
 const bold = isActive ? 'font-bold' : 'md:font-medium';
 ---
 
-<a href={href} class:list={[className, underlineWeight, underlineOffset, bold, underline, underlineColor]} {...rest}>
+<a
+	href={href}
+	class:list={[className, underlineWeight, underlineOffset, bold, underline, underlineColor, 'navbar-link']}
+	{...rest}
+>
 	<slot />
 </a>
-<style>
-	a:hover {
-		color: theme(colors.semantic.secondary);
-	}
-</style>

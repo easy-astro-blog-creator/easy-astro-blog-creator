@@ -28,7 +28,7 @@ function formatCanonicalURL(url: string | URL) {
 	return path;
 }
 
-const { pageTitle, pageDescription, heroImage, heroAlt, pubDate, updatedDate } = Astro.props;
+const { pageTitle, pageDescription, heroImage, heroImagePath, heroAlt, publishedDate, modifiedDate } = Astro.props;
 
 const socialImage = await (async () => {
 	let imageSrc: string;
@@ -36,6 +36,8 @@ const socialImage = await (async () => {
 	if (heroImage) {
 		const image: GetImageResult = await getImage({ src: heroImage, format: 'webp' });
 		imageSrc = image.src;
+	} else if (heroImagePath) {
+		imageSrc = heroImagePath;
 	} else {
 		imageSrc = await easyConfig.defaultSocialImage;
 	}
@@ -50,14 +52,14 @@ const socialImage = await (async () => {
 
 <SEO
 	title={pageTitle && `${pageTitle}`}
-	titleTemplate={`%s — ${easyConfig.siteTitle}`}
+	titleTemplate={`%s | ${easyConfig.siteTitle}`}
 	titleDefault={easyConfig.siteTitle}
 	description={pageDescription}
 	canonical={canonicalURL}
 	charset="utf-8"
 	openGraph={{
 		basic: {
-			title: pageTitle || easyConfig.siteTitle,
+			title: pageTitle || easyConfig.siteTitle, // This should refer to the title of the page, but we use the site title as a fallback.
 			type: 'website',
 			image: socialImage.src,
 			url: canonicalURL,
@@ -65,15 +67,25 @@ const socialImage = await (async () => {
 		optional: {
 			description: pageDescription,
 			siteName: easyConfig.siteTitle,
+			locale: 'en_US',
 		},
 		image: {
 			alt: socialImage.alt,
 		},
 		article: {
-			publishedTime: pubDate,
-			modifiedTime: updatedDate,
+			publishedTime: publishedDate,
+			modifiedTime: modifiedDate,
 			authors: [easyConfig.fullName],
 		},
+	}}
+	twitter={{
+		card: 'summary_large_image',
+		site: easyConfig.socialMedia.twitter ? easyConfig.socialMedia.twitter.username : '',
+		creator: easyConfig.socialMedia.twitter ? easyConfig.socialMedia.twitter.username : '',
+		title: pageTitle || easyConfig.siteTitle,
+		image: socialImage.src,
+		imageAlt: socialImage.alt,
+		description: pageDescription,
 	}}
 	extend={{
 		link: [{ rel: 'icon', type: easyConfig.faviconType, href: faviconPath }],

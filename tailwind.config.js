@@ -1,7 +1,7 @@
 import { genenerateTailwindTheme } from './src/utils/colorFun/src/index';
-import { CUSTOM_THEME } from './src/utils/easyConfig';
+import { customTheme } from './src/utils/easyConfig';
 
-const customTailwindTheme = genenerateTailwindTheme(CUSTOM_THEME, true);
+const customTailwindTheme = genenerateTailwindTheme(customTheme, true);
 /** @type {import('tailwindcss').Config} */
 export default {
 	mode: 'jit',

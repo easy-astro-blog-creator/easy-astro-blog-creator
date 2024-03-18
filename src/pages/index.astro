@@ -2,11 +2,16 @@
 import { easyConfig } from '@utils/easyConfig';
 import Carousel from '@components/Carousel.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { Icon } from 'astro-icon/components';
+import SocialIcon from '@components/navbar/SocialIcon.astro';
 const headshotPath = await easyConfig.headshotPath;
 ---
 
-<BaseLayout pageTitle={easyConfig.siteTitle} pageDescription={easyConfig.siteDescription} heroAlt={easyConfig.headshotAlt}>
+<BaseLayout
+	pageTitle="About"
+	pageDescription={easyConfig.siteDescription}
+	heroImagePath={headshotPath}
+	heroAlt={easyConfig.headshotAlt}
+>
 	<div class="flex flex-col items-center justify-start sm:w-full sm:pt-8 md:h-full md:w-8/12">
 		<Carousel />
 		<div
@@ -16,19 +21,18 @@ const headshotPath = await easyConfig.headshotPath;
 				<img src={headshotPath} alt={easyConfig.headshotAlt} class="w-full rounded-xl object-cover" />
 			</div>
 			<div class="mx-auto flex flex-col justify-between sm:w-full sm:items-center sm:pt-3 md:h-full md:w-9/12 md:pl-8">
-				<div class="flex flex-col sm:items-center">
+				<div class="flex h-full flex-col sm:items-center">
 					<p class="text-xl font-bold text-semantic-on-surface-variant">{`About ${easyConfig.firstName}`}</p>
-					<p class="line-clamp-3 whitespace-pre-wrap pt-3 sm:text-sm">{easyConfig.aboutMe}</p>
+					<p class="line-clamp-3 whitespace-pre-line pt-3 sm:line-clamp-6 sm:w-11/12 sm:text-center sm:text-sm">
+						{easyConfig.aboutMe}
+					</p>
 
-					<div class="flex items-center justify-start gap-2 pt-3 text-2xl text-semantic-on-surface-variant">
+					<div class="flex items-center justify-start gap-2 pt-3 text-2xl text-semantic-on-surface-variant md:mb-0 md:mt-auto">
 						<span class="text-xs">Connect:</span>
+
 						{
-							Object.entries(easyConfig.socialMedia).map(([key, value]) =>
-								value ? (
-									<a href={value} class="hover:text-semantic-secondary">
-										<Icon name={`mdi:${key}`} />
-									</a>
-								) : null
+							Object.entries(easyConfig.socialMedia).map(([socialPlatform, data]) =>
+								data ? <SocialIcon socialPlatform={socialPlatform} data={data} /> : null
 							)
 						}
 					</div>
@@ -37,3 +41,8 @@ const headshotPath = await easyConfig.headshotPath;
 		</div>
 	</div>
 </BaseLayout>
+<style>
+	[data-icon]:hover {
+		color: theme(colors.semantic.secondary);
+	}
+</style>
