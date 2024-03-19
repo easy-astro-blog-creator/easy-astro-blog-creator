@@ -37,11 +37,7 @@
 
 <h4>Preview the site</h4>
 
-- It will take a 60-120s for the codespace to build for the first time.
-
-- After the codespace has finished building, open a terminal, and start the local dev server with `npm run dev`.
-
-<img src="public/easy-abc/readme-terminal.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
+- It will take a 60-120s for the codespace to build for the first time. When it's done, a new terminal will automatically start and `npm run dev` will be run starting the local dev server for you.
 
 - Click on the link in the terminal. This will open a local version of the site in your browser. You can use this to preview your changes.
 
