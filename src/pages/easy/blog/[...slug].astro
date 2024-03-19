@@ -7,6 +7,8 @@ import { easyConfig } from '@utils/easyConfig';
 export async function getStaticPaths() {
 	if (easyConfig.easyAbcEnabled) {
 		return customGetCollection('easy', 'easy/blog');
+	} else {
+		return [];
 	}
 }
 type Props = CollectionEntry<'easy'>;

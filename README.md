@@ -25,8 +25,7 @@
 
 <img src="public/easy-abc/readme-fork-button.png" alt="Alt text" style="width:90%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
 
-- Name your repository with the format: `GITHUB_USERNAME.github.io`.
-
+- Name your repository with the format: `GITHUB_USERNAME.github.io`. <mark>This format must be used!</mark>
   - For example mine is `shelbyjenkins.github.io`.
 
 <img src="public/easy-abc/readme-fork-name.png" alt="Alt text" style="width:70%; height:auto; margin-right: auto; display: flex; margin-left: auto; margin-bottom: 2em; border-radius: 0.5rem;">
@@ -48,6 +47,10 @@
 <details closed>
   <summary><h2>Publish your Blog</h2></summary>
 
+<h4>Personalization</h4>
+
+- Every setting you need to change along with instructions for them will be in `public/easyAbcUserConfig.ts`
+
 <h4>Adding your content</h4>
 
 - Your content will live in the `public/personal-blog/blog` folder.
@@ -63,10 +66,6 @@
 - You can write in your favorite text editor and convert to markdown with tools like xyz and zyx.
   - For general markdown instructions see Astro's [general markdown guide](https://shelbyjenkins.github.io/easy/blog/markdown-style-guide/) for some notes.
   - And also the [EasyABC markdown specifics guide](https://shelbyjenkins.github.io/easy/blog/easy-a-b-c-markdown-specifics/).
-
-<h4>Personalization</h4>
-
-- Every setting you need to change along with instructions for them will be in `public/easyAbcUserConfig.ts`
 
 <h4>Deploy to Github Pages</h4>
 
