@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+
+	"tasks": [
+		{
+			"label": "EasyABC Startup Task",
+			"command": ["echo hello!", "${input:startDevServer}"],
+			"runOptions": { "runOn": "folderOpen" },
+			"dependsOn": ["newTerminal"]
+		},
+		{
+			"label": "newTerminal",
+			"command": ["${command:workbench.action.terminal.new}", "${command:workbench.action.terminal.focus}"]
+		}
+	],
+	"inputs": [
+		{
+			"id": "startDevServer",
+			"type": "command",
+			"command": "workbench.action.terminal.sendSequence",
+			"args": {
+				"text": "npm run dev\u000D"
+			}
+		}
+	]
+}

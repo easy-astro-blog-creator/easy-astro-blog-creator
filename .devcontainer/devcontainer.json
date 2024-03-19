@@ -6,7 +6,9 @@
 
 	"runArgs": ["--publish", "4321:4321"],
 	"remoteUser": "root",
-	"postCreateCommand": "npm install",
+	"waitFor": "postStartCommand",
+	"postCreateCommand": "echo 'Welcome to easyABC. Installing dependencies.' && npm install && echo 'Dependencies installed. Dev server should start now.'",
+	"postStartCommand": "",
 	"customizations": {
 		"vscode": {
 			"extensions": [
