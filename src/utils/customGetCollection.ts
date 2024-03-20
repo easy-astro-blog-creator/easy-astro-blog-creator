@@ -12,11 +12,16 @@ export async function customGetCollection(collectionName: ContentCollectionKey, 
 		let slugSplits = post.slug.split('/');
 		if (slugSplits.length === 1) {
 			newSlug = `${post.slug}`;
-			throw new Error('This is an error');
 		} else {
 			newSlug = `${slugSplits.pop()}`;
 		}
-		filePath = `src/content/${collectionName}/${post.id}`;
+		if (collectionName === 'blog') {
+			filePath = `public/personal-blog/blog/${post.id}`;
+		} else if (collectionName === 'easy') {
+			filePath = `src/content/easy/${post.id}`;
+		} else {
+			throw new Error(`Collection ${collectionName} not supported.`);
+		}
 
 		post.data.modifiedDate = postModifiedDate(filePath, post.data.pubDate, post.data.modifiedDate);
 		post.data.readingTime = getReadingTime(post.body);
