@@ -13,7 +13,7 @@ let posts = blogCollection.sort((a, b) => {
 ---
 
 <div
-	class="flex w-full flex-col items-center rounded-xl border-4 border-semantic-on-surface-variant text-semantic-on-surface-variant md:h-[63%] lg:h-[73%]"
+	class="flex w-full flex-col items-center rounded-xl border-4 border-semantic-on-surface-variant text-semantic-on-surface-variant md:h-[30rem] lg:h-[40rem]"
 >
 	<span class="py-2 text-xs tracking-[.4rem] text-semantic-on-background">recent posts</span>
 	<div class="w-12/12 carousel" style="scrollbar-width: none;">
@@ -30,32 +30,41 @@ let posts = blogCollection.sort((a, b) => {
 										alt={post.props.data.heroAlt || ''}
 									/>
 								</div>
-								<div class="absolute left-0 h-full w-full py-6 sm:px-16 md:px-20">
+								<div class="absolute left-0 h-full w-full py-6 sm:px-10 md:px-20">
 									<a
 										class="z-[3] flex h-full items-center justify-center text-left font-bold text-semantic-on-background hover:underline "
 										href={`${post.params.htmlSlug}`}
 									>
-										<span class=" sm:z-[-1] sm:line-clamp-4 sm:text-[1.7rem] sm:underline md:z-[3] md:line-clamp-3 md:text-[3.3rem] lg:line-clamp-4 lg:text-[4.4rem]">
+										<span class="rounded-xl bg-semantic-surface-variant/50 sm:z-[-1] sm:line-clamp-6 sm:px-2 sm:text-[1.7rem] sm:underline md:z-[3] md:line-clamp-4 md:px-8 md:text-[3.3rem] lg:line-clamp-4 lg:text-[4.4rem]">
 											{post.props.data.title}
 										</span>
 									</a>
 								</div>
-								<div class="absolute left-1 right-1 top-1/2 flex -translate-y-1/2 transform justify-between sm:hidden">
+								<div class="absolute left-1 right-1 top-1/2 -translate-y-1/2 transform justify-between sm:hidden md:flex">
 									{i !== 0 ? (
-										<a href={`#item_${i - 1}`} class="btn btn-circle hover:bg-semantic-on-background/30">
+										<a
+											href={`#item_${i - 1}`}
+											class="btn btn-circle bg-semantic-background/20 hover:bg-semantic-on-background/30"
+										>
 											❮
 										</a>
 									) : (
-										<a href={`#item_${posts.length - 1}`} class="btn btn-circle hover:bg-semantic-on-background/30">
+										<a
+											href={`#item_${posts.length - 1}`}
+											class="btn btn-circle bg-semantic-background/20 hover:bg-semantic-on-background/30"
+										>
 											❮
 										</a>
 									)}
 									{i !== posts.length - 1 ? (
-										<a href={`#item_${i + 1}`} class="btn btn-circle hover:bg-semantic-on-background/30">
+										<a
+											href={`#item_${i + 1}`}
+											class="btn btn-circle bg-semantic-background/20 hover:bg-semantic-on-background/30"
+										>
 											❯
 										</a>
 									) : (
-										<a href={`#item_0`} class="btn btn-circle hover:bg-semantic-on-background/30">
+										<a href={`#item_0`} class="btn btn-circle bg-semantic-background/20 hover:bg-semantic-on-background/30">
 											❯
 										</a>
 									)}
